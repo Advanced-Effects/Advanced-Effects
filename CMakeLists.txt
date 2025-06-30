@@ -51,7 +51,6 @@ endif()
 qt_add_executable(${CMAKE_PROJECT_NAME}
     src/main.cpp
     assets/assets.qrc
-    thirdparty/IconLibrary/IconLibrary.qrc
     ${app_icon_windows}
     ${app_icon_macos}
 )
@@ -64,7 +63,7 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
     QML_FILES
         src/appshell/qml/Main.qml
         src/appshell/qml/AppWindow.qml
-        src/appshell/qml/TopBar.qml
+        src/appshell/qml/Topbar.qml
         src/appshell/qml/BaseCanvas.qml
         src/appshell/qml/PropertiesBar.qml
         src/appshell/qml/TimelineBar.qml
@@ -184,13 +183,14 @@ install(TARGETS ${CMAKE_PROJECT_NAME}
 )
 
 # Output?
-qt_generate_deploy_qml_app_script(
-    TARGET ${CMAKE_PROJECT_NAME}
-    OUTPUT_SCRIPT deploy_script
-    MACOS_BUNDLE_POST_BUILD
-    NO_UNSUPPORTED_PLATFORM_ERROR
-    DEPLOY_USER_QML_MODULES_ON_UNSUPPORTED_PLATFORM
-)
-install(SCRIPT ${deploy_script})
+# FIXME(kaixoo): Failing ???
+#qt_generate_deploy_qml_app_script(
+#    TARGET ${CMAKE_PROJECT_NAME}
+#    OUTPUT_SCRIPT deploy_script
+#    MACOS_BUNDLE_POST_BUILD
+#    NO_UNSUPPORTED_PLATFORM_ERROR
+#    DEPLOY_USER_QML_MODULES_ON_UNSUPPORTED_PLATFORM
+#)
+#install(SCRIPT ${deploy_script})
 
 ################################################################################
