@@ -6,22 +6,20 @@ import QtQuick 2.15
 //
 // TODO: Research how MuseScore does dialogs?
 // TODO: QML OpenGL widget
-EditPage {
-    Column {
-        Row {
-            // Properties dialog
+Column {
+    Row {
+        // Properties dialog
 
-            // central widget
-            Column {
-                // Switch between Files
-                TabBar {}
-                // Canvas
-                BaseCanvas {}
-            }
-
-            // General Dialog
+        // central widget
+        Column {
+            // Switch between Files
+            TabBar {}
+            // Canvas
+            BaseCanvas {}
         }
 
-    // Timeline
+        // General Dialog
     }
+
+// Timeline
 }

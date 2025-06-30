@@ -48,9 +48,12 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     set(app_icon_macos "${CMAKE_SOURCE_DIR}/assets/macos/${CMAKE_PROJECT_NAME}.icns")
 endif()
 
+qt_add_resources(resources_QRC src/resources.qrc)
+
 qt_add_executable(${CMAKE_PROJECT_NAME}
     src/main.cpp
     assets/assets.qrc
+    ${resources_QRC}
     ${app_icon_windows}
     ${app_icon_macos}
 )

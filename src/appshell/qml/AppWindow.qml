@@ -1,10 +1,9 @@
-import QtQUick 2.15
+import QtQuick 2.15
 
-AppWindow {
-    Row {
-        Menubar {}
-        Topbar {}
-        // Currently rendered page.
-        Item {}
-    }
+Row {
+    // TODO(kaixoo)
+    //Menubar {}
+    //Topbar {}
+    // Currently rendered page.
+    //Item {}
 }

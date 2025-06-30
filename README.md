@@ -25,6 +25,7 @@ sudo apt install cmake ninja \
 qt6-base-dev libqt6svg6-dev \ # Core, SVG
 qt6-declarative-dev qml-qt6 \ # QML
 linguist-qt6 qt6-tools-dev # LinguistToools
+qml6-module-qtqml-workerscript # WorkerTools (QML Resources)
 ```
 
 - CMake and Ninja

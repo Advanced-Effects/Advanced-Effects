@@ -1,11 +1,10 @@
 import QtQuick 2.15
 
-TimelineBar {
+Row {
     // BoxscrollArea?
-    Row {
-        // Timeline TreeView
-        TreeView {}
-        // KeysView
-        CustomPaintArea {}
-    }
+
+    // Timeline TreeView
+    TreeView {}
+    // KeysView
+    CustomPaintArea {}
 }

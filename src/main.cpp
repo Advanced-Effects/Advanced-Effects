@@ -5,6 +5,8 @@
 
 #include <QQmlApplicationEngine>
 #include <QCoreApplication>
+#include <QStringLiteral>
+#include <QUrl>
 #include <QQmlContext>
 #include <QQuickWindow>
 #include <QQuickStyle>
@@ -46,6 +48,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
     engine.addImportPath(":/");
     engine.addImportPath(":/Advanced-Effects");
+    engine.load(QUrl(QStringLiteral("qrc:/appshell/qml/Main.qml")));
 
     //qDebug() << engine.importPathList();
     //QDirIterator qrc(":", QDirIterator::Subdirectories);
