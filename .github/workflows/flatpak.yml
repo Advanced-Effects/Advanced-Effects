@@ -1,3 +1,4 @@
+---
 #-------------------------------------------------------------------------------
 # Workflow configuration
 #-------------------------------------------------------------------------------
@@ -18,9 +19,9 @@ jobs:
       image: bilelmoussaoui/flatpak-github-actions:freedesktop-24.08
       options: --privileged
     steps:
-    - uses: actions/checkout@v4
-    - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v6
-      with:
-        bundle: QmlAppTemplate.flatpak
-        manifest-path: assets/linux/QmlAppTemplate.flatpak.yml
-        cache-key: flatpak-builder-${{ github.sha }}
+      - uses: actions/checkout@v4
+      - uses: bilelmoussaoui/flatpak-github-actions/flatpak-builder@v6
+        with:
+          bundle: Advanced-Effects.flatpak
+          manifest-path: assets/linux/Advanced-Effects.flatpak.yml
+          cache-key: flatpak-builder-${{ github.sha }}

@@ -45,8 +45,7 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
     engine.addImportPath(":/");
-    engine.addImportPath(":/QmlAppTemplate");
-    engine.addImportPath(":/ComponentLibrary");
+    engine.addImportPath(":/Advanced-Effects");
 
     //qDebug() << engine.importPathList();
     //QDirIterator qrc(":", QDirIterator::Subdirectories);

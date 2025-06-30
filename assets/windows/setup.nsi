@@ -5,8 +5,8 @@ Unicode True
 !include "FileFunc.nsh"
 !include "LogicLib.nsh"
 
-!define APPNAME                      "QmlAppTemplate"
-!define EXECNAME                     "QmlAppTemplate"
+!define APPNAME                      "Advanced-Effects"
+!define EXECNAME                     "Advanced-Effects"
 !define COMPANYNAME                  "Emeric Grange"
 !define DESCRIPTION                  "A Qt6 / QML application template"
 !define VERSIONMAJOR                 0
@@ -57,10 +57,10 @@ Section "${APPNAME} (required)" SecDummy
   SectionIn RO
   SetOutPath "$INSTDIR"
   File /r "${APPNAME}\*"
-  
+
   ${GetSize} "$INSTDIR" "/S=0K" $0 $1 $2
   IntFmt $0 "0x%08X" $0
-  
+
   DeleteRegKey HKCU "Software\${COMPANYNAME}\${APPNAME}"
   DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${COMPANYNAME} ${APPNAME}"
 

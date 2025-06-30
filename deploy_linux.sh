@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-export APP_NAME="QmlAppTemplate"
+export APP_NAME="Advanced-Effects"
 export APP_VERSION=0.8
 export GIT_VERSION=$(git rev-parse --short HEAD)
 

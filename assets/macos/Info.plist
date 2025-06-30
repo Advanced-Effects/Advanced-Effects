@@ -9,19 +9,19 @@
 	<string>APPL</string>
 
 	<key>CFBundleName</key>
-	<string>QmlAppTemplate</string>
+	<string>Advanced-Effects</string>
 
 	<key>CFBundleDisplayName</key>
-	<string>QmlAppTemplate</string>
+	<string>Advanced-Effects</string>
 
 	<key>CFBundleExecutable</key>
-	<string>QmlAppTemplate</string>
+	<string>Advanced-Effects</string>
 
 	<key>CFBundleIdentifier</key>
-	<string>io.emeric.qmlapptemplate</string>
+	<string>io.emeric.advanced-effects</string>
 
 	<key>CFBundleIconFile</key>
-	<string>QmlAppTemplate.icns</string>
+	<string>Advanced-Effects.icns</string>
 
 	<key>CFBundleVersion</key>
 	<string>000801</string>

@@ -2,13 +2,13 @@
 <!-- Copyright 2022 Emeric Grange <emeric.grange@gmail.com> -->
 
 <component type="desktop-application">
-  <id>io.emeric.qmlapptemplate</id>
-  <name>QmlAppTemplate</name>
-  <launchable type="desktop-id">QmlAppTemplate.desktop</launchable>
+  <id>com.kaixoo12.advanced-effects</id>
+  <name>Advanced-Effects</name>
+  <launchable type="desktop-id">Advanced-Effects.desktop</launchable>
 
-  <summary>QML Application Template</summary>
+  <summary>Advanced Effects</summary>
   <description>
-    <p>QmlAppTemplate is a Qt6 / QML Application Template</p>
+    <p>Advanced-Effects is a good-looking animation software.</p>
   </description>
 
   <project_license>GPL-3.0+</project_license>
@@ -19,10 +19,9 @@
     <name>Emeric Grange</name>
   </developer>
 
-  <url type="homepage">https://emeric.io/QmlAppTemplate</url>
-  <url type="bugtracker">https://github.com/emericg/QmlAppTemplate/issues</url>
-  <url type="translate">https://github.com/emericg/QmlAppTemplate/blob/master/i18n/README.md</url>
-  <url type="donation">https://paypal.me/EmericGrange</url>
+  <url type="homepage">https://github.com/kaixoo12/Advanced-Effects</url>
+  <url type="bugtracker">https://github.com/kaixoo12/Advanced-Effects/issues</url>
+  <url type="translate">https://github.com/kaixoo12/Advanced-Effects/blob/master/i18n/README.md</url>
 
   <releases>
     <release version="0.8" date="2024-12-12" />

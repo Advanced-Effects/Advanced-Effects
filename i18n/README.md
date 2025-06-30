@@ -7,8 +7,8 @@ You can work on translations using one of two ways:
 
 ##### Step 1: Add the language to the project (if it's a new language)
 
-Edit the Qt project file (_CMakeLists.txt_) and add a new language file entry to the I18N_TRANSLATED_LANGUAGES section.  
-You'll need to use an [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) two letter code (ex: _i18n/QmlAppTemplate_fr.ts_).  
+Edit the Qt project file (_CMakeLists.txt_) and add a new language file entry to the I18N_TRANSLATED_LANGUAGES section.
+You'll need to use an [ISO 639-1](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) two letter code (ex: _i18n/Advanced-Effects_fr.ts_).
 
 > qt_standard_project_setup(I18N_TRANSLATED_LANGUAGES de fr xx)
 
@@ -20,8 +20,8 @@ To create (or update) the actual translation file, from the project root directo
 cmake --build build/ --target lupdate
 ```
 
-This will scrape the source code and add/update the strings that need to be translated into the language files.  
-If you are not able to run that command, you can simply open a GitHub issue and ask me for a new translation file in the langugage file you want.  
+This will scrape the source code and add/update the strings that need to be translated into the language files.
+If you are not able to run that command, you can simply open a GitHub issue and ask me for a new translation file in the langugage file you want.
 
 ##### Step 3: Translating
 
@@ -39,6 +39,6 @@ Translate by editing the .ts file using Qt Linguist.
 
 ##### Step 4: Publish it!
 
-Send the file(s) back to the project, using email or a GitHub pull request.  
-If you want to be credited in the application (and in this file) please be sure to mention it, and provide a name/pseudo, and wished an email/GitHub page.  
+Send the file(s) back to the project, using email or a GitHub pull request.
+If you want to be credited in the application (and in this file) please be sure to mention it, and provide a name/pseudo, and wished an email/GitHub page.
 It's useful in case a person wants to contact you about the translation, or if you want to be contacted when a new version of the project will be released and a translation update is needed.

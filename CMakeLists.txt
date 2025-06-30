@@ -121,7 +121,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
         MACOSX_BUNDLE ON
         MACOSX_BUNDLE_INFO_PLIST "${CMAKE_SOURCE_DIR}/assets/macos/Info.plist"
         # New Xcode attributes (???)
-        XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER           "io.emeric.qmlapptemplate"
+        XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER           "com.kaixoo12.advanced-effects"
         XCODE_ATTRIBUTE_PRODUCT_NAME                        ${CMAKE_PROJECT_NAME}
         XCODE_ATTRIBUTE_CURRENT_PROJECT_VERSION             ${CMAKE_PROJECT_VERSION}
         XCODE_ATTRIBUTE_MARKETING_VERSION                   ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}
@@ -140,7 +140,7 @@ if(CMAKE_SYSTEM_NAME STREQUAL "iOS")
         # Qt
         #QT_IOS_LAUNCH_SCREEN "${CMAKE_SOURCE_DIR}/assets/ios/LaunchScreen.storyboard"
         # New Xcode attributes (???)
-        XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER           "io.emeric.qmlapptemplate"
+        XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER           "com.kaixoo12.advanced-effects"
         XCODE_ATTRIBUTE_PRODUCT_NAME                        ${CMAKE_PROJECT_NAME}
         XCODE_ATTRIBUTE_CURRENT_PROJECT_VERSION             ${CMAKE_PROJECT_VERSION}
         XCODE_ATTRIBUTE_MARKETING_VERSION                   ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}

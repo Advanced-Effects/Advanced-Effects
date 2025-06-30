@@ -1,3 +1,4 @@
+---
 #-------------------------------------------------------------------------------
 # Workflow configuration
 #-------------------------------------------------------------------------------
@@ -13,7 +14,7 @@ on:
 #-------------------------------------------------------------------------------
 
 env:
-  APP_NAME: "QmlAppTemplate"
+  APP_NAME: "Advanced-Effects"
   APP_VERSION: "0.8"
   QT_VERSION: "6.7.3"
 
@@ -36,9 +37,9 @@ jobs:
       # Install dependencies (from package manager)
       - name: Install dependencies (from package manager)
         run: |
-             sudo apt-get install libgl1-mesa-dev libxkbcommon-x11-dev libx11-xcb-dev libzstd-dev -y;
-             sudo apt-get install cmake ninja-build pkgconf libtool -y;
-             sudo apt-get install appstream -y;
+          sudo apt-get install libgl1-mesa-dev libxkbcommon-x11-dev libx11-xcb-dev libzstd-dev -y;
+          sudo apt-get install cmake ninja-build pkgconf libtool -y;
+          sudo apt-get install appstream -y;
 
       # Install Qt
       - name: Install Qt
@@ -49,9 +50,9 @@ jobs:
       # Build application
       - name: Build application
         run: |
-             cmake --version
-             cmake -B build/ -DCMAKE_BUILD_TYPE=Release -G Ninja
-             cmake --build build/ --config Release
+          cmake --version
+          cmake -B build/ -DCMAKE_BUILD_TYPE=Release -G Ninja
+          cmake --build build/ --config Release
 
       # Deploy application
       - name: Deploy application
@@ -96,10 +97,10 @@ jobs:
       # Build application
       - name: Build application
         run: |
-             export CMAKE_BUILD_PARALLEL_LEVEL=`sysctl -n hw.logicalcpu`
-             cmake --version
-             cmake -B build/ -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"
-             cmake --build build/ --config Release
+          export CMAKE_BUILD_PARALLEL_LEVEL=`sysctl -n hw.logicalcpu`
+          cmake --version
+          cmake -B build/ -DCMAKE_BUILD_TYPE=Release -DCMAKE_OSX_ARCHITECTURES="x86_64;arm64"
+          cmake --build build/ --config Release
 
       # Deploy application
       - name: Deploy application
@@ -141,15 +142,15 @@ jobs:
         uses: jurplel/install-qt-action@v4
         with:
           version: ${{env.QT_VERSION}}
-          arch: 'win64_msvc2019_64'
+          arch: "win64_msvc2019_64"
 
       # Build application
       - name: Build application
         run: |
-             cmake --version
-             cmake -B build/ -DCMAKE_BUILD_TYPE=Release -G "NMake Makefiles"
-             cd build/
-             nmake
+          cmake --version
+          cmake -B build/ -DCMAKE_BUILD_TYPE=Release -G "NMake Makefiles"
+          cd build/
+          nmake
 
       # Deploy application
       - name: Deploy application

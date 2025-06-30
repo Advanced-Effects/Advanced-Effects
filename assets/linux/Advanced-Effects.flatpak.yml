@@ -1,12 +1,12 @@
 app-id: io.emeric.qmlapptemplate
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: "24.08"
 sdk: org.freedesktop.Sdk
-command: QmlAppTemplate
+command: Advanced-Effects
 
-rename-desktop-file: QmlAppTemplate.desktop
-rename-appdata-file: QmlAppTemplate.appdata.xml
-rename-icon: QmlAppTemplate
+rename-desktop-file: Advanced-Effects.desktop
+rename-appdata-file: Advanced-Effects.appdata.xml
+rename-icon: Advanced-Effects
 
 finish-args:
   # Our UI is GPU accelerated
@@ -122,9 +122,9 @@ modules:
           stable-only: true
           url-template: https://download.qt.io/archive/qt/$major.$minor/$version/submodules/qtsvg-everywhere-src-$version.tar.xz
 
-  - name: qmlapptemplate
+  - name: advanced-effects
     buildsystem: cmake-ninja
     sources:
       - type: archive
-        url: https://github.com/emericg/qmlapptemplate/archive/refs/tags/v0.8.tar.gz
+        url: https://github.com/kaixoo12/Advanced-Effects/archive/refs/tags/v0.8.tar.gz
         sha256:
