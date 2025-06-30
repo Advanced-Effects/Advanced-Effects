@@ -9,7 +9,7 @@ A good-looking open-source animation software inspired on Friction, Glaxnimate, 
 
 This piece of software wouldn't be available without the sustained hard work and research of the authors of Friction, Glaxnimate, and MuseScore. If you are honest, **you should not** **resell copies** of this software. More details on how GNU GPL v2 works: https://choosealicense.com/
 
-YOU came here looking for a free SVG animation alternative to propietary software. Do something good for the rest :) 
+YOU came here looking for a free SVG animation alternative to propietary software. Do something good for the rest :)
 
 ## Why this
 
@@ -19,6 +19,15 @@ The idea of developing this was born out of frustration with Friction's codebase
 
 I recommend using Qt Creator to run this software as it does most things for you.
 
+Ubuntu 24.04:
+```
+sudo apt install cmake ninja \
+qt6-base-dev libqt6svg6-dev \ # Core, SVG
+qt6-declarative-dev qml-qt6 \ # QML
+linguist-qt6 qt6-tools-dev # LinguistToools
+```
+
+- CMake and Ninja
 - C++17 compiler
 - Qt 6.7+ with QtQuick 2
 - FFmpeg (libav)
