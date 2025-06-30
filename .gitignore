@@ -1,0 +1,23 @@
+# Binaries and build artifacts
+build/*
+bin/*
+contribs/*
+appdir/*
+
+# CMake temporary project files
+CMakeLists.txt.user
+Makefile
+
+# Private signatures
+assets/ios/ios_signature.pri
+assets/macos/macos_signature.pri
+
+# XCode related
+Debug/*
+Release/*
+*.xcodeproj/*
+asset_catalog_compiler.Info.plist
+
+# Others
+stash/*
+.DS_Store
