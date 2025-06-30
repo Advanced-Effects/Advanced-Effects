@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(QmlAppTemplate VERSION 0.8 LANGUAGES CXX)
+project(Advanced-Effects VERSION 0.8 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -35,9 +35,10 @@ qt_standard_project_setup(REQUIRES 6.7
                           I18N_SOURCE_LANGUAGE en
                           I18N_TRANSLATED_LANGUAGES fr)
 
-qt_policy(SET QTP0001 NEW)
-qt_policy(SET QTP0002 NEW)
-qt_policy(SET QTP0003 NEW) # Qt 6.7
+# FIXME(kaixoo): what is this for?
+#qt_policy(SET QTP0001 NEW)
+#qt_policy(SET QTP0002 NEW)
+#qt_policy(SET QTP0003 NEW) # Qt 6.7
 #qt_policy(SET QTP0004 NEW) # Qt 6.8
 
 # Set app icons
@@ -49,7 +50,6 @@ endif()
 
 qt_add_executable(${CMAKE_PROJECT_NAME}
     src/main.cpp
-    src/SettingsManager.cpp src/SettingsManager.h
     assets/assets.qrc
     thirdparty/IconLibrary/IconLibrary.qrc
     ${app_icon_windows}
@@ -58,43 +58,24 @@ qt_add_executable(${CMAKE_PROJECT_NAME}
 
 qt_add_qml_module(${CMAKE_PROJECT_NAME}
     URI ${CMAKE_PROJECT_NAME}
-    RESOURCE_PREFIX "/QmlAppTemplate"
+    RESOURCE_PREFIX "/Advanced-Effects"
+    VERSION 6.7
     NO_PLUGIN
     QML_FILES
-        qml/MobileApplication.qml
-        qml/MobileHeader.qml
-        qml/MobileDrawer.qml
-        qml/MobilePermissions.qml
-        qml/MobileMenu.qml
-        qml/MobileExit.qml
-
-        qml/DesktopApplication.qml
-        qml/DesktopHeader.qml
-        qml/DesktopSidebar.qml
-
-        qml/ScreenMainView.qml
-        qml/ScreenMobileComponents.qml
-        qml/ScreenDesktopComponents.qml
-        qml/ScreenPlayground.qml
-        qml/ScreenFontInfos.qml
-        qml/ScreenHostInfos.qml
-        qml/ScreenSettings.qml
-        qml/ScreenAbout.qml
-
-        qml/PageButtons.qml
-        qml/PageColors.qml
-        qml/PageDateTime.qml
-        qml/PageDialogs.qml
-        qml/PageIndicators.qml
-        qml/PageSelectors.qml
-        qml/PageSliders.qml
-        qml/PageTextFields.qml
-        qml/PageTickers.qml
-
-        qml/popups/PopupMessage.qml
-        qml/popups/PopupChoice.qml
-        qml/popups/PopupDate.qml
-        qml/popups/PopupTime.qml
+        src/appshell/qml/Main.qml
+        src/appshell/qml/AppWindow.qml
+        src/appshell/qml/TopBar.qml
+        src/appshell/qml/BaseCanvas.qml
+        src/appshell/qml/PropertiesBar.qml
+        src/appshell/qml/TimelineBar.qml
+        src/appshell/qml/components/GeneralBar.qml
+        src/appshell/qml/components/Menubar.qml
+        src/appshell/qml/topbar/PlaybackWidget.qml
+        src/appshell/qml/topbar/QuickAccessBar.qml
+        src/appshell/qml/topbar/SwitchPageWidget.qml
+        src/appshell/qml/views/EditPage.qml
+        src/appshell/qml/views/RenderPage.qml
+        src/appshell/qml/views/WelcomePage.qml
 )
 
 qt_add_translations(${CMAKE_PROJECT_NAME}
@@ -117,40 +98,10 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
 
 ################################################################################
 
-# SingleApplication
-set(QAPPLICATION_CLASS QGuiApplication)
-add_subdirectory(thirdparty/SingleApplication)
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE SingleApplication)
-
-# AppUtils
-set(UTILS_DOCK_ENABLED true)
-add_subdirectory(thirdparty/AppUtils)
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE AppUtils)
-
-# MobileUI
-add_subdirectory(thirdparty/MobileUI)
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE MobileUI)
-
-# ComponentLibrary
-add_subdirectory(thirdparty/ComponentLibrary)
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE ComponentLibraryplugin)
-set(QML_IMPORT_PATH "${CMAKE_BINARY_DIR}/thirdparty" CACHE STRING "")
-
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE src/)
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE thirdparty/)
 
 ################################################################################
-
-## Android
-if(CMAKE_SYSTEM_NAME STREQUAL "Android")
-    set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
-        #QT_ANDROID_ABIS "armeabi-v7a;arm64-v8a;x86;x86_64"
-        #QT_ANDROID_BUILD_ALL_ABIS ON
-        QT_ANDROID_MIN_SDK_VERSION 23
-        QT_ANDROID_TARGET_SDK_VERSION 35
-        QT_ANDROID_PACKAGE_SOURCE_DIR "${CMAKE_SOURCE_DIR}/assets/android/"
-    )
-endif()
 
 #if(APPLE)
 #    set(CMAKE_XCODE_ATTRIBUTE_CODE_SIGNING_REQUIRED "NO")
