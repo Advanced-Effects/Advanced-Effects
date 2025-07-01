@@ -4,7 +4,7 @@
 #include <QVersionNumber>
 
 #include <QQmlApplicationEngine>
-#include <QCoreApplication>
+#include <QGuiApplication>
 #include <QStringLiteral>
 #include <QUrl>
 #include <QQmlContext>
@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     // Basic // Fusion // Imagine // macOS // iOS // Material // Universal // Windows
     //QQuickStyle::setStyle("Universal");
 
-    QCoreApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
     engine.addImportPath(":/");
