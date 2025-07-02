@@ -63,21 +63,7 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
     RESOURCE_PREFIX "/Advanced-Effects"
     VERSION 6.7
     NO_PLUGIN
-    QML_FILES
-        src/appshell/qml/Main.qml
-        src/appshell/qml/AppWindow.qml
-        src/appshell/qml/Topbar.qml
-        src/appshell/qml/BaseCanvas.qml
-        src/appshell/qml/PropertiesBar.qml
-        src/appshell/qml/TimelineBar.qml
-        src/appshell/qml/components/GeneralBar.qml
-        src/appshell/qml/components/Menubar.qml
-        src/appshell/qml/topbar/PlaybackWidget.qml
-        src/appshell/qml/topbar/QuickAccessBar.qml
-        src/appshell/qml/topbar/SwitchPageWidget.qml
-        src/appshell/qml/views/EditPage.qml
-        src/appshell/qml/views/RenderPage.qml
-        src/appshell/qml/views/WelcomePage.qml
+    QML_FILES ${resources_QRC}
 )
 
 qt_add_translations(${CMAKE_PROJECT_NAME}
@@ -101,7 +87,6 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
 ################################################################################
 
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE src/)
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE thirdparty/)
 
 ################################################################################
 
