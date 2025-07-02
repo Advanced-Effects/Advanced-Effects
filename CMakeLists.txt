@@ -50,10 +50,17 @@ endif()
 
 qt_add_resources(resources_QRC src/resources.qrc)
 
+set(UI_COMPONENTS_SRC src/uicomponents)
+qt_add_resources(UI_COMPONENTS_QRC ${UI_COMPONENTS_SRC}/uicomponents.qrc ${UI_COMPONENTS_SRC}/graphicaleffects.qrc)
+
+set(UI_COMPONENTS_QML_IMPORT ${UI_COMPONENTS_SRC}/qml )
+set(UI_COMPONENTS_QMLAPI_IMPORT ${UI_COMPONENTS_SRC}/api )
+
 qt_add_executable(${CMAKE_PROJECT_NAME}
     src/main.cpp
     assets/assets.qrc
     ${resources_QRC}
+    ${UI_COMPONENTS_QRC}
     ${app_icon_windows}
     ${app_icon_macos}
 )
@@ -63,7 +70,7 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
     RESOURCE_PREFIX "/Advanced-Effects"
     VERSION 6.7
     NO_PLUGIN
-    QML_FILES ${resources_QRC}
+    QML_FILES ${resources_QRC} ${UI_COMPONENTS_QRC}
 )
 
 qt_add_translations(${CMAKE_PROJECT_NAME}
