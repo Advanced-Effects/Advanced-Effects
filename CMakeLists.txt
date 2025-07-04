@@ -57,7 +57,7 @@ endif()
 
 ################################################################################
 
-set(UI_COMPONENTS_SRC src/uicomponents)
+set(UI_COMPONENTS_SRC src/Muse/uicomponents)
 
 set(UI_COMPONENTS_QML_IMPORT ${UI_COMPONENTS_SRC}/qml )
 set(UI_COMPONENTS_QMLAPI_IMPORT ${UI_COMPONENTS_SRC}/api )
@@ -187,19 +187,24 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
     NO_PLUGIN
     QML_FILES
         src/appshell/qml/Main.qml
-        src/appshell/qml/AppWindow.qml
+        src/appshell/qml/WindowContents.qml
         src/appshell/qml/BaseCanvas.qml
-        src/appshell/qml/PropertiesBar.qml
-        src/appshell/qml/TimelineBar.qml
-        src/appshell/qml/Topbar.qml
-        src/appshell/qml/components/GeneralBar.qml
-        src/appshell/qml/components/Menubar.qml
-        src/appshell/qml/topbar/PlaybackWidget.qml
-        src/appshell/qml/topbar/QuickAccessBar.qml
-        src/appshell/qml/topbar/SwitchPageWidget.qml
-        src/appshell/qml/views/EditPage.qml
-        src/appshell/qml/views/RenderPage.qml
-        src/appshell/qml/views/WelcomePage.qml
+        src/appshell/qml/Docks/PropertiesBar.qml
+        src/appshell/qml/Docks/TimelineBar.qml
+        src/appshell/qml/Docks/GeneralBar.qml
+        src/appshell/qml/Docks/CentralWidget.qml
+        src/appshell/qml/Topbar/Topbar.qml
+        src/appshell/qml/Menu/AppWindow.qml
+        src/appshell/qml/Menu/AppTitlebar.qml
+        src/appshell/qml/Menu/AppMenubar.qml
+        src/appshell/qml/Menu/AppButtonBackground.qml
+        src/appshell/qml/Menu/AppSystemButtons.qml
+        src/appshell/qml/Topbar/PlaybackWidget.qml
+        src/appshell/qml/Topbar/QuickAccessBar.qml
+        src/appshell/qml/Topbar/SwitchPageWidget.qml
+        src/appshell/qml/Pages/EditPage.qml
+        src/appshell/qml/Pages/RenderPage.qml
+        src/appshell/qml/Pages/WelcomePage.qml
 )
 
 qt_add_translations(${CMAKE_PROJECT_NAME}
