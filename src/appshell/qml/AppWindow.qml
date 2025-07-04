@@ -1,9 +1,11 @@
 import QtQuick 2.15
 
+import AdvancedEffects
+import Muse.UiComponents
+
 Row {
-    // TODO(kaixoo)
-    //Menubar {}
-    //Topbar {}
+    Menubar {}
+    Topbar {}
     // Currently rendered page.
-    //Item {}
+    Item {}
 }

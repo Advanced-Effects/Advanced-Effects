@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(Advanced-Effects VERSION 0.8 LANGUAGES CXX)
+project(AdvancedEffects VERSION 0.8 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -31,15 +31,22 @@ message(STATUS "[PROJECT] QT_HOST_PATH              = ${QT_HOST_PATH}")
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Svg Qml Quick QuickControls2)
 find_package(Qt6 REQUIRED COMPONENTS LinguistTools)
 
-qt_standard_project_setup(REQUIRES 6.7
+qt_standard_project_setup(REQUIRES 6.9
                           I18N_SOURCE_LANGUAGE en
                           I18N_TRANSLATED_LANGUAGES fr)
 
-# FIXME(kaixoo): what is this for?
-#qt_policy(SET QTP0001 NEW)
-#qt_policy(SET QTP0002 NEW)
-#qt_policy(SET QTP0003 NEW) # Qt 6.7
-#qt_policy(SET QTP0004 NEW) # Qt 6.8
+###############################################################################
+
+# Qt policies: https://doc.qt.io/qt-6/qt-cmake-policies.html
+
+# set ':/qt/qml/' as the default resource prefix for QML modules
+qt_policy(SET QTP0001 NEW)
+qt_policy(SET QTP0002 NEW)
+qt_policy(SET QTP0003 NEW) # Qt 6.7
+# Extra directories with QML files in a QML module need extra qmldir files
+qt_policy(SET QTP0004 NEW) # Qt 6.8
+
+###############################################################################
 
 # Set app icons
 if(CMAKE_SYSTEM_NAME STREQUAL "Windows")
@@ -48,35 +55,156 @@ elseif(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
     set(app_icon_macos "${CMAKE_SOURCE_DIR}/assets/macos/${CMAKE_PROJECT_NAME}.icns")
 endif()
 
-qt_add_resources(resources_QRC src/resources.qrc)
+################################################################################
 
 set(UI_COMPONENTS_SRC src/uicomponents)
-qt_add_resources(UI_COMPONENTS_QRC ${UI_COMPONENTS_SRC}/uicomponents.qrc ${UI_COMPONENTS_SRC}/graphicaleffects.qrc)
 
 set(UI_COMPONENTS_QML_IMPORT ${UI_COMPONENTS_SRC}/qml )
 set(UI_COMPONENTS_QMLAPI_IMPORT ${UI_COMPONENTS_SRC}/api )
 
+################################################################################
+
 qt_add_executable(${CMAKE_PROJECT_NAME}
     src/main.cpp
     assets/assets.qrc
-    ${resources_QRC}
-    ${UI_COMPONENTS_QRC}
     ${app_icon_windows}
     ${app_icon_macos}
 )
 
-qt_add_qml_module(${CMAKE_PROJECT_NAME}
-    URI ${CMAKE_PROJECT_NAME}
-    RESOURCE_PREFIX "/Advanced-Effects"
-    VERSION 6.7
+# This was the missing piece of shit to get UiComponents to be linked to the main executable!
+qt_add_library(UiComponents STATIC)
+qt_add_qml_module(UiComponents
+    URI "Muse.UiComponents"
+    VERSION 1.0
     NO_PLUGIN
-    QML_FILES ${resources_QRC} ${UI_COMPONENTS_QRC}
+    QML_FILES
+        ${UI_COMPONENTS_SRC}/api/MuseApi/Controls/qmldir
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/Border.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/ButtonBox.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/CheckBox.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/ColorPicker.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/ContextMenuLoader.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/ExpandableBlank.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/ExpandableBlankSection.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/FilePicker.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/FlatButton.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/FlatButtonMenuIndicatorTriangle.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/FlatRadioButton.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/FlatRadioButtonList.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/FlatToggleButton.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/FocusableControl.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/FocusableItem.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/GradientRectangle.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/GridViewSectional.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/IncrementalPropertyControl.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/InfoPanel.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/ItemWithDropShadow.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/ListItemBlank.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/MenuButton.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/NavigationFocusBorder.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/NumberInputField.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/PageIndicator.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/PageTabButton.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/PopupPanel.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/ProgressBar.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/ProgressButton.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/RadioButtonGroup.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/RoundedRadioButton.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/RoundedRectangle.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/SearchField.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/SelectMultipleDirectoriesDialog.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/SeparatorLine.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledBusyIndicator.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledDialogView.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledDropShadow.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledDropdown.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledFlickable.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledGridView.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledGroupBox.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledIconLabel.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledListView.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledMenuLoader.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledPopupView.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledScrollBar.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledSlider.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledTabBar.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledTabButton.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledTextLabel.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledToolTip.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/TextInputField.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/TimeInputField.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/ToggleButton.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/ValueAdjustControl.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/ValueList.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/VisibilityBox.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/internal/ArrowScrollButton.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/internal/DirectoriesTopPanel.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/internal/DirectoriesView.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/internal/DropdownItem.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/internal/GridViewDelegate.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/internal/GridViewSection.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/internal/MenuMetrics.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/internal/PopupContent.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/internal/StyledDropdownLoader.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/internal/StyledDropdownView.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/internal/StyledMenu.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/internal/StyledMenuItem.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/internal/ValueListHeaderItem.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/internal/ValueListItem.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/qmldir
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/treeview/BasicTableView.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/treeview/BasicTableViewStyle.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/treeview/ScrollBar.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/treeview/ScrollView.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/treeview/ScrollViewHelper.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/treeview/ScrollViewStyle.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/treeview/Style.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/treeview/TableViewColumn.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/treeview/TableViewItemDelegateLoader.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/treeview/TreeView.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/treeview/TreeViewItemDelegateLoader.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/treeview/TreeViewStyle.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/treeview/images/header.png
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledToolBarView.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledToolBarItem.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/TextInputArea.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/StyledViewScrollAndZoomArea.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/internal/ViewScrollBar.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/RealInputField.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/GraphicalEffects/qmldir
+        ${UI_COMPONENTS_SRC}/qml/Muse/GraphicalEffects/EffectDropShadow.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/GraphicalEffects/EffectOpacityMask.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/GraphicalEffects/EffectRectangularGlow.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/GraphicalEffects/EffectFastBlur.qml
+        ${UI_COMPONENTS_SRC}/qml/Muse/GraphicalEffects/EffectColorOverlay.qml
+    RESOURCES
+        ${UI_COMPONENTS_SRC}/qml/Muse/UiComponents/Utils.js
+)
+
+qt_add_qml_module(${CMAKE_PROJECT_NAME}
+    URI "${CMAKE_PROJECT_NAME}"
+    VERSION 1.0
+    NO_PLUGIN
+    QML_FILES
+        src/appshell/qml/Main.qml
+        src/appshell/qml/AppWindow.qml
+        src/appshell/qml/BaseCanvas.qml
+        src/appshell/qml/PropertiesBar.qml
+        src/appshell/qml/TimelineBar.qml
+        src/appshell/qml/Topbar.qml
+        src/appshell/qml/components/GeneralBar.qml
+        src/appshell/qml/components/Menubar.qml
+        src/appshell/qml/topbar/PlaybackWidget.qml
+        src/appshell/qml/topbar/QuickAccessBar.qml
+        src/appshell/qml/topbar/SwitchPageWidget.qml
+        src/appshell/qml/views/EditPage.qml
+        src/appshell/qml/views/RenderPage.qml
+        src/appshell/qml/views/WelcomePage.qml
 )
 
 qt_add_translations(${CMAKE_PROJECT_NAME}
     TS_FILE_BASE ${CMAKE_PROJECT_NAME}
     TS_FILE_DIR ${CMAKE_SOURCE_DIR}/i18n/
-    RESOURCE_PREFIX "/i18n"
 )
 
 ################################################################################
@@ -90,6 +218,9 @@ target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
     Qt6::Quick
     Qt6::QuickControls2
 )
+
+# Include targets (UiComponents, ...)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE UiComponents)
 
 ################################################################################
 

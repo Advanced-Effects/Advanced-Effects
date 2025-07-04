@@ -19,18 +19,11 @@ The idea of developing this was born out of frustration with Friction's codebase
 
 I recommend using Qt Creator to run this software as it does most things for you.
 
-Ubuntu 24.04:
-```
-sudo apt install cmake ninja \
-qt6-base-dev libqt6svg6-dev \ # Core, SVG
-qt6-declarative-dev qml-qt6 \ # QML
-linguist-qt6 qt6-tools-dev # LinguistToools
-qml6-module-qtqml-workerscript # WorkerTools (QML Resources)
-```
+You **can't install Qt through the system manager** because in Ubuntu only Qt 6.4 is distributed and **6.9** is required to run this.
 
 - CMake and Ninja
 - C++17 compiler
-- Qt 6.7+ with QtQuick 2
+- Qt 6.9+ with QtQuick 2
 - FFmpeg (libav)
 - Skia
 

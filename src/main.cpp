@@ -46,9 +46,7 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
-    engine.addImportPath(":/");
-    engine.addImportPath(":/Advanced-Effects");
-    engine.load(QUrl(QStringLiteral("qrc:/appshell/qml/Main.qml")));
+    engine.loadFromModule("AdvancedEffects", "Main");
 
     //qDebug() << engine.importPathList();
     //QDirIterator qrc(":", QDirIterator::Subdirectories);
