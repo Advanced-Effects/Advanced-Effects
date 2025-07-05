@@ -3,8 +3,8 @@
 # and the UI components library
 add_subdirectory(framework)
 
-# App (main executable)
-add_subdirectory(app)
-
 # Appshell (Application GUI)
 add_subdirectory(appshell)
+
+# App (main executable)
+add_subdirectory(app)

@@ -87,8 +87,8 @@ macro(setup_module)
         message(STATUS "Configuring ${MODULE} <${MODULE_ALIAS}>")
     endif()
 
-    if (NOT MUSE_FRAMEWORK_PATH)
-        set(MUSE_FRAMEWORK_PATH ${PROJECT_SOURCE_DIR})
+    if (NOT AE_FRAMEWORK_PATH)
+        set(AE_FRAMEWORK_PATH ${PROJECT_SOURCE_DIR})
     endif()
 
     if (MODULE_QRC AND NOT NO_QT_SUPPORT)
@@ -121,29 +121,6 @@ macro(setup_module)
         install(TARGETS ${MODULE} DESTINATION ${SHARED_LIBS_INSTALL_DESTINATION})
     endif()
 
-    if (MUSE_COMPILE_USE_PCH AND MODULE_USE_PCH)
-        if (${MODULE} STREQUAL muse_global)
-            target_precompile_headers(${MODULE} PRIVATE ${MUSE_FRAMEWORK_PATH}/buildscripts/pch/pch.h)
-        else()
-            if (DEFINED MODULE_OVERRIDDEN_PCH)
-                target_precompile_headers(${MODULE} PRIVATE ${MODULE_OVERRIDDEN_PCH})
-            else()
-                target_precompile_headers(${MODULE} REUSE_FROM muse_global)
-                target_compile_definitions(${MODULE} PRIVATE muse_global_EXPORTS=1)
-            endif()
-
-            set(MODULE_LINK_GLOBAL ON)
-        endif()
-    endif()
-
-    if (MUSE_COMPILE_USE_UNITY)
-        if (MODULE_USE_UNITY)
-            set_target_properties(${MODULE} PROPERTIES UNITY_BUILD ON)
-        else()
-            set_target_properties(${MODULE} PROPERTIES UNITY_BUILD OFF)
-        endif()
-    endif()
-
     target_sources(${MODULE} PRIVATE
         ${ui_headers}
         ${RCC_SOURCES}
@@ -157,12 +134,12 @@ macro(setup_module)
         ${MODULE_ROOT}
         ${PROJECT_SOURCE_DIR}/src
 
-        ${MUSE_FRAMEWORK_PATH}
-        ${MUSE_FRAMEWORK_PATH}/framework
+        ${AE_FRAMEWORK_PATH}
+        ${AE_FRAMEWORK_PATH}/framework
 
         # compat
-        ${MUSE_FRAMEWORK_PATH}/src
-        ${MUSE_FRAMEWORK_PATH}/src/framework
+        ${AE_FRAMEWORK_PATH}/src
+        ${AE_FRAMEWORK_PATH}/src/framework
         # end compat
 
         ${MODULE_INCLUDE}
@@ -176,16 +153,6 @@ macro(setup_module)
         ${MODULE_DEF}
         ${MODULE}_QML_IMPORT="${MODULE_QML_IMPORT}"
     )
-
-    if (MUSE_ENABLE_UNIT_TESTS_CODE_COVERAGE AND MODULE_USE_COVERAGE)
-        set(COVERAGE_FLAGS -fprofile-arcs -ftest-coverage --coverage)
-        target_compile_options(${MODULE} PRIVATE ${COVERAGE_FLAGS})
-        target_link_options(${MODULE} PRIVATE -lgcov --coverage)
-    endif()
-
-    if (NOT ${MODULE} MATCHES muse_global AND MODULE_LINK_GLOBAL)
-        set(MODULE_LINK muse_global ${MODULE_LINK})
-    endif()
 
     set(MODULE_LINK ${CMAKE_DL_LIBS} ${QT_LIBRARIES} ${MODULE_LINK})
 

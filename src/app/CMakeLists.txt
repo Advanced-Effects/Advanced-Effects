@@ -13,4 +13,9 @@ qt_add_executable(${CMAKE_PROJECT_NAME}
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
     ${QT_LIBRARIES}
+    app
+    project_file
+    ui
+    uicomponents
+    appshell
 )

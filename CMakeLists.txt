@@ -4,7 +4,7 @@
 
 cmake_minimum_required(VERSION 3.20)
 
-project(ae VERSION 0.8 LANGUAGES CXX)
+project(AdvancedEffects VERSION 0.8 LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -19,6 +19,9 @@ set(CMAKE_MODULE_PATH
     ${CMAKE_MODULE_PATH}
 )
 
+###########################################
+# Add declare_module functions
+###########################################
 include(DeclareModuleSetup)
 
 ###########################################

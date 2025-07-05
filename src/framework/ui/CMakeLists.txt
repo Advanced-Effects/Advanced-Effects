@@ -18,8 +18,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-declare_module(muse_ui)
-set(MODULE_ALIAS muse::ui)
+declare_module(ae_ui)
+set(MODULE_ALIAS ae::ui)
 
 set(MODULE_QRC ui.qrc)
 set(MODULE_QML_IMPORT ${CMAKE_CURRENT_LIST_DIR}/qml)
@@ -151,23 +151,15 @@ set(MODULE_SRC
     ${CMAKE_CURRENT_LIST_DIR}/dev/interactivetestsmodel.h
     ${CMAKE_CURRENT_LIST_DIR}/dev/testdialog.cpp
     ${CMAKE_CURRENT_LIST_DIR}/dev/testdialog.h
-    )
+)
 
 set(MODULE_UI
     ${CMAKE_CURRENT_LIST_DIR}/dev/testdialog.ui
-    )
+)
 
 if (OS_IS_MAC)
     find_library(AppKit NAMES AppKit)
     set(MODULE_LINK ${MODULE_LINK} ${AppKit})
 endif()
 
-set(MODULE_LINK ${MODULE_LINK}
-    muse::tours
-)
-
 setup_module()
-
-if (MUSE_MODULE_UI_TESTS)
-    add_subdirectory(tests)
-endif()
