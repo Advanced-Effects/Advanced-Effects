@@ -1,0 +1,23 @@
+<RCC>
+    <qresource>
+        <file>qml/Main.qml</file>
+        <file>qml/WindowContents.qml</file>
+        <file>qml/BaseCanvas.qml</file>
+        <file>qml/Menu/AppWindow.qml</file>
+        <file>qml/Menu/AppTitlebar.qml</file>
+        <file>qml/Menu/AppSystemButtons.qml</file>
+        <file>qml/Menu/AppMenubar.qml</file>
+        <file>qml/Menu/AppButtonBackground.qml</file>
+        <file>qml/Topbar/Topbar.qml</file>
+        <file>qml/Topbar/SwitchPageWidget.qml</file>
+        <file>qml/Topbar/QuickAccessBar.qml</file>
+        <file>qml/Topbar/PlaybackWidget.qml</file>
+        <file>qml/Docks/CentralWidget.qml</file>
+        <file>qml/Docks/GeneralBar.qml</file>
+        <file>qml/Docks/PropertiesBar.qml</file>
+        <file>qml/Docks/TimelineBar.qml</file>
+        <file>qml/Pages/EditPage.qml</file>
+        <file>qml/Pages/RenderPage.qml</file>
+        <file>qml/Pages/WelcomePage.qml</file>
+    </qresource>
+</RCC>
