@@ -10,11 +10,4 @@ set(MODULE_SRC
     internal/basecanvas.h
     internal/basecanvas.cpp)
 
-
-set(MODULE_LINK
-    ae::ui
-    ae::uicomponents
-    ae::dockwindow
-)
-
 setup_module()
