@@ -7,6 +7,7 @@ set(LIB_LIST
 
     ae::app
     ae::project_file
+    muse::global
     muse::ui
     muse::uicomponents
     ae::appshell
