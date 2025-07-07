@@ -44,6 +44,7 @@ include(SetupQt6)
 # Add source tree
 ###########################################
 
+add_subdirectory(thirdparty)
 add_subdirectory(src)
 
 ###########################################

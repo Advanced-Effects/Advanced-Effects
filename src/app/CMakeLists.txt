@@ -13,9 +13,9 @@ qt_add_executable(${CMAKE_PROJECT_NAME}
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE
     ${QT_LIBRARIES}
-    app
-    project_file
-    ui
-    uicomponents
-    appshell
+    muse::ui
+    muse::uicomponents
+    ae::app
+    ae::project_file
+    ae::appshell
 )
