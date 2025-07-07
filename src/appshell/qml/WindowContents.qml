@@ -1,18 +1,37 @@
 import QtQuick 2.15
 
-DockWindow {
+import AdvancedEffects.AppShell
+
+Column {
     id: root
     objectName: "WindowContent"
 
-    NavigationSection {
-        id: topToolbarKeyNavigationSection
-        name: "TopTool"
-        order: 1
+    // Includes the tool selection bar, the fill and stroke bar...
+    Topbar {
+        id: topbar
+
+        anchors.top: root.top
+        anchors.left: root.left
+        anchors.right: root.right
     }
 
-    pages: [
-        WelcomePage {},
-        EditPage {},
-        RenderPage {}
-    ]
+    Row {
+        anchors.top: topbar.bottom
+        anchors.left: root.left
+        anchors.right: root.right
+
+        PropertiesBar {
+            anchors.left: parent.left
+        }
+        CentralWidget {}
+        GeneralBar {
+            anchors.right: parent.right
+        }
+    }
+
+    TimelineBar {
+        anchors.left: root.left
+        anchors.right: root.right
+        anchors.bottom: root.bottom
+    }
 }

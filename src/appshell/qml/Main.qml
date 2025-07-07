@@ -31,7 +31,7 @@ AppWindow {
     WindowContents {
         id: windowContents
 
-        anchors.top: appTitlebar.top
+        anchors.top: appTitlebar.bottom
         anchors.left: root.left
         anchors.right: root.right
         anchors.bottom: root.bottom

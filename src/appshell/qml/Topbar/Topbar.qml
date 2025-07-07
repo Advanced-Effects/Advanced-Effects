@@ -4,7 +4,12 @@ import AdvancedEffects
 import Muse.UiComponents
 
 Column {
-    SwitchPageWidget {}
-    PlaybackWidget {}
-    QuickAccessBar {}
+    id: root
+
+    SelectToolBar {
+        anchors.left: root.left
+    }
+    QuickAccessBar {
+        anchors.right: root.right
+    }
 }
