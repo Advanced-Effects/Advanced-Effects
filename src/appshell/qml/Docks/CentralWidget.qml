@@ -12,7 +12,7 @@ Column {
         anchors.right: root.right
         anchors.top: root.top
     }
-    BaseCanvas {
+    ViewCanvas {
         anchors.left: root.left
         anchors.right: root.right
         anchors.top: fileTabBar.bottom

@@ -2,7 +2,7 @@
     <qresource>
         <file>qml/Main.qml</file>
         <file>qml/WindowContents.qml</file>
-        <file>qml/BaseCanvas.qml</file>
+        <file>qml/Canvas/ViewCanvas.qml</file>
         <file>qml/Menu/AppWindow.qml</file>
         <file>qml/Menu/AppTitlebar.qml</file>
         <file>qml/Menu/AppSystemButtons.qml</file>
