@@ -135,11 +135,15 @@ macro(setup_module)
         ${PROJECT_SOURCE_DIR}/src
 
         ${AE_FRAMEWORK_PATH}
-        ${AE_FRAMEWORK_PATH}/framework
+        ${AE_FRAMEWORK_PATH}/library
+        ${CMAKE_SOURCE_DIR}/thirdparty
+        ${CMAKE_SOURCE_DIR}/thirdparty/global
 
         # compat
         ${AE_FRAMEWORK_PATH}/src
-        ${AE_FRAMEWORK_PATH}/src/framework
+        ${AE_FRAMEWORK_PATH}/src/library
+        ${CMAKE_SOURCE_DIR}/thirdparty
+        ${CMAKE_SOURCE_DIR}/thirdparty/global
         # end compat
 
         ${MODULE_INCLUDE}

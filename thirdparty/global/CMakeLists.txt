@@ -254,9 +254,4 @@ list(APPEND MODULE_LINK
 list(APPEND MODULE_LINK ${TINYXML_MODULE_LINK})
 set(MODULE_DEF ${TINYXML_MODULE_DEF})
 
-target_sources(muse_global
-  PRIVATE
-    types/secs.h
-)
-
 setup_module()
