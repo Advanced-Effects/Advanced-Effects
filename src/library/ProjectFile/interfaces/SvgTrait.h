@@ -1,5 +1,6 @@
-#ifndef SVG_TRAIT_H
-#define SVG_TRAIT_H
+#pragma once
+
+namespace ae::project_file::interfaces {
 
 // This interface tells the caller:
 // "Hey dude, this object can be exported / imported to SVG"
@@ -8,4 +9,4 @@ class SVGTrait {
     //static virtual ??
 };
 
-#endif // SVG_TRAIT_H
+};
