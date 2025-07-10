@@ -3,6 +3,9 @@
 # and the UI components library
 add_subdirectory(library)
 
+# Services, in between library and appshell
+add_subdirectory(services)
+
 # Appshell (Application GUI)
 add_subdirectory(appshell)
 
@@ -21,6 +24,8 @@ set(LIB_LIST
     muse::ui
     muse::uicomponents
     muse::dockwindow
+
+    ae::services
     ae::appshell
 )
 
