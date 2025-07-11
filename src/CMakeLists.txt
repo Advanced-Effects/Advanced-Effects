@@ -1,3 +1,23 @@
+###########################################
+# We define the target first to set the include paths
+###########################################
+
+qt_add_executable(${CMAKE_PROJECT_NAME}
+    main.cpp
+    ../assets/assets.qrc
+)
+
+###########################################
+# Set include paths
+###########################################
+
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${MUSE_FRAMEWORK_SRC_PATH}/framework/)
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${MUSE_FRAMEWORK_SRC_PATH}/framework/global/)
+
+###########################################
+# Include subdirectories (libraries)
+###########################################
+
 # Library, should be first to work
 # Contains core libraries required for the program to work,
 # and the UI components library
@@ -16,22 +36,17 @@ add_subdirectory(appshell)
 
 set(LIB_LIST
     ${QT_LIBRARIES}
-    muse::global
+    global
 
     ae::app
     ae::project_file
 
-    muse::ui
-    muse::uicomponents
-    muse::dockwindow
+    ui
+    uicomponents
+    dockwindow
 
     ae::services
     ae::appshell
-)
-
-qt_add_executable(${CMAKE_PROJECT_NAME}
-    main.cpp
-    ../assets/assets.qrc
 )
 
 target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE ${LIB_LIST})

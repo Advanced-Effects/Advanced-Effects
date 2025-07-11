@@ -5,19 +5,19 @@
 #include <QQmlEngine>
 #include <QJSValue>
 
-#include "library/project_file/ProjectFile.h"
+#include "library/ProjectFile/ProjectFile.h"
 
 class OpenProjectsManager : public QObject {
     Q_OBJECT
     QML_SINGLETON
 
 public:
-    OpenProjectsManager(QJsValue id, QObject *parent = nullptr)
+    OpenProjectsManager(QJSValue id, QObject *parent = nullptr)
     : QObject(parent)
     , _symbol(std::move(id)) {};
 
     static OpenProjectsManager *create(QQmlEngine *qmlEngine, QJSEngine *) {
-        return new OpenProjectsManager(qmlEngine->newSymbol(u"OpenProjectsManager"_s));
+        return new OpenProjectsManager(qmlEngine->newSymbol(u"OpenProjectsManager"));
     };
 
     std::vector<ProjectFile> currentlyOpenProjects;
