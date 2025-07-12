@@ -1,37 +1,23 @@
 import QtQuick 2.15
 
+import Muse.Ui
+import Muse.UiComponents
+import Muse.DockWindow
+
 import AdvancedEffects.AppShell
 
-Column {
+DockWindow {
     id: root
     objectName: "WindowContent"
 
-    // Includes the tool selection bar, the fill and stroke bar...
-    Topbar {
-        id: topbar
+    toolbars: [
+        Topbar {}
+    ]
 
-        anchors.top: root.top
-        anchors.left: root.left
-        anchors.right: root.right
-    }
+    panels: [
+        GeneralBar {},
+        TimelineBar {}
+    ]
 
-    Row {
-        anchors.top: topbar.bottom
-        anchors.left: root.left
-        anchors.right: root.right
-
-        PropertiesBar {
-            anchors.left: parent.left
-        }
-        CentralWidget {}
-        GeneralBar {
-            anchors.right: parent.right
-        }
-    }
-
-    TimelineBar {
-        anchors.left: root.left
-        anchors.right: root.right
-        anchors.bottom: root.bottom
-    }
+    central: CentralWidget {}
 }

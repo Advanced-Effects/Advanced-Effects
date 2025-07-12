@@ -2,20 +2,26 @@
     <qresource>
         <file>qml/Main.qml</file>
         <file>qml/WindowContents.qml</file>
+        <file>qml/CentralWidget.qml</file>
+        <file>qml/FileTabBar.qml</file>
         <file>qml/Canvas/ViewCanvas.qml</file>
+        <file>qml/Canvas/OpenGLContainer.qml</file>
         <file>qml/Menu/AppWindow.qml</file>
         <file>qml/Menu/AppTitlebar.qml</file>
         <file>qml/Menu/AppSystemButtons.qml</file>
         <file>qml/Menu/AppMenubar.qml</file>
         <file>qml/Menu/AppButtonBackground.qml</file>
-        <file>qml/Topbar/Topbar.qml</file>
-        <file>qml/Topbar/SelectToolBar.qml</file>
-        <file>qml/Topbar/QuickAccessBar.qml</file>
-        <file>qml/Docks/CentralWidget.qml</file>
-        <file>qml/Docks/GeneralBar.qml</file>
-        <file>qml/Docks/PropertiesBar.qml</file>
-        <file>qml/Docks/FileTabBar.qml</file>
+        <file>qml/Toolbars/Topbar.qml</file>
+        <file>qml/Toolbars/SelectToolBar.qml</file>
+        <file>qml/GeneralBar/GeneralBar.qml</file>
+        <file>qml/GeneralBar/Properties.qml</file>
+        <file>qml/GeneralBar/Align.qml</file>
+        <file>qml/GeneralBar/FillAndStroke.qml</file>
+        <file>qml/GeneralBar/Effects.qml</file>
         <file>qml/Timeline/KeysView.qml</file>
-        <file>qml/Timeline/TimelineBar.qml</file>
+        <file>qml/Timeline/ObjectsTreeView.qml</file>
+        <file>qml/Timeline/ObjectsTreeView.qml</file>
+        <file>qml/Timeline/TimelineSecondsBar.qml</file>
+        <file>qml/Timeline/TimelineWidget.qml</file>
     </qresource>
 </RCC>
