@@ -36,14 +36,14 @@ add_subdirectory(appshell)
 
 set(LIB_LIST
     ${QT_LIBRARIES}
-    global
+    muse::global
 
     ae::app
     ae::project_file
 
-    ui
-    uicomponents
-    dockwindow
+    muse::ui
+    muse::uicomponents
+    muse::dockwindow
 
     ae::services
     ae::appshell
