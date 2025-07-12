@@ -2,13 +2,12 @@ import QtQuick 2.15
 
 import Muse.UiComponents
 
-Column {
+Row {
     id: root
 
     SelectToolBar {
         anchors.left: root.left
-    }
-    QuickAccessBar {
-        anchors.right: root.right
+        anchors.top: root.top
+        anchors.bottom: root.bottom
     }
 }
