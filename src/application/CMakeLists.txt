@@ -11,7 +11,7 @@ qt_add_executable(${CMAKE_PROJECT_NAME}
 # Set include paths
 ###########################################
 
-target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${MUSE_FRAMEWORK_SRC_PATH}/library/)
+target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_LIST_DIR}/../library/)
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${MUSE_FRAMEWORK_SRC_PATH}/framework/)
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${MUSE_FRAMEWORK_SRC_PATH}/framework/global/)
 
