@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 
-namespace ae::project_file::objects {
+namespace ae::library::ProjectFile::objects {
 
 /// Node is the base element in the object hierarchy
 ///

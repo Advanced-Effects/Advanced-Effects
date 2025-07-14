@@ -2,6 +2,8 @@
 
 #include "range.h"
 
+namespace ae::library::ProjectFile::objects {
+
 template<typename T>
 class Key {
 public:
@@ -11,4 +13,6 @@ public:
     T keys[_range];
 
     Range _range;
+};
+
 };

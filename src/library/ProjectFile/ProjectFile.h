@@ -1,8 +1,9 @@
-#ifndef PROJECT_FILE_H
-#define PROJECT_FILE_H
+#pragma once
 
 #include <vector>
 #include <QFile>
+
+namespace ae::library::ProjectFile {
 
 // A ProjectFile has layers, objects, and linked assets
 // A ProjectFile can be exported / imported to/from a file.
@@ -24,4 +25,4 @@ private:
     std::vector<QFile*> linkedAssets;
 };
 
-#endif // PROJECT_FILE_H
+};
