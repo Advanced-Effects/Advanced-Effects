@@ -5,6 +5,7 @@ set(MODULE_ROOT ${CMAKE_CURRENT_LIST_DIR})
 
 set(MODULE_SRC
     ProjectFile.h
+    ProjectFile.cpp
     objects/node.h
     objects/node2d.h
     objects/keys/key.h

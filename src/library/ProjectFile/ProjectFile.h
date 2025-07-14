@@ -7,13 +7,13 @@
 // A ProjectFile has layers, objects, and linked assets
 // A ProjectFile can be exported / imported to/from a file.
 class ProjectFile {
+public:
     ProjectFile();
     ~ProjectFile() = default;
 
     static ProjectFile fromFile(QFile*);
-    QFile* toFile();
+    QFile* getFile();
 
-public:
     void linkAsset(QFile*);
     void removeAsset(QFile*);
 
