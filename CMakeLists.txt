@@ -119,6 +119,11 @@ set(QT_ADD_STATEMACHINE ON)
 
 include(SetupQt6)
 
+qt_policy(SET QTP0001 NEW)
+qt_policy(SET QTP0002 NEW)
+qt_policy(SET QTP0003 NEW) # Qt 6.7
+qt_policy(SET QTP0004 NEW) # Qt 6.8
+
 ###########################################
 # Setup Configure
 ###########################################
