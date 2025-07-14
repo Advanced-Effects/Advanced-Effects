@@ -5,7 +5,7 @@ GuiApp::GuiApp(const modularity::ContextPtr& ctx)
 
 void GuiApp::addModule(muse::modularity::IModuleSetup* module) {
     m_modules.push_back(module);
-}
+};
 
 void GuiApp::perform() {};
 

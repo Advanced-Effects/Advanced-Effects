@@ -5,7 +5,7 @@
 
 static void appshell_init_qrc() {
     Q_INIT_RESOURCE(appshell);
-}
+};
 
 void AppShellModule::moduleName() const {
     return "appshell"
@@ -34,4 +34,4 @@ void AppShellModule::onInit() {};
 
 void AppShellModule::onAllInitied() {};
 
-void AppShellModule::onDeinit() {}
+void AppShellModule::onDeinit() {};
