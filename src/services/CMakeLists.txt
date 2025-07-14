@@ -3,6 +3,7 @@ set(MODULE_ALIAS ae::services)
 
 set(MODULE_SRC
     OpenProjectsManager.h
+    OpenProjectsManager.cpp
 )
 
 setup_module()

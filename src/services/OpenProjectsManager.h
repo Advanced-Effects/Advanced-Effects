@@ -3,25 +3,32 @@
 #include <vector>
 #include <QObject>
 #include <QQmlEngine>
-#include <QJSValue>
+#include <QFile>
 
 #include "library/ProjectFile/ProjectFile.h"
 
 class OpenProjectsManager : public QObject {
     Q_OBJECT
     QML_SINGLETON
+    QML_ELEMENT
 
 public:
-    OpenProjectsManager(QJSValue id, QObject *parent = nullptr)
-    : QObject(parent)
-    , _symbol(std::move(id)) {};
+    static OpenProjectsManager &getInstance();
 
-    static OpenProjectsManager *create(QQmlEngine *qmlEngine, QJSEngine *) {
-        return new OpenProjectsManager(qmlEngine->newSymbol(u"OpenProjectsManager"));
-    };
+    std::vector<ProjectFile*> currentlyOpenProjects;
 
-    std::vector<ProjectFile> currentlyOpenProjects;
+    ProjectFile* addFileAsProject(QFile*);
+    void removeFileFromProjects(QFile*);
 
+    // You can ignore this code below here
 private:
-    QJSValue _symbol;
+    OpenProjectsManager(QObject *parent = nullptr);
+    static OpenProjectsManager sInstance;
+
+    // We delete these constructors here because this class
+    // Is a Singleton
+    OpenProjectsManager(const OpenProjectsManager&) = delete;
+    OpenProjectsManager(OpenProjectsManager&&) = delete;
+    OpenProjectsManager& operator=(const OpenProjectsManager&) = delete;
+    OpenProjectsManager& operator=(OpenProjectsManager&&) = delete;
 };
