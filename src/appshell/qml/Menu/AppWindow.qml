@@ -1,7 +1,6 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
-import AdvancedEffects
 import Muse.UiComponents
 
 // Joins a custom titlebar + the window contents
