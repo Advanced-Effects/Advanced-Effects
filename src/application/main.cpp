@@ -18,8 +18,8 @@
 /* ************************************************************************** */
 
 
-void logQtResourceDirectories(QQmlApplicationEngine engine) {
-    qDebug() << engine.importPathList();
+void logQtResourceDirectories(QQmlApplicationEngine *engine) {
+    qDebug() << engine->importPathList();
     QDirIterator qrc(":", QDirIterator::Subdirectories);
     while(qrc.hasNext()) { qWarning() << qrc.next(); }
 };
@@ -38,11 +38,11 @@ void runHacks() {
     #endif
 };
 
-int showWindowFromRootElement(QQmlApplicationEngine engine) {
+int showWindowFromRootElement(QQmlApplicationEngine *engine) {
     // only create window in desktop
 #if !defined(Q_OS_ANDROID) && !defined(Q_OS_IOS)
     // QQuickWindow must be valid at this point
-    QQuickWindow *window = qobject_cast<QQuickWindow *>(engine.rootObjects().value(0));
+    QQuickWindow *window = qobject_cast<QQuickWindow *>(engine->rootObjects().value(0));
     if (!window) return EXIT_FAILURE;
 #endif
 
@@ -65,7 +65,7 @@ int createApplication(int argc, char *argv[]) {
     engine.loadFromModule("AdvancedEffects", "Main");
 
     // Comment this out for debugging:
-    //logQtResourceDirectories(&engine);
+    logQtResourceDirectories(&engine);
 
     if (engine.rootObjects().isEmpty())
     {
