@@ -16,3 +16,4 @@ add_subdirectory(appshell)
 
 # Finally, squash everything together in application/
 add_subdirectory(application)
+
