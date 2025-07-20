@@ -4,7 +4,7 @@
 
 #include <QRectF>
 
-namespace ae::project_file::objects {
+namespace ae::library::ProjectFile::objects {
 
 class Node2D : Node {
 protected:

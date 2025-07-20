@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ae::project_file::interfaces {
+namespace ae::library::ProjectFile::interfaces {
 
 class ProjectFileTrait {
 };

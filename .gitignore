@@ -84,3 +84,5 @@ CMakeUserPresets.json
 
 # debug information files
 *.dwo
+
+*~

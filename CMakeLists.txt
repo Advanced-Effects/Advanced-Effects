@@ -99,6 +99,8 @@ set(APP_BUILD_MODE "dev" CACHE STRING "Build mode")
 
 set(APP_REVISION "" CACHE STRING "Build revision")
 
+set(MUSE_MODULE_GLOBAL ON)
+set(MUSE_MODULE_UI ON)
 set(MUSE_MODULE_AUTOBOT OFF)
 set(MUSE_MODULE_DRAW OFF)
 set(MUSE_MODULE_UPDATE OFF)
@@ -118,6 +120,11 @@ set(QT_MIN_VERSION "6.9.1")
 set(QT_ADD_STATEMACHINE ON)
 
 include(SetupQt6)
+
+qt_policy(SET QTP0001 NEW)
+qt_policy(SET QTP0002 NEW)
+qt_policy(SET QTP0003 NEW) # Qt 6.7
+qt_policy(SET QTP0004 NEW) # Qt 6.8
 
 ###########################################
 # Setup Configure

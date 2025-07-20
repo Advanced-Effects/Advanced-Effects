@@ -3,25 +3,23 @@
 #include <vector>
 #include <QObject>
 #include <QQmlEngine>
-#include <QJSValue>
 
 #include "library/ProjectFile/ProjectFile.h"
+
+namespace ae::services {
+
+using namespace ae::library::ProjectFile;
 
 class OpenProjectsManager : public QObject {
     Q_OBJECT
     QML_SINGLETON
 
 public:
-    OpenProjectsManager(QJSValue id, QObject *parent = nullptr)
-    : QObject(parent)
-    , _symbol(std::move(id)) {};
+    OpenProjectsManager(QObject *parent = nullptr)
+    : QObject(parent) {};
+    ~OpenProjectsManager() = default;
 
-    static OpenProjectsManager *create(QQmlEngine *qmlEngine, QJSEngine *) {
-        return new OpenProjectsManager(qmlEngine->newSymbol(u"OpenProjectsManager"));
-    };
+    std::vector<ProjectFile*> currentlyOpenProjects;
+};
 
-    std::vector<ProjectFile> currentlyOpenProjects;
-
-private:
-    QJSValue _symbol;
 };
