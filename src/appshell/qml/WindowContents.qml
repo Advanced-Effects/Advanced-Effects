@@ -4,8 +4,6 @@ import Muse.Ui
 import Muse.UiComponents
 import Muse.DockWindow
 
-import AdvancedEffects.AppShell
-
 DockWindow {
     id: root
     objectName: "WindowContent"

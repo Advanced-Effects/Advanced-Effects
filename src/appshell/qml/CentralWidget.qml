@@ -1,7 +1,5 @@
 import QtQuick 2.15
 
-import AdvancedEffects.AppShell
-
 Column {
     id: root
 

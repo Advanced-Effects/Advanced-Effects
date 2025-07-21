@@ -2,8 +2,6 @@ import QtQuick 2.15
 
 import Muse.UiComponents
 
-import AdvancedEffects.AppShell
-
 AppWindow {
     id: root
 

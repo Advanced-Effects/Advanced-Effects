@@ -3,8 +3,6 @@ import QtQuick.Controls 2.15
 
 import Muse.UiComponents
 
-import AdvancedEffects.AppShell
-
 // A widget for populating with different utilities (like AfterEffects)
 // Align, Fill and Stroke, effects, advanced features...
 StyledListView {
