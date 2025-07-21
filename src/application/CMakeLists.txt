@@ -4,6 +4,10 @@
 
 qt_add_executable(${CMAKE_PROJECT_NAME}
     main.cpp
+    cmdline.h
+    cmdline.cpp
+    app.h
+    app.cpp
     ../../assets/assets.qrc
 )
 

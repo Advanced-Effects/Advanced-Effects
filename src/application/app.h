@@ -1,5 +1,12 @@
 #pragma once
 
+#include <vector>
+#include <memory>
+
+#include <QQmlApplicationEngine>
+#include <QApplication>
+
+#include "cmdline.h"
 #include "modularity/imodulesetup.h"
 
 namespace ae::app {
@@ -11,14 +18,17 @@ public:
 
     void addModule(muse::modularity::IModuleSetup* module);
 
-    int exec();
+    int exec(
+        CommandLineParser &parser,
+        QApplication* app,
+        QQmlApplicationEngine* engine = new QQmlApplicationEngine()
+    );
 
 private:
-    muse::modularity::IModuleSetup* _modules;
+    std::vector<muse::modularity::IModuleSetup *> _modules;
 
     void initalizeModules();
     void deinitModules();
 };
 
 };
-

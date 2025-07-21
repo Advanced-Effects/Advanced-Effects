@@ -16,6 +16,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+# This is required by some IDEs to properly analyze the project
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 ###########################################
 # Modules (alphabetical order please)
 ###########################################
@@ -132,6 +135,7 @@ qt_policy(SET QTP0004 NEW) # Qt 6.8
 
 add_definitions(-DQT_SUPPORT)
 add_definitions(-DKORS_LOGGER_QT_SUPPORT)
+add_definitions(-DKORS_PROFILER_SUPPORT)
 
 set(MUSE_APP_INSTALL_NAME "\"App\"")
 set(MUSE_APP_INSTALL_PREFIX "\"\"")

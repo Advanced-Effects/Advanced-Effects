@@ -1,6 +1,8 @@
 #include "app.h"
 
 #include <QApplication>
+#include <QQmlApplicationEngine>
+#include <QQuickWindow>
 
 namespace ae::app {
 
@@ -10,13 +12,13 @@ Application::~Application() {
     deinitModules();
 };
 
-QQuickWindow* loadApplicationAndCreateWindow(QQmlApplicationEngine engine) {
+QQuickWindow* loadApplicationAndCreateWindow(QQmlApplicationEngine* engine) {
     // Load the QML file to the App Engine
-    QUrl url = "qrc:/qml/Main.qml";
-    engine.load(url);
+    const QUrl url("qrc:/qml/Main.qml");
+    engine->load(url);
 
     // Get the first element (QtQuick Window)
-    auto *rootElement = engine.rootObjects().value(0);
+    auto *rootElement = engine->rootObjects().value(0);
     if (!rootElement) {
         return nullptr;
     };
@@ -25,9 +27,11 @@ QQuickWindow* loadApplicationAndCreateWindow(QQmlApplicationEngine engine) {
     return qobject_cast<QQuickWindow *>(rootElement);
 };
 
-int Application::exec(QQmlApplicationEngine engine, CommandLineParser &parser) {
-    QApplication app;
-
+int Application::exec(
+    CommandLineParser &parser,
+    QApplication* app,
+    QQmlApplicationEngine* engine
+) {
     auto *window = loadApplicationAndCreateWindow(engine);
     if (!window) {
         qWarning("Application didn't load");
@@ -36,12 +40,15 @@ int Application::exec(QQmlApplicationEngine engine, CommandLineParser &parser) {
 
     window->show();
 
-    return app.exec(argc, argv);
+    return app->exec();
 };
 
 void Application::addModule(muse::modularity::IModuleSetup* module) {
     _modules.push_back(module);
 };
 
-};
+void Application::initalizeModules() {};
 
+void Application::deinitModules() {};
+
+};
