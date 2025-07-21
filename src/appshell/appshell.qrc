@@ -6,11 +6,6 @@
         <file>qml/FileTabBar.qml</file>
         <file>qml/Canvas/ViewCanvas.qml</file>
         <file>qml/Canvas/OpenGLContainer.qml</file>
-        <file>qml/Menu/AppWindow.qml</file>
-        <file>qml/Menu/AppTitlebar.qml</file>
-        <file>qml/Menu/AppSystemButtons.qml</file>
-        <file>qml/Menu/AppMenubar.qml</file>
-        <file>qml/Menu/AppButtonBackground.qml</file>
         <file>qml/Toolbars/Topbar.qml</file>
         <file>qml/Toolbars/SelectToolBar.qml</file>
         <file>qml/GeneralBar/GeneralBar.qml</file>
