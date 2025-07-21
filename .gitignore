@@ -3,6 +3,7 @@ build/*
 bin/*
 contribs/*
 appdir/*
+.cache/
 
 # CMake temporary project files
 CMakeLists.txt.user
