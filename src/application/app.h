@@ -21,7 +21,7 @@ public:
     int exec(
         CommandLineParser &parser,
         QApplication* app,
-        QQmlApplicationEngine* engine = new QQmlApplicationEngine()
+        QQmlApplicationEngine* engine
     );
 
 private:

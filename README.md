@@ -37,3 +37,11 @@ If you **don't want** to use **Qt Creator**, here's how to run the software:
 - The template used is: https://github.com/emericg/QmlAppTemplate
 
 Thanks to all who made this possible :heart: (rodlie, MaurycyLiebner, Alecadd, MuseScore team, emericg) and the Friction community.
+
+
+## Debug
+
+Set these environment variables to inspect the application:
+
+- `QML_IMPORT_TRACE`: When set to 'ON', shows the QML Engine log when importing modules (is a Qt environment variable).
+- `APP_LIST_QRT`: When set to '1', prints the Qt Resource Tree (`src/application/main.cpp`)

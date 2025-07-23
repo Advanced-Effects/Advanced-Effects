@@ -2,6 +2,7 @@
 
 #include <QQmlApplicationEngine>
 #include <QApplication>
+#include <QDirIterator>
 
 #include "app.h"
 #include "cmdline.h"
@@ -22,7 +23,17 @@ int main(int argc, char *argv[]) {
     parser.init();
     parser.parse(argc, argv);
 
-    auto* app = new QApplication(argc, argv);
+    auto* qApp = new QApplication(argc, argv);
+    auto *engine = new QQmlApplicationEngine();
 
-    return application.exec(parser, app);
+    /* ================ DEBUG TRICKS =============== */
+
+    // If environment variable "APP_LIST_QRT" is defined and set to '1', show Qt Resource Tree
+    if(qgetenv("APP_LIST_QRT") == "1") {
+        qDebug() << engine->importPathList();
+        QDirIterator qrc(":", QDirIterator::Subdirectories);
+        while(qrc.hasNext()) { qWarning() << qrc.next(); }
+    };
+
+    return application.exec(parser, qApp, engine);
 };

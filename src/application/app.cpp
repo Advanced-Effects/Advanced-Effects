@@ -17,10 +17,11 @@ Application::~Application() {
     deinitModules();
 };
 
+const QUrl applicationMainFile("qrc:/qml/Main.qml");
+
 QQuickWindow* loadApplicationAndCreateWindow(QQmlApplicationEngine* engine) {
     // Load the QML file to the App Engine
-    const QUrl url("qrc:/qml/Main.qml");
-    engine->load(url);
+    engine->load(applicationMainFile);
 
     // Get the first element (QtQuick Window)
     auto *rootElement = engine->rootObjects().value(0);
@@ -37,9 +38,6 @@ int Application::exec(
     QApplication* app,
     QQmlApplicationEngine* engine
 ) {
-    // Look for modules ("Muse.UiComponents") from root:
-    engine->addImportPath("qrc:/");
-
     // Create app window
     auto *window = loadApplicationAndCreateWindow(engine);
     if (!window) {
