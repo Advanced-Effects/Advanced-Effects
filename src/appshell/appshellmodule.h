@@ -1,10 +1,8 @@
 #pragma once
 
-#include <memory>
 #include <string>
 
 #include "modularity/imodulesetup.h"
-#include "iapplication.h"
 
 namespace ae::appshell {
 
@@ -15,6 +13,7 @@ public:
     std::string moduleName() const override;
 
     void registerResources() override;
+    void registerUiTypes() override;
 };
 
 };

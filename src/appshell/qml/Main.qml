@@ -2,6 +2,8 @@ import QtQuick 2.15
 
 import Muse.UiComponents
 
+import "Menu/"
+
 AppWindow {
     id: root
 

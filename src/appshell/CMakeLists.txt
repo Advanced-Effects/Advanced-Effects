@@ -7,7 +7,11 @@ set(MODULE_QRC appshell.qrc)
 set(MODULE_QML_IMPORT ${CMAKE_CURRENT_LIST_DIR}/qml)
 
 set(MODULE_SRC
-    appshellmodule.h
-    appshellmodule.cpp)
+    ${CMAKE_CURRENT_LIST_DIR}/appshellmodule.h
+    ${CMAKE_CURRENT_LIST_DIR}/appshellmodule.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/view/appmenumodel.h
+    ${CMAKE_CURRENT_LIST_DIR}/view/appmenumodel.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/view/mainwindowtitleprovider.cpp
+    ${CMAKE_CURRENT_LIST_DIR}/view/mainwindowtitleprovider.h)
 
 setup_module()
