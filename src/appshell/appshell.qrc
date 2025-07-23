@@ -1,5 +1,5 @@
 <RCC>
-    <qresource>
+    <qresource prefix="/">
         <file>qml/Main.qml</file>
         <file>qml/WindowContents.qml</file>
         <file>qml/CentralWidget.qml</file>
