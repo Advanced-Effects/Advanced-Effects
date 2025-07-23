@@ -25,6 +25,7 @@ int main(int argc, char *argv[]) {
 
     auto* qtApp = new QApplication(argc, argv);
     auto *engine = new QQmlApplicationEngine();
+    engine->addImportPath(":/qml/");
 
     /* ================ DEBUG TRICKS =============== */
 
