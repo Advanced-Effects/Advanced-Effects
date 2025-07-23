@@ -23,7 +23,7 @@ int main(int argc, char *argv[]) {
     parser.init();
     parser.parse(argc, argv);
 
-    auto* qApp = new QApplication(argc, argv);
+    auto* qtApp = new QApplication(argc, argv);
     auto *engine = new QQmlApplicationEngine();
 
     /* ================ DEBUG TRICKS =============== */
@@ -35,5 +35,5 @@ int main(int argc, char *argv[]) {
         while(qrc.hasNext()) { qWarning() << qrc.next(); }
     };
 
-    return application.exec(parser, qApp, engine);
+    return application.exec(parser, qtApp, engine);
 };
