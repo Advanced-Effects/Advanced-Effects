@@ -26,7 +26,7 @@ void AppShellModule::registerResources() {
 
 void AppShellModule::registerUiTypes() {
     qmlRegisterType<AppMenuModel>("AdvancedEffects.AppShell", 1, 0, "AppMenuModel");
-    qmlRegisterType<MainWindowTitleProvider>("AdvancedEffects.AppShell", 1, 0, "MainWindowTitleProvider");
+    qmlRegisterType<MainWindowTitleProvider>("AdvancedEffects.AppShell", 1, 0, "AppMenuModel");
 };
 
 };
