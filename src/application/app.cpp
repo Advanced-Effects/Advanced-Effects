@@ -38,6 +38,9 @@ int Application::exec(
     QApplication* app,
     QQmlApplicationEngine* engine
 ) {
+    // Initialize C++ types before loading QML code!!
+    initalizeModules();
+
     // Create app window
     auto *window = loadApplicationAndCreateWindow(engine);
     if (!window) {
