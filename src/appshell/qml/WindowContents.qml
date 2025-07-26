@@ -2,11 +2,19 @@ import QtQuick 2.15
 
 import Muse.Ui
 import Muse.UiComponents
-import Muse.DockWindow
+import Muse.Dock
 
-DockWindow {
+import "Toolbars/"
+import "GeneralBar/"
+import "Timeline/"
+
+Item {
     id: root
-    objectName: "WindowContent"
+}
+
+/*DockWindow {
+    id: root
+    objectName: "WindowContents"
 
     toolbars: [
         Topbar {}
@@ -14,8 +22,9 @@ DockWindow {
 
     panels: [
         GeneralBar {},
-        TimelineBar {}
+        TimelineWidget {}
     ]
 
     central: CentralWidget {}
 }
+*/

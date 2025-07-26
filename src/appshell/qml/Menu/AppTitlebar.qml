@@ -36,7 +36,7 @@ Rectangle {
 
     property int windowVisibility: Window.Windowed
 
-    property alias appWindow: menu.appWindow
+    //property alias appWindow: menu.appWindow
 
     signal showWindowMinimizedRequested()
     signal toggleWindowMaximizedRequested()

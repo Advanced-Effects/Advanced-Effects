@@ -1,25 +1,39 @@
 import QtQuick 2.15
+import QtQuick.Controls 2.15
 
-Column {
+Item {
     id: root
 
-    Row {
+    /*Item {
         id: topbar
+
+        height: 32
+
+        anchor.left: root.left
+        anchor.right: root.right
+        anchor.top: root.top
 
         PlaybackActions {
             id: playbackActions
-            anchor.left: root.left
-            anchor.top: root.top
+            anchor.left: topbar.left
+            anchor.top: topbar.top
+            anchor.bottom: topbar.bottom
         }
         TimelineSecondsBar {
             id: secondsBar
 
-            anchor.right: root.right
-            anchor.top: root.top
+            anchor.right: topbar.right
+            anchor.top: topbar.top
+            anchor.bottom: topbar.bottom
         }
     }
 
     ScrollView {
+        anchor.top: topbar.bottom
+        anchor.left: root.left
+        anchor.right: root.right
+        anchor.bottom: root.bottom
+
         ObjectsTreeView {
             id: treeView
 
@@ -39,5 +53,5 @@ Column {
         anchor.right: root.right
         anchor.bottom: root.bottom
         anchor.top: topbar.bottom
-    }
+        }*/
 }

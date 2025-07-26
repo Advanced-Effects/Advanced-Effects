@@ -2,7 +2,9 @@ import QtQuick 2.15
 
 import Muse.UiComponents
 
-Row {
+import "."
+
+Item {
     id: root
 
     SelectToolBar {
