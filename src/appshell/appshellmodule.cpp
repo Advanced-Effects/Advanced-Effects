@@ -3,7 +3,7 @@
 #include <QQmlEngine>
 
 // UI types
-#include "view/mainwindowtitleprovider.h"
+#include "internal/mainwindowtitleprovider.h"
 #include "view/appmenumodel.h"
 
 // Links this module to appshell.qrc file
@@ -17,7 +17,7 @@ static void init_appshell_qrc() {
 namespace ae::appshell {
 
 std::string AppShellModule::moduleName() const {
-    return "AppShell";
+    return "appshell";
 };
 
 void AppShellModule::registerResources() {
@@ -26,7 +26,7 @@ void AppShellModule::registerResources() {
 
 void AppShellModule::registerUiTypes() {
     qmlRegisterType<AppMenuModel>("AdvancedEffects.AppShell", 1, 0, "AppMenuModel");
-    qmlRegisterType<MainWindowTitleProvider>("AdvancedEffects.AppShell", 1, 0, "AppMenuModel");
+    qmlRegisterType<MainWindowTitleProvider>("AdvancedEffects.AppShell", 1, 0, "MainWindowTitleProvider");
 };
 
 };

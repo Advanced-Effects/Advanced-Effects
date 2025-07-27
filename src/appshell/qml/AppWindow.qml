@@ -24,6 +24,9 @@ import QtQuick.Controls 2.15
 
 import Muse.Ui 1.0
 
+// we import this for MainWindowTitleProvider
+import AdvancedEffects.AppShell 1.0
+
 ApplicationWindow {
     id: root
 
@@ -31,7 +34,7 @@ ApplicationWindow {
 
     objectName: "ApplicationWindow"
 
-    title: /*titleProvider.title*/ "sd"
+    title: titleProvider.title
 
     width: 1150
     height: 800
@@ -45,12 +48,12 @@ ApplicationWindow {
 
     Component.onCompleted: {
         ui.rootItem = root.contentItem
-        //titleProvider.load()
+        titleProvider.load()
     }
 
-    /*MainWindowTitleProvider {
+    MainWindowTitleProvider {
         id: titleProvider
-        }*/
+    }
 
     Item {
         id: windowContentItem
