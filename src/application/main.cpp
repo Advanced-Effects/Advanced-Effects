@@ -9,10 +9,16 @@
 #include "cmdline.h"
 
 // Application modules!!
-#include "accessibility/accessibilitymodule.h"
+#include "actions/actionsmodule.h"
 #include "ui/uimodule.h"
-#include "dockwindow/dockmodule.h"
+#include "shortcuts/shortcutsmodule.h"
+#include "accessibility/accessibilitymodule.h"
 #include "uicomponents/uicomponentsmodule.h"
+#include "dockwindow/dockmodule.h"
+#include "network/networkmodule.h"
+#include "learn/learnmodule.h"
+#include "languages/languagesmodule.h"
+#include "workspace/workspacemodule.h"
 #include "appshellmodule.h"
 
 using namespace ae::app;
@@ -20,10 +26,16 @@ using namespace ae::app;
 int main(int argc, char *argv[]) {
     /* ================ Load application modules ================ */
     Application application;
+    application.addModule(new muse::actions::ActionsModule());
+    application.addModule(new muse::workspace::WorkspaceModule());
     application.addModule(new muse::accessibility::AccessibilityModule());
+    application.addModule(new muse::learn::LearnModule());
+    application.addModule(new muse::languages::LanguagesModule());
     application.addModule(new muse::ui::UiModule());
     application.addModule(new muse::uicomponents::UiComponentsModule());
     application.addModule(new muse::dock::DockModule());
+    application.addModule(new muse::shortcuts::ShortcutsModule());
+    application.addModule(new muse::network::NetworkModule());
     application.addModule(new ae::appshell::AppShellModule());
 
     /* ================ Setup variables ================ */

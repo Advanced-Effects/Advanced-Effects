@@ -30,6 +30,22 @@ set(LIB_LIST
     ae::app
     ae::project_file
 
+    muse::accessibility
+    muse::actions
+    muse::audio
+    muse::diagnostics
+    muse::extensions
+    muse::languages
+    muse::learn
+    muse::midi
+    muse::mpe
+    muse::multiinstances
+    muse::network
+    muse::shortcuts
+    muse::tours
+    muse::update
+    muse::workspace
+
     muse::ui
     muse::uicomponents
     muse::dockwindow
