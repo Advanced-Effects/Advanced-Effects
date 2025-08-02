@@ -178,7 +178,7 @@ endif(MUE_COMPILE_USE_CCACHE)
 # Include MuseScore framework (UI library + utilities)
 ###########################################
 
-add_subdirectory(${MUSE_FRAMEWORK_SRC_PATH} ${MUSE_FRAMEWORK_PATH})
+add_subdirectory(${MUSE_FRAMEWORK_SRC_PATH})
 
 ###########################################
 # Add source tree
