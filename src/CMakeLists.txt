@@ -8,6 +8,9 @@
 # and the UI components library
 add_subdirectory(library)
 
+# Global app state
+add_subdirectory(context)
+
 # Services, in between library and appshell
 add_subdirectory(services)
 
@@ -16,4 +19,3 @@ add_subdirectory(appshell)
 
 # Finally, squash everything together in application/
 add_subdirectory(application)
-

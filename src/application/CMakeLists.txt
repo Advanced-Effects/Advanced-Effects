@@ -51,6 +51,7 @@ set(LIB_LIST
     muse::dockwindow
 
     ae::services
+    ae::context
     ae::appshell
 )
 

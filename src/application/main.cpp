@@ -19,6 +19,7 @@
 #include "learn/learnmodule.h"
 #include "languages/languagesmodule.h"
 #include "workspace/workspacemodule.h"
+#include "context/contextmodule.h"
 #include "appshellmodule.h"
 
 using namespace ae::app;
@@ -31,6 +32,7 @@ int main(int argc, char *argv[]) {
     application.addModule(new muse::accessibility::AccessibilityModule());
     application.addModule(new muse::learn::LearnModule());
     application.addModule(new muse::languages::LanguagesModule());
+    application.addModule(new mu::context::ContextModule());
     application.addModule(new muse::ui::UiModule());
     application.addModule(new muse::uicomponents::UiComponentsModule());
     application.addModule(new muse::dock::DockModule());
