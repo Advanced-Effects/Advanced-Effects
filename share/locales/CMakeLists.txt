@@ -1,0 +1,4 @@
+install(FILES
+    ${CMAKE_CURRENT_LIST_DIR}/languages.json
+    DESTINATION ${AU4_SHARE_NAME}${AU4_INSTALL_NAME}locale
+)

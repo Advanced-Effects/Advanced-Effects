@@ -2,31 +2,34 @@
 
 #include <QQmlEngine>
 
-// UI types
-#include "internal/mainwindowtitleprovider.h"
 #include "view/appmenumodel.h"
+#include "view/mainwindowtitleprovider.h"
 
-// Links this module to appshell.qrc file
-//
-// We put this here outside of ae::appshell namespace
-// because Q_INIT_RESOURCE doesn't work inside a namespace
-static void init_appshell_qrc() {
+// Links the module to the .qrc file
+// WE put it outside of the app::appshell namespace
+// because Q_INIT_RESOURCE can't be located inside a namespace
+// (either it fails with error "couldn't find qLinkResources_app()")
+static void appshell_init_qrc()
+{
     Q_INIT_RESOURCE(appshell);
 };
 
-namespace ae::appshell {
+namespace app::appshell {
+
+AppShellModule::AppShellModule() {};
 
 std::string AppShellModule::moduleName() const {
     return "appshell";
 };
 
 void AppShellModule::registerResources() {
-    init_appshell_qrc();
+    appshell_init_qrc();
 };
 
-void AppShellModule::registerUiTypes() {
-    qmlRegisterType<AppMenuModel>("AdvancedEffects.AppShell", 1, 0, "AppMenuModel");
-    qmlRegisterType<MainWindowTitleProvider>("AdvancedEffects.AppShell", 1, 0, "MainWindowTitleProvider");
+void AppShellModule::registerExports() {
+        qmlRegisterType<MainWindowTitleProvider>("App.AppShell", 1, 0, "MainWindowTitleProvider");
+        qmlRegisterType<AppMenuModel>("App.AppShell", 1, 0, "AppMenuModel");
 };
 
 };
+

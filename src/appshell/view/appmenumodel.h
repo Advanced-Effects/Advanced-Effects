@@ -27,6 +27,7 @@
 
 #include "modularity/ioc.h"
 #include "actions/iactionsdispatcher.h"
+#include "context/iglobalcontext.h"
 #include "extensions/iextensionsprovider.h"
 #include "global/iglobalconfiguration.h"
 #ifdef MUSE_MODULE_MUSESAMPLER
@@ -39,11 +40,28 @@
 #include "update/iupdateconfiguration.h"
 #include "workspace/iworkspacemanager.h"
 
-namespace ae::appshell {
+#include "internal/iappmenumodelhook.h"
 
+namespace app::appshell {
 class AppMenuModel : public muse::uicomponents::AbstractMenuModel
 {
     Q_OBJECT
+
+public:
+    muse::Inject<IAppMenuModelHook> appMenuModelHook = { this };
+    muse::Inject<mu::context::IGlobalContext> globalContext = { this };
+    muse::Inject<muse::IGlobalConfiguration> globalConfiguration = { this };
+    muse::Inject<muse::actions::IActionsDispatcher> actionsDispatcher = { this };
+    muse::Inject<muse::extensions::IExtensionsProvider> extensionsProvider = { this };
+#ifdef MUSE_MODULE_MUSESAMPLER
+    muse::Inject<muse::musesampler::IMuseSamplerInfo> museSamplerInfo = { this };
+#endif
+    muse::Inject<muse::ui::IMainWindow> mainWindow = { this };
+    muse::Inject<muse::ui::INavigationController> navigationController = { this };
+    muse::Inject<muse::ui::IUiActionsRegister> uiActionsRegister = { this };
+    muse::Inject<muse::ui::IUiConfiguration> uiConfiguration = { this };
+    muse::Inject<muse::update::IUpdateConfiguration> updateConfiguration = { this };
+    muse::Inject<muse::workspace::IWorkspaceManager> workspacesManager = { this };
 
 public:
     explicit AppMenuModel(QObject* parent = nullptr);
@@ -51,38 +69,5 @@ public:
     Q_INVOKABLE void load() override;
     Q_INVOKABLE bool isGlobalMenuAvailable();
 
-private:
-    using muse::uicomponents::AbstractMenuModel::makeMenuItem;
-    muse::uicomponents::MenuItem* makeMenuItem(const muse::actions::ActionCode& actionCode, muse::uicomponents::MenuItemRole role);
-
-    muse::uicomponents::MenuItem* makeFileMenu();
-    muse::uicomponents::MenuItem* makeEditMenu();
-    muse::uicomponents::MenuItem* makeViewMenu();
-    muse::uicomponents::MenuItem* makeAddMenu();
-    muse::uicomponents::MenuItem* makeFormatMenu();
-    muse::uicomponents::MenuItem* makeToolsMenu();
-    muse::uicomponents::MenuItem* makePluginsMenu();
-    muse::uicomponents::MenuItemList makePluginsMenuSubitems();
-    muse::uicomponents::MenuItem* makeHelpMenu(bool addDiagnosticsSubMenu);
-    muse::uicomponents::MenuItem* makeDiagnosticsMenu();
-
-    muse::uicomponents::MenuItemList makeRecentScoresItems();
-    muse::uicomponents::MenuItemList appendClearRecentSection(const muse::uicomponents::MenuItemList& recentScores);
-
-    muse::uicomponents::MenuItemList makeNotesItems();
-    muse::uicomponents::MenuItemList makeIntervalsItems();
-    muse::uicomponents::MenuItemList makeTupletsItems();
-    muse::uicomponents::MenuItemList makeMeasuresItems();
-    muse::uicomponents::MenuItemList makeFramesItems();
-    muse::uicomponents::MenuItemList makeFramesAppendItems();
-    muse::uicomponents::MenuItemList makeTextItems();
-    muse::uicomponents::MenuItemList makeLinesItems();
-    muse::uicomponents::MenuItemList makeChordAndFretboardDiagramsItems();
-    muse::uicomponents::MenuItemList makeToolbarsItems();
-    muse::uicomponents::MenuItemList makeWorkspacesItems();
-    muse::uicomponents::MenuItemList makeShowItems();
-    muse::uicomponents::MenuItemList makePluginsItems();
-
-    std::shared_ptr<muse::uicomponents::AbstractMenuModel> m_workspacesMenuModel;
 };
 }

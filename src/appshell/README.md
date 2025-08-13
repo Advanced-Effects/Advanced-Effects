@@ -1,9 +1,11 @@
-# src/appshell
+# appshell/
 
-Appshell is the folder that contains the program's UI. It is divided between:
-- `qml/`: Contains the barebones UI components in QML language (similar to ReactJS, HTML...)
-- `internal/`: contains the C++ code that tells the UI components how to work and behave.
+`appshell/` handles the UI layer of the application. You can think of it like `ui/` or `gui/` folder.
 
-## How to create a new widget.
-
-It is more comfortable to work with Qt Creator IDE. It automatically adds files to CMakeLists.txt. If not, create the qml file `appshell/qml/SomeWidget.qml`and add it to the CMakeLists file. Then, if necessary, create the correspondent `.h` (header) and `.cpp` (source) files under `internal/`.
+- `appshellmodule` includes .qml files (`Q_INIT_RESOURCE(appshell)`) and injects C++ types into the QmlEngine.
+- UI Application begins at `qml/Main.qml`, which is then loaded into the `QQmlApplicationEngine` using `->load("qrc:/Main.qml");`.
+- `import Muse.UiComponents` refers to `thirdparty/framework/uicomponents`
+- `import Muse.Ui` refers to `thirdparty/framework/ui`
+- You'll see imports like `import Application.AppShell`. That refers to types that have been injected using C++ using `qmlRegisterType<T>("Application.AppShell", ...)`. The name `Application.AppShell` is arbitrary, it could be anything else.
+- You'll see many components refer to a misterious `ui` object (`ui.theme.backgroundPrimaryColor
+`). That is a special object called `UiEngine` that's injected into the app using `QQmlApplicationEngine->setContextProperty("ui", UiEngine);`. It's also the reason we use the `qmlAppEngine()` from `UiEngine` instead of creating one (`new QQmlApplicationEngine();`); `UiEngine` creates the `QQmlApplicationEngine` and then adds this object, which we utilize.

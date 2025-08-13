@@ -4,16 +4,18 @@
 
 #include "modularity/imodulesetup.h"
 
-namespace ae::appshell {
+namespace app::appshell {
 
-using namespace muse::modularity;
-
-class AppShellModule : public IModuleSetup {
+class AppShellModule : public muse::modularity::IModuleSetup {
 public:
+    AppShellModule();
+    ~AppShellModule() = default;
+
     std::string moduleName() const override;
 
     void registerResources() override;
-    void registerUiTypes() override;
+    void registerExports() override;
 };
 
 };
+

@@ -1,14 +1,22 @@
 import QtQuick 2.15
 
-import Muse.UiComponents
+import Muse.UiComponents 1.0
 
-import "Menu/"
+import "./TitleBar"
 
 AppWindow {
     id: root
 
+    function toggleMaximized() {
+        if (root.visibility === Window.Maximized) {
+            root.showNormal()
+        } else {
+            root.showMaximized()
+        }
+    }
+
     AppTitlebar {
-        id: appTitlebar
+        id: appTitleBar
 
         anchors.top: parent.top
         anchors.left: parent.left
@@ -30,12 +38,12 @@ AppWindow {
         }
     }
 
-    WindowContents {
-        id: windowContents
+    WindowContent {
+        id: window
 
         anchors.top: appTitlebar.bottom
-        anchors.left: root.left
-        anchors.right: root.right
-        anchors.bottom: root.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
     }
 }

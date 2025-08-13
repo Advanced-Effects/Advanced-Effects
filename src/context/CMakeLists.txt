@@ -20,7 +20,7 @@
 
 # This module stores global state
 declare_module(context)
-set(MODULE_ALIAS ae::context)
+set(MODULE_ALIAS app::context)
 
 set(MODULE_SRC
     ${CMAKE_CURRENT_LIST_DIR}/contextmodule.cpp
