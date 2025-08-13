@@ -1,0 +1,25 @@
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+
+Item {
+        id: root
+        objectName: "TimelineWidget"
+
+        LeftNavigation {
+                id: leftNavigation
+
+                anchors.right: keysView.left
+                anchors.left: root.left
+                anchors.top: root.top
+                anchors.bottom: root.bottom
+        }
+
+        KeysView {
+                id: keysView
+
+                anchors.left: leftNavigation.right
+                anchors.right: root.right
+                anchors.top: root.top
+                anchors.bottom: root.bottom
+        }
+}
