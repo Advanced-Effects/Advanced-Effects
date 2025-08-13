@@ -6,7 +6,7 @@
 ###########################################
 # Common
 ###########################################
-set(EXECUTABLE_NAME app)
+set(EXECUTABLE_NAME AdvancedEffects)
 
 ###########################################
 # Platform specific
@@ -108,7 +108,7 @@ add_executable(${EXECUTABLE_NAME}
 # Includes
 ###########################################
 
-target_include_directories(app PRIVATE
+target_include_directories(${EXECUTABLE_NAME} PRIVATE
     ${PROJECT_BINARY_DIR}
     ${CMAKE_CURRENT_BINARY_DIR}
 
@@ -131,12 +131,12 @@ endif (APP_OUTPUT_NAME)
 if (MUSE_ENABLE_UNIT_TESTS_CODE_COVERAGE)
         set(COVERAGE_FLAGS -fprofile-arcs -ftest-coverage --coverage)
         set(COVERAGE_LINK_FLAGS -lgcov --coverage)
-        target_compile_options(app PRIVATE ${COVERAGE_FLAGS})
-        target_link_options(app PRIVATE ${COVERAGE_LINK_FLAGS})
+        target_compile_options(${EXECUTABLE_NAME} PRIVATE ${COVERAGE_FLAGS})
+        target_link_options(${EXECUTABLE_NAME} PRIVATE ${COVERAGE_LINK_FLAGS})
 endif()
 
 if (OS_IS_MAC)
-        set_target_properties(app
+        set_target_properties(${EXECUTABLE_NAME}
         PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/buildscripts/packaging/MacOS/MacOSXBundleInfo.plist.in
         XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER ${MACOSX_BUNDLE_GUI_IDENTIFIER}
     )
@@ -157,7 +157,7 @@ endif(CC_IS_MSVC)
 ###########################################
 # Link
 ###########################################
-target_link_libraries(app ${LINK_LIB}  ${COVERAGE_LINK_FLAGS})
+target_link_libraries(${EXECUTABLE_NAME} ${LINK_LIB}  ${COVERAGE_LINK_FLAGS})
 
 ###########################################
 # INSTALL
