@@ -31,15 +31,6 @@ using namespace muse::ui;
 using namespace muse::uicomponents;
 using namespace muse::workspace;
 using namespace muse::actions;
-using namespace muse::extensions;
-
-static const ActionCode TOGGLE_UNDO_HISTORY_PANEL_CODE = "toggle-undo-history-panel";
-static const QString VIEW_TOGGLE_UNDO_HISTORY_PANEL_ITEM_ID = "view/toggle-undo-history-panel";
-
-static QString makeId(const ActionCode& actionCode, int itemIndex)
-{
-    return QString::fromStdString(actionCode) + QString::number(itemIndex);
-}
 
 AppMenuModel::AppMenuModel(QObject* parent)
     : AbstractMenuModel(parent)
@@ -49,9 +40,118 @@ AppMenuModel::AppMenuModel(QObject* parent)
 void AppMenuModel::load()
 {
     TRACEFUNC;
+
+    MenuItemList items = getMenuList();
+    setItems(items);
+
+    AbstractMenuModel::load();
 }
 
-bool AppMenuModel::isGlobalMenuAvailable()
-{
-    return uiConfiguration()->isGlobalMenuAvailable();
+MenuItemList AppMenuModel::getMenuList() {
+        MenuItemList items {
+                makeFileMenu(),
+                makeEditMenu(),
+                makeCompositionMenu(),
+                makeLayerMenu(),
+                makeEffectsMenu(),
+                makeViewMenu(),
+                makeWindowMenu(),
+                makeHelpMenu()
+        };
+
+        return items;
 }
+
+MenuItem* AppMenuModel::makeFileMenu() {
+        MenuItemList items {
+                makeMenuItem("file-new"),
+                makeMenuItem("file-open"),
+                makeMenuItem("file-import"),
+                makeSeparator(),
+                makeMenuItem("file-save"),
+                makeMenuItem("file-copy"),
+                makeMenuItem("file-export"),
+                makeSeparator(),
+                makeMenuItem("file-properties"),
+                makeSeparator(),
+                makeMenuItem("quit")
+        };
+
+        return makeMenu(TranslatableString("appshell/menu/file", "&File"), items, "menu-file");
+}
+
+MenuItem* AppMenuModel::makeEditMenu() {
+        MenuItemList items {
+                makeMenuItem("edit-copy"),
+                makeMenuItem("edit-paste"),
+                makeMenuItem("edit-cut"),
+                makeSeparator(),
+                makeMenuItem("edit-undo"),
+                makeMenuItem("edit-redo"),
+        };
+
+        return makeMenu(TranslatableString("appshell/menu/edit", "&Edit"), items, "menu-edit");
+};
+
+MenuItem* AppMenuModel::makeCompositionMenu() {
+        MenuItemList items {
+                makeMenuItem("composition-new"),
+        };
+
+        return makeMenu(TranslatableString("appshell/menu/composition", "&Composition"), items, "menu-composition");
+};
+
+MenuItem* AppMenuModel::makeLayerMenu() {
+        MenuItemList items {
+                makeMenuItem("layer-new"),
+        };
+
+        return makeMenu(TranslatableString("appshell/menu/layer", "&Layer"), items, "menu-layer");
+};
+
+MenuItem* AppMenuModel::makeEffectsMenu() {
+        MenuItemList items {
+                makeMenuItem("effects-raster"),
+                makeMenuItem("effects-vector"),
+                makeMenuItem("effects-path"),
+        };
+
+        return makeMenu(TranslatableString("appshell/menu/effects", "&Effects"), items, "menu-effects");
+};
+
+MenuItem* AppMenuModel::makeViewMenu() {
+        MenuItemList items {
+                makeMenuItem("file-new"),
+                makeMenuItem("file-open"),
+                makeMenuItem("file-import"),
+                makeSeparator(),
+                makeMenuItem("file-save"),
+                makeMenuItem("file-copy"),
+                makeMenuItem("file-export"),
+                makeSeparator(),
+                makeMenuItem("file-properties"),
+                makeSeparator(),
+                makeMenuItem("quit")
+        };
+
+        return makeMenu(TranslatableString("appshell/menu/view", "&View"), items, "menu-view");
+};
+
+MenuItem* AppMenuModel::makeWindowMenu() {
+        MenuItemList items {
+                makeMenuItem("window-maximize"),
+                makeMenuItem("window-minimize"),
+                makeMenuItem("window-close"),
+        };
+
+        return makeMenu(TranslatableString("appshell/menu/window", "&Window"), items, "menu-window");
+};
+
+MenuItem* AppMenuModel::makeHelpMenu() {
+        MenuItemList items {
+                makeMenuItem("about-qt"),
+                makeMenuItem("about-app"),
+        };
+
+        return makeMenu(TranslatableString("appshell/menu/help", "&Help"), items, "menu-help");
+};

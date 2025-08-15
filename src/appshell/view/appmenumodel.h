@@ -26,48 +26,31 @@
 #include "muse_framework_config.h"
 
 #include "modularity/ioc.h"
-#include "actions/iactionsdispatcher.h"
-#include "context/iglobalcontext.h"
-#include "extensions/iextensionsprovider.h"
-#include "global/iglobalconfiguration.h"
-#ifdef MUSE_MODULE_MUSESAMPLER
-#include "musesampler/imusesamplerinfo.h"
-#endif
-#include "ui/imainwindow.h"
-#include "ui/inavigationcontroller.h"
-#include "ui/iuiactionsregister.h"
-#include "ui/iuiconfiguration.h"
-#include "update/iupdateconfiguration.h"
-#include "workspace/iworkspacemanager.h"
-
-#include "internal/iappmenumodelhook.h"
+#include "uicomponents/view/menuitem.h"
 
 namespace app::appshell {
+
+using namespace muse::uicomponents;
+
 class AppMenuModel : public muse::uicomponents::AbstractMenuModel
 {
     Q_OBJECT
 
 public:
-    muse::Inject<IAppMenuModelHook> appMenuModelHook = { this };
-    muse::Inject<mu::context::IGlobalContext> globalContext = { this };
-    muse::Inject<muse::IGlobalConfiguration> globalConfiguration = { this };
-    muse::Inject<muse::actions::IActionsDispatcher> actionsDispatcher = { this };
-    muse::Inject<muse::extensions::IExtensionsProvider> extensionsProvider = { this };
-#ifdef MUSE_MODULE_MUSESAMPLER
-    muse::Inject<muse::musesampler::IMuseSamplerInfo> museSamplerInfo = { this };
-#endif
-    muse::Inject<muse::ui::IMainWindow> mainWindow = { this };
-    muse::Inject<muse::ui::INavigationController> navigationController = { this };
-    muse::Inject<muse::ui::IUiActionsRegister> uiActionsRegister = { this };
-    muse::Inject<muse::ui::IUiConfiguration> uiConfiguration = { this };
-    muse::Inject<muse::update::IUpdateConfiguration> updateConfiguration = { this };
-    muse::Inject<muse::workspace::IWorkspaceManager> workspacesManager = { this };
-
-public:
     explicit AppMenuModel(QObject* parent = nullptr);
 
     Q_INVOKABLE void load() override;
-    Q_INVOKABLE bool isGlobalMenuAvailable();
 
+private:
+        MenuItemList getMenuList();
+
+        MenuItem* makeFileMenu();
+        MenuItem* makeEditMenu();
+        MenuItem* makeCompositionMenu();
+        MenuItem* makeLayerMenu();
+        MenuItem* makeEffectsMenu();
+        MenuItem* makeViewMenu();
+        MenuItem* makeWindowMenu();
+        MenuItem* makeHelpMenu();
 };
 }
