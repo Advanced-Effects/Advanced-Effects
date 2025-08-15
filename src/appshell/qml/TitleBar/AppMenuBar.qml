@@ -135,35 +135,6 @@ ListView {
 
         navigation.accessible.ignored: true
 
-        AccessibleItem {
-            id: accessibleInfo
-
-            accessibleParent: panelAccessibleInfo
-            visualItem: radioButtonDelegate
-            role: MUAccessible.Button
-            name: radioButtonDelegate.title
-
-            property bool active: radioButtonDelegate.highlight && !radioButtonDelegate.isMenuOpened
-            onActiveChanged: {
-                if (active) {
-                    forceActiveFocus()
-                    accessibleInfo.readInfo()
-                } else {
-                    accessibleInfo.resetFocus()
-                }
-            }
-
-            function readInfo() {
-                accessibleInfo.ignored = false
-                accessibleInfo.focused = true
-            }
-
-            function resetFocus() {
-                accessibleInfo.focused = false
-                accessibleInfo.ignored = true
-            }
-        }
-
         contentItem: StyledTextLabel {
             id: textLabel
 
