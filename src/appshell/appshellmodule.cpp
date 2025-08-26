@@ -2,8 +2,9 @@
 
 #include <QQmlEngine>
 
-#include "view/appmenumodel.h"
+#include "view/navigableappmenumodel.h"
 #include "view/mainwindowtitleprovider.h"
+#include "view/toolselectionmodel.h"
 
 // Links the module to the .qrc file
 // WE put it outside of the app::appshell namespace
@@ -28,8 +29,8 @@ void AppShellModule::registerResources() {
 
 void AppShellModule::registerExports() {
         qmlRegisterType<MainWindowTitleProvider>("App.AppShell", 1, 0, "MainWindowTitleProvider");
-        qmlRegisterType<AppMenuModel>("App.AppShell", 1, 0, "AppMenuModel");
+        qmlRegisterType<NavigableAppMenuModel>("App.AppShell", 1, 0, "AppMenuModel");
+        qmlRegisterType<ToolSelectionModel>("App.AppShell", 1, 0, "ToolSelectionModel");
 };
 
 };
-

@@ -28,6 +28,9 @@
 #include "modularity/ioc.h"
 #include "uicomponents/view/menuitem.h"
 
+#include "ui/imainwindow.h"
+#include "ui/inavigationcontroller.h"
+
 namespace app::appshell {
 
 using namespace muse::uicomponents;
@@ -36,6 +39,7 @@ class AppMenuModel : public muse::uicomponents::AbstractMenuModel
 {
     Q_OBJECT
 
+    muse::Inject<muse::ui::INavigationController> navigationController = { this };
 public:
     explicit AppMenuModel(QObject* parent = nullptr);
 
