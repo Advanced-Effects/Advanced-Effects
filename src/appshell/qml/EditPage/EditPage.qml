@@ -11,11 +11,35 @@ DockPage {
         objectName: "Edit"
         uri: "app://edit"
 
-        central: centralWidget
+        central: CentralWidget {}
 
-        Component {
-                id: centralWidget
+        toolBars: [
+                DockToolBar {
+                        id: selectToolBar
+                        objectName: "selectToolBar"
+                        title: qsTr("appshell", "Toolbar")
+                        visible: true
 
-                CentralWidget {}
-        }
+                        dropDestinations: [
+                            root.toolBarTopDropDestination,
+                            root.toolBarBottomDropDestination,
+                            root.toolBarLeftDropDestination,
+                            root.toolBarRightDropDestination
+                        ]
+
+                        thickness: orientation === Qt.Horizontal ? 40 : 76
+                        resizable: !floating
+
+                        ToolSelection {
+                                orientation: selectToolBar.orientation
+                                floating: selectToolBar.floating
+
+                                maximumWidth: selectToolBar.maximumWidth
+                                maximumHeight: selectToolBar.maximumHeight
+
+                                navigationPanel.section: selectToolBar.navigationSection
+                                navigationPanel.order: 1
+                        }
+                }
+        ]
 }
