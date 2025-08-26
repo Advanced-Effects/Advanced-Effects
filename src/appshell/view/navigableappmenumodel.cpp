@@ -80,11 +80,11 @@ void NavigableAppMenuModel::load()
         }
     });
 
-    navigationController()->navigationChanged().onNotify(this, [this](){
+    /*navigationController()->navigationChanged().onNotify(this, [this](){
         if (navigationController()->isHighlight() && !isMenuOpened()) {
             resetNavigation();
         }
-    });
+    });*/
 
     qApp->installEventFilter(this);
 }
@@ -172,7 +172,7 @@ void NavigableAppMenuModel::setOpenedMenuId(QString openedMenuId)
     //! NOTE: When the user navigates through the menu, MU navigation is highlighted.
     //!       Reset the highlighted state after the menu is closed
     if (navigationStarted) {
-        navigationController()->setIsHighlight(false);
+        //navigationController()->setIsHighlight(false);
     }
 
     //! NOTE: user closed menu by mouse
@@ -182,7 +182,7 @@ void NavigableAppMenuModel::setOpenedMenuId(QString openedMenuId)
 
     //! NOTE: after opening the menu, position on the first control
     if (navigationStarted && menuOpened) {
-        actionsDispatcher()->dispatch("nav-first-control");
+        //actionsDispatcher()->dispatch("nav-first-control");
     }
 
     emit openedMenuIdChanged(m_openedMenuId);
@@ -435,7 +435,7 @@ void NavigableAppMenuModel::navigateToSubItem(const QString& menuId, const QSet<
         return;
     }
 
-    INavigationSection* section = navigationController()->activeSection();
+    /*INavigationSection* section = navigationController()->activeSection();
     INavigationPanel* panel = navigationController()->activePanel();
 
     if (!section || !panel) {
@@ -456,7 +456,7 @@ void NavigableAppMenuModel::navigateToSubItem(const QString& menuId, const QSet<
     bool isMenu = !subItem.subitems().isEmpty();
     if (!isMenu) {
         resetNavigation();
-    }
+    }*/
 }
 
 void NavigableAppMenuModel::resetNavigation()
@@ -482,7 +482,7 @@ QRect NavigableAppMenuModel::openedMenuAreaRect() const
 
 void NavigableAppMenuModel::saveMUNavigationSystemState()
 {
-    bool muNavigationIsHighlight = navigationController()->isHighlight();
+    /*bool muNavigationIsHighlight = navigationController()->isHighlight();
     m_needActivateLastMUNavigationControl = muNavigationIsHighlight;
 
     INavigationSection* section = navigationController()->activeSection();
@@ -496,12 +496,12 @@ void NavigableAppMenuModel::saveMUNavigationSystemState()
 
     if (control) {
         control->setActive(false);
-    }
+    }*/
 }
 
 void NavigableAppMenuModel::restoreMUNavigationSystemState()
 {
-    if (m_lastActiveMUNavigationState.has_value()) {
+    /*if (m_lastActiveMUNavigationState.has_value()) {
         MUNavigationSystemState state = m_lastActiveMUNavigationState.value();
 
         bool ok = navigationController()->requestActivateByName(state.sectionName, state.panelName, state.controlName);
@@ -512,7 +512,7 @@ void NavigableAppMenuModel::restoreMUNavigationSystemState()
         m_lastActiveMUNavigationState.reset();
     }
 
-    navigationController()->setIsHighlight(m_needActivateLastMUNavigationControl);
+    navigationController()->setIsHighlight(m_needActivateLastMUNavigationControl);*/
 }
 
 void NavigableAppMenuModel::activateHighlightedMenu()
