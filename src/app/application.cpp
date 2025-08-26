@@ -114,12 +114,28 @@ void Application::deinitModules() {
     muse::modularity::_ioc()->reset();
 };
 
+#if APP_LIST_QUI
+void dumpTree(QObject *obj, int indent) {
+    qDebug().noquote() << QString(indent, ' ') << obj->metaObject()->className() << obj->objectName();
+    for (QObject *child : obj->children()) {
+        dumpTree(child, indent + 2);
+    }
+}
+#endif
+
 // Loads the Main.qml file and returns the first element
 // (which is a QtQuick `Window`)
 QQuickWindow *loadApplicationAndCreateWindow(QQmlApplicationEngine &engine) {
     // We load the Main.qml file to the application engine
     const QUrl url(QStringLiteral("qrc:/qml/Main.qml"));
     engine.load(url);
+
+#if APP_LIST_QUI
+    const QList<QObject*> rootObjects = engine.rootObjects();
+    for (QObject *root : rootObjects) {
+        dumpTree(root, 0);
+    }
+#endif
 
     // We get the root element (Main.qml)
     QObject *rootUiElement = engine.rootObjects().value(0);

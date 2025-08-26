@@ -2,6 +2,7 @@ import QtQuick 2.15
 
 import Muse.UiComponents 1.0
 
+import App.AppShell
 import "./TitleBar"
 
 AppWindow {
@@ -41,7 +42,7 @@ AppWindow {
     WindowContent {
         id: window
 
-        anchors.top: appTitlebar.bottom
+        anchors.top: appTitleBar.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom

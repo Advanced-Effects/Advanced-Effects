@@ -33,7 +33,7 @@ ListView {
     height: Math.max(1,contentItem.childrenRect.height)
     width: contentWidth
 
-    //property alias appWindow: appMenuModel.appWindow
+    property alias appWindow: appMenuModel.appWindow
 
     orientation: Qt.Horizontal
 
@@ -53,16 +53,16 @@ ListView {
     AppMenuModel {
         id: appMenuModel
 
-        /*appMenuAreaRect: Qt.rect(root.x, root.y, root.width, root.height)
-        openedMenuAreaRect: openedArea(menuLoader)*/
+        appMenuAreaRect: Qt.rect(root.x, root.y, root.width, root.height)
+        openedMenuAreaRect: openedArea(menuLoader)
 
-        /*onOpenMenuRequested: function(menuId) {
+        onOpenMenuRequested: function(menuId) {
             prv.openMenu(menuId)
         }
 
         onCloseOpenedMenuRequested: {
             menuLoader.close()
-        }*/
+        }
 
         /*onNavigateWithSymbolRequested: function(symbol) {
             if (menuLoader.isMenuOpened) {
@@ -134,35 +134,6 @@ ListView {
         accentButton: isMenuOpened
 
         navigation.accessible.ignored: true
-
-        AccessibleItem {
-            id: accessibleInfo
-
-            accessibleParent: panelAccessibleInfo
-            visualItem: radioButtonDelegate
-            role: MUAccessible.Button
-            name: radioButtonDelegate.title
-
-            property bool active: radioButtonDelegate.highlight && !radioButtonDelegate.isMenuOpened
-            onActiveChanged: {
-                if (active) {
-                    forceActiveFocus()
-                    accessibleInfo.readInfo()
-                } else {
-                    accessibleInfo.resetFocus()
-                }
-            }
-
-            function readInfo() {
-                accessibleInfo.ignored = false
-                accessibleInfo.focused = true
-            }
-
-            function resetFocus() {
-                accessibleInfo.focused = false
-                accessibleInfo.ignored = true
-            }
-        }
 
         contentItem: StyledTextLabel {
             id: textLabel
