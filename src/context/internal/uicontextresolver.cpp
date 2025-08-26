@@ -33,8 +33,7 @@ using namespace mu::context;
 using namespace muse;
 using namespace muse::ui;
 
-static const muse::Uri HOME_PAGE_URI("musescore://home");
-static const muse::Uri NOTATION_PAGE_URI("musescore://notation");
+static const muse::Uri PROJECT_PAGE_URI("app://edit");
 
 static const QString NOTATION_NAVIGATION_PANEL("ScoreView");
 
@@ -56,11 +55,11 @@ UiContext UiContextResolver::currentUiContext() const
     currentUri = diagnostics::diagnosticCurrentUri(interactive()->stack());
 #endif
 
-    if (currentUri == HOME_PAGE_URI) {
+    /*if (currentUri == HOME_PAGE_URI) {
         return context::UiCtxHomeOpened;
-    }
+        }*/
 
-    if (currentUri == NOTATION_PAGE_URI) {
+    if (currentUri == PROJECT_PAGE_URI) {
         INavigationPanel* activePanel = navigationController()->activePanel();
         if (activePanel) {
             if (activePanel->name() == NOTATION_NAVIGATION_PANEL) {

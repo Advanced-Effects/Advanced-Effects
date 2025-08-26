@@ -6,9 +6,12 @@ import Muse.UiComponents
 
 import "./EditPage"
 
-DockWindow {
-        id: root
+CentralWidget {
+        anchors.fill: parent.fill
+}
 
+/*DockWindow {
+        id: root
         objectName: "WindowContent"
 
         onPageLoaded: {
@@ -24,7 +27,12 @@ DockWindow {
                 }
         }
 
+        Component.onCompleted: {
+                api.launcher.load("app://edit")
+        }
+
         pages: [
                 EditPage {}
         ]
 }
+*/
