@@ -6,11 +6,7 @@ import Muse.UiComponents
 
 import "./EditPage"
 
-CentralWidget {
-        anchors.fill: parent.fill
-}
-
-/*DockWindow {
+DockWindow {
         id: root
         objectName: "WindowContent"
 
@@ -35,4 +31,3 @@ CentralWidget {
                 EditPage {}
         ]
 }
-*/
