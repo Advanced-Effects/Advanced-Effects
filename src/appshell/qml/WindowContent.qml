@@ -23,8 +23,14 @@ DockWindow {
                 }
         }
 
+        NavigationSection {
+                id: topToolbarKeyNavigationSection
+                name: "TopTool"
+                order: 1
+        }
+
         Component.onCompleted: {
-                api.launcher.load("app://edit")
+                api.launcher.open("app://edit")
         }
 
         pages: [
