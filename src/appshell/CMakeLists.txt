@@ -16,6 +16,10 @@ set(MODULE_SRC
     view/mainwindowtitleprovider.h
     view/mainwindowtitleprovider.cpp
     view/internal/iappmenumodelhook.h
+    internal/appshellactions.h
+    internal/appshellactions.cpp
+    internal/appshellactionscontroller.h
+    internal/appshellactionscontroller.cpp
     )
 
 set(MODULE_LINK
