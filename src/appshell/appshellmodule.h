@@ -15,7 +15,7 @@ public:
 
     void registerResources() override;
     void registerExports() override;
+    void resolveImports() override;
 };
 
 };
-

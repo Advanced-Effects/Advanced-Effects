@@ -6,11 +6,7 @@ import Muse.UiComponents
 
 import "./EditPage"
 
-CentralWidget {
-        anchors.fill: parent.fill
-}
-
-/*DockWindow {
+DockWindow {
         id: root
         objectName: "WindowContent"
 
@@ -27,12 +23,17 @@ CentralWidget {
                 }
         }
 
+        NavigationSection {
+                id: topToolbarKeyNavigationSection
+                name: "TopTool"
+                order: 1
+        }
+
         Component.onCompleted: {
-                api.launcher.load("app://edit")
+                api.launcher.open("app://edit")
         }
 
         pages: [
                 EditPage {}
         ]
 }
-*/

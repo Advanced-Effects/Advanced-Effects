@@ -67,14 +67,14 @@ InteractiveProvider::InteractiveProvider(const modularity::ContextPtr& iocCtx)
     : QObject(), Injectable(iocCtx)
 {
     connect(qApp, &QGuiApplication::focusWindowChanged, this, [this](QWindow* window) {
-        raiseWindowInStack(window);
+        //raiseWindowInStack(window);
     });
 
     connect(qApp, &QGuiApplication::focusObjectChanged, this, [this](QObject* obj) {
         auto widget = dynamic_cast<QWidget*>(obj);
 
         if (widget && widget->isWindow()) {
-            raiseWindowInStack(widget);
+            //raiseWindowInStack(widget);
         }
     });
 }
