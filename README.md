@@ -49,6 +49,15 @@ You **can't install Qt through the system manager** because in Ubuntu only Qt 6.
 
 If you **don't want** to use **Qt Creator**, here's how to run the software:
 
+**1. Clone or download** the repository: `git clone https://github.com/Advanced-Effects/Advanced-Effects.git`.
+**2. Open a terminal** and enter the directory where the repository is located: `cd /path/to/Advanced-Effects`.
+**3. Setup the build environment:** by getting a C++17 compiler like `gcc`, `CMake`, and `Ninja`.
+**4. Get the dependencies:** by getting the [Muse's framework dependencies](https://github.com/musescore/MuseScore/wiki/Install-dependencies), OpenGL and `glfw3`, and [Qt 6.9.1](https://www.qt.io/product/qt6)
+**5. Create a build directory** where the project's output files will be by executing `mkdir build` and then go into it using `cd build`.
+**6. Finally, compile the project** by setting up the CMake environment `cmake ..` and compiling the project `cmake --build .`
+
+**✅ If everything has gone right, you now have a Debug version of the application in `<your project directory>/build/src/app/AdvancedEffects`**
+
 ## ❤️ Credits
 
 - The UI is inspired on After Effects and, mostly, MuseScore.
