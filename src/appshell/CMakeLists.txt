@@ -1,6 +1,8 @@
 declare_module(app_appshell)
 set(MODULE_ALIAS app::appshell)
 
+include(FindQtQuickOpenGLWidget)
+
 set(MODULE_QRC appshell.qrc)
 set(MODULE_QML_IMPORT ${CMAKE_CURRENT_LIST_DIR}/qml)
 
@@ -26,6 +28,7 @@ set(MODULE_LINK
     muse::uicomponents
     muse::ui
     muse::dockwindow
+    FindQtQuickOpenGLWidget
     )
 
 # we use private/qkeymapper_p.h to fix https://github.com/musescore/MuseScore/issues/10181
