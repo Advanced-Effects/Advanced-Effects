@@ -1,5 +1,7 @@
 # Advanced Effects
 
+![An early image of Advanced Effects](https://raw.githubusercontent.com/Advanced-Effects/Muse-Qml-App-Template/refs/heads/main/screenshot.webp)
+
 Are you a?
 
 - YouTuber that wants to create animations for his videos?
