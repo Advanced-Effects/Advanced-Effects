@@ -24,7 +24,7 @@ jobs:
       uses: jurplel/install-qt-action@v4
       with:
         version: 6.9.1
-        modules: qtnetworkauth qt6core5compat
+        modules: qtnetworkauth qt5compat
 
     - name: ⚙️ Set up dependencies
       run: |
