@@ -104,16 +104,45 @@ MenuItem* AppMenuModel::makeCompositionMenu() {
 MenuItem* AppMenuModel::makeLayerMenu() {
         MenuItemList items {
                 makeMenuItem("layer-new"),
+                makeMenuItem("layer-remove"),
         };
 
         return makeMenu(TranslatableString("appshell/menu/layer", "&Layer"), items, "menu-layer");
 };
 
+MenuItem* submenuRasterEffects() {
+        MenuItemList items {};
+
+        return makeMenu(
+                TranslatableString("appshell/menu/effects/raster", "&Raster effects"),
+                items,
+                "menu-effects-raster"
+        );
+};
+MenuItem* submenuVectorEffects() {
+        MenuItemList items {};
+
+        return makeMenu(
+                TranslatableString("appshell/menu/effects/vector", "&Vector effects"),
+                items,
+                "menu-effects-vector"
+        );
+};
+MenuItem* submenuPathEffects() {
+        MenuItemList items {};
+
+        return makeMenu(
+                TranslatableString("appshell/menu/effects/path", "&Path effects"),
+                items,
+                "menu-effects-path"
+        );
+};
+
 MenuItem* AppMenuModel::makeEffectsMenu() {
         MenuItemList items {
-                makeMenuItem("effects-raster"),
-                makeMenuItem("effects-vector"),
-                makeMenuItem("effects-path"),
+                submenuRasterEffects(),
+                submenuVectorEffects(),
+                submenuPathEffects(),
         };
 
         return makeMenu(TranslatableString("appshell/menu/effects", "&Effects"), items, "menu-effects");
@@ -121,17 +150,7 @@ MenuItem* AppMenuModel::makeEffectsMenu() {
 
 MenuItem* AppMenuModel::makeViewMenu() {
         MenuItemList items {
-                makeMenuItem("file-new"),
-                makeMenuItem("file-open"),
-                makeMenuItem("file-import"),
-                makeSeparator(),
-                makeMenuItem("file-save"),
-                makeMenuItem("file-copy"),
-                makeMenuItem("file-export"),
-                makeSeparator(),
-                makeMenuItem("file-properties"),
-                makeSeparator(),
-                makeMenuItem("quit")
+                makeMenuItem("view-fullscreen"),
         };
 
         return makeMenu(TranslatableString("appshell/menu/view", "&View"), items, "menu-view");
