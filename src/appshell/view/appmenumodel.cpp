@@ -110,7 +110,7 @@ MenuItem* AppMenuModel::makeLayerMenu() {
         return makeMenu(TranslatableString("appshell/menu/layer", "&Layer"), items, "menu-layer");
 };
 
-MenuItem* submenuRasterEffects() {
+MenuItem* AppMenuModel::submenuRasterEffects() {
         MenuItemList items {};
 
         return makeMenu(
@@ -119,7 +119,7 @@ MenuItem* submenuRasterEffects() {
                 "menu-effects-raster"
         );
 };
-MenuItem* submenuVectorEffects() {
+MenuItem* AppMenuModel::submenuVectorEffects() {
         MenuItemList items {};
 
         return makeMenu(
@@ -128,7 +128,7 @@ MenuItem* submenuVectorEffects() {
                 "menu-effects-vector"
         );
 };
-MenuItem* submenuPathEffects() {
+MenuItem* AppMenuModel::submenuPathEffects() {
         MenuItemList items {};
 
         return makeMenu(
