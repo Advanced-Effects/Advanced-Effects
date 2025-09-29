@@ -52,7 +52,14 @@ private:
         MenuItem* makeEditMenu();
         MenuItem* makeCompositionMenu();
         MenuItem* makeLayerMenu();
+
+
+        MenuItem* submenuRasterEffects();
+        MenuItem* submenuVectorEffects();
+        MenuItem* submenuPathEffects();
         MenuItem* makeEffectsMenu();
+
+
         MenuItem* makeViewMenu();
         MenuItem* makeWindowMenu();
         MenuItem* makeHelpMenu();
