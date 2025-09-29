@@ -55,5 +55,5 @@ jobs:
       with:
         name: AdvancedEffects
         path: |
-          build/*
+          build/src/app/*
         if-no-files-found: error
