@@ -5,18 +5,19 @@ namespace app::appshell {
 using namespace muse::uicomponents;
 
 ToolSelectionModel::ToolSelectionModel(QObject* parent)
-        : AbstractMenuModel(parent) {};
+        : AbstractToolBarModel(parent) {};
 
 void ToolSelectionModel::load() {
-        MenuItemList items = getMenuItems();
+        ToolBarItemList items = getToolBarItems();
 
         setItems(items);
-        AbstractMenuModel::load();
+
+        AbstractToolBarModel::load();
 };
 
-MenuItemList ToolSelectionModel::getMenuItems() {
-        MenuItemList items {
-                makeMenuItem("selection-tool")
+ToolBarItemList ToolSelectionModel::getToolBarItems() {
+        ToolBarItemList items {
+                makeItem("selection-tool")
         };
 
         return items;

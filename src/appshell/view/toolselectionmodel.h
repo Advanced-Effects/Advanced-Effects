@@ -1,12 +1,18 @@
 #pragma once
 
-#include "uicomponents/view/abstractmenumodel.h"
+#include "uicomponents/view/abstracttoolbarmodel.h"
 
 #include "modularity/ioc.h"
 
 namespace app::appshell {
 
-class ToolSelectionModel : public muse::uicomponents::AbstractMenuModel {
+// ToolSelectionModel is the skeleton of the tool selection bar,
+// right above the Canvas.
+//
+// It comes from the class AbstractToolBarModel,
+// and loads the different tools people can switch between
+// makeItem("selection-tool") - for example.
+class ToolSelectionModel : public muse::uicomponents::AbstractToolBarModel {
         Q_OBJECT
 
         Q_PROPERTY(bool isInputAllowed READ isInputAllowed NOTIFY isInputAllowedChanged)
@@ -21,7 +27,7 @@ public:
 signals:
         void isInputAllowedChanged();
 private:
-        muse::uicomponents::MenuItemList getMenuItems();
+        muse::uicomponents::ToolBarItemList getMenuItems();
 };
 
 };
