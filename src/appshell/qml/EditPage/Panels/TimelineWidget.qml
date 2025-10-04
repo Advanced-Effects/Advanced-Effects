@@ -1,6 +1,8 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
+import "../../Timeline/"
+
 Item {
         id: root
         objectName: "TimelineWidget"
