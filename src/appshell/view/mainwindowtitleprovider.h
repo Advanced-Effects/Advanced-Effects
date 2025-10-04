@@ -26,6 +26,10 @@
 #include "context/iglobalcontext.h"
 
 namespace app::appshell {
+
+// Basically, MainWindowTitleProvider is a helper class that provides useful things
+// to the Qml layout, such as what the current window title should be,
+// what the current file path is and whether it's modified.
 class MainWindowTitleProvider : public QObject, public muse::Injectable, public muse::async::Asyncable
 {
     Q_OBJECT
