@@ -42,4 +42,28 @@ DockPage {
                         }
                 }
         ]
+
+        panels: [
+                DockPanel {
+                        id: timelinePanel
+
+                        objectName: "Timeline"
+                        title: qsTrc("appshell", "Timeline")
+
+                        navigationSection: root.navigationPanelSec(generalPanel.location)
+
+                        width: root.horizontalPanelDefaultWidth
+                        minimumWidth: root.horizontalPanelDefaultWidth
+                        maximumWidth: root.horizontalPanelDefaultWidth
+
+                        minimumHeight: root.panelMinDimension
+                        maximumHeight: root.panelMaxDimension
+
+                        groupName: root.horizontalPanelsGroup
+
+                        dropDestinations: root.horizontalPanelDropDestinations
+                
+                        TimelineWidget {}
+                }
+        ]
 }
