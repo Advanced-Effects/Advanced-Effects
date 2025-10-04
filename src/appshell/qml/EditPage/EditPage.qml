@@ -50,6 +50,8 @@ DockPage {
                         objectName: "Timeline"
                         title: qsTrc("appshell", "Timeline")
 
+                        location: Location.Bottom
+
                         navigationSection: root.navigationPanelSec(generalPanel.location)
 
                         width: root.horizontalPanelDefaultWidth
@@ -62,7 +64,7 @@ DockPage {
                         groupName: root.horizontalPanelsGroup
 
                         dropDestinations: root.horizontalPanelDropDestinations
-                
+
                         TimelineWidget {}
                 }
         ]
