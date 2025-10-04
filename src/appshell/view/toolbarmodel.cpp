@@ -1,13 +1,13 @@
-#include "toolselectionmodel.h"
+#include "toolbarmodel.h"
 
 namespace app::appshell {
 
 using namespace muse::uicomponents;
 
-ToolSelectionModel::ToolSelectionModel(QObject* parent)
+ToolBarModel::ToolBarModel(QObject* parent)
         : AbstractToolBarModel(parent) {};
 
-void ToolSelectionModel::load() {
+void ToolBarModel::load() {
         ToolBarItemList items {
                 makeItem("tool-input")
         };

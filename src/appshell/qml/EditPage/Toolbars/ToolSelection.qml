@@ -24,12 +24,12 @@ Item {
                 enabled: root.enabled && root.visible
         }
 
-        ToolSelectionModel {
-                id: toolSelectionModel
+        ToolBarModel {
+                id: toolBarModel
         }
 
         Component.onCompleted: {
-                toolSelectionModel.load()
+                toolBarModel.load()
         }
 
         // GridViewSectional is a more ergonomical way to place items in a GridView
@@ -55,7 +55,7 @@ Item {
                 }
 
                 // From this model (muse::AbstractMenuModel)
-                model: toolSelectionModel
+                model: toolBarModel
 
                 // Render this
                 itemDelegate: FlatButton {
@@ -67,7 +67,7 @@ Item {
                         width: gridView.cellWidth
                         height: gridView.cellWidth
 
-                        enabled: toolSelectionModel.isInputAllowed
+                        enabled: true
 
                         accentButton: (Boolean(item) && item.checked) || menuLoader.isMenuOpened
                         transparent: !accentButton
@@ -96,7 +96,7 @@ Item {
                         }
 
                         function handleMenuItem() {
-                                Qt.callLater(toolSelectionModel.handleMenuItem, item.id)
+                                Qt.callLater(toolBarModel.handleMenuItem, item.id)
                         }
 
                         onClicked: {
@@ -120,7 +120,7 @@ Item {
                                 id: menuLoader
 
                                 onHandleMenuItem: function(itemId) {
-                                        toolSelectionModel.handleMenuItem(itemId)
+                                        toolBarModel.handleMenuItem(itemId)
                                 }
                         }
                 }
