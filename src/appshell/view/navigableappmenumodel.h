@@ -31,6 +31,10 @@
 Q_MOC_INCLUDE(< QWindow >)
 
 namespace app::appshell {
+
+// NavigableAppMenuModel is the thing tasked for actually displaying an AppMenuModel,
+// with a horizontal menubar that you can actually open and click items in,
+// while AppMenuModel says WHICH menus there are.
 class NavigableAppMenuModel : public AppMenuModel
 {
     Q_OBJECT
