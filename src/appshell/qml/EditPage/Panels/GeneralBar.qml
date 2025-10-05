@@ -12,11 +12,12 @@ StyledListView {
         }
 
         delegate: Item {
-                width: root.width
+                width: parent.width
                 height: 40
 
-                Text {
+                GeneralBarHeader {
                         text: model.name
+                        modelIndex: model.index
                 }
         }
 }
