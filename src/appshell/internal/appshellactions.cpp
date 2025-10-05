@@ -1,3 +1,12 @@
+/// This file is used to register the application's actions
+/// (Think of Gtk.Action, godot signals...)
+///
+/// The ones that are declared here are the ones for the
+/// main application menu. (m_actions)
+/// - They are used in appshell/view/appmenumodel.cpp
+/// - In order to give actions a real functionality, they are declared
+///   in appshell actions controller.
+
 #include "appshellactions.h"
 
 #include "modularity/ioc.h"
@@ -46,6 +55,7 @@ async::Channel<ActionCodeList> AppshellUiActions::actionCheckedChanged() const
 }
 
 const UiActionList AppshellUiActions::m_actions = {
+        // File menu
         UiAction("file-new",
                 UiCtxAny,
                 muse::shortcuts::CTX_ANY,
@@ -78,4 +88,66 @@ const UiActionList AppshellUiActions::m_actions = {
                 UiCtxAny,
                 muse::shortcuts::CTX_ANY,
                 TranslatableString("action", "Quit")),
+        // Edit menu
+        UiAction("edit-copy",
+                UiCtxAny,
+                muse::shortcuts::CTX_ANY,
+                TranslatableString("action", "Copy")),
+        UiAction("edit-paste",
+                UiCtxAny,
+                muse::shortcuts::CTX_ANY,
+                TranslatableString("action", "Paste")),
+        UiAction("edit-cut",
+                UiCtxAny,
+                muse::shortcuts::CTX_ANY,
+                TranslatableString("action", "Cut")),
+        UiAction("edit-undo",
+                UiCtxAny,
+                muse::shortcuts::CTX_ANY,
+                TranslatableString("action", "Undo")),
+        UiAction("edit-redo",
+                UiCtxAny,
+                muse::shortcuts::CTX_ANY,
+                TranslatableString("action", "Redo")),
+        // Composition menu
+        UiAction("composition-new",
+                UiCtxAny,
+                muse::shortcuts::CTX_ANY,
+                TranslatableString("action", "New Composition")),
+        // Layer menu
+        UiAction("layer-new",
+                UiCtxAny,
+                muse::shortcuts::CTX_ANY,
+                TranslatableString("action", "New Layer")),
+        UiAction("layer-remove",
+                UiCtxAny,
+                muse::shortcuts::CTX_ANY,
+                TranslatableString("action", "Delete Layer")),
+        // View menu
+        UiAction("view-fullscreen",
+                UiCtxAny,
+                muse::shortcuts::CTX_ANY,
+                TranslatableString("action", "Fullscreen")),
+        // Window menu
+        UiAction("window-maximize",
+                UiCtxAny,
+                muse::shortcuts::CTX_ANY,
+                TranslatableString("action", "Maximize Window")),
+        UiAction("window-minimize",
+                UiCtxAny,
+                muse::shortcuts::CTX_ANY,
+                TranslatableString("action", "Minimize Window")),
+        UiAction("window-close",
+                UiCtxAny,
+                muse::shortcuts::CTX_ANY,
+                TranslatableString("action", "Close Window")),
+        // Help menu
+        UiAction("about-qt",
+                UiCtxAny,
+                muse::shortcuts::CTX_ANY,
+                TranslatableString("action", "About Qt")),
+        UiAction("about-app",
+                UiCtxAny,
+                muse::shortcuts::CTX_ANY,
+                TranslatableString("action", "About")),
 };
