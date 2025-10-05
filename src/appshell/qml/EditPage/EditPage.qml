@@ -52,17 +52,17 @@ DockPage {
 
                         navigationSection: root.navigationPanelSec(generalPanel.location)
 
-                        width: root.verticalPanelDefaultWidth
-                        minimumWidth: root.verticalPanelDefaultWidth
-                        maximumWidth: root.verticalPanelDefaultWidth
+                        width: 160
+                        minimumWidth: root.horizontalPanelDefaultWidth
+                        maximumWidth: root.horizontalPanelDefaultWidth
 
                         minimumHeight: root.panelMinDimension
                         maximumHeight: root.panelMaxDimension
 
-                        groupName: root.verticalPanelsGroup
+                        groupName: root.horizontalPanelsGroup
 
-                        dropDestinations: root.verticalPanelDropDestinations
-                
+                        dropDestinations: root.horizontalPanelDropDestinations
+
                         GeneralBar {}
                 }
         ]
