@@ -1,5 +1,7 @@
 # Advanced Effects
 
+![An early image of Advanced Effects](https://raw.githubusercontent.com/Advanced-Effects/Muse-Qml-App-Template/refs/heads/main/screenshot.webp)
+
 Are you a?
 
 - YouTuber that wants to create animations for his videos?
@@ -80,3 +82,4 @@ Set these environment variables to inspect the application:
 - `QML_IMPORT_TRACE`: When set to 'ON', shows the QML Engine log when importing modules (is a Qt environment variable).
 - `APP_LIST_QRT`: When set to '1', prints the Qt Resource Tree (`src/application/main.cpp`)
 - `-DAPP_LIST_QUI`: When set to 'ON' (`cmake .. -DAPP_LIST_QUI=ON`), prints the QQmlApplicationEngine UI hierarchy.
+
