@@ -12,6 +12,7 @@
 // Register UI Actions
 #include "internal/appshellactionscontroller.h"
 #include "internal/appshellactions.h"
+#include "internal/toolbaractions.h"
 
 // Links the module to the .qrc file
 // WE put it outside of the app::appshell namespace
@@ -41,6 +42,7 @@ void AppShellModule::registerExports() {
 
         m_actionsController = std::make_shared<AppshellActionController>(iocContext());
         m_appshellActions = std::make_shared<AppshellUiActions>(m_actionsController, iocContext());
+        m_toolbarActions = std::make_shared<ToolBarUiActions>(m_actionsController, iocContext());
 };
 
 void AppShellModule::resolveImports() {

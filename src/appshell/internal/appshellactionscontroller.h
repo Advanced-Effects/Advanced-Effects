@@ -15,8 +15,7 @@ class AppshellActionController : public Injectable, public actions::Actionable
         Inject<IInteractive> interactive = { this };
 
 public:
-        AppshellActionController(const modularity::ContextPtr& iocCtx)
-        : Injectable(iocCtx) {}
+        AppshellActionController(const modularity::ContextPtr& iocCtx);
 
         void init();
 };

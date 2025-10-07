@@ -18,6 +18,8 @@ set(MODULE_SRC
     view/internal/iappmenumodelhook.h
     internal/appshellactions.h
     internal/appshellactions.cpp
+    internal/toolbaractions.h
+    internal/toolbaractions.cpp
     internal/appshellactionscontroller.h
     internal/appshellactionscontroller.cpp
     )
