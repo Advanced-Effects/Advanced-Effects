@@ -9,7 +9,7 @@ TreeView {
 
         anchors.fill: parent
 
-        delegate: TreeViewDelegate {
+        /*delegate: TreeViewDelegate {
                 treeview: objectsTreeModel
-        }
+                }*/
 }

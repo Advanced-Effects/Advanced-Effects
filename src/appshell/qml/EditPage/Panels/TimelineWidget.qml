@@ -14,6 +14,8 @@ Item {
                 anchors.left: root.left
                 anchors.top: root.top
                 anchors.bottom: root.bottom
+
+                width: 256 + 128
         }
 
         KeysView {
