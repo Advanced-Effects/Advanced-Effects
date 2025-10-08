@@ -17,7 +17,7 @@ StyledListView {
 
                 GeneralBarHeader {
                         text: model.name
-                        modelIndex: model.index
+                        //component: model.component
                 }
         }
 }

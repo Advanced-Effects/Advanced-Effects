@@ -12,21 +12,21 @@ Item {
 
     property bool expanded: false
     property bool hovered: false
-    property bool unresolved: false
+
+    // Header title
     property string text: ""
+    // The QtQuick component to render when widget is expanded
+    //property Component component: null
 
-    property bool isInVisibleArea: true
-
-    property var modelIndex: null
-
-    signal toggleExpandRequested()
+    function toggleExpandRequested() {
+            root.expanded = !root.expanded
+    }
 
     FlatButton {
         id: paletteExpandArrow
 
         z: 1000
         width: height
-        visible: !root.unresolved // TODO: make a separate palette placeholder component
         activeFocusOnTab: false // same focus object as parent palette
         icon: root.expanded ? IconCode.SMALL_ARROW_DOWN : IconCode.SMALL_ARROW_RIGHT
         transparent: true
@@ -44,6 +44,13 @@ Item {
         onClicked: root.toggleExpandRequested()
     }
 
+    // Clicking any part of the widget - not just the arrow button - should trigger a toggle.
+    MouseArea {
+            anchors.fill: parent
+
+            onClicked: root.toggleExpandRequested()
+    }
+
     StyledTextLabel {
         id: textItem
 
@@ -56,18 +63,37 @@ Item {
         anchors {
             left: paletteExpandArrow.right; leftMargin: 4;
             right: root.right
+            top: root.top
+            bottom: root.bottom
         }
 
         text: root.text
         font: ui.theme.bodyBoldFont
     }
 
+    // This rectangle makes the widget have a greyish background
     Rectangle {
         id: mainContainer
+
         readonly property int padding: 1
-        implicitHeight: 32 + 2 * padding
+        implicitHeight: 32 + /*root.component.implicitHeight +*/ 2 * padding
         implicitWidth: parent.width
         height: implicitHeight
+
+        color: root.hovered ? ui.theme.strokeColor : ui.theme.backgroundColor
         border { width: 1; color: ui.theme.strokeColor }
     }
+
+    // Shows the `component` dynamically
+    /*Loader {
+            id: loader
+            sourceComponent: root.component
+
+            anchors.top: textItem.bottom
+            anchors.left: root.left
+            anchors.right: root.right
+            anchors.bottom: root.bottom
+
+            z: 999
+            }*/
 }
