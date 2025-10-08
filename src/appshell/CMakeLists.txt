@@ -23,6 +23,10 @@ set(MODULE_SRC
     view/preferences/preferencepageitem.cpp
     view/canvas/applicationcanvas.h
     view/canvas/applicationcanvas.cpp
+    view/preferences/preferencesmodel.h
+    view/preferences/preferencesmodel.cpp
+    view/preferences/preferencepageitem.h
+    view/preferences/preferencepageitem.cpp
     internal/appshellactions.h
     internal/appshellactions.cpp
     internal/appshellactionscontroller.h
