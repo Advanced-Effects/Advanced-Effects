@@ -3,6 +3,8 @@ import QtQuick.Controls 2.15
 
 import Muse.UiComponents
 
+import App.AppShell
+
 Item {
         id: root
         objectName: "CentralWidget"
@@ -19,12 +21,10 @@ Item {
                 anchors.right: root.right
         }
 
-        Rectangle {
-                color: "#000000"
-
-                anchors.top: fileTabBar.top
+        ApplicationCanvas {
+                /*anchors.top: fileTabBar.top
                 anchors.left: root.left
                 anchors.right: root.right
-                anchors.bottom: root.bottom
+                anchors.bottom: root.bottom*/
         }
 }
