@@ -16,6 +16,8 @@ set(MODULE_SRC
     view/mainwindowtitleprovider.h
     view/mainwindowtitleprovider.cpp
     view/internal/iappmenumodelhook.h
+    view/canvas/applicationcanvas.h
+    view/canvas/applicationcanvas.cpp
     internal/appshellactions.h
     internal/appshellactions.cpp
     internal/appshellactionscontroller.h
