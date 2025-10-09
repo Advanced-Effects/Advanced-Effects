@@ -22,9 +22,9 @@ Item {
         }
 
         ApplicationCanvas {
-                /*anchors.top: fileTabBar.top
+                anchors.top: fileTabBar.top
                 anchors.left: root.left
                 anchors.right: root.right
-                anchors.bottom: root.bottom*/
+                anchors.bottom: root.bottom
         }
 }

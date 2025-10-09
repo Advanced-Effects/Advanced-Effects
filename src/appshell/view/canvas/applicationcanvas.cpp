@@ -2,4 +2,4 @@
 
 using namespace app::appshell;
 
-ApplicationCanvas::ApplicationCanvas(QWidget *parent) : QQuickWidget(parent) {};
+ApplicationCanvas::ApplicationCanvas(QQuickItem *parent) : QQuickItem(parent) {};

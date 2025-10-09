@@ -1,15 +1,13 @@
 #pragma once
 
-#include <QQuickWidget>
-
-#include "openglwidget.h"
+#include <QQuickItem>
 
 namespace app::appshell {
 
-class ApplicationCanvas : public QQuickWidget {
+class ApplicationCanvas : public QQuickItem {
         Q_OBJECT
 public:
-        ApplicationCanvas(QWidget *parent = nullptr);
+        ApplicationCanvas(QQuickItem *parent = nullptr);
         ~ApplicationCanvas() = default;
 };
 
