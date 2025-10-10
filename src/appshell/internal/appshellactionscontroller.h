@@ -5,9 +5,10 @@
 #include "actions/actionable.h"
 #include "iinteractive.h"
 
-namespace app::appshell {
 
 using namespace muse;
+
+namespace app::appshell {
 
 class AppshellActionController : public Injectable, public actions::Actionable
 {
@@ -16,7 +17,7 @@ class AppshellActionController : public Injectable, public actions::Actionable
 
 public:
         AppshellActionController(const modularity::ContextPtr& iocCtx)
-        : Injectable(iocCtx) {}
+                : Injectable(iocCtx) {};
 
         void init();
 };

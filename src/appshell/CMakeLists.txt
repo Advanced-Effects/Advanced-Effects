@@ -7,8 +7,8 @@ set(MODULE_QML_IMPORT ${CMAKE_CURRENT_LIST_DIR}/qml)
 set(MODULE_SRC
     appshellmodule.h
     appshellmodule.cpp
-    view/toolselectionmodel.h
-    view/toolselectionmodel.cpp
+    view/toolbarmodel.h
+    view/toolbarmodel.cpp
     view/appmenumodel.h
     view/appmenumodel.cpp
     view/navigableappmenumodel.h
@@ -20,6 +20,8 @@ set(MODULE_SRC
     view/canvas/applicationcanvas.cpp
     internal/appshellactions.h
     internal/appshellactions.cpp
+    internal/toolbaractions.h
+    internal/toolbaractions.cpp
     internal/appshellactionscontroller.h
     internal/appshellactionscontroller.cpp
     )
