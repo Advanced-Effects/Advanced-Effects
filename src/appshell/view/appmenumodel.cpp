@@ -88,6 +88,8 @@ MenuItem* AppMenuModel::makeEditMenu() {
                 makeSeparator(),
                 makeMenuItem("edit-undo"),
                 makeMenuItem("edit-redo"),
+                makeSeparator(),
+                makeMenuItem("open-preferences")
         };
 
         return makeMenu(TranslatableString("appshell/menu/edit", "&Edit"), items, "menu-edit");

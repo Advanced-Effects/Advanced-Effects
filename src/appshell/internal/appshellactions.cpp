@@ -109,6 +109,10 @@ const UiActionList AppshellUiActions::m_actions = {
                 UiCtxAny,
                 muse::shortcuts::CTX_ANY,
                 TranslatableString("action", "Redo")),
+        UiAction("open-preferences",
+                UiCtxAny,
+                muse::shortcuts::CTX_ANY,
+                TranslatableString("action", "Preferences")),
         // Composition menu
         UiAction("composition-new",
                 UiCtxAny,
