@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>@Variables_substituted_by_CMAKE_on_installation@
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+    <mime-type type="application/x-advancedeffects">
+        <comment>Advanced Effects Project</comment>
+        <glob pattern="*.ae1"/>
+        <sub-class-of type="application/zip"/>
+        <icon name="application-x-advancedeffects@MUSE_APP_INSTALL_SUFFIX@"/>
+    </mime-type>
+</mime-info>

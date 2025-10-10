@@ -21,7 +21,7 @@ Here arrives Advanced Effects, what aims to be the After Effects killer. A good-
 
 - [x] 💻 A Minimal App that shows a window.
 - [x] 🧭 With a Complex Navigation System.
-- [ ] 🎨 That shows an OpenGL canvas with Skia2D.
+- [x] 🎨 That shows an OpenGL canvas with Skia2D.
 - [ ] 📁 That can open and save project files.
 - [ ] 🟦 Where you can drag objects around.
 - [ ] 🚄 And animate them.

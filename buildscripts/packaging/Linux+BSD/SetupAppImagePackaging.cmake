@@ -1,7 +1,7 @@
 include(GetPlatformInfo)
 
 if(NOT(OS_IS_LIN OR OS_IS_FBSD))
-    return()
+        return()
 endif()
 
 set(DESKTOP_LAUNCHER_NAME "${MUSE_APP_NAME_VERSION} Portable")
@@ -28,20 +28,20 @@ install(FILES ${CMAKE_CURRENT_LIST_DIR}/portable/qt.conf DESTINATION bin COMPONE
 set(WINDOW_MANAGER_CLASS ${MUSE_APP_NAME_VERSION})
 
 # Install desktop file (perform variable substitution first)
-configure_file(${CMAKE_CURRENT_LIST_DIR}/org.musescore.MuseScore.desktop.in org.musescore.MuseScore${MUSE_APP_INSTALL_SUFFIX}.desktop)
-install(FILES ${PROJECT_BINARY_DIR}/org.musescore.MuseScore${MUSE_APP_INSTALL_SUFFIX}.desktop DESTINATION share/applications)
+configure_file(${CMAKE_CURRENT_LIST_DIR}/org.kaixoo12.AdvancedEffects.desktop.in org.kaixoo12.AdvancedEffects${MUSE_APP_INSTALL_SUFFIX}.desktop)
+install(FILES ${PROJECT_BINARY_DIR}/org.kaixoo12.AdvancedEffects${MUSE_APP_INSTALL_SUFFIX}.desktop DESTINATION share/applications)
 
 # Install appdata file (perform variable substitution first)
 if("${MUSE_APP_INSTALL_SUFFIX}" MATCHES "-")
-    message(FATAL_ERROR
+        message(FATAL_ERROR
         "MUSE_APP_INSTALL_SUFFIX='${MUSE_APP_INSTALL_SUFFIX}'\n"
         "MUSE_APP_INSTALL_SUFFIX must not contain hyphen characters. It will be used "
         "inside the <id> tag in *.appdata.xml and hyphens are discouraged there."
     )
 endif()
 
-configure_file(${CMAKE_CURRENT_LIST_DIR}/org.musescore.MuseScore.appdata.xml.in org.musescore.MuseScore${MUSE_APP_INSTALL_SUFFIX}.appdata.xml)
-install(FILES ${PROJECT_BINARY_DIR}/org.musescore.MuseScore${MUSE_APP_INSTALL_SUFFIX}.appdata.xml DESTINATION share/metainfo)
+configure_file(${CMAKE_CURRENT_LIST_DIR}/org.kaixoo12.AdvancedEffects.appdata.xml.in org.kaixoo12.AdvancedEffects${MUSE_APP_INSTALL_SUFFIX}.appdata.xml)
+install(FILES ${PROJECT_BINARY_DIR}/org.kaixoo12.AdvancedEffects${MUSE_APP_INSTALL_SUFFIX}.appdata.xml DESTINATION share/metainfo)
 
 # Add .MSCZ, .MSCX and .MSCS to MIME database (informs system that filetypes .MSCZ, .MSCX and .MSCS are MuseScore files)
 #configure_file(${CMAKE_CURRENT_LIST_DIR}/musescore.xml.in musescore${MUSE_APP_INSTALL_SUFFIX}.xml)
