@@ -8,7 +8,7 @@ Item {
     id: root
 
     width: parent.width
-    height: parent.height
+    height: 40
 
     property bool expanded: false
     property bool hovered: false
@@ -16,7 +16,7 @@ Item {
     // Header title
     property string text: ""
     // The QtQuick component to render when widget is expanded
-    //property Component component: null
+    property Component component: null
 
     function toggleExpandRequested() {
             root.expanded = !root.expanded
@@ -76,7 +76,9 @@ Item {
         id: mainContainer
 
         readonly property int padding: 1
-        implicitHeight: 32 + /*root.component.implicitHeight +*/ 2 * padding
+        implicitHeight: 32 +
+        (root.expanded ? loader.implicitHeight : 0)
+        + 2 * padding
         implicitWidth: parent.width
         height: implicitHeight
 
@@ -85,9 +87,11 @@ Item {
     }
 
     // Shows the `component` dynamically
-    /*Loader {
+    Loader {
             id: loader
             sourceComponent: root.component
+
+            visible: root.expanded
 
             anchors.top: textItem.bottom
             anchors.left: root.left
@@ -95,5 +99,5 @@ Item {
             anchors.bottom: root.bottom
 
             z: 999
-            }*/
+        }
 }

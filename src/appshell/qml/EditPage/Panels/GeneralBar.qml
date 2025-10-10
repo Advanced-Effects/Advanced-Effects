@@ -1,23 +1,19 @@
 import QtQuick 2.15
+import QtQuick.Controls 2.15
 
 import Muse.UiComponents
 
-StyledListView {
+Column {
         id: root
         objectName: "GeneralBar"
 
-        model: ListModel {
-                ListElement { name: "Align" }
-                ListElement { name: "Fill & Stroke" }
+        GeneralBarHeader {
+                text: "Align"
+                component: Text { text: "Align!" }
         }
 
-        delegate: Item {
-                width: parent.width
-                height: 40
-
-                GeneralBarHeader {
-                        text: model.name
-                        //component: model.component
-                }
+        GeneralBarHeader {
+                text: "Fill & Stroke"
+                component: Text { text: "F&S!" }
         }
 }
