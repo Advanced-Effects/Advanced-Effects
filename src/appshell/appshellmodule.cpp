@@ -5,6 +5,7 @@
 #include "view/navigableappmenumodel.h"
 #include "view/mainwindowtitleprovider.h"
 #include "view/toolselectionmodel.h"
+#include "view/canvas/applicationcanvas.h"
 
 #include "modularity/ioc.h"
 #include "ui/iinteractiveuriregister.h"
@@ -38,6 +39,8 @@ void AppShellModule::registerExports() {
         qmlRegisterType<MainWindowTitleProvider>("App.AppShell", 1, 0, "MainWindowTitleProvider");
         qmlRegisterType<NavigableAppMenuModel>("App.AppShell", 1, 0, "AppMenuModel");
         qmlRegisterType<ToolSelectionModel>("App.AppShell", 1, 0, "ToolSelectionModel");
+
+        qmlRegisterType<ApplicationCanvas>("App.AppShell", 1, 0, "ApplicationCanvas");
 
         m_actionsController = std::make_shared<AppshellActionController>(iocContext());
         m_appshellActions = std::make_shared<AppshellUiActions>(m_actionsController, iocContext());
