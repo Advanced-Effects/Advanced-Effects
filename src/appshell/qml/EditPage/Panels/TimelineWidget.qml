@@ -1,6 +1,8 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
+import App.ProjectScene 1.0
+
 Item {
         id: root
         objectName: "TimelineWidget"
@@ -12,6 +14,8 @@ Item {
                 anchors.left: root.left
                 anchors.top: root.top
                 anchors.bottom: root.bottom
+
+                width: 256 + 128
         }
 
         KeysView {

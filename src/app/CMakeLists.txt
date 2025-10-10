@@ -83,6 +83,7 @@ set(LINK_LIB
     muse::diagnostics
 
     app::context
+    app::projectscene
     app::appshell
 )
 
