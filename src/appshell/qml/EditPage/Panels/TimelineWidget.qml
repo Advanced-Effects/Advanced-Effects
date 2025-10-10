@@ -1,7 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 
-import App.ProjectScene
+import App.ProjectScene 1.0
 
 Item {
         id: root

@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>qml/Timeline/LeftNavigation.qml</file>
-        <file>qml/Timeline/ObjectsTreeView.qml</file>
-        <file>qml/Timeline/QuickActions.qml</file>
+        <file>qml/App/ProjectScene/LeftNavigation.qml</file>
+        <file>qml/App/ProjectScene/ObjectsTreeView.qml</file>
+        <file>qml/App/ProjectScene/QuickActions.qml</file>
     </qresource>
 </RCC>
