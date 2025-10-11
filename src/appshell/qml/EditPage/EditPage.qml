@@ -55,6 +55,18 @@ DockPage {
                         navigationSection: root.navigationPanelSec(generalPanel.location)
 
                         width: root.horizontalPanelDefaultWidth
+
+                        TimelineWidget {}
+                },
+                DockPanel {
+                        id: generalPanel
+
+                        objectName: "General"
+                        title: qsTrc("appshell", "General")
+
+                        navigationSection: root.navigationPanelSec(generalPanel.location)
+
+                        width: 160
                         minimumWidth: root.horizontalPanelDefaultWidth
                         maximumWidth: root.horizontalPanelDefaultWidth
 
@@ -65,7 +77,7 @@ DockPage {
 
                         dropDestinations: root.horizontalPanelDropDestinations
 
-                        TimelineWidget {}
+                        GeneralBar {}
                 }
         ]
 }
