@@ -8,7 +8,7 @@ Item {
     id: root
 
     width: parent.width
-    height: 40
+    height: 40 + (root.expanded ? loader.implicitHeight : 0)
 
     property bool expanded: false
     property bool hovered: false
@@ -57,7 +57,7 @@ Item {
         z: 999
 
         width: root.width
-        height: root.height
+        height: 32
 
         horizontalAlignment: Text.AlignHLeft
         anchors {
