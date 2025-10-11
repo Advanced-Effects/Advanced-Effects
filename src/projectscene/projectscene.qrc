@@ -3,5 +3,6 @@
         <file>qml/App/ProjectScene/LeftNavigation.qml</file>
         <file>qml/App/ProjectScene/ObjectsTreeView.qml</file>
         <file>qml/App/ProjectScene/QuickActions.qml</file>
+        <file>qml/App/ProjectScene/qmldir</file>
     </qresource>
 </RCC>
