@@ -1,9 +1,9 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Layouts 2.15
 
 import Muse.Ui 1.0
 import Muse.UiComponents 1.0
-import App.Preferences 1.0
 
 import "internal"
 
