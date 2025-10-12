@@ -9,6 +9,7 @@ set(MODULE_SRC
     appshellmodule.cpp
     view/toolbarmodel.h
     view/toolbarmodel.cpp
+    iappshellconfiguration.h
     view/appmenumodel.h
     view/appmenumodel.cpp
     view/navigableappmenumodel.h
@@ -16,8 +17,16 @@ set(MODULE_SRC
     view/mainwindowtitleprovider.h
     view/mainwindowtitleprovider.cpp
     view/internal/iappmenumodelhook.h
+    view/preferences/preferencesmodel.h
+    view/preferences/preferencesmodel.cpp
+    view/preferences/preferencepageitem.h
+    view/preferences/preferencepageitem.cpp
     view/canvas/applicationcanvas.h
     view/canvas/applicationcanvas.cpp
+    view/preferences/preferencesmodel.h
+    view/preferences/preferencesmodel.cpp
+    view/preferences/preferencepageitem.h
+    view/preferences/preferencepageitem.cpp
     internal/appshellactions.h
     internal/appshellactions.cpp
     internal/toolbaractions.h

@@ -19,7 +19,12 @@ public:
         AppshellActionController(const modularity::ContextPtr& iocCtx)
                 : Injectable(iocCtx) {};
 
+        // This is where ACTIONS are registered,
+        // where it is stated what they DO. (`IActionsDispatcher->reg()`)
         void init();
+
+        void quitApplication();
+        void openPreferencesDialog();
 };
 
 };

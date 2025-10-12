@@ -22,6 +22,21 @@ ApplicationWindow {
     signal toggleWindowMaximizedRequested()
     signal closeWindowRequested()
 
+    // This is a strange mechanism
+    // (A model, not a GUI widget)
+    // to let MuseScore's framework know
+    // THIS is the WINDOW to work with.
+    //
+    // Ignore it.
+    MainWindowBridge {
+            id: bridge
+
+            window: root
+
+            filePath: ""
+            fileModified: false
+    }
+
     Item {
         id: windowContentItem
         anchors.fill: parent

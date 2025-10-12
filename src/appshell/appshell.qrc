@@ -6,6 +6,7 @@
         <file>qml/EditPage/EditPage.qml</file>
         <file>qml/EditPage/CentralWidget.qml</file>
         <file>qml/EditPage/Panels/GeneralBar.qml</file>
+        <file>qml/EditPage/Panels/GeneralBarHeader.qml</file>
         <file>qml/EditPage/Panels/TimelineWidget.qml</file>
         <file>qml/EditPage/Toolbars/ToolSelection.qml</file>
         <file>qml/Timeline/KeysView.qml</file>
@@ -16,5 +17,9 @@
         <file>qml/TitleBar/AppMenuBar.qml</file>
         <file>qml/TitleBar/AppSystemButtons.qml</file>
         <file>qml/TitleBar/AppButtonBackground.qml</file>
+        <file>qml/Preferences/PreferencesDialog.qml</file>
+        <file>qml/Preferences/PreferencesPage.qml</file>
+        <file>qml/Preferences/internal/PreferencesButtonsPanel.qml</file>
+        <file>qml/Preferences/internal/PreferencesMenu.qml</file>
     </qresource>
 </RCC>
