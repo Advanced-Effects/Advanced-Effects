@@ -58,7 +58,7 @@ Item {
         color: ui.theme.backgroundPrimaryColor
     }
 
-    LegacyTreeView {
+    TreeView {
         id: treeView
 
         anchors.fill: parent

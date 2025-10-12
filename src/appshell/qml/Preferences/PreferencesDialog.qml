@@ -30,7 +30,7 @@ StyledDialogView {
 
                         spacing: 0
 
-                        PreferencesMenu {
+                        /*PreferencesMenu {
                                 id: menu
                         }
 
@@ -38,7 +38,7 @@ StyledDialogView {
 
                         StackLayout {
                                 id: stack
-                        }
+                                }*/
                 }
 
                 SeparatorLine { }
