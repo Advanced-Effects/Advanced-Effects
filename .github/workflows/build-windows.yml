@@ -25,10 +25,10 @@ jobs:
                                 update: true
                                 install: |
                                   git
-                                  mingw-w64-x86_64-cmake mingw-w64-ninja mingw-w64-cross-clang mingw-w64-gcc
+                                  mingw-w64-x86_64-cmake mingw-w64-x86_64-ninja mingw-w64-cross-clang mingw-w64-x86_64-gcc
                                   mingw-w64-x86_64-mesa mingw-w64-x86_64-glew mingw-w64-x86_64-glfw
-                                  mingw-w64-fontconfig mingw-w64-freetype mingw-w64-libjpeg-turbo mingw-w64-libpng mingw-w64-libwebp
-                                  mingw-w64-harfbuzz mingw-w64-icu
+                                  mingw-w64-x86_64-fontconfig mingw-w64-x86_64-freetype mingw-w64-x86_64-libjpeg-turbo mingw-w64-x86_64-libpng mingw-w64-x86_64-libwebp
+                                  mingw-w64-x86_64-harfbuzz mingw-w64-x86_64-icu
 
                         - name: Get Qt framework
                           uses: jurplel/install-qt-action@v4
