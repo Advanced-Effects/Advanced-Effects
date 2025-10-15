@@ -4,8 +4,9 @@
 
 #include "types/val.h"
 
-using namespace app::appshell;
 using namespace muse::actions;
+
+namespace app::appshell {
 
 void AppshellActionController::init()
 {
@@ -27,3 +28,5 @@ void AppshellActionController::quitApplication() {
 void AppshellActionController::openPreferencesDialog() {
         interactive()->open("app://preferences");
 };
+
+}
