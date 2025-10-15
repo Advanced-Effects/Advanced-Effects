@@ -1,0 +1,61 @@
+
+name: Build project
+
+on:
+        push:
+                branches: [main]
+        pull_request:
+
+jobs:
+        build:
+                runs-on: windows-latest
+
+                steps:
+                        - name: 📥 Checkout repository
+                          uses: actions/checkout@v4
+
+                        - name: Get MSYS2
+                          uses: msys2/setup-msys2@v2
+                        
+                        - name: Update system
+                          shell: msys2 {0}
+                          run: pacman -Sy
+                          
+                        - name: Get dependencies
+                          shell: mingw64 {0}
+                          run: |
+                            pacman -Sy
+                            pacman -Sy mingw-w64-x86_64-cmake mingw-w64-ninja mingw-w64-cross-clang mingw-w64-gcc
+                            pacman -Sy mingw-w64-x86_64-mesa mingw-w64-x86_64-glew mingw-w64-x86_64-glfw
+                            pacman -Sy mingw-w64-fontconfig mingw-w64-freetype mingw-w64-libjpeg-turbo mingw-w64-libpng mingw-w64-libwebp
+                            pacman -Sy mingw-w64-harfbuzz mingw-w64-icu
+
+                        - name: Get Qt framework
+                          uses: jurplel/install-qt-action@v4
+                          with:
+                                version: 6.9.1
+                                modules: qtnetworkauth qt5compat
+
+                        - name: Cache build directory
+                          uses: actions/cache@v4
+                          with:
+                                  path: build/
+                                  key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt', '**/*.cpp') }}
+                                  restore-keys: |
+                                          ${{ runner.os }}-build-
+
+                        - name: 🏗️ Configure and build
+                          shell: mingw64 {0}
+                          run: |
+                                  mkdir -p build
+                                  cd build
+                                  cmake ..
+                                  cmake --build . -j$(nproc)
+
+                        - name: 📦 Upload executable
+                          uses: actions/upload-artifact@v4
+                          with:
+                                  name: AdvancedEffects
+                                  path: |
+                                          build/src/app/AdvancedEffects.exe
+                                  if-no-files-found: error
