@@ -35,6 +35,9 @@ namespace app::appshell {
 
 using namespace muse::uicomponents;
 
+// AppMenuModel is an Abstract MenuModel that contains the main window's menubar information.
+// It's basically an information model - it contains just information.
+// It's NavigableAppMenuModel who actually DISPLAYS the menus.
 class AppMenuModel : public muse::uicomponents::AbstractMenuModel
 {
     Q_OBJECT

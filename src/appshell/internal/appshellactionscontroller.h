@@ -5,18 +5,19 @@
 #include "actions/actionable.h"
 #include "iinteractive.h"
 
-namespace app::appshell {
 
 using namespace muse;
 
+namespace app::appshell {
+
 class AppshellActionController : public Injectable, public actions::Actionable
 {
-        Inject<actions::IActionsDispatcher> dispatcher = { this };
-        Inject<IInteractive> interactive = { this };
+        muse::Inject<actions::IActionsDispatcher> dispatcher = { this };
+        muse::Inject<IInteractive> interactive = { this };
 
 public:
         AppshellActionController(const modularity::ContextPtr& iocCtx)
-        : Injectable(iocCtx) {}
+                : Injectable(iocCtx) {};
 
         // This is where ACTIONS are registered,
         // where it is stated what they DO. (`IActionsDispatcher->reg()`)

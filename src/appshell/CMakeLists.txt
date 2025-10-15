@@ -7,9 +7,9 @@ set(MODULE_QML_IMPORT ${CMAKE_CURRENT_LIST_DIR}/qml)
 set(MODULE_SRC
     appshellmodule.h
     appshellmodule.cpp
+    view/toolbarmodel.h
+    view/toolbarmodel.cpp
     iappshellconfiguration.h
-    view/toolselectionmodel.h
-    view/toolselectionmodel.cpp
     view/appmenumodel.h
     view/appmenumodel.cpp
     view/navigableappmenumodel.h
@@ -29,6 +29,11 @@ set(MODULE_SRC
     view/preferences/preferencepageitem.cpp
     internal/appshellactions.h
     internal/appshellactions.cpp
+    internal/toolbar/toolactioncontroller.h
+    internal/toolbar/toolactioncontroller.cpp
+    internal/toolbar/toolbaractions.h
+    internal/toolbar/toolbaractions.cpp
+    internal/toolbar/toolidentifier.h
     internal/appshellactionscontroller.h
     internal/appshellactionscontroller.cpp
     )

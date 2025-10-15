@@ -4,19 +4,19 @@
 #include "modularity/ioc.h"
 #include "ui/iuicontextresolver.h"
 
-#include "appshellactionscontroller.h"
+#include "../appshellactionscontroller.h"
 
 namespace app::appshell {
 
 using namespace muse;
 
-class AppshellUiActions
+class ToolBarUiActions
         : public ui::IUiActionsModule
         , public Injectable {
         muse::Inject<ui::IUiContextResolver> uicontextResolver = { this };
 
 public:
-        AppshellUiActions(std::shared_ptr<AppshellActionController> controller,
+        ToolBarUiActions(std::shared_ptr<AppshellActionController> controller,
                           const muse::modularity::ContextPtr& iocCtx);
 
         const ui::UiActionList& actionsList() const override;
