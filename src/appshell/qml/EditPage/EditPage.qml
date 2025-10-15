@@ -31,11 +31,11 @@ DockPage {
                         resizable: !floating
 
                         ToolSelection {
-                                orientation: selectToolBar.orientation
-                                floating: selectToolBar.floating
+                                //orientation: selectToolBar.orientation
+                                //floating: selectToolBar.floating
 
-                                maximumWidth: selectToolBar.maximumWidth
-                                maximumHeight: selectToolBar.maximumHeight
+                                //maximumWidth: selectToolBar.maximumWidth
+                                //maximumHeight: selectToolBar.maximumHeight
 
                                 navigationPanel.section: selectToolBar.navigationSection
                                 navigationPanel.order: 1

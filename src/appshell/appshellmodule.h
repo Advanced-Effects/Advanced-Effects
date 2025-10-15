@@ -5,12 +5,15 @@
 #include "modularity/imodulesetup.h"
 #include "iapplication.h"
 
+#include "internal/toolbar/toolactioncontroller.h"
+
 using namespace muse;
 
 namespace app::appshell {
 
 class AppshellUiActions;
 class AppshellActionController;
+class ToolBarUiActions;
 
 class AppShellModule : public muse::modularity::IModuleSetup {
 public:
@@ -28,6 +31,8 @@ public:
 private:
         std::shared_ptr<AppshellActionController> m_actionsController;
         std::shared_ptr<AppshellUiActions> m_appshellActions;
+        std::shared_ptr<ToolBarUiActions> m_toolbarActions;
+        std::shared_ptr<ToolActionController> m_toolActionsController;
 };
 
 };

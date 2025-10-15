@@ -5,7 +5,7 @@
 #include "ui/uitypes.h"
 #include "view/navigableappmenumodel.h"
 #include "view/mainwindowtitleprovider.h"
-#include "view/toolselectionmodel.h"
+#include "view/toolbarmodel.h"
 #include "view/canvas/applicationcanvas.h"
 
 #include "modularity/ioc.h"
@@ -14,6 +14,8 @@
 // Register UI Actions
 #include "internal/appshellactionscontroller.h"
 #include "internal/appshellactions.h"
+#include "internal/toolbar/toolbaractions.h"
+#include "internal/toolbar/toolactioncontroller.h"
 
 // Links the module to the .qrc file
 // WE put it outside of the app::appshell namespace
@@ -39,12 +41,14 @@ void AppShellModule::registerResources() {
 void AppShellModule::registerExports() {
         qmlRegisterType<MainWindowTitleProvider>("App.AppShell", 1, 0, "MainWindowTitleProvider");
         qmlRegisterType<NavigableAppMenuModel>("App.AppShell", 1, 0, "AppMenuModel");
-        qmlRegisterType<ToolSelectionModel>("App.AppShell", 1, 0, "ToolSelectionModel");
+        qmlRegisterType<ToolBarModel>("App.AppShell", 1, 0, "ToolBarModel");
 
         qmlRegisterType<ApplicationCanvas>("App.AppShell", 1, 0, "ApplicationCanvas");
 
         m_actionsController = std::make_shared<AppshellActionController>(iocContext());
         m_appshellActions = std::make_shared<AppshellUiActions>(m_actionsController, iocContext());
+        m_toolbarActions = std::make_shared<ToolBarUiActions>(m_actionsController, iocContext());
+        m_toolActionsController = std::make_shared<ToolActionController>(iocContext());
 };
 
 void AppShellModule::resolveImports() {
@@ -57,11 +61,13 @@ void AppShellModule::resolveImports() {
         auto ar = ioc()->resolve<ui::IUiActionsRegister>(moduleName());
         if (ar) {
                 ar->reg(m_appshellActions);
+                ar->reg(m_toolbarActions);
         }
 };
 
 void AppShellModule::onInit(const IApplication::RunMode& mode) {
         m_actionsController->init();
+        m_toolActionsController->init();
 };
 
 
