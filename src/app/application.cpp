@@ -159,8 +159,6 @@ int Application::exec(
 
     QQuickWindow *window = loadApplicationAndCreateWindow(engine);
     if (!window) return EXIT_FAILURE;
-    // Set the window to open as Frameless if possible
-    window->setFlags(Qt::FramelessWindowHint | Qt::Window);
     // Then show it
     window->show();
 

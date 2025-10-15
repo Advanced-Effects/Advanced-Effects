@@ -7,6 +7,7 @@ import "./TitleBar"
 
 AppWindow {
     id: root
+    flags: Qt.Window | Qt.FramelessWindowHint
 
     function toggleMaximized() {
         if (root.visibility === Window.Maximized) {
