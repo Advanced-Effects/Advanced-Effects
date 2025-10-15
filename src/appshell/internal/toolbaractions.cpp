@@ -34,7 +34,7 @@ ToolBarUiActions::ToolBarUiActions(
 const UiActionList& ToolBarUiActions::actionsList() const
 {
     return m_actions;
-}
+};
 
 bool ToolBarUiActions::actionEnabled(const UiAction& act) const
 {
@@ -43,22 +43,22 @@ bool ToolBarUiActions::actionEnabled(const UiAction& act) const
     }
 
     return true;
-}
+};
 
 bool ToolBarUiActions::actionChecked(const UiAction&) const
 {
     return false;
-}
+};
 
 async::Channel<ActionCodeList> ToolBarUiActions::actionEnabledChanged() const
 {
     return m_actionEnabledChanged;
-}
+};
 
 async::Channel<ActionCodeList> ToolBarUiActions::actionCheckedChanged() const
 {
     return m_actionCheckedChanged;
-}
+};
 
 const UiActionList ToolBarUiActions::m_actions = {
         UiAction("tool-input",
@@ -68,4 +68,4 @@ const UiActionList ToolBarUiActions::m_actions = {
                 TranslatableString("action", "Select the tool you want to use."),
                 IconCode::Code::ARROW_UP
         )
-}
+};
