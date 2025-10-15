@@ -10,25 +10,25 @@ jobs:
         build:
                 runs-on: windows-latest
 
+                defaults:
+                        run:
+                                shell: msys2 {0}
+
                 steps:
                         - name: 📥 Checkout repository
                           uses: actions/checkout@v4
 
                         - name: Get MSYS2
                           uses: msys2/setup-msys2@v2
-                        
-                        - name: Update system
-                          shell: msys2 {0}
-                          run: pacman -Sy
-                          
-                        - name: Get dependencies
-                          shell: mingw64 {0}
-                          run: |
-                            pacman -Sy
-                            pacman -Sy mingw-w64-x86_64-cmake mingw-w64-ninja mingw-w64-cross-clang mingw-w64-gcc
-                            pacman -Sy mingw-w64-x86_64-mesa mingw-w64-x86_64-glew mingw-w64-x86_64-glfw
-                            pacman -Sy mingw-w64-fontconfig mingw-w64-freetype mingw-w64-libjpeg-turbo mingw-w64-libpng mingw-w64-libwebp
-                            pacman -Sy mingw-w64-harfbuzz mingw-w64-icu
+                          with:
+                                msystem: MINGW64
+                                update: true
+                                install: |
+                                  git
+                                  mingw-w64-x86_64-cmake mingw-w64-ninja mingw-w64-cross-clang mingw-w64-gcc
+                                  mingw-w64-x86_64-mesa mingw-w64-x86_64-glew mingw-w64-x86_64-glfw
+                                  mingw-w64-fontconfig mingw-w64-freetype mingw-w64-libjpeg-turbo mingw-w64-libpng mingw-w64-libwebp
+                                  mingw-w64-harfbuzz mingw-w64-icu
 
                         - name: Get Qt framework
                           uses: jurplel/install-qt-action@v4
@@ -45,7 +45,6 @@ jobs:
                                           ${{ runner.os }}-build-
 
                         - name: 🏗️ Configure and build
-                          shell: mingw64 {0}
                           run: |
                                   mkdir -p build
                                   cd build
