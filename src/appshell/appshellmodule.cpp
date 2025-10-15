@@ -61,6 +61,7 @@ void AppShellModule::resolveImports() {
         auto ar = ioc()->resolve<ui::IUiActionsRegister>(moduleName());
         if (ar) {
                 ar->reg(m_appshellActions);
+                ar->reg(m_toolbarActions);
         }
 };
 

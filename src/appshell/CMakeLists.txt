@@ -33,6 +33,7 @@ set(MODULE_SRC
     internal/toolbar/toolactioncontroller.cpp
     internal/toolbar/toolbaractions.h
     internal/toolbar/toolbaractions.cpp
+    internal/toolbar/toolidentifier.h
     internal/appshellactionscontroller.h
     internal/appshellactionscontroller.cpp
     )

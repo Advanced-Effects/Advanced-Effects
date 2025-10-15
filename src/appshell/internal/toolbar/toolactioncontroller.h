@@ -11,6 +11,8 @@
 #include "context/iglobalcontext.h"
 #include "context/iuicontextresolver.h"
 
+#include "toolidentifier.h"
+
 using namespace mu;
 
 namespace app::appshell {
@@ -29,7 +31,13 @@ public:
         void init();
 
 private:
-        void toggleSelectedTool();
+        void registerAction(const muse::actions::ActionCode&,
+                            std::function<void()>);
+        void registerToolInputAction(const muse::actions::ActionCode&,
+                                     ToolIdentifier identifier);
+
+        void toggleSelectedTool(ToolIdentifier identifier);
+        ToolIdentifier m_selectedTool;
 };
 
 };

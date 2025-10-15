@@ -64,8 +64,15 @@ const UiActionList ToolBarUiActions::m_actions = {
         UiAction("tool-input",
                 mu::context::UiCtxProjectOpened,
                 mu::context::CTX_NOTATION_OPENED,
-                TranslatableString("action", "Tool Selection"),
-                TranslatableString("action", "Select the tool you want to use."),
+                TranslatableString("action", "Selection Tool"),
+                TranslatableString("action", "Select and modify existing objects."),
+                IconCode::Code::ARROW_UP
+        ),
+        UiAction("select-tool",
+                mu::context::UiCtxProjectOpened,
+                mu::context::CTX_NOTATION_OPENED,
+                TranslatableString("action", "Selection Tool"),
+                TranslatableString("action", "Select and modify existing objects."),
                 IconCode::Code::ARROW_UP
         )
 };
