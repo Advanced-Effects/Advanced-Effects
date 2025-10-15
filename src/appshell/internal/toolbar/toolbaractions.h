@@ -4,7 +4,7 @@
 #include "modularity/ioc.h"
 #include "ui/iuicontextresolver.h"
 
-#include "appshellactionscontroller.h"
+#include "../appshellactionscontroller.h"
 
 namespace app::appshell {
 
@@ -13,7 +13,7 @@ using namespace muse;
 class ToolBarUiActions
         : public ui::IUiActionsModule
         , public Injectable {
-        Inject<ui::IUiContextResolver> uicontextResolver = { this };
+        muse::Inject<ui::IUiContextResolver> uicontextResolver = { this };
 
 public:
         ToolBarUiActions(std::shared_ptr<AppshellActionController> controller,

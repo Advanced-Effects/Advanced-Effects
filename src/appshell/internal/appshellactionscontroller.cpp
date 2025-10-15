@@ -4,6 +4,7 @@
 
 #include "types/val.h"
 
+using namespace muse::actions;
 
 namespace app::appshell {
 

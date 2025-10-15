@@ -12,7 +12,7 @@ namespace app::appshell {
 // and loads the different menus such as the ToolInputBar
 // makeItem("tool-input") - for example.
 //
-// Menus like "tool-input" are also normal Actions - which are registered in
+// Menus like "tool-input" are also normal Actions - which are registered in toolbaractions.cpp
 // `NotationUiActions` and `NotationActionController`.
 class ToolBarModel : public muse::uicomponents::AbstractToolBarModel {
         Q_OBJECT

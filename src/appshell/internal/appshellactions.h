@@ -13,7 +13,7 @@ using namespace muse;
 class AppshellUiActions
         : public ui::IUiActionsModule
         , public Injectable {
-        Inject<ui::IUiContextResolver> uicontextResolver = { this };
+        muse::Inject<ui::IUiContextResolver> uicontextResolver = { this };
 
 public:
         AppshellUiActions(std::shared_ptr<AppshellActionController> controller,

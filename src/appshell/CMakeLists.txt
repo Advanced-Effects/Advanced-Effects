@@ -29,8 +29,10 @@ set(MODULE_SRC
     view/preferences/preferencepageitem.cpp
     internal/appshellactions.h
     internal/appshellactions.cpp
-    internal/toolbaractions.h
-    internal/toolbaractions.cpp
+    internal/toolbar/toolactioncontroller.h
+    internal/toolbar/toolactioncontroller.cpp
+    internal/toolbar/toolbaractions.h
+    internal/toolbar/toolbaractions.cpp
     internal/appshellactionscontroller.h
     internal/appshellactionscontroller.cpp
     )
