@@ -42,4 +42,28 @@ DockPage {
                         }
                 }
         ]
+
+        panels: [
+                DockPanel {
+                        id: generalPanel
+
+                        objectName: "General"
+                        title: qsTrc("appshell", "General")
+
+                        navigationSection: root.navigationPanelSec(generalPanel.location)
+
+                        width: 160
+                        minimumWidth: root.horizontalPanelDefaultWidth
+                        maximumWidth: root.horizontalPanelDefaultWidth
+
+                        minimumHeight: root.panelMinDimension
+                        maximumHeight: root.panelMaxDimension
+
+                        groupName: root.horizontalPanelsGroup
+
+                        dropDestinations: root.horizontalPanelDropDestinations
+
+                        GeneralBar {}
+                }
+        ]
 }

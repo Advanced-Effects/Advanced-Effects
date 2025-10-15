@@ -2,6 +2,7 @@
 
 #include <QQmlEngine>
 
+#include "ui/uitypes.h"
 #include "view/navigableappmenumodel.h"
 #include "view/mainwindowtitleprovider.h"
 #include "view/toolselectionmodel.h"
@@ -50,6 +51,7 @@ void AppShellModule::resolveImports() {
         auto ir = ioc()->resolve<ui::IInteractiveUriRegister>(moduleName());
         if (ir) {
                 ir->registerUri(Uri("app://edit"), ui::ContainerMeta(ui::ContainerType::PrimaryPage));
+                ir->registerUri(Uri("app://preferences"), ui::ContainerMeta(ui::ContainerType::QmlDialog, "Preferences/PreferencesDialog.qml"));
         }
 
         auto ar = ioc()->resolve<ui::IUiActionsRegister>(moduleName());
@@ -57,5 +59,10 @@ void AppShellModule::resolveImports() {
                 ar->reg(m_appshellActions);
         }
 };
+
+void AppShellModule::onInit(const IApplication::RunMode& mode) {
+        m_actionsController->init();
+};
+
 
 };
