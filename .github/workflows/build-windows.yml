@@ -24,17 +24,18 @@ jobs:
                                 msystem: MINGW64
                                 update: true
                                 install: |
-                                  git
+                                  base-devel git
                                   mingw-w64-x86_64-cmake mingw-w64-x86_64-ninja mingw-w64-cross-clang mingw-w64-x86_64-gcc
                                   mingw-w64-x86_64-mesa mingw-w64-x86_64-glew mingw-w64-x86_64-glfw
                                   mingw-w64-x86_64-fontconfig mingw-w64-x86_64-freetype mingw-w64-x86_64-libjpeg-turbo mingw-w64-x86_64-libpng mingw-w64-x86_64-libwebp
                                   mingw-w64-x86_64-harfbuzz mingw-w64-x86_64-icu
+                                  mingw-w64-x86_64-python
 
                         - name: Get Qt framework
-                          uses: jurplel/install-qt-action@v4
-                          with:
-                                version: 6.9.1
-                                modules: qtnetworkauth qt5compat
+                          run: |
+                            pip install aqtinstall
+                            export SETUPTOOLS_USE_DISTUTILS=stdlib
+                            aqt install-qt windows desktop 6.9.1 win64_mingw81 -m qtnetworkauth qt5compat
 
                         - name: Cache build directory
                           uses: actions/cache@v4
@@ -48,7 +49,7 @@ jobs:
                           run: |
                                   mkdir -p build
                                   cd build
-                                  cmake ..
+                                  cmake .. -DCMAKE_PREFIX_PATH=../Qt/6.9.1/gcc_64
                                   cmake --build . -j$(nproc)
 
                         - name: 📦 Upload executable
