@@ -138,7 +138,7 @@ if (MUSE_ENABLE_UNIT_TESTS)
 endif()
 
 add_subdirectory(share)
-add_subdirectory(${MUSE_FRAMEWORK_SRC_PATH})
+add_subdirectory(thirdparty)
 add_subdirectory(src)
 
 if (MSVC)
