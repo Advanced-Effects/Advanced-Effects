@@ -37,8 +37,6 @@ SOFTWARE.
 
 #include "funcinfo.h"
 
-#define KORS_PROFILER_ENABLED
-
 #ifdef KORS_PROFILER_ENABLED
 
 #ifndef TRACEFUNC
