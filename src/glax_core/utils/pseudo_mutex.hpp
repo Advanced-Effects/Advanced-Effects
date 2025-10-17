@@ -1,0 +1,49 @@
+/*
+ * SPDX-FileCopyrightText: 2019-2023 Mattia Basaglia <dev@dragon.best>
+ *
+ * SPDX-License-Identifier: GPL-3.0-or-later
+ */
+
+#pragma once
+
+#include <mutex>
+
+namespace glaxnimate::utils {
+
+class PseudoMutex
+{
+public:
+    bool try_lock() noexcept
+    {
+        if ( locked )
+            return false;
+
+        locked = true;
+        return true;
+    }
+
+    void lock() noexcept
+    {
+        locked = true;
+    }
+
+    void unlock() noexcept
+    {
+        locked = false;
+    }
+
+    explicit operator bool() const noexcept
+    {
+        return locked;
+    }
+
+    std::unique_lock<PseudoMutex> get_lock()
+    {
+        return std::unique_lock<PseudoMutex>(*this, std::try_to_lock);
+    }
+
+private:
+    bool locked = false;
+};
+
+} // namespace glaxnimate::utils
