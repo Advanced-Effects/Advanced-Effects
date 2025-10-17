@@ -17,8 +17,6 @@ using namespace muse::api;
 namespace app::projectscene {
 
 class KeysView : public QQuickPaintedItem, public muse::async::Asyncable {
-        // We get the ApiTheme from the IUiEngine
-        Inject<IUiEngine> uiEngine = { this };
 public:
         explicit KeysView(QQuickItem* parent = nullptr);
         ~KeysView() = default;
@@ -29,7 +27,6 @@ private:
         void drawTimelineControls(QPainter* painter);
 
         TimelineContext m_timelineContext;
-        ThemeApi* m_theme;
 
         float mousePosition[2];
 };

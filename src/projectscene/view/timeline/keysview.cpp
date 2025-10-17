@@ -1,9 +1,9 @@
 #include "keysview.h"
+#include <qnamespace.h>
 
 using namespace app::projectscene;
 
-KeysView::KeysView(QQuickItem* parent) : QQuickPaintedItem(parent)
-, m_theme(uiEngine()->theme()) {};
+KeysView::KeysView(QQuickItem* parent) : QQuickPaintedItem(parent) {};
 
 void KeysView::paint(QPainter *painter) {
         drawTimelineControls(painter);
@@ -18,6 +18,6 @@ void KeysView::drawTimelineControls(QPainter *painter)
         auto size = painter->viewport();
         int controlsHeight = 32;
 
-        painter->setPen(m_theme->backgroundSecondaryColor());
-        painter->drawRect(size.left(), 0, size.right(), controlsHeight);
+        painter->setPen(Qt::black);
+        painter->fillRect(size.left(), 0, size.right(), controlsHeight, Qt::black);
 };
