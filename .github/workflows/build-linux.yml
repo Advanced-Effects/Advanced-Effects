@@ -1,6 +1,6 @@
 # This piece of code was made by ChatGPT because I don't care enough to learn this
 
-name: Build project
+name: Build Linux
 
 on:
         push:
