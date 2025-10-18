@@ -8,6 +8,19 @@ import "./TitleBar"
 AppWindow {
     id: root
 
+    // Make window frameless
+    flags: Qt.Window | Qt.FramelessWindowHint
+    // Allow frameless window to be movable
+    FramelessWindowModel {
+            id: framelessModel
+
+            titleBarMoveArea: appTitleBar.titleMoveAreaRect
+    }
+
+    Component.onCompleted: {
+            framelessModel.init(this)
+    }
+
     function toggleMaximized() {
         if (root.visibility === Window.Maximized) {
             root.showNormal()
