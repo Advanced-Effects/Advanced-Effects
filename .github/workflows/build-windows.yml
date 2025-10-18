@@ -33,6 +33,7 @@ jobs:
 
                         - name: Get Qt framework
                           run: |
+                            python3 -m ensurepip
                             python3 -m pip install aqtinstall
                             export SETUPTOOLS_USE_DISTUTILS=stdlib
                             python -m aqt install-qt windows desktop 6.9.1 win64_mingw81 -m qtnetworkauth qt5compat
