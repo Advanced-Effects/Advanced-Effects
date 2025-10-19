@@ -29,7 +29,7 @@ jobs:
                                   mingw-w64-x86_64-mesa mingw-w64-x86_64-glew mingw-w64-x86_64-glfw
                                   mingw-w64-x86_64-fontconfig mingw-w64-x86_64-freetype mingw-w64-x86_64-libjpeg-turbo mingw-w64-x86_64-libpng mingw-w64-x86_64-libwebp
                                   mingw-w64-x86_64-harfbuzz mingw-w64-x86_64-icu
-                                  mingw-w64-x86_64-python
+                                  mingw-w64-x86_64-python mingw-w64-x86_64-python-pip
 
                         - name: Get Qt framework
                           run: |
