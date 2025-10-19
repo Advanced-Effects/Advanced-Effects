@@ -29,14 +29,15 @@ jobs:
                                   mingw-w64-x86_64-mesa mingw-w64-x86_64-glew mingw-w64-x86_64-glfw
                                   mingw-w64-x86_64-fontconfig mingw-w64-x86_64-freetype mingw-w64-x86_64-libjpeg-turbo mingw-w64-x86_64-libpng mingw-w64-x86_64-libwebp
                                   mingw-w64-x86_64-harfbuzz mingw-w64-x86_64-icu
-                                  mingw-w64-x86_64-python mingw-w64-x86_64-python-pip mingw-w64-x86_64-python-pipx
+                                  mingw-w64-x86_64-python
 
                         - name: Get Qt framework
                           run: |
-                            python3 -m pip install --upgrade pip setuptools wheel
-                            python3 -m pipx install aqtinstall
+                            python3 -m pip install --upgrade pip setuptools wheel venv
+                            mkdir pyenv
+                            python3 -m venv ./pyenv/
                             export SETUPTOOLS_USE_DISTUTILS=stdlib
-                            python -m aqt install-qt windows desktop 6.9.1 win64_mingw81 -m qtnetworkauth qt5compat
+                            ./pyenv/bin/aqt install-qt windows desktop 6.9.1 win64_mingw81 -m qtnetworkauth qt5compat
 
                         - name: Cache build directory
                           uses: actions/cache@v4
