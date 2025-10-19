@@ -24,7 +24,7 @@ jobs:
                                 msystem: MINGW64
                                 update: true
                                 install: |
-                                  base-devel git
+                                  base-devel git mingw-w64-x86_64-toolchain
                                   mingw-w64-x86_64-cmake mingw-w64-x86_64-ninja mingw-w64-cross-clang mingw-w64-x86_64-gcc
                                   mingw-w64-x86_64-mesa mingw-w64-x86_64-glew mingw-w64-x86_64-glfw
                                   mingw-w64-x86_64-fontconfig mingw-w64-x86_64-freetype mingw-w64-x86_64-libjpeg-turbo mingw-w64-x86_64-libpng mingw-w64-x86_64-libwebp
@@ -33,6 +33,7 @@ jobs:
 
                         - name: Get Qt framework
                           run: |
+                            python3 -m pip install --upgrade pip setuptools wheel
                             python3 -m pipx install aqtinstall
                             export SETUPTOOLS_USE_DISTUTILS=stdlib
                             python -m aqt install-qt windows desktop 6.9.1 win64_mingw81 -m qtnetworkauth qt5compat
