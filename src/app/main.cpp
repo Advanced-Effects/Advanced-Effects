@@ -24,6 +24,7 @@
 #include "learn/learnmodule.h"
 #include "languages/languagesmodule.h"
 #include "workspace/workspacemodule.h"
+#include "projectscene/projectscenemodule.h"
 #include "appshell/appshellmodule.h"
 
 // Pull QQmlApplicationEngine
@@ -57,6 +58,7 @@ void loadApplicationModules(std::shared_ptr<Application> application) {
     application->addModule(new muse::shortcuts::ShortcutsModule());
     application->addModule(new muse::network::NetworkModule());
 
+    application->addModule(new app::projectscene::ProjectSceneModule());
     application->addModule(new app::appshell::AppShellModule());
 };
 

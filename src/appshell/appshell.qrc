@@ -9,10 +9,6 @@
         <file>qml/EditPage/Panels/GeneralBarHeader.qml</file>
         <file>qml/EditPage/Panels/TimelineWidget.qml</file>
         <file>qml/EditPage/Toolbars/ToolSelection.qml</file>
-        <file>qml/Timeline/KeysView.qml</file>
-        <file>qml/Timeline/LeftNavigation.qml</file>
-        <file>qml/Timeline/ObjectsTreeView.qml</file>
-        <file>qml/Timeline/QuickActions.qml</file>
         <file>qml/TitleBar/AppTitlebar.qml</file>
         <file>qml/TitleBar/AppMenuBar.qml</file>
         <file>qml/TitleBar/AppSystemButtons.qml</file>
