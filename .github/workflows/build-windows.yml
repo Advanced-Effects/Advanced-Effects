@@ -35,7 +35,8 @@ jobs:
                           run: |
                             mkdir pyenv
                             python3 -m venv ./pyenv/
-                            python3 -m pip install aqtinstall
+                            ./pyenv/bin/activate
+                            ./pyenv/bin/python3 -m pip install aqtinstall
                             export SETUPTOOLS_USE_DISTUTILS=stdlib
                             ./pyenv/bin/aqt install-qt windows desktop 6.9.1 win64_mingw81 -m qtnetworkauth qt5compat
 
