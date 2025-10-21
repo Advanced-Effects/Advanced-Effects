@@ -29,7 +29,7 @@ jobs:
                                   mingw-w64-x86_64-mesa mingw-w64-x86_64-glew mingw-w64-x86_64-glfw
                                   mingw-w64-x86_64-fontconfig mingw-w64-x86_64-freetype mingw-w64-x86_64-libjpeg-turbo mingw-w64-x86_64-libpng mingw-w64-x86_64-libwebp
                                   mingw-w64-x86_64-harfbuzz mingw-w64-x86_64-icu
-                                  mingw-w64-x86_64-qt6-base mingw-w64-x86_64-qt6-declarative mingw-w64-x86_64-qt6-5compat mingw-w64-x86_64-qt6-networkauth mingw-w64-x86_64-qt6-svg
+                                  mingw-w64-x86_64-qt6-base mingw-w64-x86_64-qt6-declarative mingw-w64-x86_64-qt6-5compat mingw-w64-x86_64-qt6-networkauth mingw-w64-x86_64-qt6-svg mingw-w64-x86_64-qt6-tools mingw-w64-x86_64-qt6-multimedia
 
                         - name: Cache build directory
                           uses: actions/cache@v4
