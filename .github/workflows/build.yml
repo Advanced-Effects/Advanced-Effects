@@ -34,7 +34,7 @@ jobs:
                                   sudo apt-get install -y libglew-dev libglfw3-dev libglm-dev
                                   sudo apt-get install -y libfontconfig1-dev libfreetype-dev libjpeg-turbo8-dev libpng-dev libwebp-dev
                                   sudo apt-get install -y libharfbuzz-dev libicu-dev
-                                  sudo apt-get-install -y libavcodec-dev libavutil-dev libavformat-dev libswscale-dev
+                                  sudo apt-get install -y libavcodec-dev libavutil-dev libavformat-dev libswscale-dev
                                   sudo apt-get install -y libkf5coreaddons-dev-bin libkf5archive-dev libkf5i18n-dev
 
                         - name: Cache build directory
