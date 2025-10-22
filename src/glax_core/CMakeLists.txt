@@ -113,15 +113,15 @@ utils/trace_wrapper.cpp
 )
 
 if ( NOT ANDROID )
-    list(APPEND SOURCES
+        list(APPEND SOURCES
         io/video/video_format.cpp
         utils/tar.cpp
     )
-    find_package(Libav COMPONENTS codec util format swscale REQUIRED)
-    include_directories(${Libav_INCLUDE_DIRS})
+        find_package(Libav COMPONENTS codec util format swscale REQUIRED)
+        include_directories(${Libav_INCLUDE_DIRS})
 
-    find_package(LibArchive REQUIRED)
-    include_directories(${LibArchive_INCLUDE_DIRS})
+        find_package(LibArchive REQUIRED)
+        include_directories(${LibArchive_INCLUDE_DIRS})
 endif()
 
 find_package(ZLIB REQUIRED)
@@ -135,11 +135,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_SOURCE_DIR}/external/QtAppSetup/src)
 
 if ( GLAXNIMATE_SYSTEM_POTRACE )
-    include_directories(${Potrace_INCLUDE_DIRS})
+        include_directories(${Potrace_INCLUDE_DIRS})
 endif()
 
 add_library(${LIB_NAME_CORE} OBJECT ${SOURCES})
-kde_target_enable_exceptions(${LIB_NAME_CORE} PUBLIC)
 target_link_libraries(${LIB_NAME_CORE} PUBLIC
     QtAppSetup
     ZLIB::ZLIB
@@ -154,5 +153,5 @@ set_property(TARGET ${LIB_NAME_CORE} APPEND PROPERTY AUTOMOC_MACRO_NAMES "GLAXNI
 target_include_directories(${LIB_NAME_CORE} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
 
 if ( NOT ANDROID )
-    target_link_libraries(${LIB_NAME_CORE} PUBLIC ${Libav_LIBRARIES} ${LibArchive_LIBRARIES} )
+        target_link_libraries(${LIB_NAME_CORE} PUBLIC ${Libav_LIBRARIES} ${LibArchive_LIBRARIES} )
 endif()
