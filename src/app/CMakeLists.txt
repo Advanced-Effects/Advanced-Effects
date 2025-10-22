@@ -82,6 +82,7 @@ set(LINK_LIB
     muse::languages
     muse::diagnostics
 
+    app_glax_core
     app::context
     app::projectscene
     app::appshell

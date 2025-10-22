@@ -112,6 +112,8 @@ utils/trace.cpp
 utils/trace_wrapper.cpp
 )
 
+set(LIB_NAME_CORE app_glax_core)
+
 if ( NOT ANDROID )
         list(APPEND SOURCES
         io/video/video_format.cpp
