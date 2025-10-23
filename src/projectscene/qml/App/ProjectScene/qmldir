@@ -1,0 +1,5 @@
+module App.ProjectScene
+
+LeftNavigation 1.0 LeftNavigation.qml
+ObjectsTreeView 1.0 ObjectsTreeView.qml
+QuickActions 1.0 QuickActions.qml

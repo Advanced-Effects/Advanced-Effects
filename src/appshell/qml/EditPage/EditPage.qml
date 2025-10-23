@@ -45,6 +45,20 @@ DockPage {
 
         panels: [
                 DockPanel {
+                        id: timelinePanel
+
+                        objectName: "Timeline"
+                        title: qsTrc("appshell", "Timeline")
+
+                        location: Location.Bottom
+
+                        navigationSection: root.navigationPanelSec(generalPanel.location)
+
+                        width: root.horizontalPanelDefaultWidth
+
+                        TimelineWidget {}
+                },
+                DockPanel {
                         id: generalPanel
 
                         objectName: "General"
