@@ -14,6 +14,8 @@ jobs:
                 steps:
                         - name: 📥 Checkout repository
                           uses: actions/checkout@v4
+                          with:
+                            submodules: 'recursive'
 
                         - name: Cache APT Packages
                           uses: awalsh128/cache-apt-pkgs-action@v1.5.3
@@ -29,7 +31,7 @@ jobs:
                         - name: ⚙️ Set up dependencies
                           run: |
                                   sudo apt-get update
-                                  sudo apt-get install -y cmake ninja-build clang g++
+                                  sudo apt-get install -y cmake ninja-build clang
                                   sudo apt-get install -y mesa-utils libglu1-mesa-dev freeglut3-dev mesa-common-dev
                                   sudo apt-get install -y libglew-dev libglfw3-dev libglm-dev
                                   sudo apt-get install -y libfontconfig1-dev libfreetype-dev libjpeg-turbo8-dev libpng-dev libwebp-dev
@@ -49,7 +51,9 @@ jobs:
                           run: |
                                   mkdir -p build
                                   cd build
-                                  cmake ..
+                                  cmake -DCMAKE_C_COMPILER=clang \
+                                  -DCMAKE_CXX_COMPILER=clang++ \
+                                  ..
                                   cmake --build . -j$(nproc)
 
                         - name: 📦 Upload executable
