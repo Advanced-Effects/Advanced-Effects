@@ -113,6 +113,8 @@ utils/trace_wrapper.cpp
 )
 
 set(LIB_NAME_CORE app_glax_core)
+set(KF_MAJOR 5)
+set(QT_MAJOR_VERSION 6)
 
 if ( NOT ANDROID )
         list(APPEND SOURCES
