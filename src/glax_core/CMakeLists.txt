@@ -113,14 +113,32 @@ utils/trace_wrapper.cpp
 )
 
 set(LIB_NAME_CORE app_glax_core)
-set(KF_MAJOR 5)
 set(QT_MAJOR_VERSION 6)
+
+# KF
+set(KF_MAJOR 5)
+
+set(KF_DEP_VERSION "5.92.0")
+find_package(ECM ${KF_DEP_VERSION} REQUIRED CONFIG)
+set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_MODULE_PATH})
+include(KDEInstallDirs)
+include(KDECMakeSettings)
+include(KDECompilerSettings)
+include(ECMAddAppIcon)
+
+find_package(KF${KF_MAJOR} ${KF_DEP_VERSION}
+    REQUIRED COMPONENTS
+    I18n
+    CoreAddons
+    Archive
+)
 
 if ( NOT ANDROID )
         list(APPEND SOURCES
         io/video/video_format.cpp
         utils/tar.cpp
-    )
+        )
+
         find_package(Libav COMPONENTS codec util format swscale REQUIRED)
         include_directories(${Libav_INCLUDE_DIRS})
 
