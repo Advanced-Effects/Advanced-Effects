@@ -8,8 +8,6 @@ Item {
         QuickActions {
                 id: quickActions
 
-                height: 32
-
                 anchors {
                         top: root.top
                         left: root.left
