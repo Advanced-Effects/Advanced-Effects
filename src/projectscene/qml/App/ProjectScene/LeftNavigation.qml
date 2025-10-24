@@ -14,7 +14,6 @@ Item {
                         top: root.top
                         left: root.left
                         right: root.right
-                        bottom: objectsTreeView.top
                 }
         }
 
