@@ -13,6 +13,8 @@ Item {
                         left: root.left
                         right: root.right
                 }
+
+                z: 100
         }
 
         ObjectsTreeView {
