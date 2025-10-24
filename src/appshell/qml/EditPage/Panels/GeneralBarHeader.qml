@@ -63,7 +63,6 @@ Item {
             left: paletteExpandArrow.right; leftMargin: 4;
             right: root.right
             top: root.top
-            bottom: root.bottom
         }
 
         text: root.headerTitle
