@@ -13,8 +13,7 @@ Item {
     property bool expanded: false
     property bool hovered: false
 
-    // Header title
-    property string text: ""
+    property string headerTitle: ""
     // The QtQuick component to render when widget is expanded
     property Component component: null
 
@@ -67,7 +66,7 @@ Item {
             bottom: root.bottom
         }
 
-        text: root.text
+        text: root.headerTitle
         font: ui.theme.bodyBoldFont
     }
 
