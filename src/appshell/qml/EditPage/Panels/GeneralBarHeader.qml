@@ -98,4 +98,39 @@ Item {
 
             z: 999
         }
+
+        // Use Transitions to make the triggering animation smoother
+        state: root.expanded ? "expanded" : "collapsed"
+
+        property bool enableAnimations: true
+        property int expandDuration: 150
+
+        states: [
+            State {
+                name: "collapsed"
+                PropertyChanges { target: loader; visible: false; restoreEntryValues: false }
+            },
+            State {
+                name: "expanded"
+                PropertyChanges { target: loader; visible: true; restoreEntryValues: false }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                from: "collapsed"; to: "expanded"
+                enabled: root.enableAnimations
+                NumberAnimation { target: loader; property: "height"; from: 0; to: loader.implicitHeight; easing.type: Easing.OutCubic; duration: root.expandDuration }
+            },
+            Transition {
+                from: "expanded"; to: "collapsed"
+                enabled: root.enableAnimations
+                SequentialAnimation {
+                    PropertyAction { target: loader; property: "visible"; value: true } // temporarily set palette visible to animate it being hidden
+                    NumberAnimation { target: loader; property: "height"; from: loader.implicitHeight; to: 0; easing.type: Easing.OutCubic; duration: paletteTree.expandDuration }
+                    PropertyAction { target: loader; property: "visible"; value: false } // make palette invisible again
+                    PropertyAction { target: loader; property: "height"; value: loader.implicitHeight } // restore the height binding
+                }
+            }
+        ]
 }
