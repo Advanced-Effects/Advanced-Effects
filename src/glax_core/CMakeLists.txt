@@ -113,9 +113,11 @@ utils/trace_wrapper.cpp
 )
 
 set(LIB_NAME_CORE app_glax_core)
-set(QT_MAJOR_VERSION 6)
+# !!! NOTE: Upgrade to Qt6 when Ubuntu 26.04 is more popular.
+set(QT_MAJOR_VERSION 5)
 
 # KF
+# !!! NOTE: Upgrade to KF6 when Ubuntu 26.04 is more popular.
 set(KF_MAJOR 5)
 
 set(KF_DEP_VERSION "5.92.0")
