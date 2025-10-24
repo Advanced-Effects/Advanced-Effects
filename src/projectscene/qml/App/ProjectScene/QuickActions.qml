@@ -6,6 +6,7 @@ Item {
         id: root
         objectName: "QuickActionsTimeline"
 
+        height: 36
         anchors.fill: parent.fill
 
         // Displays a counter that shows the current time in HH:mm.ss
@@ -18,10 +19,12 @@ Item {
                 color: ui.theme.accentColor
 
                 // Center vertically
-                anchors.centerIn: root
-                anchors.left: root.left
-                anchors.top: root.top
-                anchors.bottom: root.bottom
+                anchors {
+                        verticalCenter: root
+                        left: root.left; leftMargin: 4
+                        top: root.top
+                        bottom: root.bottom
+                }
 
                 z: 999
         }
