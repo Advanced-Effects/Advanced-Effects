@@ -13,8 +13,7 @@ Item {
     property bool expanded: false
     property bool hovered: false
 
-    // Header title
-    property string text: ""
+    property string headerTitle: ""
     // The QtQuick component to render when widget is expanded
     property Component component: null
 
@@ -64,10 +63,9 @@ Item {
             left: paletteExpandArrow.right; leftMargin: 4;
             right: root.right
             top: root.top
-            bottom: root.bottom
         }
 
-        text: root.text
+        text: root.headerTitle
         font: ui.theme.bodyBoldFont
     }
 
@@ -100,4 +98,39 @@ Item {
 
             z: 999
         }
+
+        // Use Transitions to make the triggering animation smoother
+        state: root.expanded ? "expanded" : "collapsed"
+
+        property bool enableAnimations: true
+        property int expandDuration: 150
+
+        states: [
+            State {
+                name: "collapsed"
+                PropertyChanges { target: loader; visible: false; restoreEntryValues: false }
+            },
+            State {
+                name: "expanded"
+                PropertyChanges { target: loader; visible: true; restoreEntryValues: false }
+            }
+        ]
+
+        transitions: [
+            Transition {
+                from: "collapsed"; to: "expanded"
+                enabled: root.enableAnimations
+                NumberAnimation { target: loader; property: "height"; from: 0; to: loader.implicitHeight; easing.type: Easing.OutCubic; duration: root.expandDuration }
+            },
+            Transition {
+                from: "expanded"; to: "collapsed"
+                enabled: root.enableAnimations
+                SequentialAnimation {
+                    PropertyAction { target: loader; property: "visible"; value: true } // temporarily set palette visible to animate it being hidden
+                    NumberAnimation { target: loader; property: "height"; from: loader.implicitHeight; to: 0; easing.type: Easing.OutCubic; duration: paletteTree.expandDuration }
+                    PropertyAction { target: loader; property: "visible"; value: false } // make palette invisible again
+                    PropertyAction { target: loader; property: "height"; value: loader.implicitHeight } // restore the height binding
+                }
+            }
+        ]
 }

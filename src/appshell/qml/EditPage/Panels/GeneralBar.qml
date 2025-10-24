@@ -8,12 +8,12 @@ Column {
         objectName: "GeneralBar"
 
         GeneralBarHeader {
-                text: "Align"
+                headerTitle: "Align"
                 component: Text { text: "Align!" }
         }
 
         GeneralBarHeader {
-                text: "Fill & Stroke"
+                headerTitle: "Fill & Stroke"
                 component: Text { text: "F&S!" }
         }
 }
