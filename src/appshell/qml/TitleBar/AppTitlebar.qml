@@ -26,6 +26,8 @@ import QtQuick.Window 2.15
 import Muse.Ui 1.0
 import Muse.UiComponents 1.0
 
+import App.AppShell 1.0
+
 Rectangle {
     id: root
 
@@ -94,6 +96,9 @@ Rectangle {
             }
         }
 
+        PlatformDetails {
+                id: platform
+        }
         AppSystemButtons {
             id: systemButtons
 
@@ -103,7 +108,7 @@ Rectangle {
 
             windowIsMiximized: root.windowVisibility === Window.Maximized
 
-            visible: root.windowVisibility !== Window.FullScreen
+            visible: platform.isWindows() && root.windowVisibility !== Window.FullScreen
 
             onShowWindowMinimizedRequested: {
                 root.showWindowMinimizedRequested()
