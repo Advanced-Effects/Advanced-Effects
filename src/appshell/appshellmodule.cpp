@@ -18,6 +18,8 @@
 #include "internal/toolbar/toolbaractions.h"
 #include "internal/toolbar/toolactioncontroller.h"
 
+#include "internal/platformdetails.h"
+
 // Links the module to the .qrc file
 // WE put it outside of the app::appshell namespace
 // because Q_INIT_RESOURCE can't be located inside a namespace
@@ -40,6 +42,7 @@ void AppShellModule::registerResources() {
 };
 
 void AppShellModule::registerExports() {
+        qmlRegisterType<PlatformDetails>("App.AppShell", 1, 0, "PlatformDetails");
         qmlRegisterType<MainWindowTitleProvider>("App.AppShell", 1, 0, "MainWindowTitleProvider");
         qmlRegisterType<NavigableAppMenuModel>("App.AppShell", 1, 0, "AppMenuModel");
         qmlRegisterType<ToolBarModel>("App.AppShell", 1, 0, "ToolBarModel");

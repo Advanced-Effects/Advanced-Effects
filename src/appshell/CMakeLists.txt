@@ -29,6 +29,8 @@ set(MODULE_SRC
     view/preferences/preferencepageitem.cpp
     view/framelesswindow/framelesswindowmodel.h
     view/framelesswindow/framelesswindowmodel.cpp
+    internal/platformdetails.h
+    internal/platformdetails.cpp
     internal/appshellactions.h
     internal/appshellactions.cpp
     internal/toolbar/toolactioncontroller.h
