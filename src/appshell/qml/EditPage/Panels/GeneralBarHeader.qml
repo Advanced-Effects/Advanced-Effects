@@ -98,20 +98,16 @@ Item {
         }
 
         // Input detection
-        function setIsHovering(isHovering) {
-                root.hovered = isHovering;
-        }
         MouseArea {
                 anchors.fill: parent
-                propagateComposedEvents: false
 
                 // Clicking any part of the widget - not just the arrow button - should trigger a toggle.
                 onClicked: root.toggleExpandRequested()
 
-                // We also need to know when the user is hovering the widget
+                // We need to detect whether the user is hovering the element
                 hoverEnabled: true
-                onEntered: { setIsHovering(true) }
-                onExited: { setIsHovering(false) }
+                onEntered: hovered = true
+                onExited: hovered = false
         }
 
         // Use Transitions to make the triggering animation smoother
