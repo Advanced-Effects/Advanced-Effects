@@ -113,27 +113,7 @@ utils/trace_wrapper.cpp
 )
 
 set(LIB_NAME_CORE app_glax_core)
-# !!! NOTE: Upgrade to Qt6 when Ubuntu 26.04 is more popular.
-set(QT_MAJOR_VERSION 5)
-
-# KF
-# !!! NOTE: Upgrade to KF6 when Ubuntu 26.04 is more popular.
-set(KF_MAJOR 5)
-
-set(KF_DEP_VERSION "5.92.0")
-find_package(ECM ${KF_DEP_VERSION} REQUIRED CONFIG)
-set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${CMAKE_MODULE_PATH})
-include(KDEInstallDirs)
-include(KDECMakeSettings)
-include(KDECompilerSettings)
-include(ECMAddAppIcon)
-
-find_package(KF${KF_MAJOR} ${KF_DEP_VERSION}
-    REQUIRED COMPONENTS
-    I18n
-    CoreAddons
-    Archive
-)
+set(QT_MAJOR_VERSION 6)
 
 if ( NOT ANDROID )
         list(APPEND SOURCES
@@ -169,9 +149,6 @@ target_link_libraries(${LIB_NAME_CORE} PUBLIC
     Qt${QT_MAJOR_VERSION}::Xml
     Qt${QT_MAJOR_VERSION}::Network
     ${Potrace_LIBRARIES}
-    KF${KF_MAJOR}::CoreAddons
-    KF${KF_MAJOR}::Archive
-    KF${KF_MAJOR}::I18n
 )
 set_property(TARGET ${LIB_NAME_CORE} APPEND PROPERTY AUTOMOC_MACRO_NAMES "GLAXNIMATE_OBJECT")
 target_include_directories(${LIB_NAME_CORE} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
