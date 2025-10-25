@@ -31,6 +31,19 @@ Item {
                 z: 999
         }
 
+        TextInputField {
+                id: searchBar
+                width: 180
+
+                hint: qsTrc("timeline", "Search...")
+
+                anchors {
+                        verticalCenter: root
+                        left: currentTime.right
+                        leftMargin: 8
+                }
+        }
+
         // Background color
         Rectangle {
                 anchors.fill: root.fill

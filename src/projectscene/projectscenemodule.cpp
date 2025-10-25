@@ -1,5 +1,6 @@
 #include "projectscenemodule.h"
 
+#include "internal/mocktreemodel.h"
 #include "modularity/ioc.h"
 
 #include "view/timeline/keysview.h"
@@ -27,6 +28,7 @@ void ProjectSceneModule::registerResources() {
 
 void ProjectSceneModule::registerExports() {
         qmlRegisterType<KeysView>("App.ProjectScene", 1, 0, "KeysView");
+        qmlRegisterType<MockTreeModel>("App.ProjectScene", 1, 0, "MockTreeModel");
 };
 
 };
