@@ -15,7 +15,9 @@ Item {
 
                 text: "00:00.00"
 
+                font.family: ui.theme.largeBodyBoldFont.family
                 font.pointSize: 24
+
                 color: ui.theme.accentColor
 
                 // Center vertically
