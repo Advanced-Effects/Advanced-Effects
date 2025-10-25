@@ -7,9 +7,6 @@ import Muse.Ui 1.0
 Item {
     id: root
 
-    width: parent.width
-    height: 40 + (root.expanded ? loader.implicitHeight : 0)
-
     property bool expanded: false
     property bool hovered: false
 
@@ -20,6 +17,13 @@ Item {
     function toggleExpandRequested() {
             root.expanded = !root.expanded
     }
+
+    // The size that the text and FlatButtons occupy
+    property int headerHeight: 40
+    // The size that the Component occupies
+    property int loaderHeight: root.expanded ? loader.implicitHeight : 0
+    width: parent.width
+    height: headerHeight + loaderHeight
 
     FlatButton {
         id: paletteExpandArrow
@@ -43,12 +47,6 @@ Item {
         onClicked: root.toggleExpandRequested()
     }
 
-    // Clicking any part of the widget - not just the arrow button - should trigger a toggle.
-    MouseArea {
-            anchors.fill: parent
-
-            onClicked: root.toggleExpandRequested()
-    }
 
     StyledTextLabel {
         id: textItem
@@ -69,21 +67,6 @@ Item {
         font: ui.theme.bodyBoldFont
     }
 
-    // This rectangle makes the widget have a greyish background
-    Rectangle {
-        id: mainContainer
-
-        readonly property int padding: 1
-        implicitHeight: 32 +
-        (root.expanded ? loader.implicitHeight : 0)
-        + 2 * padding
-        implicitWidth: parent.width
-        height: implicitHeight
-
-        color: root.hovered ? ui.theme.strokeColor : ui.theme.backgroundColor
-        border { width: 1; color: ui.theme.strokeColor }
-    }
-
     // Shows the `component` dynamically
     Loader {
             id: loader
@@ -99,10 +82,42 @@ Item {
             z: 999
         }
 
+        // This rectangle makes the widget have a greyish background
+        Rectangle {
+            id: mainContainer
+
+            readonly property int padding: 1
+            implicitHeight: 32 +
+            (root.expanded ? loader.implicitHeight : 0)
+            + 2 * padding
+            implicitWidth: parent.width
+            height: implicitHeight
+
+            color: (root.hovered ? ui.theme.strokeColor : ui.theme.backgroundColor)
+            border { width: 1; color: ui.theme.strokeColor }
+        }
+
+        // Input detection
+        function setIsHovering(isHovering) {
+                root.hovered = isHovering;
+        }
+        MouseArea {
+                anchors.fill: parent
+                propagateComposedEvents: false
+
+                // Clicking any part of the widget - not just the arrow button - should trigger a toggle.
+                onClicked: root.toggleExpandRequested()
+
+                // We also need to know when the user is hovering the widget
+                hoverEnabled: true
+                onEntered: { setIsHovering(true) }
+                onExited: { setIsHovering(false) }
+        }
+
         // Use Transitions to make the triggering animation smoother
         state: root.expanded ? "expanded" : "collapsed"
 
-        property bool enableAnimations: true
+        property bool enableAnimations: true // !!! NOTE Set this programmatically (accessibility settings)
         property int expandDuration: 150
 
         states: [
@@ -120,16 +135,25 @@ Item {
             Transition {
                 from: "collapsed"; to: "expanded"
                 enabled: root.enableAnimations
-                NumberAnimation { target: loader; property: "height"; from: 0; to: loader.implicitHeight; easing.type: Easing.OutCubic; duration: root.expandDuration }
+                NumberAnimation {
+                        target: root; property: "height";
+                        from: headerHeight; to: headerHeight + loaderHeight;
+                        easing.type: Easing.OutCubic;
+                        duration: root.expandDuration
+                }
             },
             Transition {
                 from: "expanded"; to: "collapsed"
                 enabled: root.enableAnimations
                 SequentialAnimation {
                     PropertyAction { target: loader; property: "visible"; value: true } // temporarily set palette visible to animate it being hidden
-                    NumberAnimation { target: loader; property: "height"; from: loader.implicitHeight; to: 0; easing.type: Easing.OutCubic; duration: paletteTree.expandDuration }
+                    NumberAnimation {
+                            target: root; property: "height";
+                            from: headerHeight + loaderHeight; to: headerHeight;
+                            easing.type: Easing.OutCubic;
+                            duration: root.expandDuration
+                    }
                     PropertyAction { target: loader; property: "visible"; value: false } // make palette invisible again
-                    PropertyAction { target: loader; property: "height"; value: loader.implicitHeight } // restore the height binding
                 }
             }
         ]
