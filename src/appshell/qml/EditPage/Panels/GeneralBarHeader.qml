@@ -4,11 +4,10 @@ import QtQuick.Controls 2.1
 import Muse.UiComponents 1.0
 import Muse.Ui 1.0
 
-Item {
+Control {
     id: root
 
     property bool expanded: false
-    property bool hovered: false
 
     property string headerTitle: ""
     // The QtQuick component to render when widget is expanded
@@ -93,8 +92,7 @@ Item {
             implicitWidth: parent.width
             height: implicitHeight
 
-            color: (root.hovered ? ui.theme.strokeColor : ui.theme.backgroundColor)
-            border { width: 1; color: ui.theme.strokeColor }
+            color: (root.hovered ? ui.theme.strokeColor : ui.theme.backgroundPrimaryColor)
         }
 
         // Input detection
@@ -103,11 +101,6 @@ Item {
 
                 // Clicking any part of the widget - not just the arrow button - should trigger a toggle.
                 onClicked: root.toggleExpandRequested()
-
-                // We need to detect whether the user is hovering the element
-                hoverEnabled: true
-                onEntered: hovered = true
-                onExited: hovered = false
         }
 
         // Use Transitions to make the triggering animation smoother
