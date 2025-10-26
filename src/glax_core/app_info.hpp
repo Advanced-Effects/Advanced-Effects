@@ -52,8 +52,6 @@ public:
      */
     QString description() const;
 
-    void init_qapplication() const;
-
 private:
     AppInfo() = default;
     ~AppInfo() = default;
