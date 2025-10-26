@@ -13,8 +13,8 @@
 #include <QApplication>
 #include <QBuffer>
 #include <KCompressionDevice>
-#include <KLocalizedString>
 
+#include "translation.h"
 
 using namespace glaxnimate;
 
@@ -50,4 +50,3 @@ bool utils::gzip::is_compressed(const QByteArray& input)
 {
     return input.size() >= 2 && input[0] == '\x1f' && input[1] == '\x8b';
 }
-

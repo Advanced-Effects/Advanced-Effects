@@ -7,7 +7,8 @@
 #include "app_info.hpp"
 
 #include <QGuiApplication>
-#include <KLocalizedString>
+
+#include "translation.h"
 
 #include "application_info_generated.hpp"
 #include "utils/trace.hpp"

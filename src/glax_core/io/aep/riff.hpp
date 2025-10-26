@@ -16,7 +16,7 @@
 #include <QSysInfo>
 #include <QBuffer>
 
-#include <KLocalizedString>
+#include "translation.h"
 
 namespace glaxnimate::io::aep {
 

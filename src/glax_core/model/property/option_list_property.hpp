@@ -52,7 +52,7 @@ class OptionListProperty : public detail::PropertyTemplate<OptionListPropertyBas
 public:
     OptionListProperty(
         Object* obj,
-        const KLazyLocalizedString& name,
+        const QString& name,
         Type default_value,
         PropertyCallback<Container> option_list,
         PropertyCallback<void, Type, Type> emitter = {},

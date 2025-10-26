@@ -19,7 +19,7 @@
 #include <QVariant>
 #include <QGradient>
 
-#include <KLazyLocalizedString>
+#include "translation.h"
 
 #include "model/animation/frame_time.hpp"
 
@@ -171,7 +171,7 @@ class BaseProperty
     Q_GADGET
 
 public:
-    BaseProperty(Object* object, const KLazyLocalizedString& name, PropertyTraits traits);
+    BaseProperty(Object* object, const QString& name, PropertyTraits traits);
 
     virtual ~BaseProperty() = default;
 
@@ -217,7 +217,8 @@ protected:
 
 private:
     Object* object_;
-    KLazyLocalizedString name_;
+    QString name_;
+    QString translatedName_;
     PropertyTraits traits_;
 };
 
@@ -319,7 +320,7 @@ public:
     using reference = const Type&;
 
     PropertyTemplate(Object* obj,
-             const KLazyLocalizedString& name,
+             const QString& name,
              Type default_value = Type(),
              PropertyCallback<void, Type, Type> emitter = {},
              PropertyCallback<bool, Type> validator = {},
