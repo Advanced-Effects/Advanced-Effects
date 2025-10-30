@@ -27,6 +27,8 @@ namespace glaxnimate::math::bezier { class Bezier; }
 
 namespace glaxnimate::model {
 
+using namespace muse;
+
 class Object;
 class Document;
 
@@ -159,7 +161,7 @@ public:                                                     \
 
 #define GLAXNIMATE_PROPERTY_RO(type, name, default_value)   \
 public:                                                     \
-    Property<type> name{this, kli18n(#name), default_value, {}, {}, PropertyTraits::ReadOnly}; \
+    Property<type> name{this, qtrc("properties", #name), default_value, {}, {}, PropertyTraits::ReadOnly}; \
     type get_##name() const { return name.get(); }          \
 private:                                                    \
     Q_PROPERTY(type name READ get_##name)                   \
@@ -194,12 +196,12 @@ public:
 
     QString localized_name() const
     {
-        return name_.toString();
+        return translatedName_;
     }
 
     QString name() const
     {
-        return QString::fromLatin1(name_.untranslatedText());
+        return name_;
     }
 
     PropertyTraits traits() const
