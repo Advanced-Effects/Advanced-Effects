@@ -1,6 +1,3 @@
 [submodule "thirdparty/skia/skia"]
 	path = thirdparty/skia/skia
 	url = https://github.com/friction2d/skia
-[submodule "QtColorWidgets"]
-	path = thirdparty/QtColorWidgets
-	url = https://gitlab.com/mattbas/Qt-Color-Widgets

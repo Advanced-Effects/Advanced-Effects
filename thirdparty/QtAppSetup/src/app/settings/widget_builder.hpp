@@ -16,10 +16,6 @@
 #include <QDialog>
 #include <QDialogButtonBox>
 
-#ifndef WITHOUT_QT_COLOR_WIDGETS
-#include "QtColorWidgets/ColorSelector"
-#endif
-
 #include "app/settings/setting.hpp"
 
 #include <QEvent>
@@ -181,16 +177,11 @@ private:
             QObject::connect(wid, &QLineEdit::textChanged, SettingSetter<QString>{opt.slug, &target, opt.side_effects});
             return wid;
         }
-#ifndef WITHOUT_QT_COLOR_WIDGETS
-        else if ( opt.type == Setting::Color )
+
+        else if ( opt.type == Setting::Color ) // TODO
         {
-            auto wid = new color_widgets::ColorSelector();
-            wid->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-            wid->setColor(opt.get<QColor>(target));
-            QObject::connect(wid, &color_widgets::ColorSelector::colorChanged, SettingSetter<QColor>{opt.slug, &target, opt.side_effects});
-            return wid;
+                return nullptr;
         }
-#endif
 
         return nullptr;
     }

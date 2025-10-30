@@ -1,4 +1,3 @@
-add_subdirectory(QtColorWidgets)
 add_subdirectory(QtAppSetup)
 
 add_subdirectory(framework)
