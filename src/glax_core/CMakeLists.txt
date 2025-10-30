@@ -145,6 +145,7 @@ endif()
 add_library(${LIB_NAME_CORE} OBJECT ${SOURCES})
 target_link_libraries(${LIB_NAME_CORE} PUBLIC
     QtAppSetup
+    muse::global # translation.h
     ZLIB::ZLIB
     Qt${QT_MAJOR_VERSION}::Xml
     Qt${QT_MAJOR_VERSION}::Network
