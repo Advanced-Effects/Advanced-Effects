@@ -3,6 +3,8 @@
 
 set(SOURCES
 
+translation.hpp
+translation.cpp
 app_info.cpp
 
 command/structure_commands.cpp

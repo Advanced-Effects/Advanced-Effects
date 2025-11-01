@@ -8,7 +8,7 @@
 
 #include <QGuiApplication>
 
-#include "translation.h"
+#include "translation.hpp"
 
 #include "application_info_generated.hpp"
 #include "utils/trace.hpp"

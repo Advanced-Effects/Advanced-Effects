@@ -19,15 +19,11 @@
 #include <QVariant>
 #include <QGradient>
 
-#include "translation.h"
-
 #include "model/animation/frame_time.hpp"
 
 namespace glaxnimate::math::bezier { class Bezier; }
 
 namespace glaxnimate::model {
-
-using namespace muse;
 
 class Object;
 class Document;
@@ -161,7 +157,7 @@ public:                                                     \
 
 #define GLAXNIMATE_PROPERTY_RO(type, name, default_value)   \
 public:                                                     \
-    Property<type> name{this, qtrc("properties", #name), default_value, {}, {}, PropertyTraits::ReadOnly}; \
+    Property<type> name{this, i18n(#name), default_value, {}, {}, PropertyTraits::ReadOnly}; \
     type get_##name() const { return name.get(); }          \
 private:                                                    \
     Q_PROPERTY(type name READ get_##name)                   \

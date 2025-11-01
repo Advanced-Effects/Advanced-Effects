@@ -14,7 +14,7 @@
 #include <QBuffer>
 #include <KCompressionDevice>
 
-#include "translation.h"
+#include "translation.hpp"
 
 using namespace glaxnimate;
 
