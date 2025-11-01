@@ -82,6 +82,9 @@ set(LINK_LIB
     muse::languages
     muse::diagnostics
 
+    QtAppSetup
+    app_glax_core
+
     app::context
     app::projectscene
     app::appshell
