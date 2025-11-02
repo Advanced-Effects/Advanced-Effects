@@ -46,7 +46,7 @@ void glaxnimate::model::Bitmap::refresh(bool rebuild_embedded)
         }
         else if ( !url.get().isEmpty() )
         {
-            document()->assets()->network_downloader.get(QUrl(url.get()), [this, rebuild_embedded](QByteArray response){
+            document()->assets()->network_downloader.get(url.get(), [this, rebuild_embedded](QByteArray response){
                 QImageReader reader;
                 QImage qimage;
                 QBuffer buf(&response);
@@ -62,7 +62,7 @@ void glaxnimate::model::Bitmap::refresh(bool rebuild_embedded)
                 height.set(image.height());
 
                 document()->graphics_invalidated();
-                Q_EMIT loaded();
+                emit loaded();
             }, this);
             return;
         }
@@ -81,7 +81,7 @@ void glaxnimate::model::Bitmap::refresh(bool rebuild_embedded)
     width.set(image.width());
     height.set(image.height());
 
-    Q_EMIT loaded();
+    emit loaded();
 }
 
 QByteArray glaxnimate::model::Bitmap::build_embedded(const QImage& img) const
@@ -202,7 +202,7 @@ QUrl glaxnimate::model::Bitmap::to_url() const
 QString glaxnimate::model::Bitmap::object_name() const
 {
     if ( embedded() )
-        return i18n("Embedded image");
+        return tr("Embedded image");
     return QFileInfo(filename.get()).fileName();
 }
 

@@ -31,7 +31,7 @@ protected:
     using Ctor = AssetListBase;
 
 public:
-    ObjectListProperty<T> values{this, kli18n("values"),
+    ObjectListProperty<T> values{this, "values",
         &AssetListBase::on_added,
         &AssetListBase::on_removed,
         &AssetListBase::docnode_child_add_begin,
@@ -72,13 +72,13 @@ protected:
     virtual void on_added(T* obj, int row)
     {
         obj->attach();
-        Q_EMIT docnode_child_add_end(obj, row);
+        emit docnode_child_add_end(obj, row);
     }
 
     virtual void on_removed(T* obj, int row)
     {
         obj->detach();
-        Q_EMIT docnode_child_remove_end(obj, row);
+        emit docnode_child_remove_end(obj, row);
     }
 };
 
@@ -95,9 +95,9 @@ class NamedColorList : public AssetListBase<NamedColor, NamedColorList>
 
 public:
     QIcon tree_icon() const override;
-    QString type_name_human() const override { return i18n("Swatch"); }
+    QString type_name_human() const override { return tr("Swatch"); }
 
-Q_SIGNALS:
+signals:
     void color_changed(int position, model::NamedColor* color);
     void color_added(int position, model::NamedColor* color);
     void color_removed(int position, model::NamedColor* color);
@@ -114,7 +114,7 @@ class BitmapList : public AssetListBase<Bitmap, BitmapList>
 
 public:
     QIcon tree_icon() const override;
-    QString type_name_human() const override { return i18n("Images"); }
+    QString type_name_human() const override { return tr("Images"); }
 };
 
 class GradientColorsList : public AssetListBase<GradientColors, GradientColorsList>
@@ -124,7 +124,7 @@ class GradientColorsList : public AssetListBase<GradientColors, GradientColorsLi
 
 public:
     QIcon tree_icon() const override;
-    QString type_name_human() const override { return i18n("Gradient Colors"); }
+    QString type_name_human() const override { return tr("Gradient Colors"); }
 };
 
 class GradientList : public AssetListBase<Gradient, GradientList>
@@ -134,7 +134,7 @@ class GradientList : public AssetListBase<Gradient, GradientList>
 
 public:
     QIcon tree_icon() const override;
-    QString type_name_human() const override { return i18n("Gradients"); }
+    QString type_name_human() const override { return tr("Gradients"); }
 };
 
 class CompositionList : public AssetListBase<Composition, CompositionList>
@@ -148,9 +148,9 @@ public:
 protected:
     void on_added(model::Composition* obj, int position) override;
     void on_removed(model::Composition* obj, int position) override;
-    QString type_name_human() const override { return i18n("Compositions"); }
+    QString type_name_human() const override { return tr("Compositions"); }
 
-Q_SIGNALS:
+signals:
     void precomp_added(model::Composition* obj, int position);
 };
 
@@ -166,11 +166,11 @@ public:
 protected:
     void on_added(model::EmbeddedFont* obj, int position) override;
 
-Q_SIGNALS:
+signals:
     void font_added(model::EmbeddedFont* font);
 
 protected:
-    QString type_name_human() const override { return i18n("Fonts"); }
+    QString type_name_human() const override { return tr("Fonts"); }
 };
 
 
@@ -196,7 +196,6 @@ public:
     Q_INVOKABLE glaxnimate::model::EmbeddedFont* add_font(const QByteArray& ttf_data);
     glaxnimate::model::EmbeddedFont* add_font(const CustomFont& font);
     Q_INVOKABLE glaxnimate::model::EmbeddedFont* font_by_index(int database_index) const;
-    Q_INVOKABLE glaxnimate::model::Composition* add_composition();
     glaxnimate::model::Composition* add_comp_no_undo();
 
     DocumentNode* docnode_parent() const override;
@@ -205,7 +204,7 @@ public:
     int docnode_child_index(DocumentNode* dn) const override;
     QIcon tree_icon() const override;
     QIcon instance_icon() const override;
-    QString type_name_human() const override { return i18n("Assets"); }
+    QString type_name_human() const override { return tr("Assets"); }
 
     NetworkDownloader network_downloader;
 };

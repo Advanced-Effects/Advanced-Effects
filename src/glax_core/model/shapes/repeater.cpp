@@ -22,7 +22,7 @@ QIcon glaxnimate::model::Repeater::static_tree_icon()
 
 QString glaxnimate::model::Repeater::static_type_name_human()
 {
-    return i18n("Repeater");
+    return tr("Repeater");
 }
 
 
@@ -52,13 +52,11 @@ void glaxnimate::model::Repeater::on_paint(QPainter* painter, glaxnimate::model:
     auto alpha_e = end_opacity.get_at(t);
     int n_copies = copies.get_at(t);
 
-    auto initial_opacity = painter->opacity();
-
     for ( int i = 0; i < n_copies; i++ )
     {
         float alpha_lerp = float(i) / (n_copies == 1 ? 1 : n_copies - 1);
         auto alpha = math::lerp(alpha_s, alpha_e, alpha_lerp);
-        painter->setOpacity(alpha * initial_opacity);
+        painter->setOpacity(alpha * painter->opacity());
 
         for ( auto sib : affected() )
         {

@@ -8,9 +8,8 @@
 
 #include <set>
 
-#include <KCompressionDevice>
-
 #include "cbor_write_json.hpp"
+#include "utils/gzip.hpp"
 #include "model/shapes/polystar.hpp"
 #include "model/shapes/image.hpp"
 #include "model/shapes/stroke.hpp"
@@ -40,41 +39,43 @@ public:
     }
 
 private:
+    using ValidationVisitor::on_visit;
+
     void on_visit(model::DocumentNode * node) override
     {
         if ( qobject_cast<model::PolyStar*>(node) )
         {
-            show_error(node, i18n("Star Shapes are not officially supported"), app::log::Info);
+            show_error(node, TgsFormat::tr("Star Shapes are not officially supported"), app::log::Info);
         }
         else if ( qobject_cast<model::Image*>(node) || qobject_cast<model::Bitmap*>(node) )
         {
-            show_error(node, i18n("Images are not supported"), app::log::Error);
+            show_error(node, TgsFormat::tr("Images are not supported"), app::log::Error);
         }
         else if ( auto st = qobject_cast<model::Stroke*>(node) )
         {
             if ( qobject_cast<model::Gradient*>(st->use.get()) )
-                show_error(node, i18n("Gradient strokes are not officially supported"), app::log::Info);
+                show_error(node, TgsFormat::tr("Gradient strokes are not officially supported"), app::log::Info);
         }
         else if ( auto layer = qobject_cast<model::Layer*>(node) )
         {
             if ( layer->mask->has_mask() )
-                show_error(node, i18n("Masks are not supported"), app::log::Error);
+                show_error(node, TgsFormat::tr("Masks are not supported"), app::log::Error);
         }
         else if ( qobject_cast<model::Repeater*>(node) )
         {
-            show_error(node, i18n("Repeaters are not officially supported"), app::log::Info);
+            show_error(node, TgsFormat::tr("Repeaters are not officially supported"), app::log::Info);
         }
         else if ( qobject_cast<model::InflateDeflate*>(node) )
         {
-            show_error(node, i18n("Inflate/Deflate is not supported"), app::log::Warning);
+            show_error(node, TgsFormat::tr("Inflate/Deflate is not supported"), app::log::Warning);
         }
         else if ( qobject_cast<model::OffsetPath*>(node) )
         {
-            show_error(node, i18n("Offset Path is not supported"), app::log::Warning);
+            show_error(node, TgsFormat::tr("Offset Path is not supported"), app::log::Warning);
         }
         else if ( qobject_cast<model::ZigZag*>(node) )
         {
-            show_error(node, i18n("ZigZag is not supported"), app::log::Warning);
+            show_error(node, TgsFormat::tr("ZigZag is not supported"), app::log::Warning);
         }
     }
 };
@@ -83,9 +84,9 @@ private:
 
 bool glaxnimate::io::lottie::TgsFormat::on_open(QIODevice& file, const QString&, model::Document* document, const QVariantMap&)
 {
-    KCompressionDevice compressed(&file, false, KCompressionDevice::GZip);
-    compressed.open(QIODevice::ReadOnly);
-    QByteArray json = compressed.readAll();
+    QByteArray json;
+    if ( !utils::gzip::decompress(file, json, [this](const QString& s){ error(s); }) )
+        return false;
     return load_json(json, document);
 }
 
@@ -97,17 +98,13 @@ bool glaxnimate::io::lottie::TgsFormat::on_save(QIODevice& file, const QString&,
     json[QLatin1String("tgs")] = 1;
     QByteArray data = cbor_write_json(json, true);
 
-    {
-        KCompressionDevice compressed(&file, false, KCompressionDevice::GZip);
-        compressed.open(QIODevice::WriteOnly);
-        compressed.write(data);
-    }
-
-    quint32 compressed_size = file.pos();
+    quint32 compressed_size = 0;
+    if ( !utils::gzip::compress(data, file, [this](const QString& s){ error(s); }, 9, &compressed_size) )
+        return false;
 
     qreal size_k = compressed_size / 1024.0;
     if ( size_k > 64 )
-        error(i18n("File too large: %1k, should be under 64k", size_k));
+        error(tr("File too large: %1k, should be under 64k").arg(size_k));
 
     return true;
 }

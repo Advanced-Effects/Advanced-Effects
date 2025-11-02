@@ -53,7 +53,7 @@ void plugin::PluginRegistry::load()
             }
         }
     }
-    Q_EMIT loaded();
+    emit loaded();
 }
 
 bool plugin::PluginRegistry::load_plugin ( const QString& path, bool user_installed )

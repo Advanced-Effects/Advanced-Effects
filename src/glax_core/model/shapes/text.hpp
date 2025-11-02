@@ -76,7 +76,7 @@ public:
 
     QPainterPath path_for_glyph(quint32 glyph, CharDataCache& cache, bool fix_paint) const;
 
-Q_SIGNALS:
+signals:
     void font_changed();
 
 protected:

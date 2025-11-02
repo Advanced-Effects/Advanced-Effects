@@ -9,7 +9,6 @@
 #include <vector>
 #include <variant>
 #include <memory>
-#include <stdexcept>
 
 #include <QByteArray>
 #include <QString>

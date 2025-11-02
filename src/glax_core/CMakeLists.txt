@@ -1,10 +1,10 @@
 # SPDX-FileCopyrightText: 2019-2023 Mattia Basaglia <dev@dragon.best>
 # SPDX-License-Identifier: BSD-2-Clause
 
+set(LIB_NAME_CORE app_glax_core)
+
 set(SOURCES
 
-translation.hpp
-translation.cpp
 app_info.cpp
 
 command/structure_commands.cpp
@@ -114,15 +114,11 @@ utils/trace.cpp
 utils/trace_wrapper.cpp
 )
 
-set(LIB_NAME_CORE app_glax_core)
-set(QT_MAJOR_VERSION 6)
-
 if ( NOT ANDROID )
         list(APPEND SOURCES
         io/video/video_format.cpp
         utils/tar.cpp
-        )
-
+    )
         find_package(Libav COMPONENTS codec util format swscale REQUIRED)
         include_directories(${Libav_INCLUDE_DIRS})
 
@@ -145,14 +141,7 @@ if ( GLAXNIMATE_SYSTEM_POTRACE )
 endif()
 
 add_library(${LIB_NAME_CORE} OBJECT ${SOURCES})
-target_link_libraries(${LIB_NAME_CORE} PUBLIC
-    QtAppSetup
-    muse::global # translation.h
-    ZLIB::ZLIB
-    Qt${QT_MAJOR_VERSION}::Xml
-    Qt${QT_MAJOR_VERSION}::Network
-    ${Potrace_LIBRARIES}
-)
+target_link_libraries(${LIB_NAME_CORE} PUBLIC QtAppSetup ZLIB::ZLIB Qt${QT_VERSION_MAJOR}::Xml Qt${QT_VERSION_MAJOR}::Network ${Potrace_LIBRARIES})
 set_property(TARGET ${LIB_NAME_CORE} APPEND PROPERTY AUTOMOC_MACRO_NAMES "GLAXNIMATE_OBJECT")
 target_include_directories(${LIB_NAME_CORE} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
 

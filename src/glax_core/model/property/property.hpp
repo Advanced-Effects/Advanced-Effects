@@ -151,13 +151,13 @@ private:                                                    \
 
 #define GLAXNIMATE_PROPERTY(type, name, ...)                \
 public:                                                     \
-    Property<type> name{this, kli18n(#name), __VA_ARGS__};  \
+    Property<type> name{this, #name, __VA_ARGS__};          \
     GLAXNIMATE_PROPERTY_IMPL(type, name)                    \
     // macro end
 
 #define GLAXNIMATE_PROPERTY_RO(type, name, default_value)   \
 public:                                                     \
-    Property<type> name{this, i18n(#name), default_value, {}, {}, PropertyTraits::ReadOnly}; \
+    Property<type> name{this, #name, default_value, {}, {}, PropertyTraits::ReadOnly}; \
     type get_##name() const { return name.get(); }          \
 private:                                                    \
     Q_PROPERTY(type name READ get_##name)                   \
@@ -190,12 +190,7 @@ public:
      */
     virtual void stretch_time(qreal multiplier) { Q_UNUSED(multiplier); }
 
-    QString localized_name() const
-    {
-        return translatedName_;
-    }
-
-    QString name() const
+    const QString& name() const
     {
         return name_;
     }
@@ -216,7 +211,6 @@ protected:
 private:
     Object* object_;
     QString name_;
-    QString translatedName_;
     PropertyTraits traits_;
 };
 

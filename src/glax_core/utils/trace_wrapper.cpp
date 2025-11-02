@@ -97,11 +97,11 @@ void glaxnimate::utils::trace::TraceWrapper::trace_mono(
     const QColor& color, bool inverted, int alpha_threshold, std::vector<TraceResult>& result)
 {
     result.emplace_back();
-    Q_EMIT progress_max_changed(100);
+    emit progress_max_changed(100);
     result.back().color = color;
     utils::trace::Tracer tracer(d->source_image, d->options);
     tracer.set_target_alpha(alpha_threshold, inverted);
-    connect(&tracer, &utils::trace::Tracer::progress, this, [this](qreal value){ Q_EMIT progress_changed(value); });
+    connect(&tracer, &utils::trace::Tracer::progress, this, &TraceWrapper::progress_changed);
     tracer.set_progress_range(0, 100);
     tracer.trace(result.back().bezier);
 }
@@ -111,7 +111,7 @@ void glaxnimate::utils::trace::TraceWrapper::trace_exact(
 )
 {
     result.reserve(result.size() + colors.size());
-    Q_EMIT progress_max_changed(100 * colors.size());
+    emit progress_max_changed(100 * colors.size());
     int progress_index = 0;
     for ( QColor color : colors )
     {
@@ -128,7 +128,7 @@ void glaxnimate::utils::trace::TraceWrapper::trace_exact(
 void glaxnimate::utils::trace::TraceWrapper::trace_closest(
     const std::vector<QRgb>& colors, std::vector<TraceResult>& result)
 {
-    Q_EMIT progress_max_changed(100 * colors.size());
+    emit progress_max_changed(100 * colors.size());
     QImage converted = utils::quantize::quantize(d->source_image, colors);
     utils::trace::Tracer tracer(converted, d->options);
     result.reserve(result.size() + colors.size());
@@ -157,7 +157,7 @@ glaxnimate::model::Group* glaxnimate::utils::trace::TraceWrapper::apply(
 {
     auto layer = std::make_unique<model::Group>(d->document);
     auto created = layer.get();
-    layer->name.set(i18n("Traced %1", d->name));
+    layer->name.set(tr("Traced %1").arg(d->name));
 
     if ( trace.size() == 1 )
     {

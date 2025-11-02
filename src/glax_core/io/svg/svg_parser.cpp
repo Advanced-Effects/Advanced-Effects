@@ -85,7 +85,7 @@ protected:
             {
                 QString url = link.attribute("href");
                 if ( !url.isEmpty() )
-                    document->add_pending_asset("", QUrl(url));
+                    document->add_pending_asset("", url);
             }
         }
 
@@ -1190,7 +1190,7 @@ private:
 
         bool open = false;
         QString href = attr(args.element, "xlink", "href");
-        QUrl url = QUrl(href);
+        QUrl url = href;
 
         if ( url.isRelative() )
             open = open_asset_file(bitmap.get(), href);
@@ -1234,7 +1234,6 @@ private:
         qreal size = 64;
         bool keep_space = false;
         QPointF pos;
-        qreal anchor = 0;
     };
 
     TextStyle parse_text_style(const ParseFuncArgs& args, const TextStyle& parent)
@@ -1303,17 +1302,6 @@ private:
         if ( args.element.hasAttribute("y") )
             out.pos.setY(len_attr(args.element, "y", 0));
 
-        if ( style.contains("text-anchor") )
-        {
-            QString anchor = style["text-anchor"];
-            if ( anchor == "start" )
-                out.anchor = 0;
-            else if ( anchor == "middle" )
-                out.anchor = 0.5;
-            else if ( anchor == "end" )
-                out.anchor = 1;
-        }
-
         return out;
     }
 
@@ -1333,34 +1321,9 @@ private:
         qfont.setFamily(style.family);
         qfont.setWeight(QFont::Weight(WeightConverter::convert(style.weight, WeightConverter::css, WeightConverter::qt)));
         qfont.setStyle(style.style);
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        QString style_string = QFontDatabase::styleString(qfont);
-#else
         QFontDatabase db;
         QString style_string = db.styleString(qfont);
-#endif
         font->style.set(style_string);
-    }
-
-    void adjust_text_position(model::TextShape* shape, const TextStyle&  style)
-    {
-        if ( !shape )
-            return;
-
-        if ( style.anchor != 0 )
-        {
-            shape->position.set(
-                shape->position.get() +
-                QPointF(-style.anchor * shape->local_bounding_rect(document->current_time()).width(), 0)
-            );
-            int keycount = shape->position.keyframe_count();
-            for ( int i = 0; i < keycount; i++ )
-            {
-                auto keyframe = shape->position.keyframe(i);
-                QPointF offset(-style.anchor * shape->local_bounding_rect(keyframe->time()).width(), 0);
-                keyframe->set(keyframe->get() + offset);
-            }
-        }
     }
 
     QPointF parse_text_element(const ParseFuncArgs& args, const TextStyle& parent_style)
@@ -1380,7 +1343,6 @@ private:
             ParseFuncArgs child_args = {child.toElement(), args.shape_parent, css_style, args.in_group};
             if ( child.isElement() )
             {
-                adjust_text_position(last, style);
                 last = nullptr;
                 style.pos = pos + offset;
                 offset = parse_text_element(child_args, style);
@@ -1413,8 +1375,6 @@ private:
                 offset = last->offset_to_next_character();
             }
         }
-
-        adjust_text_position(last, style);
 
         return offset;
     }

@@ -38,7 +38,7 @@ public:
 
     QString type_name_human() const override
     {
-        return i18n("Bitmap");
+        return tr("Bitmap");
     }
 
     bool from_url(const QUrl& url);
@@ -69,7 +69,7 @@ public:
 
     QSize size() const;
 
-public Q_SLOTS:
+public slots:
     void refresh(bool rebuild_embedded);
 
     void embed(bool embedded);
@@ -77,10 +77,10 @@ public Q_SLOTS:
 private:
     QByteArray build_embedded(const QImage& img) const;
 
-private Q_SLOTS:
+private slots:
     void on_refresh();
 
-Q_SIGNALS:
+signals:
     void loaded();
 
 private:

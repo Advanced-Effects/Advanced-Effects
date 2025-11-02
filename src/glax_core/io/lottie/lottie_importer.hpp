@@ -107,7 +107,7 @@ private:
     {
         if ( json.contains("nm") )
             str = json["nm"].toString() + ": " + str;
-        Q_EMIT format->warning(str);
+        emit format->warning(str);
     }
 
     void load_stretchable_animation_container(const QJsonObject& json, model::StretchableTime* animation)
@@ -182,7 +182,7 @@ private:
         int index = json["ind"].toInt();
         if ( !json.contains("ty") || !json["ty"].isDouble() )
         {
-            warning(i18n("Missing layer type for %1", index), json);
+            warning(QObject::tr("Missing layer type for %1").arg(index), json);
             invalid_indices.insert(index);
             return;
         }
@@ -319,7 +319,8 @@ private:
             if ( invalid_indices.count(parent_index) )
             {
                 warning(
-                    i18n("Cannot use %1 as parent as it couldn't be loaded", parent_index),
+                    QObject::tr("Cannot use %1 as parent as it couldn't be loaded")
+                    .arg(parent_index),
                     json
                 );
             }
@@ -329,7 +330,8 @@ private:
                 if ( it == layer_indices.end() )
                 {
                     warning(
-                        i18n("Invalid parent layer %1", parent_index),
+                        QObject::tr("Invalid parent layer %1")
+                        .arg(parent_index),
                         json
                     );
                 }
@@ -387,7 +389,7 @@ private:
                 shape_target->animation->last_frame.set(layer->animation->last_frame.get());
                 layer->shapes.insert(std::move(shape_target));
 
-                document->set_best_name(clip, i18n("Clip"));
+                document->set_best_name(clip, QObject::tr("Clip"));
                 if ( masks.size() == 1 )
                 {
                     load_mask(masks[0].toObject(), clip);
@@ -399,7 +401,7 @@ private:
                         auto clip_group_p = make_node<model::Group>(document);
                         auto clip_group = clip_group_p.get();
                         clip->shapes.insert(std::move(clip_group_p));
-                        document->set_best_name(clip_group, i18n("Clip"));
+                        document->set_best_name(clip_group, QObject::tr("Clip"));
                         load_mask(mask.toObject(), clip_group);
                     }
                 }
@@ -454,7 +456,7 @@ private:
                 auto it = unsupported_layers.find(json["ty"].toInt());
                 if ( it != unsupported_layers.end() )
                     type = *it;
-                warning(i18n("Unsupported layer of type %1", type), json);
+                warning(QObject::tr("Unsupported layer of type %1").arg(type), json);
             }
         }
 
@@ -479,7 +481,7 @@ private:
     {
         if ( !json.contains("ty") || !json["ty"].isString() )
         {
-            warning(i18n("Missing shape type"), json);
+            warning(QObject::tr("Missing shape type"), json);
             return;
         }
 
@@ -492,7 +494,7 @@ private:
             {
                 // "mm" is marked as unsupported by lottie and it appears in several animations so we ignore the warning
                 if ( base_type != "mm" )
-                    warning(i18n("Unsupported shape type %1", json["ty"].toString()), json);
+                    warning(QObject::tr("Unsupported shape type %1").arg(json["ty"].toString()), json);
                 return;
             }
         }
@@ -502,7 +504,7 @@ private:
         );
         if ( !shape )
         {
-            warning(i18n("Unsupported shape type %1", json["ty"].toString()), json);
+            warning(QObject::tr("Unsupported shape type %1").arg(json["ty"].toString()), json);
             return;
         }
 
@@ -524,8 +526,10 @@ private:
     {
         for ( const auto& not_found : props )
         {
-            Q_EMIT format->information(
-                i18n("Unknown field %2%1", not_found, object_error_string(nullptr))
+            emit format->information(
+                QObject::tr("Unknown field %2%1")
+                .arg(not_found)
+                .arg(object_error_string(nullptr))
             );
         }
     }
@@ -565,8 +569,8 @@ private:
             {
                 model::Document dummydoc("");
                 model::Object dummy(&dummydoc);
-                model::AnimatedProperty<float> px(&dummy, {}, 0);
-                model::AnimatedProperty<float> py(&dummy, {}, 0);
+                model::AnimatedProperty<float> px(&dummy, "", 0);
+                model::AnimatedProperty<float> py(&dummy, "", 0);
                 load_animated(&px, pos["x"], {});
                 load_animated(&py, pos["y"], {});
 
@@ -610,8 +614,8 @@ private:
             {
                 model::Document dummydoc("");
                 model::Object dummy(&dummydoc);
-                model::AnimatedProperty<float> length(&dummy, {}, 0);
-                model::AnimatedProperty<float> angle(&dummy, {}, 0);
+                model::AnimatedProperty<float> length(&dummy, "", 0);
+                model::AnimatedProperty<float> angle(&dummy, "", 0);
                 if ( json_obj.contains("h") )
                     load_animated(&length, json_obj["h"], {});
                 if ( json_obj.contains("a") )
@@ -773,22 +777,18 @@ private:
         // https://github.com/airbnb/lottie-web/blob/0d658b34c40d4e81eafdccbf698815346454a899/player/js/utils/DataManager.js#L329
         if ( is_version_older_than(4, 1, 9) )
         {
-            auto iter = std::find_if(arr.begin(), arr.end(), [](const QJsonValue& v){ return v.toDouble() > 1; });
-            if ( iter != arr.end() )
-            {
-                if ( arr.size() == 3 )
-                    out = QColor::fromRgb(
-                        arr[0].toInt(), arr[1].toInt(), arr[2].toInt()
-                    );
-                else if ( arr.size() == 4 )
-                    out = QColor::fromRgb(
-                        arr[0].toInt(), arr[1].toInt(), arr[2].toInt(), qMin(255, arr[3].toInt())
-                    );
-                else
-                    return false;
+            if ( arr.size() == 3 )
+                out = QColor::fromRgb(
+                    arr[0].toInt(), arr[1].toInt(), arr[2].toInt()
+                );
+            else if ( arr.size() == 4 )
+                out = QColor::fromRgb(
+                    arr[0].toInt(), arr[1].toInt(), arr[2].toInt(), qMin(255, arr[3].toInt())
+                );
+            else
+                return false;
 
-                return true;
-            }
+            return true;
         }
 
         if ( arr.size() == 3 )
@@ -848,8 +848,10 @@ private:
                     QPointF p, ti, to;
                     if ( !compound_value_2d_raw(pos[i], p) )
                     {
-                        Q_EMIT format->warning(
-                            i18n("Invalid bezier point %1 in %2", i, property_error_string(prop))
+                        emit format->warning(
+                            QObject::tr("Invalid bezier point %1 in %2")
+                            .arg(i)
+                            .arg(property_error_string(prop))
                         );
                         continue;
                     }
@@ -894,7 +896,7 @@ private:
     {
         auto v = value_to_variant(prop, val);
         if ( !v || !prop->set_value(trans.from_lottie(*v, 0)) )
-            Q_EMIT format->warning(i18n("Invalid value for %1", prop->name()));
+            emit format->warning(QObject::tr("Invalid value for %1").arg(prop->name()));
     }
 
     void load_static(model::BaseProperty * prop, const QJsonValue& val, const TransformFunc& trans)
@@ -916,14 +918,14 @@ private:
     {
         if ( !val.isObject() )
         {
-            Q_EMIT format->warning(i18n("Invalid value for %1", property_error_string(prop)));
+            emit format->warning(QObject::tr("Invalid value for %1").arg(property_error_string(prop)));
             return;
         }
 
         QJsonObject obj = val.toObject();
         if ( !obj.contains("k") )
         {
-            Q_EMIT format->warning(i18n("Invalid value for %1", property_error_string(prop)));
+            emit format->warning(QObject::tr("Invalid value for %1").arg(property_error_string(prop)));
             return;
         }
 
@@ -931,7 +933,7 @@ private:
         {
             if ( !obj["k"].isArray() )
             {
-                Q_EMIT format->warning(i18n("Invalid keyframes for %1", property_error_string(prop)));
+                emit format->warning(QObject::tr("Invalid keyframes for %1").arg(property_error_string(prop)));
                 return;
             }
 
@@ -981,13 +983,13 @@ private:
                     QString value;
                     if ( !v )
                     {
-                        value = i18n("(null)");
+                        value = QObject::tr("(null)");
                     }
                     else
                     {
                         value = v->toString();
                         if ( value == "" )
-                            value = i18n("(empty)");
+                            value = QObject::tr("(empty)");
                         value += " ";
 #if QT_VERSION_MAJOR >= 6
                         value += QMetaType(v->userType()).name();
@@ -995,12 +997,9 @@ private:
                         value += QMetaType::typeName(v->userType());
 #endif
                     }
-                    Q_EMIT format->warning(i18n(
-                        "Cannot load keyframe at %1 for %2 with value %3",
-                        time,
-                        property_error_string(prop),
-                        value
-                    ));
+                    emit format->warning(QObject::tr("Cannot load keyframe at %1 for %2 with value %3")
+                        .arg(time).arg(property_error_string(prop)).arg(value)
+                    );
                 }
             }
         }
@@ -1050,7 +1049,7 @@ private:
 
         QString id = asset["id"].toString();
         if ( bitmap_ids.count(id) )
-            format->warning(i18n("Duplicate Bitmap ID: %1", id));
+            format->warning(io::lottie::LottieFormat::tr("Duplicate Bitmap ID: %1").arg(id));
         bitmap_ids[id] = bmp;
 
         if ( asset.contains("nm") )
@@ -1058,7 +1057,7 @@ private:
 
         if ( asset["e"].toInt() )
         {
-            bmp->from_url(QUrl(asset["p"].toString()));
+            bmp->from_url(asset["p"].toString());
         }
         else
         {
@@ -1066,7 +1065,7 @@ private:
             if ( path.contains("://") )
             {
                 path += asset["p"].toString();
-                bmp->from_url(QUrl(path));
+                bmp->from_url(path);
             }
             else
             {
@@ -1082,7 +1081,7 @@ private:
 
         QString id = asset["id"].toString();
         if ( precomp_ids.count(id) )
-            format->warning(i18n("Duplicate Composition ID: %1", id));
+            format->warning(io::lottie::LottieFormat::tr("Duplicate Composition ID: %1").arg(id));
         precomp_ids[id] = comp;
 
         comp->name.set(id);
@@ -1115,9 +1114,7 @@ private:
             }
             else if ( font.contains("fOrigin") )
             {
-                QString fOrigin = font["fOrigin"].toString();
-                fOrigin.append(" ");
-                switch ( fOrigin[0].toLatin1() )
+                switch ( (font["fOrigin"].toString() + " ")[0].toLatin1() )
                 {
                     case 'n': font_origin = FontOrigin::System; break;
                     case 'g': font_origin = FontOrigin::CssUrl; break;
@@ -1134,7 +1131,7 @@ private:
                 case FontOrigin::CssUrl:
                 case FontOrigin::FontUrl:
                     // Queue dynamic font loading
-                    document->add_pending_asset(info.family, QUrl(font["fPath"].toString()));
+                    document->add_pending_asset(info.family, font["fPath"].toString());
                     break;
                 case FontOrigin::ScriptUrl:
                     // idk how these work

@@ -12,8 +12,6 @@
 #include <QObject>
 #include <QVariant>
 
-#include "translation.hpp"
-
 #include "model/animation/frame_time.hpp"
 #include "model/factory.hpp"
 
@@ -88,7 +86,7 @@ public:
     BaseProperty* get_property(const QString& property);
 
     virtual QString object_name() const { return type_name_human(); }
-    virtual QString type_name_human() const { return i18n("Unknown Object"); }
+    virtual QString type_name_human() const { return tr("Unknown Object"); }
     virtual void set_time(FrameTime t);
     FrameTime time() const;
 
@@ -104,7 +102,7 @@ public:
 
     virtual void stretch_time(qreal multiplier);
 
-Q_SIGNALS:
+signals:
     void property_changed(const model::BaseProperty* prop, const QVariant& value);
     void visual_property_changed(const model::BaseProperty* prop, const QVariant& value);
     void removed();

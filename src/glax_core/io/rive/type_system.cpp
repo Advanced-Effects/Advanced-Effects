@@ -12,7 +12,7 @@ const glaxnimate::io::rive::ObjectDefinition * glaxnimate::io::rive::TypeSystem:
     auto it = defined_objects.find(type_id);
     if ( it == defined_objects.end() )
     {
-        Q_EMIT type_not_found(int(type_id));
+        emit type_not_found(int(type_id));
         return nullptr;
     }
 

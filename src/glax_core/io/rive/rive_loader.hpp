@@ -35,6 +35,8 @@ private:
     QByteArray read_raw_string();
     QString read_string_utf8();
 
+
+    model::Document* document;
     BinaryInputStream& stream;
     RiveFormat* format;
     PropertyTable extra_props;

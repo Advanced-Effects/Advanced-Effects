@@ -19,7 +19,7 @@ QString glaxnimate::io::ImportExport::name_filter() const
 
     ext_str.resize(ext_str.size() - 1);
     //: Open/Save file dialog file filter eg: "Text files (.txt)"
-    return i18n("%1 (%2)", name(), ext_str);
+    return tr("%1 (%2)").arg(name()).arg(ext_str);
 }
 
 
@@ -58,7 +58,7 @@ bool glaxnimate::io::ImportExport::open(QIODevice& file, const QString& filename
             return false;
 
     bool ok = on_open(file, filename, document, setting_values);
-    Q_EMIT completed(ok);
+    emit completed(ok);
     return ok;
 }
 
@@ -70,7 +70,7 @@ bool glaxnimate::io::ImportExport::save(QIODevice& file, const QString& filename
             return false;
 
     bool ok = on_save(file, filename, comp, setting_values);
-    Q_EMIT completed(ok);
+    emit completed(ok);
     return ok;
 }
 

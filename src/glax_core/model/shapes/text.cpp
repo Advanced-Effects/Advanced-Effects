@@ -29,9 +29,7 @@ public:
     QRawFont raw;
     QRawFont raw_scaled;
     QFontMetricsF metrics;
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QFontDatabase database;
-#endif
 
     Private() :
         raw(QRawFont::fromFont(query)),
@@ -95,11 +93,7 @@ public:
         }
         else
         {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
             styles = database.styles(parent->family.get());
-#else
-            styles = QFontDatabase::styles(parent->family.get());
-#endif
             if ( !parent->valid_style(parent->style.get()) && !styles.empty() )
                 parent->style.set(styles[0]);
         }
@@ -180,7 +174,7 @@ void glaxnimate::model::Font::refresh_data ( bool update_styles )
     d->update_data();
     if ( update_styles )
         d->refresh_styles(this);
-    Q_EMIT font_changed();
+    emit font_changed();
 }
 
 void glaxnimate::model::Font::on_font_changed()
@@ -235,7 +229,7 @@ const QFontMetricsF & glaxnimate::model::Font::metrics() const
 
 QString glaxnimate::model::Font::type_name_human() const
 {
-    return i18n("Font");
+    return tr("Font");
 }
 
 QPainterPath glaxnimate::model::Font::path_for_glyph(quint32 glyph, glaxnimate::model::Font::CharDataCache& cache, bool fix_paint) const
@@ -252,7 +246,7 @@ QPainterPath glaxnimate::model::Font::path_for_glyph(quint32 glyph, glaxnimate::
 
 void glaxnimate::model::Font::from_qfont(const QFont& f)
 {
-    command::UndoMacroGuard g(i18n("Change Font"), document());
+    command::UndoMacroGuard g(tr("Change Font"), document());
     QFontInfo finfo(f);
     family.set_undoable(finfo.family());
     style.set_undoable(finfo.styleName());
@@ -357,11 +351,7 @@ qreal glaxnimate::model::Font::line_spacing_unscaled() const
 
 QStringList glaxnimate::model::Font::families() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     return d->database.families();
-#else
-    return QFontDatabase::families();
-#endif
 }
 
 QList<int> glaxnimate::model::Font::standard_sizes() const
@@ -486,7 +476,7 @@ QRectF glaxnimate::model::TextShape::local_bounding_rect(glaxnimate::model::Fram
 
 QString glaxnimate::model::TextShape::type_name_human() const
 {
-    return i18n("Text");
+    return tr("Text");
 }
 
 std::unique_ptr<glaxnimate::model::ShapeElement> glaxnimate::model::TextShape::to_path() const

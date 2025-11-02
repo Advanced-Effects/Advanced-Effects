@@ -48,9 +48,21 @@ public:
     QUrl url_docs() const;
 
     /**
+     * \brief Bug reporting URL
+     */
+    QUrl url_issues() const;
+
+    /**
+     * \brief Donation URL
+     */
+    QUrl url_donate() const;
+
+    /**
      * \brief Application description
      */
     QString description() const;
+
+    void init_qapplication() const;
 
 private:
     AppInfo() = default;

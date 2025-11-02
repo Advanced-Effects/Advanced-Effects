@@ -239,7 +239,7 @@ public:
      * \pre multiplier > 0
      */
     StretchTimeCommand(T* target, qreal multiplier)
-        : QUndoCommand(i18n("Stretch Time")),
+        : QUndoCommand(QObject::tr("Stretch Time")),
           target(target),
           multiplier(multiplier)
     {}

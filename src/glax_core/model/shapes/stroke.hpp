@@ -65,7 +65,7 @@ public:
 
     static QString static_type_name_human()
     {
-        return i18n("Stroke");
+        return tr("Stroke");
     }
 
     void set_pen_style(const QPen& p);

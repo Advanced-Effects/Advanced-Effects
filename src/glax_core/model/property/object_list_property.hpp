@@ -25,7 +25,7 @@ private:                                                    \
 
 #define GLAXNIMATE_PROPERTY_LIST(type, name)                \
 public:                                                     \
-    ObjectListProperty<type> name{this, kli18n(#name)};     \
+    ObjectListProperty<type> name{this, #name};             \
     GLAXNIMATE_PROPERTY_LIST_IMPL(type, name)               \
     // macro end
 

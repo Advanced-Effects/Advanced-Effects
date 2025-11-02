@@ -25,5 +25,5 @@ float glaxnimate::model::StretchableTime::time_from_local(float local) const
 
 QString glaxnimate::model::StretchableTime::type_name_human() const
 {
-    return i18n("Timing");
+    return tr("Timing");
 }

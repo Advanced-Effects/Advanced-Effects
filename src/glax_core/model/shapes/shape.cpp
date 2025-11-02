@@ -280,7 +280,7 @@ void glaxnimate::model::ShapeOperator::on_graphics_changed()
 {
     ShapeElement::on_graphics_changed();
     bezier_cache.mark_dirty();
-    Q_EMIT shape_changed();
+    emit shape_changed();
 }
 
 void glaxnimate::model::Modifier::add_shapes(FrameTime t, math::bezier::MultiBezier& bez, const QTransform& transform) const

@@ -9,7 +9,7 @@
 #include "command/property_commands.hpp"
 
 glaxnimate::model::BaseProperty::BaseProperty(Object* object, const QString& name, PropertyTraits traits)
-    : object_(object), name_(name), translatedName_(qstrc("properties", name)), traits_(traits)
+    : object_(object), name_(name), traits_(traits)
 {
     if ( object )
         object_->add_property(this);

@@ -29,15 +29,9 @@ QAction * plugin::PluginActionRegistry::make_qaction ( plugin::ActionService* ac
     connect(act, &QAction::triggered, action, &ActionService::trigger);
     connect(action, &ActionService::disabled, act, &QAction::deleteLater);
     act->setData(QVariant::fromValue(action));
-    act->setObjectName(qaction_name(action));
+    act->setObjectName("action_plugin_" + action->plugin()->data().name.toLower() + "_" + action->label.toLower());
     return act;
 }
-
-QString glaxnimate::plugin::PluginActionRegistry::qaction_name(ActionService* action)
-{
-    return QStringLiteral("action_plugin_") + action->plugin()->data().name.toLower() + QStringLiteral("_") + action->label.toLower();
-}
-
 
 void plugin::PluginActionRegistry::add_action ( plugin::ActionService* action )
 {
@@ -49,7 +43,7 @@ void plugin::PluginActionRegistry::add_action ( plugin::ActionService* action )
     if ( it != enabled_actions.end() )
         sibling_before = *it;
     enabled_actions.insert(it, action);
-    Q_EMIT action_added(action, sibling_before);
+    emit action_added(action, sibling_before);
 }
 
 void plugin::PluginActionRegistry::remove_action ( plugin::ActionService* action )
@@ -59,7 +53,7 @@ void plugin::PluginActionRegistry::remove_action ( plugin::ActionService* action
         return;
 
     enabled_actions.erase(it);
-    Q_EMIT action_removed(action);
+    emit action_removed(action);
 }
 
 bool plugin::PluginActionRegistry::compare(plugin::ActionService* a, plugin::ActionService* b)

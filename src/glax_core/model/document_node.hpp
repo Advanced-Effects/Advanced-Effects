@@ -234,7 +234,7 @@ private:
 
     void on_name_changed(const QString& name, const QString& old_name);
 
-Q_SIGNALS:
+signals:
     void docnode_child_add_begin(int row);
     void docnode_child_add_end(DocumentNode* node, int row);
 
@@ -246,7 +246,7 @@ Q_SIGNALS:
 
     void name_changed(const QString&);
 
-Q_SIGNALS:
+signals:
     void users_changed();
 
 protected:
@@ -346,7 +346,7 @@ public:
 
     QIcon instance_icon() const override;
 
-Q_SIGNALS:
+signals:
     void docnode_visible_changed(bool);
     void docnode_locked_changed(bool);
     void docnode_visible_recursive_changed(bool);

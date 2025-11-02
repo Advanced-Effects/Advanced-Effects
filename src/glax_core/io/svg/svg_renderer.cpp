@@ -330,7 +330,6 @@ public:
                 animation.setAttribute("repeatCount", "indefinite");
                 if ( !type.isEmpty() )
                     animation.setAttribute("type", type);
-                animation.setAttribute("values", data.values.join("; "));
             }
         }
 
@@ -494,14 +493,9 @@ public:
         QFontInfo font_info(text->font->query());
 
         // QFontInfo is broken, so we do something else
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-        int weight = QFontDatabase::weight(font_info.family(), font_info.styleName());
-        QFont::Style font_style = QFontDatabase::italic(font_info.family(), font_info.styleName()) ? QFont::StyleItalic : QFont::StyleNormal;
-#else
         QFontDatabase db;
         int weight = db.weight(font_info.family(), font_info.styleName());
         QFont::Style font_style = db.italic(font_info.family(), font_info.styleName()) ? QFont::StyleItalic : QFont::StyleNormal;
-#endif
 
         // Convert weight
         weight = WeightConverter::convert(weight, WeightConverter::qt, WeightConverter::css);
@@ -820,7 +814,7 @@ public:
     {
         QDomElement g = element(parent, "g");
         g.setAttribute("id", id(descendant) + "_" + id(ancestor));
-        g.setAttribute("inkscape:label", i18n("%1 (%2)", descendant->object_name(), ancestor->object_name()));
+        g.setAttribute("inkscape:label", QObject::tr("%1 (%2)").arg(descendant->object_name()).arg(ancestor->object_name()));
         g.setAttribute("inkscape:groupmode", "layer");
         transform_to_attr(g, ancestor->transform.get());
         return g;

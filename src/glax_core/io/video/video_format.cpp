@@ -70,16 +70,16 @@ struct OutputStream
         // find the encoder
         codec = (AVCodec*)avcodec_find_encoder(codec_id);
         if ( !codec )
-            throw av::Error(i18n("Could not find encoder for '%1'", avcodec_get_name(codec_id)));
+            throw av::Error(QObject::tr("Could not find encoder for '%1'").arg(avcodec_get_name(codec_id)));
 
         stream = avformat_new_stream(oc, nullptr);
         if (!stream)
-            throw av::Error(i18n("Could not allocate stream"));
+            throw av::Error(QObject::tr("Could not allocate stream"));
 
         stream->id = oc->nb_streams-1;
         codec_context = avcodec_alloc_context3(codec);
         if ( !codec_context )
-            throw av::Error(i18n("Could not alloc an encoding context"));
+            throw av::Error(QObject::tr("Could not alloc an encoding context"));
 
         // Some formats want stream headers to be separate.
         if (oc->oformat->flags & AVFMT_GLOBALHEADER)
@@ -107,7 +107,7 @@ struct OutputStream
             if ( ret == AVERROR(EAGAIN) || ret == AVERROR_EOF )
                 break;
             else if (ret < 0)
-                throw av::Error(i18n("Error encoding a frame: %1", av::err2str(ret)));
+                throw av::Error(QObject::tr("Error encoding a frame: %1").arg(av::err2str(ret)));
 
             // rescale output packet timestamp values from codec to stream timebase
             av_packet_rescale_ts(&pkt, codec_context->time_base, stream->time_base);
@@ -117,7 +117,7 @@ struct OutputStream
             ret = av_interleaved_write_frame(format_context, &pkt);
             av_packet_unref(&pkt);
             if (ret < 0)
-                throw av::Error(i18n("Error while writing output packet: %1", av::err2str(ret)));
+                throw av::Error(QObject::tr("Error while writing output packet: %1").arg(av::err2str(ret)));
         }
 
         return ret;
@@ -128,7 +128,7 @@ struct OutputStream
         // send the frame to the encoder
         int ret = avcodec_send_frame(codec_context, frame);
         if ( ret < 0 )
-            throw av::Error(i18n("Error sending a frame to the encoder: %1", av::err2str(ret)));
+            throw av::Error(QObject::tr("Error sending a frame to the encoder: %1").arg(av::err2str(ret)));
 
         return read_packets();
     }
@@ -184,7 +184,7 @@ public:
             if ( ret >= 0 )
                 value = nullptr;
             else
-                throw Error(i18n("Could not set dict key `%1`: %2", QString(key), err2str(ret)));
+                throw Error(QObject::tr("Could not set dict key `%1`: %2").arg(QString(key)).arg(err2str(ret)));
         }
 
         void set(const QString& s)
@@ -198,7 +198,7 @@ public:
             if ( ret >= 0 )
                 value = nullptr;
             else
-                throw Error(i18n("Could not set dict key `%1`: %2", QString(key), err2str(ret)));
+                throw Error(QObject::tr("Could not set dict key `%1`: %2").arg(QString(key)).arg(err2str(ret)));
         }
 
         Item& operator=(const char* text)
@@ -243,7 +243,7 @@ public:
     {
         int ret = av_dict_set(av_dict, key.toUtf8().data(), nullptr, 0);
         if ( ret < 0 )
-            throw Error(i18n("Could not erase dict key `%1`: %2", key, err2str(ret)));
+            throw Error(QObject::tr("Could not erase dict key `%1`: %2").arg(key).arg(err2str(ret)));
     }
 
 private:
@@ -264,7 +264,7 @@ public:
     {
         int ret = av_dict_copy(&local_dict, other.local_dict, 0);
         if ( ret < 0 )
-            throw Error(i18n("Could not copy dict: %1", err2str(ret)));
+            throw Error(QObject::tr("Could not copy dict: %1").arg(err2str(ret)));
     }
 
     Dict& operator=(Dict&& other)
@@ -277,7 +277,7 @@ public:
     {
         int ret = av_dict_copy(&local_dict, other.local_dict, 0);
         if ( ret < 0 )
-            throw Error(i18n("Could not copy dict `%1`: %2", err2str(ret)));
+            throw Error(QObject::tr("Could not copy dict `%1`: %2").arg(err2str(ret)));
         return *this;
     }
 
@@ -315,7 +315,7 @@ public:
         // allocate the buffers for the frame data
         ret = av_frame_get_buffer(picture, 0);
         if (ret < 0)
-            throw av::Error(i18n("Could not allocate frame data."));
+            throw av::Error(QObject::tr("Could not allocate frame data."));
 
         return picture;
     }
@@ -400,7 +400,7 @@ public:
         : ost(oc, codec_id)
     {
         if ( ost.codec->type != AVMEDIA_TYPE_VIDEO )
-            throw Error(i18n("No video codec"));
+            throw Error(QObject::tr("No video codec"));
 
         ost.codec_context->codec_id = codec_id;
 
@@ -421,14 +421,14 @@ public:
         ost.stream->time_base = AVRational{ 1, fps };
         ost.codec_context->time_base = ost.stream->time_base;
 
-        // Q_EMIT one intra frame every twelve frames at most
+        // emit one intra frame every twelve frames at most
         ost.codec_context->gop_size = 12;
 
         // get_format() for some reason returns an invalid value
         ost.codec_context->pix_fmt = best_pixel_format(ost.codec->pix_fmts);
 
         if ( ost.codec_context->pix_fmt == AV_PIX_FMT_NONE )
-                throw av::Error(i18n("Could not determine pixel format"));
+                throw av::Error(QObject::tr("Could not determine pixel format"));
 
 //         // just for testing, we also add B-frames
 //         if ( ost.codec_context->codec_id == AV_CODEC_ID_MPEG2VIDEO )
@@ -438,19 +438,19 @@ public:
         // open the codec
         ret = avcodec_open2(ost.codec_context, ost.codec, options.dict());
         if (ret < 0)
-            throw av::Error(i18n("Could not open video codec: %1", av::err2str(ret)));
+            throw av::Error(QObject::tr("Could not open video codec: %1").arg(av::err2str(ret)));
 
         // allocate and init a re-usable frame
         ost.frame = alloc_picture(ost.codec_context->pix_fmt, ost.codec_context->width, ost.codec_context->height);
         if (!ost.frame)
-            throw av::Error(i18n("Could not allocate video frame"));
+            throw av::Error(QObject::tr("Could not allocate video frame"));
 
         ost.tmp_frame = nullptr;
 
         /* copy the stream parameters to the muxer */
         ret = avcodec_parameters_from_context(ost.stream->codecpar, ost.codec_context);
         if (ret < 0)
-            throw av::Error(i18n("Could not copy the stream parameters"));
+            throw av::Error(QObject::tr("Could not copy the stream parameters"));
     }
 
     static void fill_image(AVFrame *pict, const QImage& image)
@@ -470,7 +470,7 @@ public:
         // when we pass a frame to the encoder, it may keep a reference to it
         // internally; make sure we do not overwrite it here
         if ( av_frame_make_writable(ost.frame) < 0 )
-            throw av::Error(i18n("Error while creating video frame"));
+            throw av::Error(QObject::tr("Error while creating video frame"));
 
         auto format = image_format(image.format());
         if ( format.first == AV_PIX_FMT_NONE )
@@ -494,13 +494,13 @@ public:
                     nullptr, nullptr, nullptr
                 );
                 if (!ost.sws_context)
-                    throw av::Error(i18n("Could not initialize the conversion context"));
+                    throw av::Error(QObject::tr("Could not initialize the conversion context"));
             }
             if ( !ost.tmp_frame )
             {
                 ost.tmp_frame = alloc_picture(format.first, image.width(), image.height());
                 if (!ost.tmp_frame)
-                    throw av::Error(i18n("Could not allocate temporary picture"));
+                    throw av::Error(QObject::tr("Could not allocate temporary picture"));
             }
             fill_image(ost.tmp_frame, image);
             sws_scale(ost.sws_context, (const uint8_t * const *) ost.tmp_frame->data,
@@ -652,12 +652,7 @@ private:
         return device->read((char*)buf, buf_size);
     }
 
-
-#if LIBAVFORMAT_VERSION_MAJOR >= 61
-    static int write_packet(void *opaque, const uint8_t *buf, int buf_size)
-#else
     static int write_packet(void *opaque, uint8_t *buf, int buf_size)
-#endif
     {
         QIODevice* device = (QIODevice*)opaque;
         return device->write((char*)buf, buf_size);
@@ -747,11 +742,11 @@ bool glaxnimate::io::video::VideoFormat::on_save(QIODevice& dev, const QString& 
 
         if ( !oc )
         {
-            warning(i18n("Could not deduce output format from file extension: using MPEG."));
+            warning(tr("Could not deduce output format from file extension: using MPEG."));
             avformat_alloc_output_context2(&oc, nullptr, "mpeg", filename.data());
             if ( !oc )
             {
-                error(i18n("Could not find output format"));
+                error(tr("Could not find output format"));
                 return false;
             }
         }
@@ -779,7 +774,7 @@ bool glaxnimate::io::video::VideoFormat::on_save(QIODevice& dev, const QString& 
         AVCodecID codec_id = oc->oformat->video_codec;
         if ( codec_id == AV_CODEC_ID_NONE )
         {
-            error(i18n("No video codec"));
+            error(tr("No video codec"));
             return false;
         }
 
@@ -814,7 +809,7 @@ bool glaxnimate::io::video::VideoFormat::on_save(QIODevice& dev, const QString& 
         av::Video video(oc, opt, codec_id, 7000000, width, height, fps);
 
         // log format info
-        av_dump_format(oc, 0, filename.constData(), 1);
+        av_dump_format(oc, 0, filename, 1);
 
         // open the output file, if needed
         av::DeviceIo io(&dev);
@@ -824,18 +819,18 @@ bool glaxnimate::io::video::VideoFormat::on_save(QIODevice& dev, const QString& 
         int ret = avformat_write_header(oc, opt.dict());
         if ( ret < 0 )
         {
-            error(i18n("Error occurred when opening output file: %1", av::err2str(ret)));
+            error(tr("Error occurred when opening output file: %1").arg(av::err2str(ret)));
             return false;
         }
 
         auto first_frame = comp->animation->first_frame.get();
         auto last_frame = comp->animation->last_frame.get();
         QColor background = settings["background"].value<QColor>();
-        Q_EMIT progress_max_changed(last_frame - first_frame);
+        emit progress_max_changed(last_frame - first_frame);
         for ( auto i = first_frame; i < last_frame; i++ )
         {
             video.write_video_frame(comp->render_image(i, {width, height}, background));
-            Q_EMIT progress(i - first_frame);
+            emit progress(i - first_frame);
         }
 
         video.flush();
@@ -859,10 +854,10 @@ std::unique_ptr<app::settings::SettingsGroup> glaxnimate::io::video::VideoFormat
 {
     return std::make_unique<app::settings::SettingsGroup>(app::settings::SettingList{
         //                      slug            label             description                                           default             min max
-        app::settings::Setting{"background",    i18n("Background"), i18n("Background color"),                               QColor(0, 0, 0, 0)},
-        app::settings::Setting{"width",         i18n("Width"),      i18n("If not 0, it will overwrite the size"),           comp->width.get(),  0, 99999},
-        app::settings::Setting{"height",        i18n("Height"),     i18n("If not 0, it will overwrite the size"),           comp->height.get(), 0, 99999},
-        app::settings::Setting{"verbose",       i18n("Verbose"),    i18n("Show verbose information on the conversion"),     false},
+        app::settings::Setting{"background",    tr("Background"), tr("Background color"),                               QColor(0, 0, 0, 0)},
+        app::settings::Setting{"width",         tr("Width"),      tr("If not 0, it will overwrite the size"),           comp->width.get(),  0, 99999},
+        app::settings::Setting{"height",        tr("Height"),     tr("If not 0, it will overwrite the size"),           comp->height.get(), 0, 99999},
+        app::settings::Setting{"verbose",       tr("Verbose"),    tr("Show verbose information on the conversion"),     false},
     });
 }
 

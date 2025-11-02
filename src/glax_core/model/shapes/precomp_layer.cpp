@@ -27,7 +27,7 @@ QIcon glaxnimate::model::PreCompLayer::tree_icon() const
 
 QString glaxnimate::model::PreCompLayer::type_name_human() const
 {
-    return i18n("Composition Layer");
+    return tr("Composition Layer");
 }
 
 glaxnimate::model::FrameTime glaxnimate::model::PreCompLayer::relative_time(glaxnimate::model::FrameTime time) const
@@ -38,7 +38,7 @@ glaxnimate::model::FrameTime glaxnimate::model::PreCompLayer::relative_time(glax
 void glaxnimate::model::PreCompLayer::set_time(glaxnimate::model::FrameTime t)
 {
     ShapeElement::set_time(relative_time(t));
-    Q_EMIT document()->graphics_invalidated();
+    emit document()->graphics_invalidated();
 }
 
 std::vector<glaxnimate::model::DocumentNode *> glaxnimate::model::PreCompLayer::valid_precomps() const
@@ -71,7 +71,7 @@ void glaxnimate::model::PreCompLayer::on_paint(QPainter* painter, glaxnimate::mo
 void glaxnimate::model::PreCompLayer::on_transform_matrix_changed()
 {
     propagate_bounding_rect_changed();
-    Q_EMIT local_transform_matrix_changed(local_transform_matrix(time()));
+    emit local_transform_matrix_changed(local_transform_matrix(time()));
     propagate_transform_matrix_changed(transform_matrix(time()), group_transform_matrix(time()));
 }
 

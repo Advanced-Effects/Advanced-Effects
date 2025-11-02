@@ -54,7 +54,7 @@ public:
 
     Q_INVOKABLE bool can_handle_filename(const QString& filename, glaxnimate::io::ImportExport::Direction direction) const
     {
-        return can_handle_extension(QFileInfo(filename).completeSuffix(), direction) || can_handle_extension(QFileInfo(filename).suffix(), direction);
+        return can_handle_extension(QFileInfo(filename).completeSuffix(), direction);
     }
 
     /**
@@ -101,17 +101,17 @@ public:
 
     Q_INVOKABLE void warning(const QString& message)
     {
-        Q_EMIT this->message(message, app::log::Warning);
+        emit this->message(message, app::log::Warning);
     }
 
     Q_INVOKABLE void information(const QString& message)
     {
-        Q_EMIT this->message(message, app::log::Info);
+        emit this->message(message, app::log::Info);
     }
 
     Q_INVOKABLE void error(const QString& message)
     {
-        Q_EMIT this->message(message, app::log::Error);
+        emit this->message(message, app::log::Error);
     }
 
 protected:
@@ -140,7 +140,7 @@ protected:
         return false;
     }
 
-Q_SIGNALS:
+signals:
     void message(const QString& message, app::log::Severity severity);
     void progress_max_changed(int max);
     void progress(int value);

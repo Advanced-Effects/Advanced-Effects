@@ -35,7 +35,7 @@ public:
 
     QString type_name_human() const override
     {
-        return i18n("Path");
+        return tr("Path");
     }
 
     math::bezier::Bezier to_bezier(FrameTime t) const override
@@ -59,7 +59,7 @@ private:
         shape.set_closed(closed);
     }
 
-Q_SIGNALS:
+signals:
     void shape_changed(const math::bezier::Bezier& bez);
 };
 

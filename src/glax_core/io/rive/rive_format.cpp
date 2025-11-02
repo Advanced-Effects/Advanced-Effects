@@ -21,7 +21,7 @@ bool glaxnimate::io::rive::RiveFormat::on_open(QIODevice& file, const QString&, 
     BinaryInputStream stream(&file);
     if ( stream.read(4) != "RIVE" )
     {
-        error(i18n("Unsupported format"));
+        error(tr("Unsupported format"));
         return false;
     }
 
@@ -31,19 +31,19 @@ bool glaxnimate::io::rive::RiveFormat::on_open(QIODevice& file, const QString&, 
 
     if ( stream.has_error() )
     {
-        error(i18n("Could not read header"));
+        error(tr("Could not read header"));
         return false;
     }
 
     if ( vmaj != RiveFormat::format_version )
     {
-        error(i18n("Loading unsupported rive file version %1.%2, the only supported version is %3", vmaj, vmin, 7));
+        error(tr("Loading unsupported rive file version %1.%2, the only supported version is %3").arg(vmaj).arg(vmin).arg(7));
         return false;
     }
 
     if ( stream.has_error() )
     {
-        error(i18n("Could not read property table"));
+        error(tr("Could not read property table"));
         return false;
     }
 

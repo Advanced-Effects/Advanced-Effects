@@ -39,7 +39,7 @@ public:
 
     static QString static_type_name_human()
     {
-        return i18n("Group");
+        return tr("Group");
     }
 
     void add_shapes(model::FrameTime t, math::bezier::MultiBezier & bez, const QTransform& transform) const override;
@@ -52,7 +52,7 @@ public:
 
     std::unique_ptr<ShapeElement> to_path() const override;
 
-Q_SIGNALS:
+signals:
     void opacity_changed(float op);
 
 protected:
@@ -61,8 +61,9 @@ protected:
     void on_graphics_changed() override;
     void on_composition_changed(model::Composition* old_comp, model::Composition* new_comp) override;
 
-private Q_SLOTS:
+private slots:
     void on_transform_matrix_changed();
 };
 
 } // namespace glaxnimate::model
+

@@ -8,17 +8,11 @@
 
 #include <QGuiApplication>
 
-#include "translation.hpp"
-
 #include "application_info_generated.hpp"
-#include "utils/trace.hpp"
-#include "utils/tar.hpp"
-#include "io/video/video_format.hpp"
-#include "app/scripting/python/python_engine.hpp"
 
 QString glaxnimate::AppInfo::name() const
 {
-    return i18n("Glaxnimate");
+    return QObject::tr("Glaxnimate");
 }
 
 QString glaxnimate::AppInfo::slug() const
@@ -41,7 +35,25 @@ QUrl glaxnimate::AppInfo::url_docs() const
     return QUrl(URL_DOCS);
 }
 
+QUrl glaxnimate::AppInfo::url_issues() const
+{
+    return QUrl(URL_ISSUES);
+}
+
 QString glaxnimate::AppInfo::description() const
 {
     return PROJECT_DESCRIPTION;
+}
+
+QUrl glaxnimate::AppInfo::url_donate() const
+{
+    return QUrl(URL_DONATE);
+}
+
+void glaxnimate::AppInfo::init_qapplication() const
+{
+    qApp->setApplicationName(slug());
+    qApp->setApplicationVersion(version());
+    qApp->setOrganizationName(organization());
+    qApp->setApplicationDisplayName(name());
 }

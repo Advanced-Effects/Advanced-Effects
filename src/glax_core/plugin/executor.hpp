@@ -15,7 +15,6 @@ class PluginScript;
 class Executor
 {
 public:
-    virtual ~Executor() = default;
     virtual bool execute(const plugin::Plugin& plugin, const plugin::PluginScript& script, const QVariantList& in_args) = 0;
     virtual QVariant get_global(const QString& name) = 0;
 };

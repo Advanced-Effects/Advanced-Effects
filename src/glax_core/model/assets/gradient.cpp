@@ -80,7 +80,7 @@ QGradientStops math::lerp<QGradientStops>(const QGradientStops& a, const QGradie
 
 QString glaxnimate::model::GradientColors::type_name_human() const
 {
-    return i18n("Gradient");
+    return tr("Gradient");
 }
 
 
@@ -130,7 +130,7 @@ static QVariant split_gradient(QGradientStops colors, int index, float factor, c
 
 void glaxnimate::model::GradientColors::split_segment(int segment_index, float factor, const QColor& new_color)
 {
-    command::UndoMacroGuard guard(i18n("Add color to %1", name.get()), document());
+    command::UndoMacroGuard guard(tr("Add color to %1").arg(name.get()), document());
     if ( segment_index < 0 )
         segment_index = 0;
 
@@ -149,7 +149,7 @@ void glaxnimate::model::GradientColors::split_segment(int segment_index, float f
 
 void glaxnimate::model::GradientColors::remove_stop(int index)
 {
-    command::UndoMacroGuard guard(i18n("Remove color from %1", name.get()), document());
+    command::UndoMacroGuard guard(tr("Remove color from %1").arg(name.get()), document());
 
     if ( index < 0 )
         index = 0;
@@ -186,7 +186,7 @@ bool glaxnimate::model::Gradient::is_valid_ref ( glaxnimate::model::DocumentNode
 
 void glaxnimate::model::Gradient::on_ref_visual_changed()
 {
-    Q_EMIT style_changed();
+    emit style_changed();
 }
 
 void glaxnimate::model::Gradient::on_ref_changed ( glaxnimate::model::GradientColors* new_ref, glaxnimate::model::GradientColors* old_ref )
@@ -208,7 +208,7 @@ void glaxnimate::model::Gradient::on_ref_changed ( glaxnimate::model::GradientCo
 
 QString glaxnimate::model::Gradient::type_name_human() const
 {
-    return i18n("%1 Gradient", gradient_type_name(type.get()));
+    return tr("%1 Gradient").arg(gradient_type_name(type.get()));
 }
 
 QBrush glaxnimate::model::Gradient::brush_style ( glaxnimate::model::FrameTime t ) const
@@ -282,11 +282,11 @@ QString glaxnimate::model::Gradient::gradient_type_name(GradientType t)
     switch ( t )
     {
         case Linear:
-            return i18n("Linear");
+            return tr("Linear");
         case Radial:
-            return i18n("Radial");
+            return tr("Radial");
         case Conical:
-            return i18n("Conical");
+            return tr("Conical");
     }
 
     return {};
@@ -294,7 +294,7 @@ QString glaxnimate::model::Gradient::gradient_type_name(GradientType t)
 
 void glaxnimate::model::Gradient::on_property_changed(const glaxnimate::model::BaseProperty*, const QVariant&)
 {
-    Q_EMIT style_changed();
+    emit style_changed();
 }
 
 bool glaxnimate::model::Gradient::remove_if_unused(bool)

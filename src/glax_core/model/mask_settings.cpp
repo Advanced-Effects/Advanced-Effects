@@ -10,5 +10,5 @@ GLAXNIMATE_OBJECT_IMPL(glaxnimate::model::MaskSettings)
 
 QString glaxnimate::model::MaskSettings::type_name_human() const
 {
-    return i18n("Mask");
+    return tr("Mask");
 }

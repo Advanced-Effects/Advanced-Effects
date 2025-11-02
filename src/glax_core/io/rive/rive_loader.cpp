@@ -176,7 +176,7 @@ struct LoadCotext
         {
             if ( !artboard )
             {
-                format->warning(i18n("Unexpected Keyed Object"));
+                format->warning(QObject::tr("Unexpected Keyed Object"));
                 return;
             }
             auto id = object->get<Identifier>("objectId", artboard->child_count);
@@ -184,7 +184,7 @@ struct LoadCotext
             keyed_property = nullptr;
             if ( !keyed_object )
             {
-                format->warning(i18n("Invalid Keyed Object id %1", id));
+                format->warning(QObject::tr("Invalid Keyed Object id %1").arg(id));
                 return;
             }
         }
@@ -192,7 +192,7 @@ struct LoadCotext
         {
             if ( !keyed_object )
             {
-                format->warning(i18n("Unexpected Keyed Property"));
+                format->warning(QObject::tr("Unexpected Keyed Property"));
                 return;
             }
 
@@ -201,7 +201,7 @@ struct LoadCotext
 
             if ( !prop )
             {
-                format->warning(i18n("Unknown Keyed Property id %1", id));
+                format->warning(QObject::tr("Unknown Keyed Property id %1").arg(id));
                 return;
             }
 
@@ -212,7 +212,7 @@ struct LoadCotext
         {
             if ( !artboard )
             {
-                format->warning(i18n("Unexpected Animation"));
+                format->warning(QObject::tr("Unexpected Animation"));
                 return;
             }
 
@@ -228,7 +228,7 @@ struct LoadCotext
         {
             if ( assets.empty() )
             {
-                format->warning(i18n("Unexpected Asset Contents"));
+                format->warning(QObject::tr("Unexpected Asset Contents"));
                 return;
             }
 
@@ -239,7 +239,7 @@ struct LoadCotext
             if ( auto img = qobject_cast<model::Bitmap*>(assets.back().asset) )
             {
                 if ( !img->from_raw_data(data) )
-                    format->warning(i18n("Invalid Image Data"));
+                    format->warning(QObject::tr("Invalid Image Data"));
             }
         }
         else if ( object->has_type(TypeId::Asset) )
@@ -250,7 +250,7 @@ struct LoadCotext
         {
             if ( !keyed_property )
             {
-                format->warning(i18n("Unexpected Keyframe"));
+                format->warning(QObject::tr("Unexpected Keyframe"));
                 return;
             }
 
@@ -265,7 +265,7 @@ struct LoadCotext
             auto parent_id = object->get<Identifier>("parentId");
             auto parent = artboard_child(parent_id);
             if ( !parent )
-                format->warning(i18n("Could not find parent with id %1", parent_id));
+                format->warning(QObject::tr("Could not find parent with id %1").arg(parent_id));
             else
                 parent->children().push_back(object);
         }
@@ -315,7 +315,7 @@ struct LoadCotext
         {
             if ( child == parent )
             {
-                format->error(i18n("Parent circular reference detected"));
+                format->error(QObject::tr("Parent circular reference detected"));
                 continue;
             }
 
@@ -738,16 +738,17 @@ struct LoadCotext
 } // namespace
 
 RiveLoader::RiveLoader(BinaryInputStream& stream, RiveFormat* format)
-    : stream(stream),
+    : document(nullptr),
+    stream(stream),
     format(format)
 {
     extra_props = read_property_table();
     QObject::connect(&types, &TypeSystem::type_not_found, [format](int type){
-        format->error(i18n("Unknown object of type %1", int(type)));
+        format->error(QObject::tr("Unknown object of type %1").arg(int(type)));
     });
 
     if ( stream.has_error() )
-        format->error(i18n("Could not read property table"));
+        format->error(QObject::tr("Could not read property table"));
 
 }
 
@@ -788,7 +789,7 @@ Object RiveLoader::read_object()
     auto type_id = TypeId(stream.read_uint_leb128());
     if ( stream.has_error() )
     {
-        format->error(i18n("Could not load object type ID"));
+        format->error(QObject::tr("Could not load object type ID"));
         return {};
     }
 
@@ -802,11 +803,8 @@ Object RiveLoader::read_object()
         Identifier prop_id = stream.read_uint_leb128();
         if ( stream.has_error() )
         {
-            format->error(i18n(
-                "Could not load property ID in %1 (%2)",
-                int(type_id),
-                obj.definition()->name
-            ));
+            format->error(QObject::tr("Could not load property ID in %1 (%2)")
+                .arg(int(type_id)).arg(obj.definition()->name));
             return {};
         }
 
@@ -819,22 +817,14 @@ Object RiveLoader::read_object()
             auto unknown_it = extra_props.find(prop_id);
             if ( unknown_it == extra_props.end() )
             {
-                format->error(i18n(
-                    "Unknown property %1 of %2 (%3)",
-                    prop_id,
-                    int(type_id),
-                    obj.definition()->name
-                ));
+                format->error(QObject::tr("Unknown property %1 of %2 (%3)")
+                    .arg(prop_id).arg(int(type_id)).arg(obj.definition()->name));
                 return {};
             }
             else
             {
-                format->warning(i18n(
-                    "Skipping unknown property %1 of %2 (%3)",
-                    prop_id,
-                    int(type_id),
-                    obj.definition()->name
-                ));
+                format->warning(QObject::tr("Skipping unknown property %1 of %2 (%3)")
+                        .arg(prop_id).arg(int(type_id)).arg(obj.definition()->name));
             }
         }
         else
@@ -842,13 +832,8 @@ Object RiveLoader::read_object()
             obj.set(prop_def, read_property_value(prop_def->type));
             if ( stream.has_error() )
             {
-                format->error(i18n(
-                    "Error loading property %1 (%2) of %3 (%4)",
-                    prop_id,
-                    prop_def->name,
-                    int(type_id),
-                    obj.definition()->name
-                ));
+                format->error(QObject::tr("Error loading property %1 (%2) of %3 (%4)")
+                    .arg(prop_id).arg(prop_def->name).arg(int(type_id)).arg(obj.definition()->name));
                 return {};
             }
         }

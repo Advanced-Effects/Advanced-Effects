@@ -45,7 +45,7 @@ public:
     Q_INVOKABLE void split_segment(int segment_index, float factor = 0.5, const QColor& new_color = {});
     Q_INVOKABLE void remove_stop(int index);
 
-Q_SIGNALS:
+signals:
     void colors_changed(const QGradientStops&);
 };
 
@@ -96,7 +96,7 @@ private:
 
     void on_property_changed(const BaseProperty* prop, const QVariant& value) override;
 
-Q_SIGNALS:
+signals:
     void colors_changed_from(GradientColors* old_use, GradientColors* new_use);
 };
 
