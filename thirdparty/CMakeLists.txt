@@ -1,3 +1,5 @@
+add_subdirectory(potrace)
+
 add_subdirectory(QtAppSetup)
 
 add_subdirectory(framework)
