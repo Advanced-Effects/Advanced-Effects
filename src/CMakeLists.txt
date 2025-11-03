@@ -1,5 +1,7 @@
 add_subdirectory(context)
 
+add_subdirectory(glax_core)
+
 add_subdirectory(projectscene)
 
 add_subdirectory(appshell)

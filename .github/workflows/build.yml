@@ -20,7 +20,7 @@ jobs:
                         - name: Cache APT Packages
                           uses: awalsh128/cache-apt-pkgs-action@v1.5.3
                           with:
-                                  packages: cmake ninja-build clang g++ mesa-utils libglu1-mesa-dev freeglut3-dev mesa-common-dev libglew-dev libglfw3-dev libglm-dev libfontconfig1-dev libfreetype-dev libjpeg-turbo8-dev libpng-dev libwebp-dev libharfbuzz-dev libicu-dev
+                                  packages: cmake ninja-build clang g++ mesa-utils libglu1-mesa-dev freeglut3-dev mesa-common-dev libglew-dev libglfw3-dev libglm-dev libfontconfig1-dev libfreetype-dev libjpeg-turbo8-dev libpng-dev libwebp-dev libharfbuzz-dev libicu-dev libarchive-dev libavcodec-dev libavutil-dev libavformat-dev libswscale-dev
 
                         - name: Cache Qt
                           uses: actions/cache@v4
@@ -56,6 +56,8 @@ jobs:
                                   sudo apt-get install -y libglew-dev libglfw3-dev libglm-dev
                                   sudo apt-get install -y libfontconfig1-dev libfreetype-dev libjpeg-turbo8-dev libpng-dev libwebp-dev
                                   sudo apt-get install -y libharfbuzz-dev libicu-dev
+                                  sudo apt-get install -y libavcodec-dev libavutil-dev libavformat-dev libswscale-dev
+                                  sudo apt-get install -y python3 python3-pip
 
                         - name: Cache build directory
                           uses: actions/cache@v4
@@ -69,8 +71,10 @@ jobs:
                           run: |
                                   mkdir -p build
                                   cd build
-                                  cmake -DCMAKE_C_COMPILER=clang \
+                                  cmake -G Ninja \
+                                  -DCMAKE_C_COMPILER=clang \
                                   -DCMAKE_CXX_COMPILER=clang++ \
+                                  -DPYTHON_EXECUTABLE=/usr/bin/python3 \
                                   ..
                                   cmake --build . -j$(nproc)
 
