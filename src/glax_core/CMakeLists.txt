@@ -134,7 +134,7 @@ configure_file(
 )
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-include_directories(${CMAKE_SOURCE_DIR}/external/QtAppSetup/src)
+include_directories(${CMAKE_SOURCE_DIR}/thirdparty/QtAppSetup/src)
 
 if ( GLAXNIMATE_SYSTEM_POTRACE )
         include_directories(${Potrace_INCLUDE_DIRS})
