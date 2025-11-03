@@ -53,6 +53,7 @@ jobs:
                                   cd build
                                   cmake -DCMAKE_C_COMPILER=clang \
                                   -DCMAKE_CXX_COMPILER=clang++ \
+                                  -DPYTHON_EXECUTABLE=/usr/bin/python3 \
                                   ..
                                   cmake --build . -j$(nproc)
 
