@@ -15,14 +15,32 @@ jobs:
                         - name: 📥 Checkout repository
                           uses: actions/checkout@v4
                           with:
-                            submodules: 'recursive'
+                                  submodules: "recursive"
 
                         - name: Cache APT Packages
                           uses: awalsh128/cache-apt-pkgs-action@v1.5.3
                           with:
                                   packages: cmake ninja-build clang g++ mesa-utils libglu1-mesa-dev freeglut3-dev mesa-common-dev libglew-dev libglfw3-dev libglm-dev libfontconfig1-dev libfreetype-dev libjpeg-turbo8-dev libpng-dev libwebp-dev libharfbuzz-dev libicu-dev
 
+                        - name: Cache Qt
+                          uses: actions/cache@v4
+                          with:
+                                  path: /home/runner/Qt
+                                  restore-keys: |
+                                          ${{ runner.os }}-qt-
+
+                        - name: Check if Qt is cached or not
+                          run: |
+                                  if [ ! -d "~/Qt" ]; then
+                                        echo "Qt is not installed"
+                                        echo "::set-output name=qt_exists::false"
+                                  else
+                                        echo "Qt is installed."
+                                        echo "::set-output name=qt_exists::true"
+                                  fi
+
                         - name: Get Qt framework
+                          if: steps.check_dir.outputs.qt_exists == 'false'
                           uses: jurplel/install-qt-action@v4
                           with:
                                   version: 6.9.1
