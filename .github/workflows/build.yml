@@ -26,6 +26,7 @@ jobs:
                           uses: actions/cache@v4
                           with:
                                   path: /home/runner/Qt
+                                  key: ${{ runner.os }}-qt-${{ hashFiles('**/*') }}
                                   restore-keys: |
                                           ${{ runner.os }}-qt-
 
