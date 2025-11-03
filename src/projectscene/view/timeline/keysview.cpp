@@ -16,7 +16,7 @@ void KeysView::drawTimelineControls(QPainter *painter)
         // (Fixed to the top)
 
         auto size = painter->viewport();
-        int controlsHeight = 32;
+        int controlsHeight = 36;
 
         painter->setPen(Qt::black);
         painter->fillRect(size.left(), 0, size.right(), controlsHeight, Qt::black);

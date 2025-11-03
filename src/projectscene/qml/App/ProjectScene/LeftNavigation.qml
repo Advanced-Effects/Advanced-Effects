@@ -8,14 +8,13 @@ Item {
         QuickActions {
                 id: quickActions
 
-                height: 32
-
                 anchors {
                         top: root.top
                         left: root.left
                         right: root.right
-                        bottom: objectsTreeView.top
                 }
+
+                z: 100
         }
 
         ObjectsTreeView {
