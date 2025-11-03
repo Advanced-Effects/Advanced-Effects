@@ -138,6 +138,8 @@ include_directories(${CMAKE_SOURCE_DIR}/thirdparty/QtAppSetup/src)
 
 if ( GLAXNIMATE_SYSTEM_POTRACE )
         include_directories(${Potrace_INCLUDE_DIRS})
+else()
+        include_directories(${PROJECT_SOURCE_DIR}/thirdparty/potrace/src)
 endif()
 
 add_library(${LIB_NAME_CORE} OBJECT ${SOURCES})
