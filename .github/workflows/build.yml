@@ -31,6 +31,7 @@ jobs:
                                           ${{ runner.os }}-qt-
 
                         - name: Check if Qt is cached or not
+                          id: check_dir
                           run: |
                                   if [ ! -d "~/Qt" ]; then
                                         echo "Qt is not installed"
