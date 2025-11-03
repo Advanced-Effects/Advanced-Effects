@@ -85,6 +85,8 @@ option(AU4_BUILD_APPSHELL_MODULE "Build appshell module" ON)
 
 # === Setup ===
 
+option(GLAXNIMATE_SYSTEM_POTRACE "Get potrace from the system. If OFF (default), we build it ourselves from thirdparty/potrace." OFF)
+
 # === Pack ===
 option(MU_RUN_LRELEASE "Generate .qm files" ON)
 
