@@ -27,3 +27,12 @@ using namespace muse::async;
 GlobalContext::GlobalContext()
 {
 }
+
+Document* GlobalContext::currentProjectFile() {
+        return m_currentProjectFile;
+}
+
+void GlobalContext::setCurrentProjectFile(Document* document) {
+        m_currentProjectFile = document;
+        emit currentProjectFileChanged(document);
+}

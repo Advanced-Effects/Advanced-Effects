@@ -35,7 +35,7 @@ using namespace muse::ui;
 
 static const muse::Uri PROJECT_PAGE_URI("app://edit");
 
-static const QString NOTATION_NAVIGATION_PANEL("ScoreView");
+static const QString NOTATION_NAVIGATION_PANEL("CentralWidget");
 
 void UiContextResolver::init()
 {

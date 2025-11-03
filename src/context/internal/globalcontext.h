@@ -28,10 +28,19 @@ namespace mu::context {
 class GlobalContext : public IGlobalContext
 {
 public:
-
     GlobalContext();
 
+    Document* currentProjectFile() override;
+    void setCurrentProjectFile(Document* document) override;
+
+signals:
+        void currentProjectFileChanged(Document* document) override;
+
+private:
+        QList<Document> m_openProjects;
+        Document* m_currentProjectFile = nullptr;
 };
+
 }
 
 #endif // MU_CONTEXT_GLOBALCONTEXT_H

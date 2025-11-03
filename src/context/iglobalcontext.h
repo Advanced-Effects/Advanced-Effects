@@ -22,17 +22,29 @@
 #ifndef MU_CONTEXT_IGLOBALCONTEXT_H
 #define MU_CONTEXT_IGLOBALCONTEXT_H
 
+#include <QList>
+
 #include "async/notification.h"
 #include "modularity/imoduleinterface.h"
-#include "audio/iplayer.h"
+
+#include "glax_core/model/document.hpp"
 
 namespace mu::context {
+
+using namespace glaxnimate::model;
+
 class IGlobalContext : MODULE_EXPORT_INTERFACE
 {
-    INTERFACE_ID(mu::context::IGlobalContext)
+        INTERFACE_ID(mu::context::IGlobalContext)
 
 public:
-    virtual ~IGlobalContext() = default;
+        virtual ~IGlobalContext() = default;
+
+        virtual Document* currentProjectFile() = 0;
+        virtual void setCurrentProjectFile(Document* document) = 0;
+
+signals:
+        virtual void currentProjectFileChanged(Document*) = 0;
 };
 }
 
