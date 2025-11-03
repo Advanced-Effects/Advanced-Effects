@@ -27,7 +27,7 @@
 #include "async/notification.h"
 #include "modularity/imoduleinterface.h"
 
-#include "glax_core/model/document.hpp"
+#include "model/document.hpp"
 
 namespace mu::context {
 
