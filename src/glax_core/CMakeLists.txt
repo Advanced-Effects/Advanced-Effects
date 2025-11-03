@@ -1,9 +1,12 @@
 # SPDX-FileCopyrightText: 2019-2023 Mattia Basaglia <dev@dragon.best>
 # SPDX-License-Identifier: BSD-2-Clause
 
-set(LIB_NAME_CORE app_glax_core)
+declare_module(app_glax_core)
 
-set(SOURCES
+set(MODULE app_glax_core)
+set(MODULE_ALIAS app::glax_core)
+
+set(MODULE_SRC
 
 app_info.cpp
 
@@ -112,41 +115,34 @@ utils/gzip.cpp
 utils/quantize.cpp
 utils/trace.cpp
 utils/trace_wrapper.cpp
+# NOT android sources
+io/video/video_format.cpp
+utils/tar.cpp
 )
 
-if ( NOT ANDROID )
-        list(APPEND SOURCES
-        io/video/video_format.cpp
-        utils/tar.cpp
-    )
-        find_package(Libav COMPONENTS codec util format swscale REQUIRED)
-        include_directories(${Libav_INCLUDE_DIRS})
-
-        find_package(LibArchive REQUIRED)
-        include_directories(${LibArchive_INCLUDE_DIRS})
-endif()
+find_package(Libav COMPONENTS codec util format swscale REQUIRED)
+find_package(LibArchive REQUIRED)
 
 find_package(ZLIB REQUIRED)
+
+set(MODULE_LINK QtAppSetup ZLIB::ZLIB Qt${QT_VERSION_MAJOR}::Xml Qt${QT_VERSION_MAJOR}::Network potrace ${Libav_LIBRARIES} ${LibArchive_LIBRARIES})
+
+if ( NOT GLAXNIMATE_SYSTEM_POTRACE )
+        set(Potrace_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/thirdparty/potrace/src)
+endif()
+
+set(MODULE_INCLUDE
+        {CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/thirdparty/QtAppSetup/src
+        ${Potrace_INCLUDE_DIRS}
+        ${Libav_INCLUDE_DIRS}
+        ${LibArchive_INCLUDE_DIRS})
+
+setup_module()
 
 configure_file(
     ${CMAKE_CURRENT_SOURCE_DIR}/application_info_generated.in.hpp
     ${CMAKE_CURRENT_BINARY_DIR}/application_info_generated.hpp
 )
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-include_directories(${CMAKE_SOURCE_DIR}/thirdparty/QtAppSetup/src)
-
-if ( GLAXNIMATE_SYSTEM_POTRACE )
-        include_directories(${Potrace_INCLUDE_DIRS})
-else()
-        include_directories(${PROJECT_SOURCE_DIR}/thirdparty/potrace/src)
-endif()
-
-add_library(${LIB_NAME_CORE} OBJECT ${SOURCES})
-target_link_libraries(${LIB_NAME_CORE} PUBLIC QtAppSetup ZLIB::ZLIB Qt${QT_VERSION_MAJOR}::Xml Qt${QT_VERSION_MAJOR}::Network potrace)
-set_property(TARGET ${LIB_NAME_CORE} APPEND PROPERTY AUTOMOC_MACRO_NAMES "GLAXNIMATE_OBJECT")
-target_include_directories(${LIB_NAME_CORE} PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>)
-
-if ( NOT ANDROID )
-        target_link_libraries(${LIB_NAME_CORE} PUBLIC ${Libav_LIBRARIES} ${LibArchive_LIBRARIES} )
-endif()
+set_property(TARGET app_glax_core APPEND PROPERTY AUTOMOC_MACRO_NAMES "GLAXNIMATE_OBJECT")

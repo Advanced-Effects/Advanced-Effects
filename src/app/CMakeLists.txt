@@ -83,7 +83,7 @@ set(LINK_LIB
     muse::diagnostics
 
     QtAppSetup
-    app_glax_core
+    app::glax_core
 
     app::context
     app::projectscene
