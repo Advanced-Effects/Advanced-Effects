@@ -6,7 +6,7 @@
 
 #include "trace.hpp"
 
-#include <potracelib.h>
+#include "potracelib.h"
 
 #include "utils/color.hpp"
 
