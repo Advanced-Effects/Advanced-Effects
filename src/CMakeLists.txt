@@ -1,6 +1,6 @@
-add_subdirectory(context)
-
 add_subdirectory(glax_core)
+
+add_subdirectory(context)
 
 add_subdirectory(projectscene)
 
