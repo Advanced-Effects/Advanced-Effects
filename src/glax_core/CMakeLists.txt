@@ -145,4 +145,4 @@ configure_file(
     ${CMAKE_CURRENT_BINARY_DIR}/application_info_generated.hpp
 )
 
-set_property(TARGET app_glax_core APPEND PROPERTY AUTOMOC_MACRO_NAMES "GLAXNIMATE_OBJECT")
+set_property(TARGET ${MODULE} APPEND PROPERTY AUTOMOC_MACRO_NAMES "GLAXNIMATE_OBJECT")
