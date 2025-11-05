@@ -124,6 +124,10 @@ find_package(Libav REQUIRED
 find_package(LibArchive REQUIRED)
 find_package(ZLIB REQUIRED)
 
+set(QT_VERSION_MAJOR 6)
+
+set(MODULE_LINK_GLOBAL OFF)
+set(MODULE_LINK_QT OFF)
 set(MODULE_LINK
         QtAppSetup
         ZLIB::ZLIB
@@ -137,8 +141,8 @@ if ( NOT GLAXNIMATE_SYSTEM_POTRACE )
         set(Potrace_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/thirdparty/potrace/src)
 endif()
 
-set(MODULE_INCLUDE
-        {CMAKE_CURRENT_SOURCE_DIR}
+set(MODULE_INCLUDE ${CMAKE_CURRENT_LIST_DIR})
+set(MODULE_INCLUDE_PRIVATE
         ${CMAKE_SOURCE_DIR}/thirdparty/QtAppSetup/src
         ${Potrace_INCLUDE_DIRS}
         ${Libav_INCLUDE_DIRS}
@@ -147,8 +151,8 @@ set(MODULE_INCLUDE
 setup_module()
 
 configure_file(
-    ${CMAKE_CURRENT_SOURCE_DIR}/application_info_generated.in.hpp
-    ${CMAKE_CURRENT_BINARY_DIR}/application_info_generated.hpp)
+        ${CMAKE_CURRENT_SOURCE_DIR}/application_info_generated.in.hpp
+        ${CMAKE_CURRENT_BINARY_DIR}/application_info_generated.hpp)
 
 set_property(TARGET ${MODULE}
         APPEND PROPERTY
