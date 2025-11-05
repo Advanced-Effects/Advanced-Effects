@@ -30,6 +30,7 @@
 # set(MODULE_DEF ...)                         - set definitions
 # set(MODULE_SRC ...)                         - set sources and headers files
 # set(MODULE_LINK ...)                        - set libraries for link
+# set(MODULE_LINK_PUBLIC ...)                        - set libraries for (public) link
 # set(MODULE_LINK_GLOBAL ON/OFF)              - set whether to link with `global` module (default ON)
 # set(MODULE_LINK_QT ON/OFF)                   - set whether to link with Qt (default ON)
 # set(MODULE_QRC somename.qrc)                - set resource (qrc) file
@@ -55,6 +56,7 @@ macro(declare_module name)
         unset(MODULE_DEF)
         unset(MODULE_SRC)
         unset(MODULE_LINK)
+        unset(MODULE_LINK_PUBLIC)
         set(MODULE_LINK_GLOBAL ON)
         unset(MODULE_LINK_QT)
         set(MODULE_LINK_QT ON)
@@ -199,5 +201,9 @@ macro(setup_module)
         endif()
 
         target_link_libraries(${MODULE} PRIVATE ${MODULE_LINK} ${COVERAGE_FLAGS})
+
+        if (MODULE_LINK_PUBLIC)
+                target_link_libraries(${MODULE} PUBLIC ${MODULE_LINK_PUBLIC})
+        endif()
 
 endmacro()
