@@ -35,6 +35,6 @@ set(MODULE_SRC
     ${CMAKE_CURRENT_LIST_DIR}/internal/uicontextresolver.h
     )
 
-set(MODULE_LINK app_glax_core)
+set(MODULE_LINK_PUBLIC app::glax_core)
 
 setup_module()
