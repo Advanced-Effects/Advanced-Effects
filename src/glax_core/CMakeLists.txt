@@ -6,6 +6,8 @@ declare_module(app_glax_core)
 set(MODULE app_glax_core)
 set(MODULE_ALIAS app::glax_core)
 
+set(MODULE_ROOT ${PROJECT_SOURCE_DIR}/src/glax_core)
+
 set(MODULE_SRC
         app_info.cpp
 
@@ -141,8 +143,7 @@ if ( NOT GLAXNIMATE_SYSTEM_POTRACE )
         set(Potrace_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/thirdparty/potrace/src)
 endif()
 
-set(MODULE_INCLUDE ${PROJECT_SOURCE_DIR}/src/glax_core)
-set(MODULE_INCLUDE_PRIVATE
+set(MODULE_INCLUDE
         ${CMAKE_SOURCE_DIR}/thirdparty/QtAppSetup/src
         ${Potrace_INCLUDE_DIRS}
         ${Libav_INCLUDE_DIRS}
