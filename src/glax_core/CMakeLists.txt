@@ -141,7 +141,7 @@ if ( NOT GLAXNIMATE_SYSTEM_POTRACE )
         set(Potrace_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/thirdparty/potrace/src)
 endif()
 
-set(MODULE_INCLUDE ${CMAKE_CURRENT_LIST_DIR})
+set(MODULE_INCLUDE ${PROJECT_SOURCE_DIR}/src/glax_core)
 set(MODULE_INCLUDE_PRIVATE
         ${CMAKE_SOURCE_DIR}/thirdparty/QtAppSetup/src
         ${Potrace_INCLUDE_DIRS}
