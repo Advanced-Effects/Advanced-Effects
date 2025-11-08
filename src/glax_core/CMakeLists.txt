@@ -158,3 +158,8 @@ configure_file(
 set_property(TARGET ${MODULE}
         APPEND PROPERTY
         AUTOMOC_MACRO_NAMES "GLAXNIMATE_OBJECT")
+
+set_source_files_properties(${MODULE_SRC}
+                            PROPERTIES
+                            SKIP_UNITY_BUILD_INCLUSION ON
+                            SKIP_PRECOMPILE_HEADERS ON)
