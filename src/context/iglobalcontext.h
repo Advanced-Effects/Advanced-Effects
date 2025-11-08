@@ -31,6 +31,8 @@
 
 namespace mu::context {
 
+using namespace glaxnimate::model;
+
 class IGlobalContext : MODULE_EXPORT_INTERFACE
 {
         INTERFACE_ID(mu::context::IGlobalContext)
@@ -38,11 +40,11 @@ class IGlobalContext : MODULE_EXPORT_INTERFACE
 public:
         virtual ~IGlobalContext() = default;
 
-        virtual glaxnimate::model::Document* currentProjectFile() = 0;
-        virtual void setCurrentProjectFile(glaxnimate::model::Document* document) = 0;
+        virtual Document* currentProjectFile() = 0;
+        virtual void setCurrentProjectFile(Document* document) = 0;
 
-//signals:
-        //virtual void currentProjectFileChanged(Document*) = 0;
+signals:
+        virtual void currentProjectFileChanged(Document*) = 0;
 };
 }
 

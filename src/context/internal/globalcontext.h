@@ -25,6 +25,9 @@
 #include "../iglobalcontext.h"
 
 namespace mu::context {
+
+using namespace glaxnimate::model;
+
 class GlobalContext : public IGlobalContext
 {
 public:

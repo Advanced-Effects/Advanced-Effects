@@ -23,6 +23,7 @@
 
 using namespace mu::context;
 using namespace muse::async;
+using namespace glaxnimate::model;
 
 GlobalContext::GlobalContext()
 {
