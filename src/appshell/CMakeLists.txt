@@ -50,6 +50,13 @@ set(MODULE_LINK
     muse::dockwindow
     )
 
+set(MODULE_LINK_PUBLIC app::context)
+
+set(MODULE_INCLUDE
+        ${PROJECT_SOURCE_DIR}/thirdparty/potrace/src
+        ${PROJECT_SOURCE_DIR}/thirdparty/QtAppSetup/src
+        ${PROJECT_SOURCE_DIR}/src/glax_core)
+
 # we use private/qkeymapper_p.h to fix https://github.com/musescore/MuseScore/issues/10181
 set(MODULE_INCLUDE_PRIVATE ${Qt6Gui_PRIVATE_INCLUDE_DIRS} )
 
