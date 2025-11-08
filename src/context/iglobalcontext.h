@@ -43,8 +43,7 @@ public:
         virtual Document* currentProjectFile() = 0;
         virtual void setCurrentProjectFile(Document* document) = 0;
 
-signals:
-        virtual void currentProjectFileChanged(Document*) = 0;
+        virtual muse::async::Notification currentProjectFileChanged() const = 0;
 };
 }
 

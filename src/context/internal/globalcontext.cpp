@@ -35,5 +35,8 @@ Document* GlobalContext::currentProjectFile() {
 
 void GlobalContext::setCurrentProjectFile(Document* document) {
         m_currentProjectFile = document;
-        emit currentProjectFileChanged(document);
+
+        m_currentProjectFileChanged.notify();
 }
+
+muse::async::Notification GlobalContext::currentProjectFileChanged() const { return m_currentProjectFileChanged; }

@@ -36,12 +36,13 @@ public:
     Document* currentProjectFile() override;
     void setCurrentProjectFile(Document* document) override;
 
-signals:
-        void currentProjectFileChanged(Document* document) override;
+    muse::async::Notification currentProjectFileChanged() const override;
 
 private:
         QList<Document> m_openProjects;
         Document* m_currentProjectFile = nullptr;
+
+        muse::async::Notification m_currentProjectFileChanged;
 };
 
 }
