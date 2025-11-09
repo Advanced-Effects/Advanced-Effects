@@ -1,5 +1,7 @@
 <RCC>
     <qresource prefix="/">
+        <file>qml/App/ProjectScene/NewProjectDialog/NewProject.qml</file>
+        <file>qml/App/ProjectScene/NewProjectDialog/NewProjectButtonsPanel.qml</file>
         <file>qml/App/ProjectScene/EditPage/EditPage.qml</file>
         <file>qml/App/ProjectScene/EditPage/CentralWidget.qml</file>
         <file>qml/App/ProjectScene/EditPage/Panels/GeneralBar.qml</file>

@@ -13,6 +13,7 @@
 
 #include "view/canvas/applicationcanvas.h"
 #include "view/timeline/keysview.h"
+#include "view/toolbarmodel.h"
 
 // Links the module to the .qrc file
 // WE put it outside of the app::appshell namespace
@@ -54,6 +55,7 @@ void ProjectSceneModule::resolveImports() {
         auto ir = ioc()->resolve<ui::IInteractiveUriRegister>(moduleName());
         if (ir) {
                 ir->registerUri(Uri("app://edit"), ui::ContainerMeta(ui::ContainerType::PrimaryPage));
+                ir->registerUri(Uri("app://new"), ui::ContainerMeta(ui::ContainerType::QmlDialog, "App/ProjectScene/NewProjectDialog/NewProject.qml"));
         }
 
         auto ar = ioc()->resolve<ui::IUiActionsRegister>(moduleName());

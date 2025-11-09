@@ -9,3 +9,5 @@ CentralWidget 1.0 EditPage/CentralWidget.qml
 ToolSelection 1.0 EditPage/Toolbars/ToolSelection.qml
 GeneralBar 1.0 EditPage/Panels/GeneralBar.qml
 GeneralBarHeader 1.0 EditPage/Panels/GeneralBarHeader.qml
+NewProject 1.0 NewProjectDialog/NewProject.qml
+NewProjectButtonsPanel 1.0 NewProjectDialog/NewProjectButtonsPanel.qml
