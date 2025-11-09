@@ -27,14 +27,8 @@ set(MODULE_SRC
 
 set(MODULE_LINK
     muse::uicomponents
-    muse::ui
-    )
+    muse::ui)
 
 set(MODULE_LINK_PUBLIC app::context)
-
-set(MODULE_INCLUDE
-        ${PROJECT_SOURCE_DIR}/thirdparty/potrace/src
-        ${PROJECT_SOURCE_DIR}/thirdparty/QtAppSetup/src
-        ${PROJECT_SOURCE_DIR}/src/glax_core)
 
 setup_module()
