@@ -4,6 +4,7 @@ import QtQuick.Controls 2.15
 import Muse.UiComponents
 
 import App.AppShell
+import App.ProjectScene
 
 Item {
         id: root

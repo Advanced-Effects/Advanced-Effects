@@ -4,6 +4,7 @@ import Muse.Ui
 import Muse.UiComponents
 
 import App.AppShell
+import App.ProjectScene
 
 StyledToolBarView {
         navigationPanel.name: "ToolSelectionBar"

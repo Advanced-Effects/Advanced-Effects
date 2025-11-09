@@ -40,6 +40,7 @@ void ProjectSceneModule::registerResources() {
 };
 
 void ProjectSceneModule::registerExports() {
+        qmlRegisterType<ToolBarModel>("App.ProjectScene", 1, 0 , "ToolBarModel");
         qmlRegisterType<ApplicationCanvas>("App.ProjectScene", 1, 0, "ApplicationCanvas");
         qmlRegisterType<KeysView>("App.ProjectScene", 1, 0, "KeysView");
 

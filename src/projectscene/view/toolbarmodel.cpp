@@ -1,6 +1,6 @@
 #include "toolbarmodel.h"
 
-namespace app::appshell {
+namespace app::projectscene {
 
 using namespace muse::uicomponents;
 

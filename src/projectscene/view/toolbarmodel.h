@@ -4,7 +4,7 @@
 
 #include "modularity/ioc.h"
 
-namespace app::appshell {
+namespace app::projectscene {
 
 // ToolBarModel is the skeleton of the ToolBar right above the Canvas.
 //

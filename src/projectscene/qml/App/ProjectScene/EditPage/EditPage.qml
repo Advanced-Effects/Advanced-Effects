@@ -3,6 +3,7 @@ import QtQuick 2.15
 import Muse.UiComponents
 import Muse.Dock
 
+import "../TimelineWidget"
 import "./Panels/"
 import "./Toolbars/"
 
