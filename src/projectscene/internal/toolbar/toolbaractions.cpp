@@ -20,14 +20,14 @@
 
 using namespace mu;
 using namespace mu::context;
-using namespace app::appshell;
+using namespace app::projectscene;
 using namespace muse;
 using namespace muse::ui;
 using namespace muse::actions;
 
 
 ToolBarUiActions::ToolBarUiActions(
-        std::shared_ptr<AppshellActionController> controller,
+        std::shared_ptr<ToolActionController> controller,
         const muse::modularity::ContextPtr& iocCtx
 ) : muse::Injectable(iocCtx), m_controller(controller) {};
 

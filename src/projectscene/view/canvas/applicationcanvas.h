@@ -3,7 +3,7 @@
 #include <QQuickFramebufferObject>
 #include <QOpenGLFramebufferObject>
 
-namespace app::appshell {
+namespace app::projectscene {
 
 class ApplicationCanvas : public QQuickFramebufferObject {
         Q_OBJECT

@@ -7,14 +7,34 @@ set(MODULE_QML_IMPORT ${CMAKE_CURRENT_LIST_DIR}/qml)
 set(MODULE_SRC
         projectscenemodule.h
         projectscenemodule.cpp
+        view/toolbarmodel.h
+        view/toolbarmodel.cpp
+        view/canvas/applicationcanvas.h
+        view/canvas/applicationcanvas.cpp
         view/timeline/timelinecontext.h
         view/timeline/keysview.h
         view/timeline/keysview.cpp
+        internal/projectactionscontroller.h
+        internal/projectactionscontroller.cpp
+        internal/projectuiactions.h
+        internal/projectuiactions.cpp
+        internal/toolbar/toolactioncontroller.h
+        internal/toolbar/toolactioncontroller.cpp
+        internal/toolbar/toolbaractions.h
+        internal/toolbar/toolbaractions.cpp
+        internal/toolbar/toolidentifier.h
     )
 
 set(MODULE_LINK
     muse::uicomponents
     muse::ui
     )
+
+set(MODULE_LINK_PUBLIC app::context)
+
+set(MODULE_INCLUDE
+        ${PROJECT_SOURCE_DIR}/thirdparty/potrace/src
+        ${PROJECT_SOURCE_DIR}/thirdparty/QtAppSetup/src
+        ${PROJECT_SOURCE_DIR}/src/glax_core)
 
 setup_module()

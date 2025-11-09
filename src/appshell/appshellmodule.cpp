@@ -5,8 +5,6 @@
 #include "ui/uitypes.h"
 #include "view/navigableappmenumodel.h"
 #include "view/mainwindowtitleprovider.h"
-#include "view/toolbarmodel.h"
-#include "view/canvas/applicationcanvas.h"
 #include "view/framelesswindow/framelesswindowmodel.h"
 
 #include "modularity/ioc.h"
@@ -15,8 +13,6 @@
 // Register UI Actions
 #include "internal/appshellactionscontroller.h"
 #include "internal/appshellactions.h"
-#include "internal/toolbar/toolbaractions.h"
-#include "internal/toolbar/toolactioncontroller.h"
 
 #include "internal/platformdetails.h"
 
@@ -45,35 +41,27 @@ void AppShellModule::registerExports() {
         qmlRegisterType<PlatformDetails>("App.AppShell", 1, 0, "PlatformDetails");
         qmlRegisterType<MainWindowTitleProvider>("App.AppShell", 1, 0, "MainWindowTitleProvider");
         qmlRegisterType<NavigableAppMenuModel>("App.AppShell", 1, 0, "AppMenuModel");
-        qmlRegisterType<ToolBarModel>("App.AppShell", 1, 0, "ToolBarModel");
-
-        qmlRegisterType<ApplicationCanvas>("App.AppShell", 1, 0, "ApplicationCanvas");
 
         qmlRegisterType<mu::appshell::FramelessWindowModel>("App.AppShell", 1, 0, "FramelessWindowModel");
 
         m_actionsController = std::make_shared<AppshellActionController>(iocContext());
         m_appshellActions = std::make_shared<AppshellUiActions>(m_actionsController, iocContext());
-        m_toolbarActions = std::make_shared<ToolBarUiActions>(m_actionsController, iocContext());
-        m_toolActionsController = std::make_shared<ToolActionController>(iocContext());
 };
 
 void AppShellModule::resolveImports() {
         auto ir = ioc()->resolve<ui::IInteractiveUriRegister>(moduleName());
         if (ir) {
-                ir->registerUri(Uri("app://edit"), ui::ContainerMeta(ui::ContainerType::PrimaryPage));
                 ir->registerUri(Uri("app://preferences"), ui::ContainerMeta(ui::ContainerType::QmlDialog, "Preferences/PreferencesDialog.qml"));
         }
 
         auto ar = ioc()->resolve<ui::IUiActionsRegister>(moduleName());
         if (ar) {
                 ar->reg(m_appshellActions);
-                ar->reg(m_toolbarActions);
         }
 };
 
 void AppShellModule::onInit(const IApplication::RunMode& mode) {
         m_actionsController->init();
-        m_toolActionsController->init();
 };
 
 

@@ -22,8 +22,10 @@
 #ifndef MU_APPSHELL_MAINWINDOWTITLEPROVIDER_H
 #define MU_APPSHELL_MAINWINDOWTITLEPROVIDER_H
 
+#include <QObject>
+
+#include "modularity/ioc.h"
 #include "async/asyncable.h"
-#include "context/iglobalcontext.h"
 
 namespace app::appshell {
 
@@ -37,8 +39,6 @@ class MainWindowTitleProvider : public QObject, public muse::Injectable, public 
     Q_PROPERTY(QString title READ title NOTIFY titleChanged)
     Q_PROPERTY(QString filePath READ filePath NOTIFY filePathChanged)
     Q_PROPERTY(bool fileModified READ fileModified NOTIFY fileModifiedChanged)
-
-    muse::Inject<mu::context::IGlobalContext> context = { this };
 
 public:
     explicit MainWindowTitleProvider(QObject* parent = nullptr);

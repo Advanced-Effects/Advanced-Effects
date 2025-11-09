@@ -1,7 +1,17 @@
 #include "projectscenemodule.h"
 
-#include "modularity/ioc.h"
+#include <memory>
 
+#include "modularity/ioc.h"
+#include "ui/iuiactionsregister.h"
+#include "ui/iinteractiveuriregister.h"
+
+#include "internal/projectactionscontroller.h"
+#include "internal/projectuiactions.h"
+#include "internal/toolbar/toolactioncontroller.h"
+#include "internal/toolbar/toolbaractions.h"
+
+#include "view/canvas/applicationcanvas.h"
 #include "view/timeline/keysview.h"
 
 // Links the module to the .qrc file
@@ -15,7 +25,11 @@ static void projectscene_init_qrc()
 
 namespace app::projectscene {
 
-ProjectSceneModule::ProjectSceneModule() {};
+using namespace muse;
+
+ProjectSceneModule::ProjectSceneModule()
+        : m_actionsController(nullptr)
+        , m_projectActions(nullptr) {};
 
 std::string ProjectSceneModule::moduleName() const {
     return "projectscene";
@@ -26,7 +40,31 @@ void ProjectSceneModule::registerResources() {
 };
 
 void ProjectSceneModule::registerExports() {
+        qmlRegisterType<ApplicationCanvas>("App.ProjectScene", 1, 0, "ApplicationCanvas");
         qmlRegisterType<KeysView>("App.ProjectScene", 1, 0, "KeysView");
+
+        m_actionsController = std::make_shared<ProjectActionController>(iocContext());
+        m_projectActions = std::make_shared<ProjectUiActions>(m_actionsController, iocContext());
+        m_toolbarController = std::make_shared<ToolActionController>(iocContext());
+        m_toolbarActions = std::make_shared<ToolBarUiActions>(m_toolbarController, iocContext());
+};
+
+void ProjectSceneModule::resolveImports() {
+        auto ir = ioc()->resolve<ui::IInteractiveUriRegister>(moduleName());
+        if (ir) {
+                ir->registerUri(Uri("app://edit"), ui::ContainerMeta(ui::ContainerType::PrimaryPage));
+        }
+
+        auto ar = ioc()->resolve<ui::IUiActionsRegister>(moduleName());
+        if (ar) {
+                ar->reg(m_projectActions);
+                ar->reg(m_toolbarActions);
+        }
+};
+
+void ProjectSceneModule::onInit(const IApplication::RunMode& mode) {
+        m_actionsController->init();
+        m_toolbarController->init();
 };
 
 };

@@ -3,12 +3,6 @@
         <file>qml/Main.qml</file>
         <file>qml/WindowContent.qml</file>
         <file>qml/AppWindow.qml</file>
-        <file>qml/EditPage/EditPage.qml</file>
-        <file>qml/EditPage/CentralWidget.qml</file>
-        <file>qml/EditPage/Panels/GeneralBar.qml</file>
-        <file>qml/EditPage/Panels/GeneralBarHeader.qml</file>
-        <file>qml/EditPage/Panels/TimelineWidget.qml</file>
-        <file>qml/EditPage/Toolbars/ToolSelection.qml</file>
         <file>qml/TitleBar/AppTitlebar.qml</file>
         <file>qml/TitleBar/AppMenuBar.qml</file>
         <file>qml/TitleBar/AppSystemButtons.qml</file>

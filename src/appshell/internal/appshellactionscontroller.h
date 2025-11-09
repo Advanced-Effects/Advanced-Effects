@@ -25,9 +25,6 @@ public:
 
         void quitApplication();
         void openPreferencesDialog();
-
-        void openFileDialog();
-        void importFileDialog();
 };
 
 };

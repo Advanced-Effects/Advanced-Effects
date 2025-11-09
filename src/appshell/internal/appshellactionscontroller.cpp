@@ -16,8 +16,6 @@ void AppshellActionController::init()
         });
 
         dispatcher()->reg(this, "open-preferences", this, &AppshellActionController::openPreferencesDialog);
-        dispatcher()->reg(this, "file-open", this, &AppshellActionController::openFileDialog);
-        dispatcher()->reg(this, "file-import", this, &AppshellActionController::importFileDialog);
 }
 
 void AppshellActionController::quitApplication() {
@@ -27,9 +25,5 @@ void AppshellActionController::quitApplication() {
 void AppshellActionController::openPreferencesDialog() {
         interactive()->open("app://preferences");
 };
-
-void AppshellActionController::openFileDialog() {};
-
-void AppshellActionController::importFileDialog() {};
 
 }
