@@ -9,7 +9,9 @@ namespace app::projectscene {
 
 using namespace glaxnimate::model;
 
-class IProjectFilesController : public Injectable {
+class IProjectFilesController : MODULE_EXPORT_INTERFACE {
+        INTERFACE_ID(app::projectscene::IProjectFilesController)
+
 public:
         virtual ~IProjectFilesController() = default;
 

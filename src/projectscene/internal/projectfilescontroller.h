@@ -6,7 +6,8 @@
 
 using namespace app::projectscene;
 
-class ProjectFilesController : public IProjectFilesController {
+class ProjectFilesController : public IProjectFilesController 
+                             , public Injectable {
 public:
         ProjectFilesController(const modularity::ContextPtr& iocCtx)
                 : Injectable(iocCtx) {};
