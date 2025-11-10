@@ -15,6 +15,6 @@ public:
 
         virtual void addProject(std::shared_ptr<Document> document) = 0;
         virtual void removeProject(std::shared_ptr<Document> document) = 0;
-}
+};
 
 }

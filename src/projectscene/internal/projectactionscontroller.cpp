@@ -22,7 +22,7 @@ void ProjectActionController::openProject(const muse::actions::ActionData& args)
         openProject(std::make_shared<Document>(url));
 };
 
-void ProjectActionController::openProject(glaxnimate::model::Document* document) {
+void ProjectActionController::openProject(std::shared_ptr<glaxnimate::model::Document> document) {
         projectFiles()->addProject(document);
 };
 

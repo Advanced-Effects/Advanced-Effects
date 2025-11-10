@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include "modularity/ioc.h"
 #include "actions/iactionsdispatcher.h"
 #include "actions/actionable.h"
@@ -8,6 +10,7 @@
 
 #include "context/iglobalcontext.h"
 #include "glax_core/model/document.hpp"
+#include "../iprojectfilescontroller.h"
 
 namespace app::projectscene {
 
@@ -36,7 +39,7 @@ private:
         // Action to open a project. Expects two arguments:
         // 0. The URL to the file
         void openProject(const muse::actions::ActionData& args);
-        void openProject(glaxnimate::model::Document* document);
+        void openProject(std::shared_ptr<glaxnimate::model::Document> document);
 
         void saveProject();
         void closeProject();
