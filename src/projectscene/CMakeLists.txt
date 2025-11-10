@@ -7,6 +7,7 @@ set(MODULE_QML_IMPORT ${CMAKE_CURRENT_LIST_DIR}/qml)
 set(MODULE_SRC
         projectscenemodule.h
         projectscenemodule.cpp
+        iprojectfilescontroller.h
         view/toolbarmodel.h
         view/toolbarmodel.cpp
         view/canvas/applicationcanvas.h
@@ -14,6 +15,8 @@ set(MODULE_SRC
         view/timeline/timelinecontext.h
         view/timeline/keysview.h
         view/timeline/keysview.cpp
+        internal/projectfilescontroller.h
+        internal/projectfilescontroller.cpp
         internal/projectactionscontroller.h
         internal/projectactionscontroller.cpp
         internal/projectuiactions.h

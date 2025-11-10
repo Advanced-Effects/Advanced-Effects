@@ -3,8 +3,11 @@
 #include "modularity/ioc.h"
 #include "actions/iactionsdispatcher.h"
 #include "actions/actionable.h"
+#include "actions/actiontypes.h"
 #include "iinteractive.h"
 
+#include "context/iglobalcontext.h"
+#include "glax_core/model/document.hpp"
 
 namespace app::projectscene {
 
@@ -16,6 +19,7 @@ class ProjectActionController
 {
         Inject<actions::IActionsDispatcher> dispatcher = { this };
         Inject<IInteractive> interactive = { this };
+        Inject<IProjectFilesController> projectFiles = { this };
 
 public:
         ProjectActionController(const modularity::ContextPtr& iocCtx)
@@ -24,11 +28,15 @@ public:
         // This is where ACTIONS are registered
         void init();
 
+private:
         // Opens the 'New Project' UI dialog
         // What actually creates new projects is the "open project" action
         void newProject();
 
-        void openProject();
+        // Action to open a project. Expects two arguments:
+        // 0. The URL to the file
+        void openProject(const muse::actions::ActionData& args);
+        void openProject(glaxnimate::model::Document* document);
 
         void saveProject();
         void closeProject();

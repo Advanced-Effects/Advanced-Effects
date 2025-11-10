@@ -49,6 +49,7 @@ void ProjectSceneModule::registerExports() {
         m_projectActions = std::make_shared<ProjectUiActions>(m_actionsController, iocContext());
         m_toolbarController = std::make_shared<ToolActionController>(iocContext());
         m_toolbarActions = std::make_shared<ToolBarUiActions>(m_toolbarController, iocContext());
+        m_projectFilesController = std::make_shared<ProjectFilesController>(iocContext());
 };
 
 void ProjectSceneModule::resolveImports() {

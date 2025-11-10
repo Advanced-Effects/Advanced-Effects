@@ -8,6 +8,7 @@
 #include "internal/projectuiactions.h"
 #include "internal/toolbar/toolactioncontroller.h"
 #include "internal/toolbar/toolbaractions.h"
+#include "internal/projectfilescontroller.h"
 
 namespace app::projectscene {
 
@@ -29,6 +30,7 @@ private:
         std::shared_ptr<ProjectUiActions> m_projectActions;
         std::shared_ptr<ToolActionController> m_toolbarController;
         std::shared_ptr<ToolBarUiActions> m_toolbarActions;
+        std::shared_ptr<ProjectFilesController> m_projectFilesController;
 };
 
 };
