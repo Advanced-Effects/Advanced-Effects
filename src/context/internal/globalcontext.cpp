@@ -23,7 +23,20 @@
 
 using namespace mu::context;
 using namespace muse::async;
+using namespace glaxnimate::model;
 
 GlobalContext::GlobalContext()
 {
 }
+
+Document* GlobalContext::currentProjectFile() {
+        return m_currentProjectFile;
+}
+
+void GlobalContext::setCurrentProjectFile(Document* document) {
+        m_currentProjectFile = document;
+
+        m_currentProjectFileChanged.notify();
+}
+
+muse::async::Notification GlobalContext::currentProjectFileChanged() const { return m_currentProjectFileChanged; }

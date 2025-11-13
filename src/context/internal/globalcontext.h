@@ -25,13 +25,26 @@
 #include "../iglobalcontext.h"
 
 namespace mu::context {
+
+using namespace glaxnimate::model;
+
 class GlobalContext : public IGlobalContext
 {
 public:
-
     GlobalContext();
 
+    Document* currentProjectFile() override;
+    void setCurrentProjectFile(Document* document) override;
+
+    muse::async::Notification currentProjectFileChanged() const override;
+
+private:
+        QList<Document> m_openProjects;
+        Document* m_currentProjectFile = nullptr;
+
+        muse::async::Notification m_currentProjectFileChanged;
 };
+
 }
 
 #endif // MU_CONTEXT_GLOBALCONTEXT_H

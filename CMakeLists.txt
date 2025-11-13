@@ -9,6 +9,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
+# Getting some weird-ass error about PCH files
+set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+
 ###########################################
 # Muse Framework
 ###########################################
@@ -18,11 +21,10 @@ set(MUSE_FRAMEWORK_SRC_PATH ${MUSE_FRAMEWORK_PATH}/framework)
 
 # Sets the paths where cmake scripts ("include" calls) will be looked up in
 set(CMAKE_MODULE_PATH
-    ${CMAKE_CURRENT_LIST_DIR}
-    ${CMAKE_CURRENT_LIST_DIR}/buildscripts/cmake
-    ${MUSE_FRAMEWORK_PATH}/buildscripts/cmake
-    ${CMAKE_MODULE_PATH}
-    )
+        ${CMAKE_CURRENT_LIST_DIR}
+        ${CMAKE_CURRENT_LIST_DIR}/buildscripts/cmake
+        ${MUSE_FRAMEWORK_PATH}/buildscripts/cmake
+        ${CMAKE_MODULE_PATH})
 
 include(${MUSE_FRAMEWORK_SRC_PATH}/cmake/MuseDeclareOptions.cmake)
 
@@ -84,6 +86,8 @@ set(MUSE_MODULE_WORKSPACE ON)
 option(AU4_BUILD_APPSHELL_MODULE "Build appshell module" ON)
 
 # === Setup ===
+
+option(GLAXNIMATE_SYSTEM_POTRACE "Get potrace from the system. If OFF (default), we build it ourselves from thirdparty/potrace." OFF)
 
 # === Pack ===
 option(MU_RUN_LRELEASE "Generate .qm files" ON)

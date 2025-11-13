@@ -83,7 +83,7 @@ set(LINK_LIB
     muse::diagnostics
 
     QtAppSetup
-    app_glax_core
+    app::glax_core
 
     app::context
     app::projectscene
@@ -161,7 +161,7 @@ endif(CC_IS_MSVC)
 ###########################################
 # Link
 ###########################################
-target_link_libraries(${EXECUTABLE_NAME} ${LINK_LIB}  ${COVERAGE_LINK_FLAGS})
+target_link_libraries(${EXECUTABLE_NAME} PRIVATE ${LINK_LIB}  ${COVERAGE_LINK_FLAGS})
 
 ###########################################
 # INSTALL

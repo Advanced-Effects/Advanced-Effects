@@ -30,7 +30,9 @@
 # set(MODULE_DEF ...)                         - set definitions
 # set(MODULE_SRC ...)                         - set sources and headers files
 # set(MODULE_LINK ...)                        - set libraries for link
+# set(MODULE_LINK_PUBLIC ...)                        - set libraries for (public) link
 # set(MODULE_LINK_GLOBAL ON/OFF)              - set whether to link with `global` module (default ON)
+# set(MODULE_LINK_QT ON/OFF)                   - set whether to link with Qt (default ON)
 # set(MODULE_QRC somename.qrc)                - set resource (qrc) file
 # set(MODULE_BIG_QRC somename.qrc)            - set big resource (qrc) file
 # set(MODULE_UI ...)                          - set ui headers
@@ -46,112 +48,115 @@
 # setup_module()
 
 macro(declare_module name)
-    set(MODULE ${name})
-    # just reset all settings
-    unset(MODULE_ALIAS)
-    unset(MODULE_ROOT)
-    unset(MODULE_INCLUDE)
-    unset(MODULE_DEF)
-    unset(MODULE_SRC)
-    unset(MODULE_LINK)
-    set(MODULE_LINK_GLOBAL ON)
-    unset(MODULE_QRC)
-    unset(MODULE_BIG_QRC)
-    unset(MODULE_UI)
-    unset(MODULE_QML_IMPORT)
-    unset(MODULE_QMLEXT_IMPORT)
-    set(MODULE_USE_PCH ON)
-    set(MODULE_USE_UNITY ON)
-    unset(MODULE_OVERRIDDEN_PCH)
-    unset(MODULE_IS_STUB)
-    set(MODULE_USE_COVERAGE ON)
+        set(MODULE ${name})
+        # just reset all settings
+        unset(MODULE_ALIAS)
+        unset(MODULE_ROOT)
+        unset(MODULE_INCLUDE)
+        unset(MODULE_DEF)
+        unset(MODULE_SRC)
+        unset(MODULE_LINK)
+        unset(MODULE_LINK_PUBLIC)
+        set(MODULE_LINK_GLOBAL ON)
+        unset(MODULE_LINK_QT)
+        set(MODULE_LINK_QT ON)
+        unset(MODULE_QRC)
+        unset(MODULE_BIG_QRC)
+        unset(MODULE_UI)
+        unset(MODULE_QML_IMPORT)
+        unset(MODULE_QMLEXT_IMPORT)
+        set(MODULE_USE_PCH ON)
+        set(MODULE_USE_UNITY ON)
+        unset(MODULE_OVERRIDDEN_PCH)
+        unset(MODULE_IS_STUB)
+        set(MODULE_USE_COVERAGE ON)
 endmacro()
 
 
 macro(add_qml_import_path input_var)
-    if (NOT ${${input_var}} STREQUAL "")
-        set(QML_IMPORT_PATH "$CACHE{QML_IMPORT_PATH}")
-        list(APPEND QML_IMPORT_PATH ${${input_var}})
-        list(REMOVE_DUPLICATES QML_IMPORT_PATH)
-        set(QML_IMPORT_PATH "${QML_IMPORT_PATH}" CACHE STRING
+        if (NOT ${${input_var}} STREQUAL "")
+                set(QML_IMPORT_PATH "$CACHE{QML_IMPORT_PATH}")
+                list(APPEND QML_IMPORT_PATH ${${input_var}})
+                list(REMOVE_DUPLICATES QML_IMPORT_PATH)
+                set(QML_IMPORT_PATH "${QML_IMPORT_PATH}" CACHE STRING
           "QtCreator extra import paths for QML modules" FORCE)
-    endif()
+        endif()
 endmacro()
 
 
 macro(setup_module)
 
-    if (MODULE_IS_STUB)
-        message(STATUS "Configuring ${MODULE} <${MODULE_ALIAS}> [stub]")
-    else()
-        message(STATUS "Configuring ${MODULE} <${MODULE_ALIAS}>")
-    endif()
-
-    if (NOT MUSE_FRAMEWORK_PATH)
-        set(MUSE_FRAMEWORK_PATH ${PROJECT_SOURCE_DIR})
-    endif()
-
-    if (MODULE_QRC AND NOT NO_QT_SUPPORT)
-        qt_add_resources(RCC_SOURCES ${MODULE_QRC})
-    endif()
-
-    if (MODULE_BIG_QRC AND NOT NO_QT_SUPPORT)
-        qt_add_big_resources(RCC_BIG_SOURCES ${MODULE_BIG_QRC})
-    endif()
-
-    if (MODULE_UI)
-        find_package(Qt6Widgets)
-        QT6_WRAP_UI(ui_headers ${MODULE_UI} )
-    endif()
-
-    add_qml_import_path(MODULE_QML_IMPORT)
-    add_qml_import_path(MODULE_QMLAPI_IMPORT)
-
-    if (CC_IS_EMSCRIPTEN)
-        add_library(${MODULE} OBJECT)
-    else()
-        add_library(${MODULE}) # STATIC/SHARED set global in the SetupBuildEnvironment.cmake
-    endif()
-
-    if (MODULE_ALIAS)
-        add_library(${MODULE_ALIAS} ALIAS ${MODULE})
-    endif()
-
-    if (BUILD_SHARED_LIBS)
-        install(TARGETS ${MODULE} DESTINATION ${SHARED_LIBS_INSTALL_DESTINATION})
-    endif()
-
-    if (MUSE_COMPILE_USE_PCH AND MODULE_USE_PCH)
-        if (${MODULE} STREQUAL muse_global)
-            target_precompile_headers(${MODULE} PRIVATE ${MUSE_FRAMEWORK_PATH}/buildscripts/pch/pch.h)
+        if (MODULE_IS_STUB)
+                message(STATUS "Configuring ${MODULE} <${MODULE_ALIAS}> [stub]")
         else()
-            if (DEFINED MODULE_OVERRIDDEN_PCH)
-                target_precompile_headers(${MODULE} PRIVATE ${MODULE_OVERRIDDEN_PCH})
-            else()
-                target_precompile_headers(${MODULE} REUSE_FROM muse_global)
-                target_compile_definitions(${MODULE} PRIVATE muse_global_EXPORTS=1)
-            endif()
-
-            set(MODULE_LINK_GLOBAL ON)
+                message(STATUS "Configuring ${MODULE} <${MODULE_ALIAS}>")
         endif()
-    endif()
 
-    if (MUSE_COMPILE_USE_UNITY)
-        if (MODULE_USE_UNITY)
-            set_target_properties(${MODULE} PROPERTIES UNITY_BUILD ON)
+        if (NOT MUSE_FRAMEWORK_PATH)
+                set(MUSE_FRAMEWORK_PATH ${PROJECT_SOURCE_DIR})
+        endif()
+
+        if (MODULE_QRC AND NOT NO_QT_SUPPORT)
+                qt_add_resources(RCC_SOURCES ${MODULE_QRC})
+        endif()
+
+        if (MODULE_BIG_QRC AND NOT NO_QT_SUPPORT)
+                qt_add_big_resources(RCC_BIG_SOURCES ${MODULE_BIG_QRC})
+        endif()
+
+        if (MODULE_UI)
+                find_package(Qt6Widgets)
+                QT6_WRAP_UI(ui_headers ${MODULE_UI} )
+        endif()
+
+        add_qml_import_path(MODULE_QML_IMPORT)
+        add_qml_import_path(MODULE_QMLAPI_IMPORT)
+
+        if (CC_IS_EMSCRIPTEN)
+                add_library(${MODULE} OBJECT)
         else()
-            set_target_properties(${MODULE} PROPERTIES UNITY_BUILD OFF)
+                add_library(${MODULE}) # STATIC/SHARED set global in the SetupBuildEnvironment.cmake
         endif()
-    endif()
 
-    target_sources(${MODULE} PRIVATE
+        if (MODULE_ALIAS)
+                add_library(${MODULE_ALIAS} ALIAS ${MODULE})
+        endif()
+
+        if (BUILD_SHARED_LIBS)
+                install(TARGETS ${MODULE} DESTINATION ${SHARED_LIBS_INSTALL_DESTINATION})
+        endif()
+
+        if (MUSE_COMPILE_USE_PCH AND MODULE_USE_PCH)
+                if (${MODULE} STREQUAL muse_global)
+                        target_precompile_headers(${MODULE} PRIVATE ${MUSE_FRAMEWORK_PATH}/buildscripts/pch/pch.h)
+                else()
+                        if (DEFINED MODULE_OVERRIDDEN_PCH)
+                                target_precompile_headers(${MODULE} PRIVATE ${MODULE_OVERRIDDEN_PCH})
+                        else()
+                                target_precompile_headers(${MODULE} REUSE_FROM muse_global)
+                                target_compile_definitions(${MODULE} PRIVATE muse_global_EXPORTS=1)
+                        endif()
+
+                        set(MODULE_LINK_GLOBAL ON)
+                endif()
+        endif()
+
+        if (MUSE_COMPILE_USE_UNITY)
+                if (MODULE_USE_UNITY)
+                        set_target_properties(${MODULE} PROPERTIES UNITY_BUILD ON)
+                else()
+                        set_target_properties(${MODULE} PROPERTIES UNITY_BUILD OFF)
+                endif()
+        endif()
+
+        target_sources(${MODULE} PRIVATE
         ${ui_headers}
         ${RCC_SOURCES}
         ${RCC_BIG_SOURCES}
         ${MODULE_SRC}
         )
 
-    target_include_directories(${MODULE} PUBLIC
+        target_include_directories(${MODULE} PUBLIC
         ${PROJECT_BINARY_DIR}
         ${CMAKE_CURRENT_BINARY_DIR}
         ${MODULE_ROOT}
@@ -172,27 +177,33 @@ macro(setup_module)
         ${MODULE_INCLUDE}
     )
 
-    target_include_directories(${MODULE} PRIVATE
+        target_include_directories(${MODULE} PRIVATE
         ${MODULE_INCLUDE_PRIVATE}
     )
 
-    target_compile_definitions(${MODULE} PUBLIC
+        target_compile_definitions(${MODULE} PUBLIC
         ${MODULE_DEF}
         ${MODULE}_QML_IMPORT="${MODULE_QML_IMPORT}"
     )
 
-    if (MUSE_ENABLE_UNIT_TESTS_CODE_COVERAGE AND MODULE_USE_COVERAGE)
-        set(COVERAGE_FLAGS -fprofile-arcs -ftest-coverage --coverage)
-        target_compile_options(${MODULE} PRIVATE ${COVERAGE_FLAGS})
-        target_link_options(${MODULE} PRIVATE -lgcov --coverage)
-    endif()
+        if (MUSE_ENABLE_UNIT_TESTS_CODE_COVERAGE AND MODULE_USE_COVERAGE)
+                set(COVERAGE_FLAGS -fprofile-arcs -ftest-coverage --coverage)
+                target_compile_options(${MODULE} PRIVATE ${COVERAGE_FLAGS})
+                target_link_options(${MODULE} PRIVATE -lgcov --coverage)
+        endif()
 
-    if (NOT ${MODULE} MATCHES muse_global AND MODULE_LINK_GLOBAL)
-        set(MODULE_LINK muse_global ${MODULE_LINK})
-    endif()
+        if (NOT ${MODULE} MATCHES muse_global AND MODULE_LINK_GLOBAL)
+                set(MODULE_LINK muse_global ${MODULE_LINK})
+        endif()
 
-    set(MODULE_LINK ${CMAKE_DL_LIBS} ${QT_LIBRARIES} ${MODULE_LINK})
+        if (MODULE_LINK_QT)
+                set(MODULE_LINK ${CMAKE_DL_LIBS} ${QT_LIBRARIES} ${MODULE_LINK})
+        endif()
 
-    target_link_libraries(${MODULE} PRIVATE ${MODULE_LINK} ${COVERAGE_FLAGS})
+        target_link_libraries(${MODULE} PRIVATE ${MODULE_LINK} ${COVERAGE_FLAGS})
+
+        if (MODULE_LINK_PUBLIC)
+                target_link_libraries(${MODULE} PUBLIC ${MODULE_LINK_PUBLIC})
+        endif()
 
 endmacro()

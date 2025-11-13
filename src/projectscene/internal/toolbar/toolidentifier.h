@@ -1,4 +1,4 @@
-namespace app::appshell {
+namespace app::projectscene {
 
 enum ToolIdentifier {
         selection

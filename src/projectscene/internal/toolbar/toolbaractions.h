@@ -4,9 +4,9 @@
 #include "modularity/ioc.h"
 #include "ui/iuicontextresolver.h"
 
-#include "../appshellactionscontroller.h"
+#include "toolactioncontroller.h"
 
-namespace app::appshell {
+namespace app::projectscene {
 
 using namespace muse;
 
@@ -16,7 +16,7 @@ class ToolBarUiActions
         muse::Inject<ui::IUiContextResolver> uicontextResolver = { this };
 
 public:
-        ToolBarUiActions(std::shared_ptr<AppshellActionController> controller,
+        ToolBarUiActions(std::shared_ptr<ToolActionController> controller,
                           const muse::modularity::ContextPtr& iocCtx);
 
         const ui::UiActionList& actionsList() const override;
@@ -29,7 +29,7 @@ public:
 
 private:
         static const ui::UiActionList m_actions;
-        std::shared_ptr<AppshellActionController> m_controller;
+        std::shared_ptr<ToolActionController> m_controller;
         async::Channel<actions::ActionCodeList> m_actionEnabledChanged;
         async::Channel<actions::ActionCodeList> m_actionCheckedChanged;
 };

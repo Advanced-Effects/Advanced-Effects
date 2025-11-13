@@ -15,7 +15,7 @@
 
 using namespace mu;
 
-namespace app::appshell {
+namespace app::projectscene {
 
 class ToolActionController : public muse::actions::Actionable
                            , public muse::async::Asyncable

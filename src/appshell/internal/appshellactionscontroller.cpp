@@ -15,10 +15,7 @@ void AppshellActionController::init()
                 return true;
         });
 
-        dispatcher()->reg(this, "open-preferences", [this](const ActionData& args) {
-                openPreferencesDialog();
-                return true;
-        });
+        dispatcher()->reg(this, "open-preferences", this, &AppshellActionController::openPreferencesDialog);
 }
 
 void AppshellActionController::quitApplication() {

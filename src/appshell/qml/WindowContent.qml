@@ -4,7 +4,7 @@ import Muse.Dock
 import Muse.Ui
 import Muse.UiComponents
 
-import "./EditPage"
+import App.ProjectScene
 
 DockWindow {
         id: root

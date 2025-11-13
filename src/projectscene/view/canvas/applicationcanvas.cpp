@@ -1,6 +1,6 @@
 #include "applicationcanvas.h"
 
-using namespace app::appshell;
+using namespace app::projectscene;
 
 ApplicationCanvas::ApplicationCanvas(QQuickItem *parent) : QQuickFramebufferObject(parent) {};
 

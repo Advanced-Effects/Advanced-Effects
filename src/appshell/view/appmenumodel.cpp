@@ -64,15 +64,15 @@ MenuItemList AppMenuModel::getMenuList() {
 
 MenuItem* AppMenuModel::makeFileMenu() {
         MenuItemList items {
-                makeMenuItem("file-new"),
-                makeMenuItem("file-open"),
-                makeMenuItem("file-import"),
+                makeMenuItem("project-new"),
+                makeMenuItem("project-open"),
+                makeMenuItem("asset-import"),
                 makeSeparator(),
-                makeMenuItem("file-save"),
-                makeMenuItem("file-copy"),
-                makeMenuItem("file-export"),
+                makeMenuItem("project-save"),
+                makeMenuItem("project-copy"),
+                makeMenuItem("project-export"),
                 makeSeparator(),
-                makeMenuItem("file-properties"),
+                makeMenuItem("project-properties"),
                 makeSeparator(),
                 makeMenuItem("quit")
         };
