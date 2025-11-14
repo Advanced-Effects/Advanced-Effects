@@ -2,6 +2,7 @@
 
 #include <memory>
 
+#include "iprojectfilescontroller.h"
 #include "modularity/ioc.h"
 #include "ui/iuiactionsregister.h"
 #include "ui/iinteractiveuriregister.h"
@@ -49,7 +50,9 @@ void ProjectSceneModule::registerExports() {
         m_projectActions = std::make_shared<ProjectUiActions>(m_actionsController, iocContext());
         m_toolbarController = std::make_shared<ToolActionController>(iocContext());
         m_toolbarActions = std::make_shared<ToolBarUiActions>(m_toolbarController, iocContext());
+
         m_projectFilesController = std::make_shared<ProjectFilesController>(iocContext());
+        ioc()->registerExport<IProjectFilesController>(moduleName(), m_projectFilesController);
 };
 
 void ProjectSceneModule::resolveImports() {
