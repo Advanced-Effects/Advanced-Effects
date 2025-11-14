@@ -25,17 +25,21 @@ void ProjectActionController::openProject(const muse::actions::ActionData& args)
                 openProject(std::make_shared<Document>(url.toString()));
         }
 
-        auto file = QFileDialog::getOpenFileUrl(nullptr,
-                                                "",
-                                                QUrl(),
-                                                "Glaxnimate project file (*.rawr);;\
-                                                After Effects file (*.aep)");
+        auto fileUrl = QFileDialog::getOpenFileUrl(nullptr,
+                                                   "",
+                                                   QUrl(),
+                                                   "Glaxnimate project file (*.rawr);;\
+                                                   After Effects file (*.aep)");
 
-        return openProject(std::make_shared<Document>(file.toString()));
+        return openProject(fileUrl);
 };
 
-void ProjectActionController::openProject(std::shared_ptr<glaxnimate::model::Document> document) {
+void ProjectActionController::openProject(std::shared_ptr<Document> document) {
         projectFiles()->addProject(document);
+};
+
+void ProjectActionController::openProject(QUrl fileUrl) {
+        projectFiles()->importProject(fileUrl);
 };
 
 void ProjectActionController::closeProject() {};

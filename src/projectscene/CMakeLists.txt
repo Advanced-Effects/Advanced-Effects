@@ -35,3 +35,9 @@ set(MODULE_LINK
 set(MODULE_LINK_PUBLIC app::context)
 
 setup_module()
+
+set_source_files_properties(internal/projectactionscontroller.cpp
+                            internal/projectactionscontroller.h
+                            PROPERTIES
+                            SKIP_UNITY_BUILD_INCLUSION ON
+                            SKIP_PRECOMPILE_HEADERS ON)

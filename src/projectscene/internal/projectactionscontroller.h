@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <string>
 
 #include "modularity/ioc.h"
 #include "actions/iactionsdispatcher.h"
@@ -39,7 +40,8 @@ private:
         // Action to open a project. Expects two arguments:
         // 0. The URL to the file
         void openProject(const muse::actions::ActionData& args);
-        void openProject(std::shared_ptr<glaxnimate::model::Document> document);
+        void openProject(QUrl fileUrl);
+        void openProject(std::shared_ptr<Document> document);
 
         void saveProject();
         void closeProject();
