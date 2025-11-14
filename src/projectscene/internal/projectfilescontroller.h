@@ -4,6 +4,9 @@
 
 #include <QList>
 
+#include "modularity/ioc.h"
+
+using namespace muse;
 using namespace app::projectscene;
 
 class ProjectFilesController : public IProjectFilesController

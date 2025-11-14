@@ -4,9 +4,12 @@
 
 #include "glax_core/model/assets/assets.hpp"
 #include "glax_core/io/base.hpp"
-#include "io/glaxnimate/glaxnimate_format.hpp"
+
+#include "glax_core/io/glaxnimate/glaxnimate_format.hpp"
+#include "glax_core/io/aep/aep_format.hpp"
 
 using namespace app::projectscene;
+using namespace glaxnimate::io::glaxnimate;
 using namespace glaxnimate::io;
 
 void ProjectFilesController::addProject(std::shared_ptr<Document> document) {
@@ -16,18 +19,18 @@ void ProjectFilesController::addProject(std::shared_ptr<Document> document) {
 void ProjectFilesController::removeProject(std::shared_ptr<Document> document) {};
 
 std::shared_ptr<Document> ProjectFilesController::importProject(QUrl fileUrl) {
-        auto documentToReturn = std::make_shared<Document>(fileUrl.toLocalFile());
+        auto fileName = fileUrl.toLocalFile();
+        auto documentToReturn = std::make_shared<Document>(fileName);
 
         // Select project importer to use
-        auto fileExtension = fileUrl.fileName();
-        ImportExport *import = nullptr;
+        ImportExport *import = GlaxnimateFormat::instance();
         if (!import->can_handle(ImportExport::Direction::Import)) return nullptr;
 
         // Open file
-        auto file = QFile(fileUrl.toLocalFile());
+        auto file = QFile(fileName);
 
         // Actually import the file
-        import->open(file, fileUrl.toLocalFile(), documentToReturn.get(), QVariantMap());
+        import->open(file, fileName, documentToReturn.get(), QVariantMap());
 
         // And add it to project list and return
         addProject(documentToReturn);
