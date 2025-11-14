@@ -36,8 +36,7 @@ set(MODULE_LINK_PUBLIC app::context)
 
 setup_module()
 
-set_source_files_properties(internal/projectactionscontroller.cpp
-                            internal/projectactionscontroller.h
+set_source_files_properties(${MODULE_SRC}
                             PROPERTIES
                             SKIP_UNITY_BUILD_INCLUSION ON
                             SKIP_PRECOMPILE_HEADERS ON)
