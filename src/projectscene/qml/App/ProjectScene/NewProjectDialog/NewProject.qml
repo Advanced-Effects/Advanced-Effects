@@ -10,6 +10,10 @@ import App.ProjectScene
 StyledDialogView {
         id: root
 
+        property int selectedWidth: 1920
+        property int selectedHeight: 1080
+        property int selectedFps: 30
+
         title: qsTrc("projectscene/newproject", "New Project")
 
         contentWidth: 300
@@ -28,12 +32,48 @@ StyledDialogView {
 
                 spacing: 0
 
-                RowLayout {
+                Column {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
 
-                        spacing: 0
+                        anchors {
+                                fill: parent
+                        }
 
+                        spacing: 4
+
+                        IncrementalPropertyControl {
+                                id: widthField
+
+                                currentValue: root.selectedWidth
+
+                                step: 1
+                                decimals: 1
+                                maxValue: 10_000
+                                minValue: 1
+                        }
+
+                        IncrementalPropertyControl {
+                                id: heightField
+
+                                currentValue: root.selectedHeight
+
+                                step: 1
+                                decimals: 0
+                                maxValue: 10_000
+                                minValue: 1
+                        }
+
+                        IncrementalPropertyControl {
+                                id: fpsField
+
+                                currentValue: root.selectedFps
+
+                                step: 1
+                                decimals: 0
+                                maxValue: 1000
+                                minValue: 1
+                        }
                 }
 
                 SeparatorLine { }
@@ -52,7 +92,7 @@ StyledDialogView {
                         }
 
                         onCreateProjectRequested: {
-                                projectModel.newProject("Scene 1", 1920, 1080, 30)
+                                projectModel.newProject("", root.width, root.height, root.fps)
 
                                 root.hide()
                         }
