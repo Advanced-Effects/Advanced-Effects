@@ -20,7 +20,6 @@ public:
 
         virtual std::shared_ptr<Document> importProject(QUrl fileUrl) = 0;
         virtual std::shared_ptr<Document> createAndOpenProject(std::string fileName,
-                                                               std::string sceneName,
                                                                int width, int height,
                                                                int fps) = 0;
 };

@@ -38,7 +38,6 @@ std::shared_ptr<Document> ProjectFilesController::importProject(QUrl fileUrl) {
 };
 
 std::shared_ptr<Document> ProjectFilesController::createAndOpenProject(std::string fileName,
-                                                                       std::string sceneName,
                                                                        int width, int height,
                                                                        int fps) {
         auto document = std::make_shared<Document>();
