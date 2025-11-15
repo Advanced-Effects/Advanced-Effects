@@ -5,6 +5,8 @@ import QtQuick.Layouts 2.15
 import Muse.Ui 1.0
 import Muse.UiComponents 1.0
 
+import App.ProjectScene
+
 StyledDialogView {
         id: root
 
@@ -17,6 +19,10 @@ StyledDialogView {
         property string currentPageId: ""
         property var params: null
 
+        ProjectModel {
+                id: projectModel
+        }
+
         ColumnLayout  {
                 anchors.fill: parent
 
@@ -28,15 +34,6 @@ StyledDialogView {
 
                         spacing: 0
 
-                        /*PreferencesMenu {
-                                id: menu
-                        }
-
-                        SeparatorLine { orientation: Qt.Vertical }
-
-                        StackLayout {
-                                id: stack
-                                }*/
                 }
 
                 SeparatorLine { }
@@ -54,7 +51,11 @@ StyledDialogView {
                                 root.hide()
                         }
 
-                        onCreateProjectRequested: {}
+                        onCreateProjectRequested: {
+                                projectModel.newProject("Scene 1", 1920, 1080, 30)
+
+                                root.hide()
+                        }
                 }
         }
 }
