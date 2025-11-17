@@ -4,6 +4,7 @@
         <file>qml/App/ProjectScene/NewProjectDialog/NewProjectButtonsPanel.qml</file>
         <file>qml/App/ProjectScene/EditPage/EditPage.qml</file>
         <file>qml/App/ProjectScene/EditPage/CentralWidget.qml</file>
+        <file>qml/App/ProjectScene/EditPage/TabBar/ProjectSwitchBar.qml</file>
         <file>qml/App/ProjectScene/EditPage/Panels/GeneralBar.qml</file>
         <file>qml/App/ProjectScene/EditPage/Panels/GeneralBarHeader.qml</file>
         <file>qml/App/ProjectScene/EditPage/Toolbars/ToolSelection.qml</file>

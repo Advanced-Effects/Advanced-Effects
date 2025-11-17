@@ -6,6 +6,7 @@ QuickActions 1.0 TimelineWidget/QuickActions.qml
 TimelineWidget 1.0 TimelineWidget/TimelineWidget.qml
 EditPage 1.0 EditPage/EditPage.qml
 CentralWidget 1.0 EditPage/CentralWidget.qml
+ProjectSwitchBar 1.0 EditPage/TabBar/ProjectSwitchBar.qml
 ToolSelection 1.0 EditPage/Toolbars/ToolSelection.qml
 GeneralBar 1.0 EditPage/Panels/GeneralBar.qml
 GeneralBarHeader 1.0 EditPage/Panels/GeneralBarHeader.qml
