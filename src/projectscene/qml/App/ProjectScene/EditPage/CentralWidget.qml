@@ -22,7 +22,7 @@ Item {
         }
 
         ApplicationCanvas {
-                anchors.top: fileTabBar.bottom
+                anchors.top: projectTabBar.bottom
                 anchors.left: root.left
                 anchors.right: root.right
                 anchors.bottom: root.bottom
