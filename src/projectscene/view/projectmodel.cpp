@@ -2,8 +2,16 @@
 
 using namespace app::projectscene;
 
-ProjectModel::ProjectModel(QObject* parent)
-        : QObject(parent) {};
+ProjectModel::ProjectModel(QWidget* parent)
+        : QListView(parent) {};
+
+void ProjectModel::init() {
+        connectFileSignals();
+};
+
+void ProjectModel::connectFileSignals() {
+        //projectFiles()->openProjectsChanged.onNotify(this, []() {});
+};
 
 void ProjectModel::newProject(QString fileName,
                               int width,

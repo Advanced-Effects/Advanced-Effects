@@ -72,6 +72,7 @@ void ProjectSceneModule::resolveImports() {
 };
 
 void ProjectSceneModule::onInit(const IApplication::RunMode& mode) {
+        m_projectFilesController->init();
         m_actionsController->init();
         m_toolbarController->init();
 };

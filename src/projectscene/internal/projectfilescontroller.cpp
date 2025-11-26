@@ -13,6 +13,7 @@ using namespace glaxnimate::io::glaxnimate;
 using namespace glaxnimate::io;
 
 void ProjectFilesController::addProject(std::shared_ptr<Document> document) {
+        openProjectsChanged.notify();
         m_openProjects.append(document);
 };
 
