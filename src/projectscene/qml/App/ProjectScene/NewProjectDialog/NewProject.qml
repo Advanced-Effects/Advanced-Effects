@@ -5,8 +5,14 @@ import QtQuick.Layouts 2.15
 import Muse.Ui 1.0
 import Muse.UiComponents 1.0
 
+import App.ProjectScene
+
 StyledDialogView {
         id: root
+
+        property int selectedWidth: 1920
+        property int selectedHeight: 1080
+        property int selectedFps: 30
 
         title: qsTrc("projectscene/newproject", "New Project")
 
@@ -17,26 +23,57 @@ StyledDialogView {
         property string currentPageId: ""
         property var params: null
 
+        ProjectModel {
+                id: projectModel
+        }
+
         ColumnLayout  {
                 anchors.fill: parent
 
                 spacing: 0
 
-                RowLayout {
+                Column {
                         Layout.fillWidth: true
                         Layout.fillHeight: true
 
-                        spacing: 0
-
-                        /*PreferencesMenu {
-                                id: menu
+                        anchors {
+                                fill: parent
                         }
 
-                        SeparatorLine { orientation: Qt.Vertical }
+                        spacing: 4
 
-                        StackLayout {
-                                id: stack
-                                }*/
+                        IncrementalPropertyControl {
+                                id: widthField
+
+                                currentValue: root.selectedWidth
+
+                                step: 1
+                                decimals: 1
+                                maxValue: 10_000
+                                minValue: 1
+                        }
+
+                        IncrementalPropertyControl {
+                                id: heightField
+
+                                currentValue: root.selectedHeight
+
+                                step: 1
+                                decimals: 0
+                                maxValue: 10_000
+                                minValue: 1
+                        }
+
+                        IncrementalPropertyControl {
+                                id: fpsField
+
+                                currentValue: root.selectedFps
+
+                                step: 1
+                                decimals: 0
+                                maxValue: 1000
+                                minValue: 1
+                        }
                 }
 
                 SeparatorLine { }
@@ -54,7 +91,11 @@ StyledDialogView {
                                 root.hide()
                         }
 
-                        onCreateProjectRequested: {}
+                        onCreateProjectRequested: {
+                                projectModel.newProject("", root.width, root.height, root.fps)
+
+                                root.hide()
+                        }
                 }
         }
 }

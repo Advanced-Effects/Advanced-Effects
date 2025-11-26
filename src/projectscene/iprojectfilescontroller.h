@@ -3,6 +3,8 @@
 #include <memory>
 
 #include "modularity/ioc.h"
+#include "async/notification.h"
+
 #include "glax_core/model/document.hpp"
 
 namespace app::projectscene {
@@ -15,14 +17,17 @@ class IProjectFilesController : MODULE_EXPORT_INTERFACE {
 public:
         virtual ~IProjectFilesController() = default;
 
+        virtual void init() {};
+
         virtual void addProject(std::shared_ptr<Document> document) = 0;
         virtual void removeProject(std::shared_ptr<Document> document) = 0;
 
         virtual std::shared_ptr<Document> importProject(QUrl fileUrl) = 0;
         virtual std::shared_ptr<Document> createAndOpenProject(std::string fileName,
-                                                               std::string sceneName,
                                                                int width, int height,
                                                                int fps) = 0;
+        // Signals
+        muse::async::Notification openProjectsChanged;
 };
 
 }

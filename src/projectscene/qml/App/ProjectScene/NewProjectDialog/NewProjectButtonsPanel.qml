@@ -17,7 +17,6 @@ Rectangle {
     ButtonBox {
         id: buttonBox
 
-        anchors.left: parent.left
         anchors.right: parent.right
         anchors.verticalCenter: parent.verticalCenter
         anchors.margins: 10

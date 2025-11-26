@@ -13,6 +13,7 @@ using namespace glaxnimate::io::glaxnimate;
 using namespace glaxnimate::io;
 
 void ProjectFilesController::addProject(std::shared_ptr<Document> document) {
+        openProjectsChanged.notify();
         m_openProjects.append(document);
 };
 
@@ -38,7 +39,6 @@ std::shared_ptr<Document> ProjectFilesController::importProject(QUrl fileUrl) {
 };
 
 std::shared_ptr<Document> ProjectFilesController::createAndOpenProject(std::string fileName,
-                                                                       std::string sceneName,
                                                                        int width, int height,
                                                                        int fps) {
         auto document = std::make_shared<Document>();
