@@ -2,17 +2,17 @@
 
 #include "iprojectfilescontroller.h"
 
-#include <QWidget>
-#include <QListView>
+#include <QObject>
+#include <QStringListModel>
 
 namespace app::projectscene {
 
-class ProjectModel : public QListView {
+class ProjectModel : public QStringListModel {
         Q_OBJECT
         INJECT(IProjectFilesController, projectFiles)
 
 public:
-        explicit ProjectModel(QWidget* parent = nullptr);
+        explicit ProjectModel(QObject* parent = nullptr);
         ~ProjectModel() = default;
 
         void init();
@@ -22,7 +22,8 @@ public:
                                     int height,
                                     int fps);
 
-        // Signals
+        // Connects to IProjectsFileController to make sure
+        // files there are also updated here
         void connectFileSignals();
 };
 

@@ -2,8 +2,8 @@
 
 using namespace app::projectscene;
 
-ProjectModel::ProjectModel(QWidget* parent)
-        : QListView(parent) {};
+ProjectModel::ProjectModel(QObject* parent)
+        : QStringListModel(parent) {};
 
 void ProjectModel::init() {
         connectFileSignals();
