@@ -28,10 +28,6 @@ set(MODULE_SRC
         internal/toolbar/toolidentifier.h
     )
 
-set(MODULE_LINK
-    muse::uicomponents
-    muse::ui)
-
 set(MODULE_LINK_PUBLIC app::context)
 
 setup_module()
