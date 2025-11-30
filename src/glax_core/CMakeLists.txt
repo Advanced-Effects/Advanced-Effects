@@ -138,6 +138,7 @@ set(MODULE_LINK
         ${Libav_LIBRARIES}
         ${LibArchive_LIBRARIES}
         potrace)
+set(MODULE_LINK_PUBLIC Skia::Skia)
 
 if ( NOT GLAXNIMATE_SYSTEM_POTRACE )
         set(Potrace_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/thirdparty/potrace/src)
