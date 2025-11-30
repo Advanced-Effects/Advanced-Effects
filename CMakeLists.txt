@@ -16,6 +16,8 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 # Muse Framework
 ###########################################
 
+include(FetchContent)
+
 set(MUSE_FRAMEWORK_PATH ${PROJECT_SOURCE_DIR}/thirdparty)
 set(MUSE_FRAMEWORK_SRC_PATH ${MUSE_FRAMEWORK_PATH}/framework)
 
@@ -132,6 +134,16 @@ endif(MUE_COMPILE_USE_CCACHE)
 ###########################################
 set(QT_MIN_VERSION "6.9.2")
 include(SetupQt6)
+
+###########################################
+# Setup skia
+###########################################
+
+FetchContent_Declare(skia
+        GIT_REPOSITORY https://github.com/friction2d/skia.git
+        GIT_TAG m83f)
+
+FetchContent_MakeAvailable(skia)
 
 ###########################################
 # Add source tree
