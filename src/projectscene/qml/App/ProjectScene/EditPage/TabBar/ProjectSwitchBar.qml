@@ -21,21 +21,19 @@ Item {
         }
 
         // List of open files
-        ListView {
+        Repeater {
                 id: openFilesWidget
-
-                clip: true
-
-                model: fileListModel
-                delegate: Text {
-                        text: model.display
-                }
 
                 anchors {
                         left: root.left
                         right: rightControlsBar.left
                         top: root.top
                         bottom: root.bottom
+                }
+
+                model: fileListModel
+                ProjectTab {
+                        fileName: model.display
                 }
         }
 
