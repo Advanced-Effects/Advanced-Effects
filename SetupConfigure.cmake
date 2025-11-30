@@ -24,11 +24,11 @@ include(GetPlatformInfo)
 include(version)
 
 if (NOT AU4_BUILD_CONFIGURATION)
-    set(AU4_BUILD_CONFIGURATION "app")
+        set(AU4_BUILD_CONFIGURATION "app")
 endif()
 
 if (NOT AU4_BUILD_MODE)
-    set(AU4_BUILD_MODE "dev")
+        set(AU4_BUILD_MODE "dev")
 endif()
 
 # Set revision for local builds
@@ -45,40 +45,40 @@ string(TOUPPER ${AU4_BUILD_MODE} BUILD_MODE)
 # Setup by mode
 ###########################################
 if(BUILD_MODE MATCHES "DEV")
-    set(MUSE_APP_UNSTABLE ON)
-    set(MUSE_APP_RELEASE_CHANNEL "dev")
-    set(MUSE_APP_NAME_VERSION "${MUSE_APP_NAME_VERSION} ${MUSE_APP_RELEASE_CHANNEL}")
-    set(MUSE_APP_IS_PRERELEASE ON)
-    set(AU4_ALLOW_UPDATE_ON_PRERELEASE OFF)
+        set(MUSE_APP_UNSTABLE ON)
+        set(MUSE_APP_RELEASE_CHANNEL "dev")
+        set(MUSE_APP_NAME_VERSION "${MUSE_APP_NAME_VERSION} ${MUSE_APP_RELEASE_CHANNEL}")
+        set(MUSE_APP_IS_PRERELEASE ON)
+        set(AU4_ALLOW_UPDATE_ON_PRERELEASE OFF)
 endif()
 
 if(BUILD_MODE MATCHES "TESTING")
-    set(MUSE_APP_UNSTABLE OFF)
-    set(MUSE_APP_RELEASE_CHANNEL "Testing")
-    set(MUSE_APP_NAME_VERSION "${MUSE_APP_NAME_VERSION} ${MUSE_APP_RELEASE_CHANNEL}")
-    set(MUSE_APP_IS_PRERELEASE ON)
-    set(AU4_ALLOW_UPDATE_ON_PRERELEASE ON)
+        set(MUSE_APP_UNSTABLE OFF)
+        set(MUSE_APP_RELEASE_CHANNEL "Testing")
+        set(MUSE_APP_NAME_VERSION "${MUSE_APP_NAME_VERSION} ${MUSE_APP_RELEASE_CHANNEL}")
+        set(MUSE_APP_IS_PRERELEASE ON)
+        set(AU4_ALLOW_UPDATE_ON_PRERELEASE ON)
 endif()
 
 if(BUILD_MODE MATCHES "RELEASE")
-    set(MUSE_APP_UNSTABLE OFF)
-    set(MUSE_APP_IS_PRERELEASE OFF)
-    set(AU4_ALLOW_UPDATE_ON_PRERELEASE OFF)
+        set(MUSE_APP_UNSTABLE OFF)
+        set(MUSE_APP_IS_PRERELEASE OFF)
+        set(AU4_ALLOW_UPDATE_ON_PRERELEASE OFF)
 endif()
 
 ###########################################
 # Setup paths
 ###########################################
 if (OS_IS_MAC)
-    SET(AU4_INSTALL_NAME  "Contents/Resources/")
-    SET(AU4_SHARE_NAME    "AdvancedEffects.app/")
-    SET(AU4_FRAMEWORKS_NAME "Frameworks/")
+        SET(AU4_INSTALL_NAME  "Contents/Resources/")
+        SET(AU4_SHARE_NAME    "AdvancedEffects.app/")
+        SET(AU4_FRAMEWORKS_NAME "Frameworks/")
 elseif (OS_IS_WIN)
-    SET(AU4_INSTALL_NAME  "")
-    SET(AU4_SHARE_NAME    "./")
+        SET(AU4_INSTALL_NAME  "")
+        SET(AU4_SHARE_NAME    "./")
 else()
-    SET(AU4_INSTALL_NAME  "AdvancedEffects${MUSE_APP_INSTALL_SUFFIX}-${AU4_VERSION_MAJ_MIN}/")
-    SET(AU4_SHARE_NAME    "share/")
+        SET(AU4_INSTALL_NAME  "AdvancedEffects${MUSE_APP_INSTALL_SUFFIX}-${AU4_VERSION_MAJ_MIN}/")
+        SET(AU4_SHARE_NAME    "share/")
 endif()
 
 ###########################################
@@ -86,46 +86,46 @@ endif()
 ###########################################
 set(AU4_GENERAL_APP OFF)
 if(BUILD_CONFIGURE MATCHES "APP")
-    set(AU4_GENERAL_APP ON)
+        set(AU4_GENERAL_APP ON)
 endif()
 
 if(BUILD_CONFIGURE MATCHES "APP-PORTABLE")
-    set(AU4_GENERAL_APP ON)
-    set(WIN_PORTABLE ON)
+        set(AU4_GENERAL_APP ON)
+        set(WIN_PORTABLE ON)
 endif()
 
 if (AU4_GENERAL_APP)
-    if (BUILD_IS_DEBUG)
-        set(MUSE_MODULE_GLOBAL_LOGGER_DEBUGLEVEL ON)
-    else()
-        set(MUSE_MODULE_GLOBAL_LOGGER_DEBUGLEVEL OFF)
-    endif()
+        if (BUILD_IS_DEBUG)
+                set(MUSE_MODULE_GLOBAL_LOGGER_DEBUGLEVEL ON)
+        else()
+                set(MUSE_MODULE_GLOBAL_LOGGER_DEBUGLEVEL OFF)
+        endif()
 endif()
 
 if (WIN_PORTABLE)
-    set(MUSE_MODULE_UPDATE OFF)
+        set(MUSE_MODULE_UPDATE OFF)
 endif()
 if (OS_IS_FBSD)
-    message(WARNING "Not building unsupported chrashpad client on FreeBSD")
-    set(MUSE_MODULE_DIAGNOSTICS_CRASHPAD_CLIENT OFF)
+        message(WARNING "Not building unsupported chrashpad client on FreeBSD")
+        set(MUSE_MODULE_DIAGNOSTICS_CRASHPAD_CLIENT OFF)
 endif()
 
 ###########################################
 # CONFIGURE: UTest
 ###########################################
 if(BUILD_CONFIGURE MATCHES "UTEST")
-    set(MUSE_ENABLE_UNIT_TESTS ON)
-    set(MUSE_MODULE_GLOBAL_LOGGER_DEBUGLEVEL ON)
-    set(MUSE_MODULE_AUDIO OFF)
-    set(MUSE_COMPILE_ASAN ON)
+        set(MUSE_ENABLE_UNIT_TESTS ON)
+        set(MUSE_MODULE_GLOBAL_LOGGER_DEBUGLEVEL ON)
+        set(MUSE_MODULE_AUDIO OFF)
+        set(MUSE_COMPILE_ASAN ON)
 
-    message(STATUS "If you added tests to a module that didn't have them yet, make sure that this module is enabled, see SetupConfigure.cmake")
-    set(MUSE_MODULE_MIDI OFF)
-    set(MUSE_MODULE_MUSESAMPLER OFF)
-    set(MUSE_MODULE_NETWORK OFF)
-    set(MUSE_MODULE_SHORTCUTS OFF)
+        message(STATUS "If you added tests to a module that didn't have them yet, make sure that this module is enabled, see SetupConfigure.cmake")
+        set(MUSE_MODULE_MIDI OFF)
+        set(MUSE_MODULE_MUSESAMPLER OFF)
+        set(MUSE_MODULE_NETWORK OFF)
+        set(MUSE_MODULE_SHORTCUTS OFF)
 
-    set(MUE_BUILD_APPSHELL_MODULE OFF)
+        set(MUE_BUILD_APPSHELL_MODULE OFF)
 
 endif()
 
@@ -136,7 +136,7 @@ endif()
 set(QT_SUPPORT ON)
 
 if (NOT MUSE_MODULE_UI)
-    set(MUE_BUILD_APPSHELL_MODULE OFF) # hard dependency
+        set(MUE_BUILD_APPSHELL_MODULE OFF) # hard dependency
 endif()
 
 ###########################################
@@ -144,7 +144,7 @@ endif()
 ###########################################
 if (NOT MUSE_ENABLE_UNIT_TESTS)
 
-    set(MUE_BUILD_PROJECT_TESTS OFF)
+        set(MUE_BUILD_PROJECT_TESTS OFF)
 
 endif()
 
@@ -155,7 +155,7 @@ set(MUSE_APP_BUILD_NUMBER ${CMAKE_BUILD_NUMBER})
 set(MUSE_APP_INSTALL_PREFIX "\"${CMAKE_INSTALL_PREFIX}\"")
 set(MUSE_APP_INSTALL_NAME "\"${AU4_INSTALL_NAME}\"")
 
-include(${MUSE_FRAMEWORK_SRC_PATH}/cmake/MuseSetupConfiguration.cmake)
+include(MuseSetupConfiguration)
 
 ###########################################
 # Global definitions
@@ -165,33 +165,33 @@ include(${MUSE_FRAMEWORK_SRC_PATH}/cmake/MuseSetupConfiguration.cmake)
 # modules config
 
 if (AU4_ALLOW_UPDATE_ON_PRERELEASE)
-    add_definitions(-DAU4_ALLOW_UPDATE_ON_PRERELEASE)
+        add_definitions(-DAU4_ALLOW_UPDATE_ON_PRERELEASE)
 endif()
 
 if (QT_SUPPORT)
-    add_definitions(-DQT_SUPPORT)
-    add_definitions(-DKORS_LOGGER_QT_SUPPORT)
+        add_definitions(-DQT_SUPPORT)
+        add_definitions(-DKORS_LOGGER_QT_SUPPORT)
 
-    if (QT_QPROCESS_SUPPORTED)
-        add_compile_definitions(QT_QPROCESS_SUPPORTED)
-    endif()
+        if (QT_QPROCESS_SUPPORTED)
+                add_compile_definitions(QT_QPROCESS_SUPPORTED)
+        endif()
 
-    if (QT_ADD_CONCURRENT)
-        add_compile_definitions(QT_CONCURRENT_SUPPORTED)
-    endif()
+        if (QT_ADD_CONCURRENT)
+                add_compile_definitions(QT_CONCURRENT_SUPPORTED)
+        endif()
 
 else()
-    add_definitions(-DNO_QT_SUPPORT)
+        add_definitions(-DNO_QT_SUPPORT)
 endif()
 
 if (WIN_PORTABLE)
-    add_definitions(-DWIN_PORTABLE)
+        add_definitions(-DWIN_PORTABLE)
 endif()
 
 if (MUSE_APP_IS_PRERELEASE)
-    add_definitions(-DKORS_PROFILER_ENABLED)
+        add_definitions(-DKORS_PROFILER_ENABLED)
 endif()
 
 if (MUE_ENABLE_LOAD_QML_FROM_SOURCE)
-    add_definitions(-DMUE_ENABLE_LOAD_QML_FROM_SOURCE)
+        add_definitions(-DMUE_ENABLE_LOAD_QML_FROM_SOURCE)
 endif()

@@ -16,15 +16,11 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 # Muse Framework
 ###########################################
 
-include(ExternalProject)
-ExternalProject_Add(Framework
+include(FetchContent)
+FetchContent_Declare(Framework
         GIT_REPOSITORY https://github.com/Advanced-Effects/framework.git
-        GIT_TAG main
-        GIT_SHALLOW true
-        SOURCE_DIR "${CMAKE_BINARY_DIR}/framework-src"
-        BINARY_DIR "${CMAKE_BINARY_DIR}/framework")
-
-set(MUSE_FRAMEWORK_SRC_PATH ${CMAKE_BINARY_DIR}/framework-src)
+        GIT_TAG main)
+FetchContent_MakeAvailable(Framework)
 
 # Sets the paths where cmake scripts ("include" calls) will be looked up in
 set(CMAKE_MODULE_PATH
