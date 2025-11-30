@@ -19,6 +19,8 @@ public:
 
         virtual void init() {};
 
+        virtual QList<std::shared_ptr<Document>> projects() = 0;
+
         virtual void addProject(std::shared_ptr<Document> document) = 0;
         virtual void removeProject(std::shared_ptr<Document> document) = 0;
 

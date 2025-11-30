@@ -1,3 +1,4 @@
+import QtQuick
 import QtQuick.Controls
 
 import Muse.UiComponents
@@ -5,11 +6,11 @@ import Muse.UiComponents
 Item {
         id: root
 
-        property string fileName;
-        property bool isEdited;
+        property string fileName
+        property bool isEdited
 
-        property signal onRequestClose();
-        property signal onRequestFocus();
+        signal onRequestClose()
+        signal onRequestFocus()
 
         Text {
                 text: fileName

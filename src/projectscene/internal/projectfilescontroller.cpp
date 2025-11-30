@@ -12,6 +12,10 @@ using namespace app::projectscene;
 using namespace glaxnimate::io::glaxnimate;
 using namespace glaxnimate::io;
 
+QList<std::shared_ptr<Document>> ProjectFilesController::projects() {
+        return m_openProjects;
+};
+
 void ProjectFilesController::addProject(std::shared_ptr<Document> document) {
         openProjectsChanged.notify();
         m_openProjects.append(document);

@@ -10,7 +10,18 @@ void ProjectModel::init() {
 };
 
 void ProjectModel::connectFileSignals() {
-        //projectFiles()->openProjectsChanged.onNotify(this, []() {});
+        // When the project list is updated
+        projectFiles()->openProjectsChanged.onNotify(this, [=]() {
+                // Refill it
+                auto projects = projectFiles()->projects();
+
+                QStringList list;
+                for (auto project : projects) {
+                        list.append(project->filename());
+                };
+
+                setStringList(list);
+        });
 };
 
 void ProjectModel::newProject(QString fileName,

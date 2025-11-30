@@ -20,9 +20,15 @@ Item {
         ListView {
                 id: openFilesWidget
 
-                model: fileListModel
-                delegate: ItemDelegate {
+                clip: true
 
+                model: fileListModel
+                delegate: Item {
+                        ProjectTab {
+                                anchors.fill: parent
+
+                                fileName: model.fileName
+                        }
                 }
 
                 anchors {

@@ -1,5 +1,6 @@
 #pragma once
 
+#include "async/asyncable.h"
 #include "iprojectfilescontroller.h"
 
 #include <QObject>
@@ -7,7 +8,10 @@
 
 namespace app::projectscene {
 
-class ProjectModel : public QStringListModel {
+using namespace muse::async;
+
+class ProjectModel : public QStringListModel
+                   , public Asyncable {
         Q_OBJECT
         INJECT(IProjectFilesController, projectFiles)
 

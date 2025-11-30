@@ -16,6 +16,8 @@ public:
                 : Injectable(iocCtx) {};
         ~ProjectFilesController() = default;
 
+        QList<std::shared_ptr<Document>> projects() override;
+
         void addProject(std::shared_ptr<Document> document) override;
         void removeProject(std::shared_ptr<Document> document) override;
 
