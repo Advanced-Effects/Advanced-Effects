@@ -16,6 +16,10 @@ Item {
                 id: fileListModel
         }
 
+        Component.onCompleted: {
+                fileListModel.init();
+        }
+
         // List of open files
         ListView {
                 id: openFilesWidget
@@ -23,12 +27,8 @@ Item {
                 clip: true
 
                 model: fileListModel
-                delegate: Item {
-                        ProjectTab {
-                                anchors.fill: parent
-
-                                fileName: model.fileName
-                        }
+                delegate: Text {
+                        text: model.display
                 }
 
                 anchors {

@@ -17,8 +17,8 @@ QList<std::shared_ptr<Document>> ProjectFilesController::projects() {
 };
 
 void ProjectFilesController::addProject(std::shared_ptr<Document> document) {
-        openProjectsChanged.notify();
         m_openProjects.append(document);
+        openProjectsChanged.notify();
 };
 
 void ProjectFilesController::removeProject(std::shared_ptr<Document> document) {};

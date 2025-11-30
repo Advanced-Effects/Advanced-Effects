@@ -19,7 +19,7 @@ public:
         explicit ProjectModel(QObject* parent = nullptr);
         ~ProjectModel() = default;
 
-        void init();
+        Q_INVOKABLE void init();
 
         Q_INVOKABLE void newProject(QString fileName,
                                     int width,
