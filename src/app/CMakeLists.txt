@@ -8,11 +8,6 @@
 ###########################################
 set(EXECUTABLE_NAME AdvancedEffects)
 
-###########################################
-# Platform specific
-###########################################
-include(GetPlatformInfo)
-
 if (OS_IS_WIN)
         set(APP_OUTPUT_NAME ${MUSESCORE_NAME}${MUSESCORE_VERSION_MAJOR})
 
@@ -62,25 +57,10 @@ endif()
 # Dependency library declaration
 ###########################################
 
+set(LINK_DEP Framework)
+
 set(LINK_LIB
     ${QT_LIBRARIES}
-    muse::global
-
-    muse::autobot
-    muse::draw
-    muse::actions
-    muse::ui
-    muse::uicomponents
-    muse::dockwindow
-    muse::shortcuts
-    muse::workspace
-    muse::accessibility
-    muse::cloud
-    muse::network
-    muse::multiinstances
-    muse::learn
-    muse::languages
-    muse::diagnostics
 
     QtAppSetup
     app::glax_core
@@ -161,6 +141,7 @@ endif(CC_IS_MSVC)
 ###########################################
 # Link
 ###########################################
+add_dependencies(${EXECUTABLE_NAME} ${LINK_DEP})
 target_link_libraries(${EXECUTABLE_NAME} PRIVATE ${LINK_LIB}  ${COVERAGE_LINK_FLAGS})
 
 ###########################################
