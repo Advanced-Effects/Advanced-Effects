@@ -12,21 +12,17 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Getting some weird-ass error about PCH files
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
-###########################################
-# Muse Framework
-###########################################
-
-include(FetchContent)
-FetchContent_Declare(Framework
-        GIT_REPOSITORY https://github.com/Advanced-Effects/framework.git
-        GIT_TAG main)
-FetchContent_MakeAvailable(Framework)
-
 # Sets the paths where cmake scripts ("include" calls) will be looked up in
 set(CMAKE_MODULE_PATH
         ${CMAKE_CURRENT_LIST_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/buildscripts/cmake
         ${CMAKE_MODULE_PATH})
+
+###########################################
+# Muse Framework
+###########################################
+
+include(SetupFramework)
 
 # Installs 'declare_module' calls etc. (Module System)
 include(DeclareModuleSetup)
