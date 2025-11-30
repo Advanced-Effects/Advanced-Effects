@@ -1,4 +1,4 @@
-declare_module(app_appshell)
+ae_declare_module(app_appshell)
 set(MODULE_ALIAS app::appshell)
 
 set(MODULE_QRC appshell.qrc)
@@ -44,4 +44,4 @@ set(MODULE_LINK
 # we use private/qkeymapper_p.h to fix https://github.com/musescore/MuseScore/issues/10181
 set(MODULE_INCLUDE_PRIVATE ${Qt6Gui_PRIVATE_INCLUDE_DIRS} )
 
-setup_module()
+ae_setup_module()

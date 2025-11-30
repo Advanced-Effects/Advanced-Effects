@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2019-2023 Mattia Basaglia <dev@dragon.best>
 # SPDX-License-Identifier: BSD-2-Clause
 
-declare_module(app_glax_core)
+ae_declare_module(app_glax_core)
 
 set(MODULE app_glax_core)
 set(MODULE_ALIAS app::glax_core)
@@ -138,6 +138,7 @@ set(MODULE_LINK
         ${Libav_LIBRARIES}
         ${LibArchive_LIBRARIES}
         potrace)
+set(MODULE_LINK_PUBLIC Skia::Skia)
 
 if ( NOT GLAXNIMATE_SYSTEM_POTRACE )
         set(Potrace_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/thirdparty/potrace/src)
@@ -149,7 +150,7 @@ set(MODULE_INCLUDE
         ${Libav_INCLUDE_DIRS}
         ${LibArchive_INCLUDE_DIRS})
 
-setup_module()
+ae_setup_module()
 
 configure_file(
         ${CMAKE_CURRENT_SOURCE_DIR}/application_info_generated.in.hpp

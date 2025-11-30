@@ -11,6 +11,9 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # Getting some weird-ass error about PCH files
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+# Specify path where .so/.dll files are located
+# this is required for linking Skia (duh...# this is required for linking Skia (duh...))
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 ###########################################
 # Muse Framework
@@ -29,7 +32,8 @@ set(CMAKE_MODULE_PATH
 include(${MUSE_FRAMEWORK_SRC_PATH}/cmake/MuseDeclareOptions.cmake)
 
 # Installs 'declare_module' calls etc. (Module System)
-include(DeclareModuleSetup)
+# We put the AE_ underscore to avoid naming conflicts with Muse framework
+include(AE_DeclareModuleSetup)
 
 # Installs 'muse_framework_config.h' from an input file
 include(${MUSE_FRAMEWORK_SRC_PATH}/cmake/MuseSetupConfiguration.cmake)
@@ -132,6 +136,12 @@ endif(MUE_COMPILE_USE_CCACHE)
 ###########################################
 set(QT_MIN_VERSION "6.9.2")
 include(SetupQt6)
+
+###########################################
+# Setup skia
+###########################################
+
+include(SetupSkia)
 
 ###########################################
 # Add source tree

@@ -19,7 +19,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 ## Declare
-# declare_module(somename) - set module (target) name
+# ae_declare_module(somename) - set module (target) name
 
 ## Setup
 # set(MODULE somename)                        - set module (target) name
@@ -45,9 +45,9 @@
 # set(MODULE_IS_STUB ON)                      - set a mark that the module is stub
 
 # After all the settings you need to do:
-# setup_module()
+# ae_setup_module()
 
-macro(declare_module name)
+macro(ae_declare_module name)
         set(MODULE ${name})
         # just reset all settings
         unset(MODULE_ALIAS)
@@ -84,7 +84,11 @@ macro(add_qml_import_path input_var)
 endmacro()
 
 
-macro(setup_module)
+macro(ae_setup_module)
+	message(STATUS "${MODULE} setup with MODULE_ALIAS ${MODULE_ALIAS}")
+	message(STATUS "${MODULE_ALIAS} MODULE_ROOT: ${MODULE_ROOT}")
+	message(STATUS "${MODULE_ALIAS} MODULE_LINK: ${MODULE_LINK}")
+	message(STATUS "${MODULE_ALIAS} MODULE_LINK_PUBLIC: ${MODULE_LINK_PUBLIC}")
 
         if (MODULE_IS_STUB)
                 message(STATUS "Configuring ${MODULE} <${MODULE_ALIAS}> [stub]")

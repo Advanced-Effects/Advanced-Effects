@@ -1,4 +1,4 @@
-declare_module(app_projectscene)
+ae_declare_module(app_projectscene)
 set(MODULE_ALIAS app::projectscene)
 
 set(MODULE_QRC projectscene.qrc)
@@ -32,9 +32,11 @@ set(MODULE_LINK
     muse::uicomponents
     muse::ui)
 
-set(MODULE_LINK_PUBLIC app::context)
+set(MODULE_LINK_PUBLIC
+        app::context
+	Skia::Skia)
 
-setup_module()
+ae_setup_module()
 
 set_source_files_properties(${MODULE_SRC}
                             PROPERTIES
