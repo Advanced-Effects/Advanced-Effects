@@ -8,6 +8,8 @@ set(MODULE_SRC
         projectscenemodule.h
         projectscenemodule.cpp
         iprojectfilescontroller.h
+        view/projectmodel.h
+        view/projectmodel.cpp
         view/toolbarmodel.h
         view/toolbarmodel.cpp
         view/canvas/applicationcanvas.h

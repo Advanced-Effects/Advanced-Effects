@@ -15,6 +15,7 @@
 #include "view/canvas/applicationcanvas.h"
 #include "view/timeline/keysview.h"
 #include "view/toolbarmodel.h"
+#include "view/projectmodel.h"
 
 // Links the module to the .qrc file
 // WE put it outside of the app::appshell namespace
@@ -43,6 +44,7 @@ void ProjectSceneModule::registerResources() {
 
 void ProjectSceneModule::registerExports() {
         qmlRegisterType<ToolBarModel>("App.ProjectScene", 1, 0 , "ToolBarModel");
+        qmlRegisterType<ProjectModel>("App.ProjectScene", 1, 0, "ProjectModel");
         qmlRegisterType<ApplicationCanvas>("App.ProjectScene", 1, 0, "ApplicationCanvas");
         qmlRegisterType<KeysView>("App.ProjectScene", 1, 0, "KeysView");
 
@@ -70,6 +72,7 @@ void ProjectSceneModule::resolveImports() {
 };
 
 void ProjectSceneModule::onInit(const IApplication::RunMode& mode) {
+        m_projectFilesController->init();
         m_actionsController->init();
         m_toolbarController->init();
 };
