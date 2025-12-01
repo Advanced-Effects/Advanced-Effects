@@ -8,6 +8,7 @@ set(PACKAGE_BUILD "${CMAKE_BINARY_DIR}/_deps/skia-build")
 FetchContent_Declare(skia
         GIT_REPOSITORY https://github.com/friction2d/skia.git
         GIT_TAG m83f)
+FetchContent_MakeAvailable(skia)
 
 set(Skia_FOUND TRUE)
 
