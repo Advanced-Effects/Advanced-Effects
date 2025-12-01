@@ -32,7 +32,9 @@ set(MODULE_LINK
     muse::uicomponents
     muse::ui)
 
-set(MODULE_LINK_PUBLIC app::context)
+set(MODULE_LINK_PUBLIC
+        app::context
+        Skia::Skia)
 
 setup_module()
 
