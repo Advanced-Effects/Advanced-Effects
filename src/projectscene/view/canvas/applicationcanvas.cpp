@@ -6,6 +6,9 @@
 #include "include/core/SkImageInfo.h"
 
 #include "glax_core/model/assets/composition.hpp"
+#include "include/gpu/GrTypes.h"
+#include "include/gpu/gl/GrGLInterface.h"
+#include "include/gpu/GrContext.h"
 
 using namespace app::projectscene;
 
@@ -30,19 +33,28 @@ void ApplicationCanvas::Renderer::render() {
         update();
 };
 
-std::unique_ptr<SkSurface> createSkiaSurfaceForFBO(GLuint fbo, int width, int height) {
+sk_sp<SkSurface> createSkiaSurfaceForFBO(GLuint fbo, int width, int height) {
     // Create Skia surface
     SkImageInfo info = SkImageInfo::MakeN32Premul(width, height);
-    auto backendTexture = SkGr::GetGLBackendTexture();
+
+    sk_sp<const GrGLInterface> interface = GrGLMakeNativeInterface();
+    const GrContextOptions& grOptions = GrContextOptions();
+    auto grContext = GrContext::MakeGL(interface, grOptions);
+    const GrBackendTexture& backendTexture = GrBackendTexture();
+
+    auto colorType = SkColorSpace::MakeSRGB();
+    const SkSurfaceProps* surfaceOptions = new SkSurfaceProps(0, kUnknown_SkPixelGeometry);
 
     return SkSurface::MakeFromBackendTexture(
+        grContext.get(),
         backendTexture,
-        width,
-        height,
         kTopLeft_GrSurfaceOrigin,
         /* Sample count */ 1,
-        kPremul_SkAlphaType,
-        nullptr // Do not use a direct pixel copying
+        kUnknown_SkColorType,
+        colorType,
+        surfaceOptions,
+        nullptr,
+        nullptr
     );
 }
 

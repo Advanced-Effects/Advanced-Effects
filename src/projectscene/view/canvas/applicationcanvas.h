@@ -35,7 +35,7 @@ public:
                               int height);
                 void performSkiaDraw();
 
-                std::unique_ptr<SkSurface> m_skia_surface;
+                sk_sp<SkSurface> m_skia_surface;
                 SkCanvas* m_skia_canvas;
         };
 };
