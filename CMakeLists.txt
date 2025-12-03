@@ -137,7 +137,7 @@ include(SetupQt6)
 # Setup skia
 ###########################################
 
-find_package(Skia REQUIRED)
+include(SetupSkia)
 
 ###########################################
 # Add source tree
