@@ -34,7 +34,7 @@ set(MODULE_LINK
 
 set(MODULE_LINK_PUBLIC
         app::context
-        skia)
+        skia-friction)
 
 setup_module()
 
