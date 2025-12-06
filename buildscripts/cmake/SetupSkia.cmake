@@ -9,3 +9,6 @@ FetchContent_MakeAvailable(skia)
 # isn't adding the include dir and
 # we can't include directories on another project's target
 include_directories("${CMAKE_BINARY_DIR}/_deps/skia-src")
+
+# find the skia library and initialize a ${SKIA_LIBRARIES}
+find_library(SKIA_LIBRARIES NAMES skia-friction PATHS ${CMAKE_BINARY_DIR}/_deps/skia-src)
