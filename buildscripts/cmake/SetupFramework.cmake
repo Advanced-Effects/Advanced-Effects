@@ -1,5 +1,8 @@
 include(FetchContent)
 
+# Allow using FetchContent_Populate
+cmake_policy(SET CMP0169 OLD)
+
 FetchContent_Declare(Framework
         GIT_REPOSITORY https://github.com/Advanced-Effects/framework.git
         GIT_TAG main)
