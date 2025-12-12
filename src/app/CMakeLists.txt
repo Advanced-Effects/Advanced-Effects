@@ -8,7 +8,12 @@
 ###########################################
 set(EXECUTABLE_NAME AdvancedEffects)
 
-if (OS_IS_WIN)
+###########################################
+# Platform specific
+###########################################
+include(GetPlatformInfo)
+
+if (WIN32)
         set(APP_OUTPUT_NAME ${MUSESCORE_NAME}${MUSESCORE_VERSION_MAJOR})
 
         include(GetCompilerInfo)
@@ -27,7 +32,7 @@ if (OS_IS_WIN)
                 set_source_files_properties(${PROJECT_BINARY_DIR}/windows_icons_rc.o PROPERTIES generated true)
         endif()
 
-elseif(OS_IS_LIN)
+elseif(LINUX)
 
         if (MUSE_APP_INSTALL_SUFFIX)
                 set(APP_OUTPUT_NAME "${EXECUTABLE_NAME}${MUSE_APP_INSTALL_SUFFIX}")
@@ -38,7 +43,7 @@ elseif(OS_IS_LIN)
                 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_RPATH};${SHARED_LIBS_INSTALL_DESTINATION}")
         endif(BUILD_SHARED_LIBS)
 
-elseif(OS_IS_MAC)
+elseif(APPLE)
         set(EXECUTABLE_NAME app MACOSX_BUNDLE)
         set(MACOSX_BUNDLE_ICON_FILE AppIcon.icns)
         set(MACOSX_BUNDLE_GUI_IDENTIFIER ${MUSE_APP_GUI_IDENTIFIER})
@@ -57,10 +62,25 @@ endif()
 # Dependency library declaration
 ###########################################
 
-set(LINK_DEP Framework)
-
 set(LINK_LIB
     ${QT_LIBRARIES}
+    muse::global
+
+    muse::autobot
+    muse::draw
+    muse::actions
+    muse::ui
+    muse::uicomponents
+    muse::dockwindow
+    muse::shortcuts
+    muse::workspace
+    muse::accessibility
+    muse::cloud
+    muse::network
+    muse::multiinstances
+    muse::learn
+    muse::languages
+    muse::diagnostics
 
     QtAppSetup
     app::glax_core
@@ -119,12 +139,12 @@ if (MUSE_ENABLE_UNIT_TESTS_CODE_COVERAGE)
         target_link_options(${EXECUTABLE_NAME} PRIVATE ${COVERAGE_LINK_FLAGS})
 endif()
 
-if (OS_IS_MAC)
+if (APPLE)
         set_target_properties(${EXECUTABLE_NAME}
         PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/buildscripts/packaging/MacOS/MacOSXBundleInfo.plist.in
         XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER ${MACOSX_BUNDLE_GUI_IDENTIFIER}
     )
-endif (OS_IS_MAC)
+endif (APPLE)
 
 if (CC_IS_MINGW)
         if (CMAKE_BUILD_TYPE MATCHES "DEBUG")
@@ -141,7 +161,6 @@ endif(CC_IS_MSVC)
 ###########################################
 # Link
 ###########################################
-add_dependencies(${EXECUTABLE_NAME} ${LINK_DEP})
 target_link_libraries(${EXECUTABLE_NAME} PRIVATE ${LINK_LIB}  ${COVERAGE_LINK_FLAGS})
 
 ###########################################
@@ -151,7 +170,7 @@ target_link_libraries(${EXECUTABLE_NAME} PRIVATE ${LINK_LIB}  ${COVERAGE_LINK_FL
 ###########################################
 # Windows
 ###########################################
-if (OS_IS_WIN)
+if (WIN32)
 
         install(TARGETS ${EXECUTABLE_NAME} RUNTIME DESTINATION bin )
 
@@ -278,7 +297,7 @@ if (OS_IS_WIN)
         ###########################################
         # Linux
         ###########################################
-elseif(OS_IS_LIN)
+elseif(LINUX)
 
         install(TARGETS ${EXECUTABLE_NAME} RUNTIME DESTINATION bin)
 
@@ -291,7 +310,7 @@ elseif(OS_IS_FBSD)
         ###########################################
         # MacOS
         ###########################################
-elseif(OS_IS_MAC)
+elseif(APPLE)
 
         install(TARGETS app BUNDLE DESTINATION ${CMAKE_INSTALL_PREFIX})
 
