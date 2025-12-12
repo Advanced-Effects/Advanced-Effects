@@ -8,20 +8,13 @@
 ###########################################
 set(EXECUTABLE_NAME AdvancedEffects)
 
-###########################################
-# Platform specific
-###########################################
-include(GetPlatformInfo)
-
 if (WIN32)
         set(APP_OUTPUT_NAME ${MUSESCORE_NAME}${MUSESCORE_VERSION_MAJOR})
 
-        include(GetCompilerInfo)
-
-        if (CC_IS_MSVC)
+        if (MSVC)
                 # MSVC recognizes a *.rc file and will invoke the resource compiler to link it
                 set(WINDOWS_ICONS_RC ${PROJECT_SOURCE_DIR}/share/icons/windows_icons.rc)
-        elseif(CC_IS_MINGW)
+        elseif(MINGW)
                 set(WINDOWS_ICONS_RC ${PROJECT_BINARY_DIR}/windows_icons_rc.o)
                 add_custom_command(
             OUTPUT ${PROJECT_BINARY_DIR}/windows_icons_rc.o
@@ -146,17 +139,17 @@ if (APPLE)
     )
 endif (APPLE)
 
-if (CC_IS_MINGW)
+if (MINGW)
         if (CMAKE_BUILD_TYPE MATCHES "DEBUG")
                 set_target_properties(${EXECUTABLE_NAME} PROPERTIES LINK_FLAGS "-mwindows -mconsole")
         else (CMAKE_BUILD_TYPE MATCHES "DEBUG")
                 set_target_properties(${EXECUTABLE_NAME} PROPERTIES LINK_FLAGS "-Wl,-S -mwindows")
         endif (CMAKE_BUILD_TYPE MATCHES "DEBUG")
-endif(CC_IS_MINGW)
+endif(MINGW)
 
-if (CC_IS_MSVC)
+if (MSVC)
         target_link_options(${EXECUTABLE_NAME} PRIVATE /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup)
-endif(CC_IS_MSVC)
+endif(MSVC)
 
 ###########################################
 # Link
@@ -174,9 +167,7 @@ if (WIN32)
 
         install(TARGETS ${EXECUTABLE_NAME} RUNTIME DESTINATION bin )
 
-        include(GetCompilerInfo)
-
-        if (CC_IS_MINGW)
+        if (MINGW)
                 get_filename_component(COMPILER_DIR ${CMAKE_CXX_COMPILER} DIRECTORY)
                 get_filename_component (MINGW_ROOT ${COMPILER_DIR} DIRECTORY)
 
@@ -186,7 +177,7 @@ if (WIN32)
                ${MINGW_ROOT}/bin/libwinpthread-1.dll
                DESTINATION bin)
 
-        endif(CC_IS_MINGW)
+        endif(MINGW)
 
         # Install Qt
         foreach (QtLibrary ${QT_LIBRARIES})
