@@ -12,6 +12,9 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 # Getting some weird-ass error about PCH files
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
+set(CMAKE_AUTOMOC ON) # this is a setting for Qt macros
+set(CMAKE_AUTOUIC ON)
+
 # Sets the paths where cmake scripts ("include" calls) will be looked up in
 set(CMAKE_MODULE_PATH
         ${CMAKE_CURRENT_LIST_DIR}
