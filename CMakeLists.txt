@@ -24,8 +24,8 @@ set(CMAKE_MODULE_PATH
 
 include(SetupFramework)
 
-# Installs 'declare_module' calls etc. (Module System)
-include(DeclareModuleSetup)
+# Installs *our own* 'declare_module' calls etc. (Module System)
+include(AE_DeclareModuleSetup)
 
 ###########################################
 # Setup option and build settings
