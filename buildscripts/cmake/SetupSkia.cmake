@@ -25,10 +25,10 @@ add_custom_target(skia
     BYPRODUCTS ${SKIA_LIBRARIES}
 )
 
+# TODO: using this imported library does not work with Qt AUTOMOC for some reason
+# so, DO NOT use IT!
 add_library(Skia::Skia SHARED IMPORTED GLOBAL)
 
-# Set the .dll file and include path IN THE LINKING PHASE
-# (so that, when this is looked for, libskia-friction.so already exists)
 set_target_properties(Skia::Skia PROPERTIES
 	IMPORTED_LOCATION ${SKIA_LIBRARIES}
 	INTERFACE_INCLUDE_DIRECTORIES ${SKIA_INCLUDE_DIRS})

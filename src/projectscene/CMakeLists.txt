@@ -34,7 +34,7 @@ set(MODULE_LINK
 
 set(MODULE_LINK_PUBLIC
         app::context
-	Skia::Skia)
+	${SKIA_LIBRARIES})
 
 ae_setup_module()
 

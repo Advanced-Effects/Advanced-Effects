@@ -137,10 +137,10 @@ set(MODULE_LINK
         Qt${QT_VERSION_MAJOR}::Network
         ${Libav_LIBRARIES}
         ${LibArchive_LIBRARIES}
-        potrace)
-set(MODULE_LINK_PUBLIC Skia::Skia)
+        potrace
+	${SKIA_LIBRARIES})
 
-if ( NOT GLAXNIMATE_SYSTEM_POTRACE )
+if (NOT GLAXNIMATE_SYSTEM_POTRACE)
         set(Potrace_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/thirdparty/potrace/src)
 endif()
 
@@ -148,9 +148,12 @@ set(MODULE_INCLUDE
         ${CMAKE_SOURCE_DIR}/thirdparty/QtAppSetup/src
         ${Potrace_INCLUDE_DIRS}
         ${Libav_INCLUDE_DIRS}
-        ${LibArchive_INCLUDE_DIRS})
+        ${LibArchive_INCLUDE_DIRS}
+	${SKIA_INCLUDE_DIRS})
 
 ae_setup_module()
+
+target_link_directories(${MODULE} PUBLIC ${SKIA_LIBRARIES_DIRS})
 
 configure_file(
         ${CMAKE_CURRENT_SOURCE_DIR}/application_info_generated.in.hpp

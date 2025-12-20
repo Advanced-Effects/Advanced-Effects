@@ -155,6 +155,12 @@ add_subdirectory(share)
 add_subdirectory(thirdparty)
 add_subdirectory(src)
 
+# Make sure that skia is built before the targets
+# that depend on it. This is necessary because we're
+# linking to the .so file directly instead of
+# linking to another CMake target.
+add_dependencies(app_glax_core skialib)
+
 if (MSVC)
         # Now that the `app` target is defined, we can set it as the startup project in Visual Studio.
         set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT app)
