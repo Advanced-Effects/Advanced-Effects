@@ -4,6 +4,8 @@
 #include <QOpenGLFramebufferObject>
 
 #include "context/iglobalcontext.h"
+#include "include/gpu/GrTypes.h"
+#include "include/gpu/GrContext.h"
 #include "include/core/SkSurface.h"
 #include "include/core/SkCanvas.h"
 
@@ -30,11 +32,17 @@ public:
 
                 QOpenGLFramebufferObject *createFramebufferObject(const QSize &size) override;
         private:
-		std::optional<std::monostate> initSkia(GLuint fbo,
+		std::optional<std::monostate> initSkia(QOpenGLFramebufferObject *fbo,
                                                        int width,
                                                        int height);
-                void performSkiaDraw();
+		sk_sp<SkSurface> createSkiaSurfaceForFBO(QOpenGLFramebufferObject *fbo,
+							 int width,
+							 int height);
 
+                void performSkiaDraw();
+		
+		sk_sp<const GrGLInterface> m_glInterface;
+		sk_sp<GrContext> m_grContext;
                 sk_sp<SkSurface> m_skia_surface;
                 SkCanvas* m_skia_canvas;
         };

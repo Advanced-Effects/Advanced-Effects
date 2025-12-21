@@ -51,63 +51,46 @@ void ApplicationCanvas::Renderer::performSkiaDraw() {
         //rootNode->on_paint_skia(m_skia_canvas, ...);
 };
 
-// Convert our FramebufferObject into an OpenGL texture
-GLint fboToTextureId(GLuint fboId) {
-	GLint previousFBO;
-	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &previousFBO);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, fboId);
-
-	GLint textureId = 0;
-	glGetFramebufferAttatchmentParameteriv(
-			GL_FRAMEBUFFER,
-			GL_COLOR_ATTACHMENT0,
-			GL_FRAMEBUFFER_ATTACHMENT_OBJECT_NAME,
-			&textureId);
-	glBindFramebuffer(GL_FRAMEBUFFER, previousFBO);
-	
-	return textureId;
-};
-
 // Create a SkSurface from an OpenGL FramebufferObject
 // (Usually, our canvas)
-sk_sp<SkSurface> createSkiaSurfaceForFBO(GLint textureId, int width, int height) {
+sk_sp<SkSurface> ApplicationCanvas::Renderer::createSkiaSurfaceForFBO(QOpenGLFramebufferObject *fbo,
+								      int width,
+								      int height) {
 	SkImageInfo info = SkImageInfo::MakeN32Premul(width, height);
 
-	auto interface = GrGLMakeNativeInterface();
+	m_glInterface = GrGLMakeNativeInterface();
 	const GrContextOptions& grOptions = GrContextOptions();
-	auto grContext = GrContext::MakeGL(interface, grOptions);
+	m_grContext = GrContext::MakeGL(m_glInterface, grOptions);
     
-	auto surfaceCharacterization = SkSurfaceCharacterization()
-		.createResized(width, height)
-		.createFBO0(false);
+	GrGLFramebufferInfo fbInfo;
+	fbInfo.fFBOID = fbo->handle();
+	fbInfo.fFormat = GL_RGBA8;
+
+	GrBackendRenderTarget backendRT(fbo->width(), fbo->height(),
+					0, /* sample count */
+					0, /* stencil bits*/
+					fbInfo);
 	
-	GrGLTextureInfo textureInfo;
-	textureInfo.fTarget = GL_TEXTURE_2D;
-	textureInfo.fID = textureId;
-	textureInfo.fFormat = GL_RGBA8; // with alpha (opacity)
-	auto backendTexture = GrBackendTexture(width,
-					       height,
-					       GrMipMapped::kNo, // no idea what this does
-					       textureInfo);
-
-	return SkSurface::MakeFromBackendTexture(
-        	grContext.get(),
-		surfaceCharacterization,
-		backendTexture,
-		nullptr,
-		nullptr
+	return SkSurface::MakeFromBackendRenderTarget(
+        	m_grContext.get(),
+		backendRT,
+		kBottomLeft_GrSurfaceOrigin,
+		kRGBA_8888_SkColorType,
+		nullptr, // optional color space
+		nullptr // optional color surface
     	);
-}
+};
 
-std::optional<std::monostate> ApplicationCanvas::Renderer::initSkia(GLuint fbo, int width, int height) {
+std::optional<std::monostate> ApplicationCanvas::Renderer::initSkia(QOpenGLFramebufferObject *fbo,
+								    int width,
+								    int height) {
         m_skia_surface = createSkiaSurfaceForFBO(fbo, width, height);
 	if (!m_skia_surface) {
 		// error: skia surface couldn't be created
 		return std::nullopt;
 	}
-
         m_skia_canvas = m_skia_surface->getCanvas();
+
 	// success!
 	return std::monostate();
 };
@@ -115,7 +98,7 @@ std::optional<std::monostate> ApplicationCanvas::Renderer::initSkia(GLuint fbo, 
 QOpenGLFramebufferObject *ApplicationCanvas::Renderer::createFramebufferObject(const QSize &size) {
         auto fbo = new QOpenGLFramebufferObject(size);
         // Link skia to OpenGL Framebuffer Object
-        auto result = initSkia(fbo->handle(), size.width(), size.height());
+        auto result = initSkia(fbo, size.width(), size.height());
 
 	auto hasSuccess = result.has_value();
 	if (hasSuccess) return fbo;
