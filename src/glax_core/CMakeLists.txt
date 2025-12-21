@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2019-2023 Mattia Basaglia <dev@dragon.best>
 # SPDX-License-Identifier: BSD-2-Clause
 
-declare_module(app_glax_core)
+ae_declare_module(app_glax_core)
 
 set(MODULE app_glax_core)
 set(MODULE_ALIAS app::glax_core)
@@ -137,9 +137,10 @@ set(MODULE_LINK
         Qt${QT_VERSION_MAJOR}::Network
         ${Libav_LIBRARIES}
         ${LibArchive_LIBRARIES}
-        potrace)
+        potrace
+	${SKIA_LIBRARIES})
 
-if ( NOT GLAXNIMATE_SYSTEM_POTRACE )
+if (NOT GLAXNIMATE_SYSTEM_POTRACE)
         set(Potrace_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/thirdparty/potrace/src)
 endif()
 
@@ -147,9 +148,12 @@ set(MODULE_INCLUDE
         ${CMAKE_SOURCE_DIR}/thirdparty/QtAppSetup/src
         ${Potrace_INCLUDE_DIRS}
         ${Libav_INCLUDE_DIRS}
-        ${LibArchive_INCLUDE_DIRS})
+        ${LibArchive_INCLUDE_DIRS}
+	${SKIA_INCLUDE_DIRS})
 
-setup_module()
+ae_setup_module()
+
+target_link_directories(${MODULE} PUBLIC ${SKIA_LIBRARIES_DIRS})
 
 configure_file(
         ${CMAKE_CURRENT_SOURCE_DIR}/application_info_generated.in.hpp

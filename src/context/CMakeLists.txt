@@ -19,7 +19,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 # This module stores global state
-declare_module(context)
+ae_declare_module(context)
 set(MODULE_ALIAS app::context)
 
 set(MODULE_SRC
@@ -37,4 +37,4 @@ set(MODULE_SRC
 
 set(MODULE_LINK_PUBLIC app::glax_core)
 
-setup_module()
+ae_setup_module()

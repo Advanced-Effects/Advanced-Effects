@@ -14,6 +14,7 @@
 
 #include "model/animation/animatable.hpp"
 #include "model/object.hpp"
+#include "include/core/SkCanvas.h"
 
 namespace glaxnimate::model {
 
@@ -369,6 +370,7 @@ protected:
     bool docnode_valid_color() const;
     void propagate_transform_matrix_changed(const QTransform& t_global, const QTransform& t_group);
     void propagate_bounding_rect_changed();
+    virtual void on_paint_skia(SkCanvas*, FrameTime, PaintMode, model::Modifier*) const {}
     virtual void on_paint(QPainter*, FrameTime, PaintMode, model::Modifier*) const {}
 
 private:

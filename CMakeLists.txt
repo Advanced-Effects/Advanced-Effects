@@ -11,6 +11,9 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 # Getting some weird-ass error about PCH files
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
+# Specify path where .so/.dll files are located
+# this is required for linking Skia (duh...# this is required for linking Skia (duh...))
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
 ###########################################
 # Muse Framework
@@ -29,7 +32,8 @@ set(CMAKE_MODULE_PATH
 include(${MUSE_FRAMEWORK_SRC_PATH}/cmake/MuseDeclareOptions.cmake)
 
 # Installs 'declare_module' calls etc. (Module System)
-include(DeclareModuleSetup)
+# We put the AE_ underscore to avoid naming conflicts with Muse framework
+include(AE_DeclareModuleSetup)
 
 # Installs 'muse_framework_config.h' from an input file
 include(${MUSE_FRAMEWORK_SRC_PATH}/cmake/MuseSetupConfiguration.cmake)
@@ -134,6 +138,12 @@ set(QT_MIN_VERSION "6.9.2")
 include(SetupQt6)
 
 ###########################################
+# Setup skia
+###########################################
+
+include(SetupSkia)
+
+###########################################
 # Add source tree
 ###########################################
 if (MUSE_ENABLE_UNIT_TESTS)
@@ -144,6 +154,12 @@ endif()
 add_subdirectory(share)
 add_subdirectory(thirdparty)
 add_subdirectory(src)
+
+# Make sure that skia is built before the targets
+# that depend on it. This is necessary because we're
+# linking to the .so file directly instead of
+# linking to another CMake target.
+add_dependencies(app_glax_core skialib)
 
 if (MSVC)
         # Now that the `app` target is defined, we can set it as the startup project in Visual Studio.
