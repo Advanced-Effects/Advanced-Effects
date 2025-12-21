@@ -16,12 +16,13 @@ public:
                 : Injectable(iocCtx) {};
         ~ProjectFilesController() = default;
 
+        QList<std::shared_ptr<Document>> projects() override;
+
         void addProject(std::shared_ptr<Document> document) override;
         void removeProject(std::shared_ptr<Document> document) override;
 
         std::shared_ptr<Document> importProject(QUrl fileUrl) override;
         std::shared_ptr<Document> createAndOpenProject(std::string fileName,
-                                                       std::string sceneName,
                                                        int width, int height,
                                                        int fps) override;
 private:

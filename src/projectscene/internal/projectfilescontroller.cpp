@@ -12,8 +12,13 @@ using namespace app::projectscene;
 using namespace glaxnimate::io::glaxnimate;
 using namespace glaxnimate::io;
 
+QList<std::shared_ptr<Document>> ProjectFilesController::projects() {
+        return m_openProjects;
+};
+
 void ProjectFilesController::addProject(std::shared_ptr<Document> document) {
         m_openProjects.append(document);
+        openProjectsChanged.notify();
 };
 
 void ProjectFilesController::removeProject(std::shared_ptr<Document> document) {};
@@ -38,7 +43,6 @@ std::shared_ptr<Document> ProjectFilesController::importProject(QUrl fileUrl) {
 };
 
 std::shared_ptr<Document> ProjectFilesController::createAndOpenProject(std::string fileName,
-                                                                       std::string sceneName,
                                                                        int width, int height,
                                                                        int fps) {
         auto document = std::make_shared<Document>();

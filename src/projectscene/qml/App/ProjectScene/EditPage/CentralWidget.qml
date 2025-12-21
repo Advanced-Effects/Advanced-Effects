@@ -12,18 +12,17 @@ Item {
 
         anchors.fill: parent.fill
 
-        StyledTabBar {
-                id: fileTabBar
+        ProjectSwitchBar {
+                id: projectTabBar
 
                 height: 32
-
                 anchors.top: root.top
                 anchors.left: root.left
                 anchors.right: root.right
         }
 
         ApplicationCanvas {
-                anchors.top: fileTabBar.top
+                anchors.top: projectTabBar.bottom
                 anchors.left: root.left
                 anchors.right: root.right
                 anchors.bottom: root.bottom
