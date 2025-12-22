@@ -1,4 +1,4 @@
-declare_module(app_projectscene)
+ae_declare_module(app_projectscene)
 set(MODULE_ALIAS app::projectscene)
 
 set(MODULE_QRC projectscene.qrc)
@@ -28,9 +28,15 @@ set(MODULE_SRC
         internal/toolbar/toolidentifier.h
     )
 
-set(MODULE_LINK_PUBLIC app::context)
+set(MODULE_LINK
+    muse::uicomponents
+    muse::ui)
 
-setup_module()
+set(MODULE_LINK_PUBLIC
+        app::context
+	${SKIA_LIBRARIES})
+
+ae_setup_module()
 
 set_source_files_properties(${MODULE_SRC}
                             PROPERTIES

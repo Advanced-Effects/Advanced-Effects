@@ -3,5 +3,3 @@ if(NOT GLAXNIMATE_SYSTEM_POTRACE)
 endif()
 
 add_subdirectory(QtAppSetup)
-
-add_subdirectory(skia)
