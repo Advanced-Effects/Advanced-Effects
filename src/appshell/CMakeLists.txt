@@ -35,12 +35,6 @@ set(MODULE_SRC
     internal/framelesswindowcontroller.cpp
     )
 
-set(MODULE_LINK
-    muse::uicomponents
-    muse::ui
-    muse::dockwindow
-    )
-
 # we use private/qkeymapper_p.h to fix https://github.com/musescore/MuseScore/issues/10181
 set(MODULE_INCLUDE_PRIVATE ${Qt6Gui_PRIVATE_INCLUDE_DIRS} )
 

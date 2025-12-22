@@ -8,20 +8,13 @@
 ###########################################
 set(EXECUTABLE_NAME AdvancedEffects)
 
-###########################################
-# Platform specific
-###########################################
-include(GetPlatformInfo)
-
-if (OS_IS_WIN)
+if (WIN32)
         set(APP_OUTPUT_NAME ${MUSESCORE_NAME}${MUSESCORE_VERSION_MAJOR})
 
-        include(GetCompilerInfo)
-
-        if (CC_IS_MSVC)
+        if (MSVC)
                 # MSVC recognizes a *.rc file and will invoke the resource compiler to link it
                 set(WINDOWS_ICONS_RC ${PROJECT_SOURCE_DIR}/share/icons/windows_icons.rc)
-        elseif(CC_IS_MINGW)
+        elseif(MINGW)
                 set(WINDOWS_ICONS_RC ${PROJECT_BINARY_DIR}/windows_icons_rc.o)
                 add_custom_command(
             OUTPUT ${PROJECT_BINARY_DIR}/windows_icons_rc.o
@@ -32,7 +25,7 @@ if (OS_IS_WIN)
                 set_source_files_properties(${PROJECT_BINARY_DIR}/windows_icons_rc.o PROPERTIES generated true)
         endif()
 
-elseif(OS_IS_LIN)
+elseif(LINUX)
 
         if (MUSE_APP_INSTALL_SUFFIX)
                 set(APP_OUTPUT_NAME "${EXECUTABLE_NAME}${MUSE_APP_INSTALL_SUFFIX}")
@@ -43,7 +36,7 @@ elseif(OS_IS_LIN)
                 set(CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_RPATH};${SHARED_LIBS_INSTALL_DESTINATION}")
         endif(BUILD_SHARED_LIBS)
 
-elseif(OS_IS_MAC)
+elseif(APPLE)
         set(EXECUTABLE_NAME app MACOSX_BUNDLE)
         set(MACOSX_BUNDLE_ICON_FILE AppIcon.icns)
         set(MACOSX_BUNDLE_GUI_IDENTIFIER ${MUSE_APP_GUI_IDENTIFIER})
@@ -75,7 +68,6 @@ set(LINK_LIB
     muse::shortcuts
     muse::workspace
     muse::accessibility
-    muse::cloud
     muse::network
     muse::multiinstances
     muse::learn
@@ -139,24 +131,24 @@ if (MUSE_ENABLE_UNIT_TESTS_CODE_COVERAGE)
         target_link_options(${EXECUTABLE_NAME} PRIVATE ${COVERAGE_LINK_FLAGS})
 endif()
 
-if (OS_IS_MAC)
+if (APPLE)
         set_target_properties(${EXECUTABLE_NAME}
         PROPERTIES MACOSX_BUNDLE_INFO_PLIST ${PROJECT_SOURCE_DIR}/buildscripts/packaging/MacOS/MacOSXBundleInfo.plist.in
         XCODE_ATTRIBUTE_PRODUCT_BUNDLE_IDENTIFIER ${MACOSX_BUNDLE_GUI_IDENTIFIER}
     )
-endif (OS_IS_MAC)
+endif (APPLE)
 
-if (CC_IS_MINGW)
+if (MINGW)
         if (CMAKE_BUILD_TYPE MATCHES "DEBUG")
                 set_target_properties(${EXECUTABLE_NAME} PROPERTIES LINK_FLAGS "-mwindows -mconsole")
         else (CMAKE_BUILD_TYPE MATCHES "DEBUG")
                 set_target_properties(${EXECUTABLE_NAME} PROPERTIES LINK_FLAGS "-Wl,-S -mwindows")
         endif (CMAKE_BUILD_TYPE MATCHES "DEBUG")
-endif(CC_IS_MINGW)
+endif(MINGW)
 
-if (CC_IS_MSVC)
+if (MSVC)
         target_link_options(${EXECUTABLE_NAME} PRIVATE /SUBSYSTEM:WINDOWS /ENTRY:mainCRTStartup)
-endif(CC_IS_MSVC)
+endif(MSVC)
 
 ###########################################
 # Link
@@ -170,13 +162,11 @@ target_link_libraries(${EXECUTABLE_NAME} PRIVATE ${LINK_LIB}  ${COVERAGE_LINK_FL
 ###########################################
 # Windows
 ###########################################
-if (OS_IS_WIN)
+if (WIN32)
 
         install(TARGETS ${EXECUTABLE_NAME} RUNTIME DESTINATION bin )
 
-        include(GetCompilerInfo)
-
-        if (CC_IS_MINGW)
+        if (MINGW)
                 get_filename_component(COMPILER_DIR ${CMAKE_CXX_COMPILER} DIRECTORY)
                 get_filename_component (MINGW_ROOT ${COMPILER_DIR} DIRECTORY)
 
@@ -186,7 +176,7 @@ if (OS_IS_WIN)
                ${MINGW_ROOT}/bin/libwinpthread-1.dll
                DESTINATION bin)
 
-        endif(CC_IS_MINGW)
+        endif(MINGW)
 
         # Install Qt
         foreach (QtLibrary ${QT_LIBRARIES})
@@ -297,7 +287,7 @@ if (OS_IS_WIN)
         ###########################################
         # Linux
         ###########################################
-elseif(OS_IS_LIN)
+elseif(LINUX)
 
         install(TARGETS ${EXECUTABLE_NAME} RUNTIME DESTINATION bin)
 
@@ -310,7 +300,7 @@ elseif(OS_IS_FBSD)
         ###########################################
         # MacOS
         ###########################################
-elseif(OS_IS_MAC)
+elseif(APPLE)
 
         install(TARGETS app BUNDLE DESTINATION ${CMAKE_INSTALL_PREFIX})
 

@@ -15,35 +15,29 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 # this is required for linking Skia (duh...# this is required for linking Skia (duh...))
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-###########################################
-# Muse Framework
-###########################################
-
-set(MUSE_FRAMEWORK_PATH ${PROJECT_SOURCE_DIR}/thirdparty)
-set(MUSE_FRAMEWORK_SRC_PATH ${MUSE_FRAMEWORK_PATH}/framework)
+set(CMAKE_AUTOMOC ON) # this is a setting for Qt macros
+set(CMAKE_AUTOUIC ON)
 
 # Sets the paths where cmake scripts ("include" calls) will be looked up in
 set(CMAKE_MODULE_PATH
         ${CMAKE_CURRENT_LIST_DIR}
         ${CMAKE_CURRENT_LIST_DIR}/buildscripts/cmake
-        ${MUSE_FRAMEWORK_PATH}/buildscripts/cmake
         ${CMAKE_MODULE_PATH})
 
-include(${MUSE_FRAMEWORK_SRC_PATH}/cmake/MuseDeclareOptions.cmake)
+###########################################
+# Dependencies
+###########################################
+
+
+include(SetupFramework)
 
 # Installs 'declare_module' calls etc. (Module System)
 # We put the AE_ underscore to avoid naming conflicts with Muse framework
 include(AE_DeclareModuleSetup)
 
-# Installs 'muse_framework_config.h' from an input file
-include(${MUSE_FRAMEWORK_SRC_PATH}/cmake/MuseSetupConfiguration.cmake)
-
-include(GetPlatformInfo)
-
 ###########################################
 # Setup option and build settings
 ###########################################
-include(GetPaths)
 
 set(AU4_BUILD_CONFIGURATION "app" CACHE STRING "Build configuration")
 # Possible values:
@@ -104,38 +98,14 @@ option(MUSE_COMPILE_USE_CCACHE "Try use ccache" ON)
 
 
 ###########################################
-# Setup Configure
-###########################################
-
-# default
-set(QT_ADD_LINGUISTTOOLS ON)
-set(QT_ADD_CONCURRENT ON)
-set(QT_QPROCESS_SUPPORTED ON)
-
-# "SetupConfigure" sets useful CMake variables such as: MUSE_APP_INSTALL_PREFIX, etc.
-
-if(EXISTS "${CMAKE_CURRENT_LIST_DIR}/SetupConfigure.local.cmake")
-        include(${CMAKE_CURRENT_LIST_DIR}/SetupConfigure.local.cmake)
-else()
-        include(SetupConfigure)
-endif()
-
-###########################################
-# Setup compiler and build environment
-###########################################
-
-include(SetupBuildEnvironment)
-include(GetPlatformInfo)
-if (MUE_COMPILE_USE_CCACHE)
-        include(TryUseCcache)
-endif(MUE_COMPILE_USE_CCACHE)
-
-
-###########################################
 # Setup external dependencies
 ###########################################
 set(QT_MIN_VERSION "6.9.2")
 include(SetupQt6)
+
+set(QT_ADD_LINGUISTTOOLS ON)
+set(QT_ADD_CONCURRENT ON)
+set(QT_QPROCESS_SUPPORTED ON)
 
 ###########################################
 # Setup skia
@@ -165,10 +135,3 @@ if (MSVC)
         # Now that the `app` target is defined, we can set it as the startup project in Visual Studio.
         set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT app)
 endif()
-
-###########################################
-# Setup Packaging
-###########################################
-if (OS_IS_LIN)
-        include(${CMAKE_CURRENT_LIST_DIR}/buildscripts/packaging/Linux+BSD/SetupAppImagePackaging.cmake)
-endif(OS_IS_LIN)
